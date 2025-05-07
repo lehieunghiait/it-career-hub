@@ -1,0 +1,29 @@
+# Các thư mục build và dependency
+node_modules/
+dist/
+build/
+
+# Các file cấu hình
+vite.config.ts
+*.config.js
+*.d.ts
+
+# Các thư mục public
+public/
+
+# Cache
+.eslintcache
+
+# Các file lock
+package-lock.json
+yarn.lock
+pnpm-lock.yaml
+
+# Các file không liên quan đến code
+*.md
+*.svg
+*.png
+*.jpg
+*.jpeg
+*.gif
+*.ico 
