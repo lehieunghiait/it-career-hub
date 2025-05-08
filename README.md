@@ -2,7 +2,7 @@
 
 Career IT Hub is a modern job portal dedicated to connecting IT professionals with top companies in the technology sector. Built with React, TypeScript, and Ant Design, this platform offers a seamless experience for both job seekers and employers.
 
-## Features
+## ✨ Features
 
 ### For Job Seekers
 
@@ -18,7 +18,7 @@ Career IT Hub is a modern job portal dedicated to connecting IT professionals wi
 - **Company Profile**: Showcase your company culture and benefits
 - **Analytics**: Track job posting performance and application metrics
 
-## Tech Stack
+## 🛠️ Tech Stack
 
 - **Frontend**: React, TypeScript, Vite
 - **UI Library**: Ant Design
@@ -30,14 +30,14 @@ Career IT Hub is a modern job portal dedicated to connecting IT professionals wi
 - **Rich Text Editor**: React Quill
 - **Linting**: ESLint, Prettier
 
-## Prerequisites
+## 📋 Prerequisites
 
 Before you begin, ensure you have the following installed:
 
 - Node.js (v16.x or higher)
 - npm (v8.x or higher) or Yarn (v1.22.x or higher)
 
-## Installation
+## 🚀 Installation
 
 1. Clone the repository:
 
@@ -69,7 +69,7 @@ Before you begin, ensure you have the following installed:
 
 5. Open your browser and navigate to `http://localhost:5173`
 
-## Project Structure
+## 📁 Project Structure
 
 ```
 /src
@@ -94,7 +94,7 @@ Before you begin, ensure you have the following installed:
   App.tsx        # Main application component with routing
 ```
 
-## Available Scripts
+## 📜 Available Scripts
 
 - `npm run dev` or `npm start` - Start the development server
 - `npm run build` - Build the application for production
@@ -103,7 +103,7 @@ Before you begin, ensure you have the following installed:
 - `npm run lint:fix` - Fix linting issues automatically
 - `npm run format` - Format code with Prettier
 
-## Deployment
+## 🌐 Deployment
 
 To deploy the application to production:
 
@@ -117,7 +117,7 @@ To deploy the application to production:
 
 3. Deploy the contents of the `dist/` directory to your web server or hosting service
 
-## Features
+## 🎯 Features
 
 ### Client Side
 
@@ -137,7 +137,7 @@ To deploy the application to production:
 - Resume management
 - Role and permission management
 
-## Contributing
+## 🤝 Contributing
 
 1. Fork the repository
 2. Create your feature branch: `git checkout -b feature/amazing-feature`
@@ -145,6 +145,6 @@ To deploy the application to production:
 4. Push to the branch: `git push origin feature/amazing-feature`
 5. Open a Pull Request
 
-## License
+## 📄 License
 
 This project is licensed under the MIT License - see the LICENSE file for details.
