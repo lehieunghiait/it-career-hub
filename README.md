@@ -1,6 +1,6 @@
-# IT Việc - Job Portal for IT Professionals
+# Career IT Hub - Job Portal for IT Professionals
 
-IT Việc is a modern job portal dedicated to connecting IT professionals with top companies in the technology sector. Built with React, TypeScript, and Ant Design, this platform offers a seamless experience for both job seekers and employers.
+Career IT Hub is a modern job portal dedicated to connecting IT professionals with top companies in the technology sector. Built with React, TypeScript, and Ant Design, this platform offers a seamless experience for both job seekers and employers.
 
 ## Features
 
@@ -42,8 +42,8 @@ Before you begin, ensure you have the following installed:
 1. Clone the repository:
 
    ```bash
-   git clone https://github.com/yourusername/react-for-nest.git
-   cd react-for-nest
+   git clone https://github.com/lehieunghia02/it-career-hub-client.git
+   cd it-career-hub-client
    ```
 
 2. Install dependencies:
