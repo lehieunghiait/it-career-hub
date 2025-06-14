@@ -1,5 +1,5 @@
 import { callFetchJob } from '@/config/api';
-import { LOCATION_LIST, convertSlug, getLocationName } from '@/config/utils';
+import { convertSlug, getLocationName } from '@/config/utils';
 import { IJob } from '@/types/backend';
 import { EnvironmentOutlined, ThunderboltOutlined } from '@ant-design/icons';
 import { Card, Col, Empty, Pagination, Row, Spin } from 'antd';
@@ -9,6 +9,7 @@ import { Link, useNavigate } from 'react-router-dom';
 import styles from 'styles/client.module.scss';
 import dayjs from 'dayjs';
 import relativeTime from 'dayjs/plugin/relativeTime';
+import { useTranslation } from 'react-i18next';
 dayjs.extend(relativeTime);
 
 interface IProps {
@@ -17,6 +18,7 @@ interface IProps {
 
 const JobCard = (props: IProps) => {
   const { showPagination = false } = props;
+  const { t, i18n } = useTranslation('jobCard');
 
   const [displayJob, setDisplayJob] = useState<IJob[] | null>(null);
   const [isLoading, setIsLoading] = useState<boolean>(false);
@@ -72,8 +74,8 @@ const JobCard = (props: IProps) => {
           <Row gutter={[20, 20]}>
             <Col span={24}>
               <div className={isMobile ? styles['dflex-mobile'] : styles['dflex-pc']}>
-                <span className={styles['title']}>Công Việc Mới Nhất</span>
-                {!showPagination && <Link to='job'>Xem tất cả</Link>}
+                <span className={styles['title']}>{t('new-jobs')}</span>
+                {!showPagination && <Link to='job'>{t('view-all')}</Link>}
               </div>
             </Col>
 

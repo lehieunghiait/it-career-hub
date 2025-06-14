@@ -1,30 +1,29 @@
 import { Card, Col, Row, Typography } from 'antd';
+import { useTranslation } from 'react-i18next';
 import styles from 'styles/client.module.scss';
 
 const AboutContact = () => {
+  const { t } = useTranslation('about');
   return (
     <section style={{ marginBottom: 40 }}>
       <Typography.Title level={3} style={{ textAlign: 'center' }}>
-        Liên Hệ
+        {t('contact')}
       </Typography.Title>
       <Card bordered={false} className={styles['about-card']}>
         <Row gutter={[24, 24]}>
           <Col xs={24} md={12}>
             <Typography.Paragraph>
-              <strong>Địa chỉ:</strong> Thành phố Biên Hòa, Tỉnh Đồng Nai
+              <strong>{t('address')}:</strong> {t('city')}
             </Typography.Paragraph>
             <Typography.Paragraph>
-              <strong>Email:</strong> lehieunghia2402@gmail.com
+              <strong>{t('email')}:</strong> lehieunghia2402@gmail.com
             </Typography.Paragraph>
             <Typography.Paragraph>
-              <strong>Điện thoại:</strong> +84 399864422 (Vietnam)
+              <strong>{t('phone')}:</strong> +84 399864422 (Vietnam)
             </Typography.Paragraph>
           </Col>
           <Col xs={24} md={12}>
-            <Typography.Paragraph>
-              Chúng tôi luôn sẵn sàng lắng nghe ý kiến và hỗ trợ bạn. Đừng ngần ngại liên hệ với
-              chúng tôi qua email, điện thoại hoặc mạng xã hội.
-            </Typography.Paragraph>
+            <Typography.Paragraph>{t('contact_intro')}</Typography.Paragraph>
           </Col>
         </Row>
       </Card>
