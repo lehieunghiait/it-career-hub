@@ -79,7 +79,7 @@ const RegisterPage = () => {
                   </h2>
                   <div className={styles['terms-privacy']}>
                     <Checkbox className={styles['signup-checkbox']}>
-                      By signing up with Google, I agree to ITviec's{' '}
+                      By signing up with Google, I agree to ITviec&apos;s{' '}
                       <Link to='/terms'>Terms & Conditions</Link> and{' '}
                       <Link to='/privacy'>Privacy Policy</Link> in relation to your privacy
                       information.
@@ -227,8 +227,9 @@ const RegisterPage = () => {
                     className={styles['agreement']}
                   >
                     <Checkbox>
-                      I have read and agree to ITviec's <Link to='/terms'>Terms & Conditions</Link>{' '}
-                      and <Link to='/privacy'>Privacy Policy</Link>.
+                      I have read and agree to ITviec&apos;s{' '}
+                      <Link to='/terms'>Terms & Conditions</Link> and{' '}
+                      <Link to='/privacy'>Privacy Policy</Link>.
                     </Checkbox>
                   </Form.Item>
 
