@@ -1,6 +1,6 @@
 import { useEffect, useRef, useState } from 'react';
 import { createBrowserRouter, Outlet, RouterProvider, useLocation } from 'react-router-dom';
-import { useAppDispatch, useAppSelector } from '@/redux/hooks';
+import { useAppDispatch } from '@/redux/hooks';
 import NotFound from 'components/share/not.found';
 import LoginPage from 'pages/auth/login';
 import RegisterPage from 'pages/auth/register';
@@ -50,7 +50,7 @@ const LayoutClient = () => {
 
 export default function App() {
   const dispatch = useAppDispatch();
-  const isLoading = useAppSelector(state => state.account.isLoading);
+  //const isLoading = useAppSelector(state => state.account.isLoading);
 
   useEffect(() => {
     if (window.location.pathname === '/login' || window.location.pathname === '/register') return;
