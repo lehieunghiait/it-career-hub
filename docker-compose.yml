@@ -1,0 +1,32 @@
+version: '3.8'
+
+services:
+  # Dịch vụ frontend
+  app:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    container_name: it-career-hub-client
+    ports:
+      - '8080:80' # Maps port 8080 on host to port 80 in container
+    volumes:
+      - ./:/app # Mount source code for development
+      - /app/node_modules
+    environment:
+      - NODE_ENV=development
+      # Add other environment variables as needed
+
+  # Dịch vụ phát triển với hot reload
+  dev:
+    image: node:18-alpine
+    container_name: it-career-hub-client-dev
+    working_dir: /app
+    command: sh -c "npm install && npm run dev"
+    ports:
+      - '5173:5173'
+    volumes:
+      - ./:/app
+      - /app/node_modules
+    environment:
+      - NODE_ENV=development
+      - VITE_API_URL=http://localhost:3000 # Thay đổi URL API theo nhu cầu
