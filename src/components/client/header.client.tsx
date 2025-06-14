@@ -1,6 +1,5 @@
 import { useState, useEffect } from 'react';
 import {
-  BellOutlined,
   CodeOutlined,
   ContactsOutlined,
   DashOutlined,
@@ -11,7 +10,6 @@ import {
   MenuFoldOutlined,
   QuestionCircleOutlined,
   RiseOutlined,
-  TwitterOutlined,
 } from '@ant-design/icons';
 import { Avatar, Drawer, Dropdown, MenuProps, Space, message } from 'antd';
 import { Menu, ConfigProvider } from 'antd';
@@ -172,7 +170,7 @@ const Header = (props: any) => {
             </div>
           ) : (
             <div className={styles['header-mobile']}>
-              <span>Your APP</span>
+              <span>IT Career</span>
               <MenuFoldOutlined onClick={() => setOpenMobileMenu(true)} />
             </div>
           )}
