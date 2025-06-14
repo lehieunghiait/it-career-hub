@@ -1,0 +1,12 @@
+{
+  "home": "Home",
+  "job": "IT Jobs",
+  "company": "Top IT Companies",
+  "about": "About Us",
+  "faq": "FAQ",
+  "blog": "Blog",
+  "login": "Login",
+  "logout": "Logout",
+  "hello": "Hello {{name}}",
+  "admin": "Admin"
+}

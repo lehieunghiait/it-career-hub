@@ -1,0 +1,12 @@
+{
+  "home": "Trang Chủ",
+  "job": "Việc Làm IT",
+  "company": "Top Công ty IT",
+  "about": "Về Chúng Tôi",
+  "faq": "Hỏi Đáp",
+  "blog": "Blog",
+  "login": "Đăng Nhập",
+  "logout": "Đăng xuất",
+  "hello": "Xin chào {{name}}",
+  "admin": "Quản Trị"
+}

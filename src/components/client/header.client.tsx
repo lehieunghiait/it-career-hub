@@ -22,8 +22,9 @@ import { useAppDispatch, useAppSelector } from '@/redux/hooks';
 import { callLogout } from '@/config/api';
 import { setLogoutAction } from '@/redux/slice/accountSlide';
 import ManageAccount from './modal/manage.account';
+import { useTranslation } from 'react-i18next';
 
-const Header = (props: any) => {
+const Header = () => {
   const navigate = useNavigate();
   const dispatch = useAppDispatch();
 
@@ -33,7 +34,7 @@ const Header = (props: any) => {
 
   const [current, setCurrent] = useState('home');
   const location = useLocation();
-
+  const { t, i18n } = useTranslation('header');
   const [openMangeAccount, setOpenManageAccount] = useState<boolean>(false);
 
   useEffect(() => {
@@ -42,42 +43,32 @@ const Header = (props: any) => {
 
   const items: MenuProps['items'] = [
     {
-      label: <Link to={'/'}>Trang Chủ</Link>,
+      label: <Link to={'/'}>{t('home')}</Link>,
       key: '/',
       icon: <HomeOutlined />,
     },
     {
-      label: <Link to={'/job'}>Việc Làm IT</Link>,
+      label: <Link to={'/job'}>{t('job')}</Link>,
       key: '/job',
       icon: <CodeOutlined />,
     },
     {
-      label: <Link to={'/company'}>Top Công ty IT</Link>,
+      label: <Link to={'/company'}>{t('company')}</Link>,
       key: '/company',
       icon: <RiseOutlined />,
     },
-    // {
-    //   label: <Link to={'/announcement'}>Thông báo</Link>,
-    //   key: '/announcement',
-    //   icon: <BellOutlined />,
-    // },
-    // {
-    //   label: <Link to={'/contact'}>Liên Hệ</Link>,
-    //   key: '/contact',
-    //   icon: <ContactsOutlined />,
-    // },
     {
-      label: <Link to={'/about'}>Về Chúng Tôi</Link>,
+      label: <Link to={'/about'}>{t('about')}</Link>,
       key: '/about',
       icon: <InfoCircleOutlined />,
     },
     {
-      label: <Link to={'/faq'}>Hỏi Đáp</Link>,
+      label: <Link to={'/faq'}>{t('faq')}</Link>,
       key: '/faq',
       icon: <QuestionCircleOutlined />,
     },
     {
-      label: <Link to={'/blog'}>Blog</Link>,
+      label: <Link to={'/blog'}>{t('blog')}</Link>,
       key: '/blog',
       icon: <FileTextOutlined />,
     },
@@ -91,10 +82,24 @@ const Header = (props: any) => {
     const res = await callLogout();
     if (res && res.data) {
       dispatch(setLogoutAction({}));
-      message.success('Đăng xuất thành công');
+      message.success('Logout success');
       navigate('/');
     }
   };
+  const handleChangeLanguage = ({ key }: { key: string }) => {
+    i18n.changeLanguage(key);
+  };
+
+  const itemsLanguage = [
+    {
+      label: 'English',
+      key: 'en',
+    },
+    {
+      label: 'Vietnamese',
+      key: 'vi',
+    },
+  ];
 
   const itemsDropdown = [
     {
@@ -107,7 +112,7 @@ const Header = (props: any) => {
       icon: <ContactsOutlined />,
     },
     {
-      label: <Link to={'/admin'}>Trang Quản Trị</Link>,
+      label: <Link to={'/admin'}>{t('admin')}</Link>,
       key: 'admin',
       icon: <DashOutlined />,
     },
@@ -131,7 +136,7 @@ const Header = (props: any) => {
           {!isMobile ? (
             <div style={{ display: 'flex', gap: 30 }}>
               <div className={styles['brand']}>
-                <FaReact onClick={() => navigate('/')} title='Hỏi Dân IT' />
+                <FaReact onClick={() => navigate('/')} title='IT Career' />
               </div>
               <div className={styles['top-menu']}>
                 <ConfigProvider
@@ -152,12 +157,12 @@ const Header = (props: any) => {
                 </ConfigProvider>
                 <div className={styles['extra']}>
                   {isAuthenticated === false ? (
-                    <Link to={'/login'}>Đăng Nhập</Link>
+                    <Link to={'/login'}>{t('login')}</Link>
                   ) : (
                     <Dropdown menu={{ items: itemsDropdown }} trigger={['click']}>
                       <Space style={{ cursor: 'pointer' }}>
                         <span style={{ fontSize: 16, fontWeight: 600, color: '#fff' }}>
-                          Xin chào {user?.name}
+                          {t('hello', { name: user?.name })}
                         </span>
                         <Avatar style={{ backgroundColor: '#fff' }}>
                           {user?.name?.substring(0, 2)?.toUpperCase()}
@@ -166,6 +171,17 @@ const Header = (props: any) => {
                     </Dropdown>
                   )}
                 </div>
+                {/* dropdown language */}
+                <Dropdown
+                  menu={{ items: itemsLanguage, onClick: handleChangeLanguage }}
+                  trigger={['click']}
+                >
+                  <Space style={{ cursor: 'pointer' }}>
+                    <span style={{ fontSize: 16, fontWeight: 600, color: '#fff' }}>
+                      {i18n.language === 'en' ? 'English' : 'Vietnamese'}
+                    </span>
+                  </Space>
+                </Dropdown>
               </div>
             </div>
           ) : (

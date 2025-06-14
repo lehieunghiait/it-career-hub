@@ -1,4 +1,4 @@
-import { useLocation, useNavigate } from 'react-router-dom';
+import { useLocation } from 'react-router-dom';
 import { useState, useEffect } from 'react';
 import { IJob } from '@/types/backend';
 import { callFetchJobById } from '@/config/api';
@@ -23,7 +23,6 @@ import {
   HistoryOutlined,
   BankOutlined,
   TagsOutlined,
-  CheckCircleOutlined,
   ClockCircleOutlined,
   TeamOutlined,
   MailOutlined,
@@ -40,18 +39,17 @@ import relativeTime from 'dayjs/plugin/relativeTime';
 import ApplyModal from '@/components/client/modal/apply.modal';
 dayjs.extend(relativeTime);
 
-const { Title, Text, Paragraph } = Typography;
+const { Title, Text } = Typography;
 
-const ClientJobDetailPage = (props: any) => {
+const ClientJobDetailPage = () => {
   const [jobDetail, setJobDetail] = useState<IJob | null>(null);
   const [isLoading, setIsLoading] = useState<boolean>(false);
   const [isSaved, setIsSaved] = useState<boolean>(false);
   const [isModalOpen, setIsModalOpen] = useState<boolean>(false);
 
-  const navigate = useNavigate();
-  let location = useLocation();
-  let params = new URLSearchParams(location.search);
-  const id = params?.get('id'); // job id
+  const location = useLocation();
+  const params = new URLSearchParams(location.search);
+  const id = params?.get('id');
 
   useEffect(() => {
     const init = async () => {
@@ -187,7 +185,7 @@ const ClientJobDetailPage = (props: any) => {
                       <div>
                         <Text type='secondary'>Ngày đăng</Text>
                         <Text strong className={styles['value']}>
-                          {dayjs(jobDetail.updatedAt).fromNow()}
+                          {dayjs(jobDetail.updatedAt).format('DD/MM/YYYY')}
                         </Text>
                       </div>
                     </div>

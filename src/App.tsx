@@ -6,7 +6,6 @@ import LoginPage from 'pages/auth/login';
 import RegisterPage from 'pages/auth/register';
 import LayoutAdmin from 'components/admin/layout.admin';
 import ProtectedRoute from 'components/share/protected-route.ts';
-import Header from 'components/client/header.client';
 import Footer from 'components/client/footer.client';
 import HomePage from 'pages/home';
 import styles from 'styles/app.module.scss';
@@ -41,7 +40,6 @@ const LayoutClient = () => {
 
   return (
     <div className='layout-app' ref={rootRef}>
-      <Header searchTerm={searchTerm} setSearchTerm={setSearchTerm} />
       <div className={styles['content-app']}>
         <Outlet context={[searchTerm, setSearchTerm]} />
       </div>
@@ -70,6 +68,7 @@ export default function App() {
       errorElement: <NotFound />,
       children: [
         { index: true, element: <HomePage /> },
+        { path: 'login', element: <LoginPage /> },
         { path: 'job', element: <ClientJobPage /> },
         { path: 'job/:id', element: <ClientJobDetailPage /> },
         { path: 'company', element: <ClientCompanyPage /> },

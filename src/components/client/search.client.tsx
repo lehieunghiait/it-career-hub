@@ -3,12 +3,13 @@ import { EnvironmentOutlined, MonitorOutlined } from '@ant-design/icons';
 import { LOCATION_LIST, SKILLS_LIST } from '@/config/utils';
 import { ProForm } from '@ant-design/pro-components';
 import styles from 'styles/client.module.scss';
+import { useTranslation } from 'react-i18next';
 
 const SearchClient = () => {
   const optionsSkills = SKILLS_LIST;
   const optionsLocations = LOCATION_LIST;
   const [form] = Form.useForm();
-
+  const { t, i18n } = useTranslation('search');
   const onFinish = async (values: any) => {};
 
   return (
@@ -21,7 +22,7 @@ const SearchClient = () => {
     >
       <Row gutter={[20, 20]}>
         <Col span={24}>
-          <h2>Có công việc gì chưa người đẹp 😍😍😍</h2>
+          <h2>{t('title')}</h2>
         </Col>
         <Col span={24} md={16}>
           <ProForm.Item name='skills'>
@@ -49,7 +50,7 @@ const SearchClient = () => {
               style={{ width: '100%' }}
               placeholder={
                 <>
-                  <EnvironmentOutlined /> Địa điểm...
+                  <EnvironmentOutlined /> {t('location')}...
                 </>
               }
               optionLabelProp='label'
@@ -59,7 +60,7 @@ const SearchClient = () => {
         </Col>
         <Col span={12} md={4}>
           <Button type='primary' onClick={() => form.submit()} className={styles['search-button']}>
-            Tìm kiếm
+            {t('search')}
           </Button>
         </Col>
       </Row>

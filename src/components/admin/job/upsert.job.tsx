@@ -28,8 +28,8 @@ const ViewUpsertJob = (props: any) => {
   const navigate = useNavigate();
   const [value, setValue] = useState<string>('');
 
-  let location = useLocation();
-  let params = new URLSearchParams(location.search);
+  const location = useLocation();
+  const params = new URLSearchParams(location.search);
   const id = params?.get('id'); // job id
   const [dataUpdate, setDataUpdate] = useState<IJob | null>(null);
   const [form] = Form.useForm();

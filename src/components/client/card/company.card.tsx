@@ -9,6 +9,7 @@ import Slider from 'react-slick';
 import 'slick-carousel/slick/slick.css';
 import 'slick-carousel/slick/slick-theme.css';
 import { LeftOutlined, RightOutlined } from '@ant-design/icons';
+import { useTranslation } from 'react-i18next';
 
 const { Title } = Typography;
 
@@ -44,12 +45,12 @@ const PrevArrow = (props: any) => {
 
 const CompanyCard = (props: IProps) => {
   const { showPagination = false } = props;
-
+  const { t, i18n } = useTranslation('companyCard');
   const [displayCompany, setDisplayCompany] = useState<ICompany[] | null>(null);
   const [isLoading, setIsLoading] = useState<boolean>(false);
 
   const [current, setCurrent] = useState(1);
-  const [pageSize, setPageSize] = useState(8); // Tăng kích thước trang để hiển thị nhiều công ty hơn
+  const [pageSize, setPageSize] = useState(8);
   const [total, setTotal] = useState(0);
   const [filter, setFilter] = useState('');
   const [sortQuery, setSortQuery] = useState('sort=-updatedAt');
@@ -134,7 +135,7 @@ const CompanyCard = (props: IProps) => {
     if (!displayCompany || displayCompany.length === 0) {
       return (
         <div className={styles['empty']}>
-          <Empty description='Không có dữ liệu' />
+          <Empty description={t('no-data')} />
         </div>
       );
     }
@@ -148,7 +149,6 @@ const CompanyCard = (props: IProps) => {
       );
     }
 
-    // Render company cards in grid for company page
     return (
       <Row gutter={[24, 24]} className={styles['row-company-grid']}>
         {displayCompany.map(item => (
@@ -161,6 +161,11 @@ const CompanyCard = (props: IProps) => {
   };
 
   const renderCompanyCard = (item: ICompany) => {
+    // Clean description text by removing HTML tags
+    const cleanDescription = item.description
+      ? item.description.replace(/<\/?[^>]+(>|$)/g, '')
+      : '';
+
     return (
       <Card
         className={styles['company-card']}
@@ -177,18 +182,36 @@ const CompanyCard = (props: IProps) => {
         }
       >
         <div className={styles['company-card-content']}>
-          <Title level={5} className={styles['company-name']}>
+          <Title
+            level={5}
+            className={styles['company-name']}
+            style={{
+              overflow: 'hidden',
+              textOverflow: 'ellipsis',
+              whiteSpace: 'nowrap',
+              marginBottom: '8px',
+            }}
+          >
             {item.name}
           </Title>
-          {item.description && (
-            <p className={styles['company-description']}>
-              {item.description.length > 80
-                ? `${item.description.replace(/<\/?[^>]+(>|$)/g, '').substring(0, 80)}...`
-                : item.description.replace(/<\/?[^>]+(>|$)/g, '')}
+          {cleanDescription && (
+            <p
+              className={styles['company-description']}
+              style={{
+                height: '60px',
+                overflow: 'hidden',
+                textOverflow: 'ellipsis',
+                display: '-webkit-box',
+                WebkitLineClamp: 3,
+                WebkitBoxOrient: 'vertical',
+                marginBottom: '12px',
+              }}
+            >
+              {cleanDescription}
             </p>
           )}
-          <Button type='primary' className={styles['view-btn']}>
-            Xem chi tiết
+          <Button type='primary' className={styles['view-btn']} style={{ width: '100%' }}>
+            {t('view-detail')}
           </Button>
         </div>
       </Card>
@@ -201,11 +224,11 @@ const CompanyCard = (props: IProps) => {
         <Spin spinning={isLoading} tip='Loading...'>
           <div className={styles['section-header']}>
             <Title level={3} className={styles['section-title']}>
-              Nhà Tuyển Dụng Hàng Đầu
+              {t('top-it-companies')}
             </Title>
             {!showPagination && (
               <Link to='/company' className={styles['view-all-link']}>
-                Xem tất cả
+                {t('view-all')}
               </Link>
             )}
           </div>

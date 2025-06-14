@@ -21,12 +21,11 @@ const LoginPage = () => {
   const dispatch = useDispatch();
   const isAuthenticated = useAppSelector(state => state.account.isAuthenticated);
 
-  let location = useLocation();
-  let params = new URLSearchParams(location.search);
+  const location = useLocation();
+  const params = new URLSearchParams(location.search);
   const callback = params?.get('callback');
 
   useEffect(() => {
-    // Đã login => redirect to '/'
     if (isAuthenticated) {
       window.location.href = '/';
     }
@@ -73,7 +72,7 @@ const LoginPage = () => {
                   </h2>
                   <div className={styles['terms-privacy']}>
                     <p>
-                      By signing in, you agree to ITviec's{' '}
+                      By signing in, you agree to ITviec&apos;s{' '}
                       <Link to='/terms'>Terms & Conditions</Link> and{' '}
                       <Link to='/privacy'>Privacy Policy</Link> in relation to your privacy
                       information.
