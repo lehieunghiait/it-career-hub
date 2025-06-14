@@ -42,8 +42,8 @@ Before you begin, ensure you have the following installed:
 1. Clone the repository:
 
    ```bash
-   git clone https://github.com/lehieunghia02/it-career-hub-client.git
-   cd it-career-hub-client
+   git clone https://github.com/lehieunghia02/it-career-hub.git
+   cd it-career-hub
    ```
 
 2. Install dependencies:
@@ -68,6 +68,149 @@ Before you begin, ensure you have the following installed:
    ```
 
 5. Open your browser and navigate to `http://localhost:5173`
+
+## 🐳 Docker
+
+### Hướng dẫn đóng gói và chạy thử với Docker
+
+1. **Đóng gói ứng dụng với Docker**
+
+   Tạo Docker image:
+
+   ```bash
+   # Tại thư mục gốc của dự án
+   docker build -t it-career-hub:latest .
+   ```
+
+   Kiểm tra image đã được tạo:
+
+   ```bash
+   docker images
+   ```
+
+2. **Chạy thử ứng dụng**
+
+   Chạy container từ image:
+
+   ```bash
+   docker run -d -p 8080:80 --name it-career-hub-container it-career-hub:latest
+   ```
+
+   Các tham số:
+
+   - `-d`: Chạy container ở chế độ nền (detached)
+   - `-p 8080:80`: Ánh xạ cổng 8080 trên máy chủ tới cổng 80 trong container
+   - `--name it-career-hub-container`: Đặt tên cho container
+   - `it-career-hub:latest`: Tên image để chạy
+
+3. **Kiểm tra container đang chạy**
+
+   ```bash
+   docker ps
+   ```
+
+4. **Truy cập ứng dụng**
+
+   Mở trình duyệt và truy cập: `http://localhost:8080`
+
+5. **Dừng và xóa container**
+
+   ```bash
+   # Dừng container
+   docker stop it-career-hub-container
+
+   # Xóa container
+   docker rm it-career-hub-container
+   ```
+
+### Chạy với Docker Compose
+
+1. **Chạy ứng dụng trong môi trường phát triển (với hot reload)**:
+
+   ```bash
+   # Tại thư mục gốc của dự án
+   docker-compose up dev
+   ```
+
+   Ứng dụng sẽ chạy ở chế độ phát triển và có thể truy cập tại `http://localhost:5173`
+
+2. **Chạy ứng dụng đã build với Nginx**:
+
+   ```bash
+   docker-compose up app
+   ```
+
+   Ứng dụng sẽ được build và chạy trên Nginx, có thể truy cập tại `http://localhost:8080`
+
+3. **Build và chạy trong chế độ nền**:
+
+   ```bash
+   docker-compose up -d app
+   ```
+
+4. **Kiểm tra container đang chạy**:
+
+   ```bash
+   docker-compose ps
+   ```
+
+5. **Xem logs của container**:
+
+   ```bash
+   # Xem logs của dịch vụ dev
+   docker-compose logs dev
+
+   # Xem logs của dịch vụ app
+   docker-compose logs app
+
+   # Theo dõi logs (follow)
+   docker-compose logs -f app
+   ```
+
+6. **Dừng và xóa container**:
+
+   ```bash
+   # Dừng tất cả container
+   docker-compose down
+
+   # Dừng và xóa volumes (cẩn thận khi sử dụng)
+   docker-compose down -v
+   ```
+
+7. **Rebuild image khi có thay đổi**:
+
+   ```bash
+   docker-compose build app
+   docker-compose up app
+   ```
+
+## 🔄 CI/CD với GitHub Actions
+
+Dự án này sử dụng GitHub Actions để tự động triển khai lên Vercel khi có thay đổi được push lên nhánh main/master.
+
+### Thiết lập Vercel Deployment
+
+1. Tạo tài khoản trên [Vercel](https://vercel.com)
+2. Liên kết repository GitHub với Vercel
+3. Lấy các token và ID cần thiết:
+   - Truy cập [Vercel Dashboard](https://vercel.com/dashboard)
+   - Đi tới Settings → Tokens → Tạo token mới
+   - Lưu token này làm `VERCEL_TOKEN`
+   - Đi tới Project Settings → General → Lấy "Project ID" làm `VERCEL_PROJECT_ID`
+   - Đi tới [Account Settings](https://vercel.com/account) → Lấy "User ID" hoặc "Team ID" làm `VERCEL_ORG_ID`
+4. Thêm secrets vào GitHub repository:
+   - Đi tới repository GitHub → Settings → Secrets and variables → Actions
+   - Thêm ba biến môi trường sau:
+     - `VERCEL_TOKEN`: Token API từ Vercel
+     - `VERCEL_ORG_ID`: ID tổ chức Vercel
+     - `VERCEL_PROJECT_ID`: ID dự án Vercel
+
+![Thêm GitHub Secrets](https://i.imgur.com/8tZcLTh.png)
+
+### Workflow
+
+- Push lên nhánh main/master sẽ kích hoạt triển khai tự động
+- Pull request sẽ tạo ra bản preview trước khi merge
 
 ## 📁 Project Structure
 
