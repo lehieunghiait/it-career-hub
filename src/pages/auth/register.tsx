@@ -1,15 +1,4 @@
-import {
-  Button,
-  Checkbox,
-  Divider,
-  Form,
-  Input,
-  Row,
-  Select,
-  message,
-  notification,
-  Tooltip,
-} from 'antd';
+import { Button, Checkbox, Divider, Form, Input, Row, Select, message, notification } from 'antd';
 import { useState } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import { callRegister } from 'config/api';
@@ -26,7 +15,6 @@ import {
   HomeOutlined,
   NumberOutlined,
 } from '@ant-design/icons';
-import Header from 'components/client/header.client';
 import Footer from 'components/client/footer.client';
 
 const { Option } = Select;
@@ -80,7 +68,6 @@ const RegisterPage = () => {
 
   return (
     <div className={styles['auth-container']}>
-      <Header searchTerm={''} setSearchTerm={() => {}} />
       <div className={styles['register-page']}>
         <main className={styles.main}>
           <div className={`${styles.container} ${styles['responsive-container']}`}>
