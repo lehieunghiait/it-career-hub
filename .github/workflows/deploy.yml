@@ -1,4 +1,4 @@
-name: Deploy to Vercel
+name: CI/CD for ReactJS App
 
 on:
   push:
@@ -7,42 +7,41 @@ on:
     branches: [main, master]
 
 jobs:
-  deploy:
+  build-and-deploy:
     runs-on: ubuntu-latest
-    
+
     steps:
-      - name: Checkout code
+      - name: 📥 Checkout code
         uses: actions/checkout@v3
-      
-      - name: Setup Node.js
+
+      - name: 🔧 Setup Node.js
         uses: actions/setup-node@v3
         with:
           node-version: '18'
           cache: 'npm'
-      
-      - name: Install dependencies
+
+      - name: 📦 Install dependencies
         run: npm ci
-      
-      - name: Run lint
+
+      - name: 🧹 Lint code
         run: npm run lint
-      
-      - name: Build project
+
+      - name: 🧱 Build project
         run: npm run build
         env:
-          # Thêm các biến môi trường cần thiết
-          NODE_ENV: production
-      
-      - name: Run tests (if available)
+          CI: false
+          REACT_APP_API_URL: ${{ secrets.REACT_APP_API_URL }}
+
+      - name: 🧪 Run tests (optional)
         run: npm test || echo "No tests found"
-      
-      - name: Deploy to Vercel
+
+      - name: 🚀 Deploy to Vercel
         uses: amondnet/vercel-action@v20
         with:
-          zeit-token: ${{ secrets.VERCEL_TOKEN }}
           vercel-token: ${{ secrets.VERCEL_TOKEN }}
+          zeit-token: ${{ secrets.VERCEL_TOKEN }} 
           vercel-org-id: ${{ secrets.VERCEL_ORG_ID }}
           vercel-project-id: ${{ secrets.VERCEL_PROJECT_ID }}
           github-token: ${{ secrets.GITHUB_TOKEN }}
+          vercel-args: '--prod'
           github-comment: true
-          working-directory: ./
-          vercel-args: '--prod' 
