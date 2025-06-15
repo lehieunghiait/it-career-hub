@@ -64,6 +64,6 @@ export const permissionSlide = createSlice({
   },
 });
 
-export const {} = permissionSlide.actions;
+// export const {} = permissionSlide.actions;
 
 export default permissionSlide.reducer;

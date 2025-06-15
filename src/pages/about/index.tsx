@@ -1,6 +1,6 @@
 import AboutContact from '@/components/client/about/about.contact';
 import AboutTeamMember from '@/components/client/about/about.teammember';
-import { Typography, Row, Col, Card, Space, Avatar, Divider } from 'antd';
+import { Typography, Row, Col, Card, Divider } from 'antd';
 import styles from 'styles/client.module.scss';
 
 // Khai báo component AboutPage

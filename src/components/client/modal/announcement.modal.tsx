@@ -1,7 +1,6 @@
-import { useState, useEffect } from 'react';
-import { Modal, Typography, Button, Image, Space, Divider } from 'antd';
+import { Modal, Typography, Button, Space, Divider } from 'antd';
 import styles from 'styles/client.module.scss';
-import { BellOutlined, InfoCircleOutlined, CloseCircleOutlined } from '@ant-design/icons';
+import { BellOutlined, CloseCircleOutlined } from '@ant-design/icons';
 
 const { Title, Paragraph, Text } = Typography;
 

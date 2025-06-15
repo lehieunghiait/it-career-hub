@@ -1,7 +1,7 @@
 {
-  "name": "fe-vite-nestjs-hoidanit",
-  "author": "",
-  "description": "",
+  "name": "it-career-hub-client",
+  "author": "Nghia Le",
+  "description": "IT Career Hub Client",
   "private": true,
   "version": "1.0.0",
   "type": "commonjs",
@@ -9,11 +9,13 @@
     "dev": "vite",
     "start": "vite",
     "build": "tsc && vite build",
+    "prettier:check": "prettier --check \"src/**/*.{ts,tsx,scss,css,json}\"",
+    "prettier:format": "prettier --write \"src/**/*.{ts,tsx,scss,css,json}\"",
     "preview": "vite preview",
     "lint": "eslint . --ext .ts,.tsx",
     "lint:fix": "eslint . --ext .ts,.tsx --fix",
     "lint:ts": "eslint './src/**/*.{ts,tsx}' --quiet",
-    "format": "prettier --write \"src/**/*.{ts,tsx,scss,css,json}\""
+    "prepare": "husky"
   },
   "dependencies": {
     "@ant-design/icons": "4.8.0",
@@ -45,6 +47,8 @@
     "uuid": "9.0.0"
   },
   "devDependencies": {
+    "@commitlint/cli": "^19.8.1",
+    "@commitlint/config-conventional": "^19.8.1",
     "@types/lodash": "4.14.195",
     "@types/node": "20.2.3",
     "@types/react": "18.0.28",
@@ -61,10 +65,21 @@
     "eslint-plugin-react": "7.33.2",
     "eslint-plugin-react-hooks": "4.6.0",
     "eslint-plugin-unused-imports": "^4.1.4",
+    "husky": "^9.1.7",
+    "lint-staged": "^16.1.1",
     "prettier": "^3.5.3",
     "rollup-plugin-visualizer": "5.9.0",
     "sass": "1.62.1",
     "typescript": "5.3.3",
     "vite": "4.2.0"
+  },
+  "lint-staged": {
+    "src/**/*.{ts,tsx}": [
+      "eslint --fix",
+      "prettier --write"
+    ],
+    "src/**/*.{scss,css,json}": [
+      "prettier --write"
+    ]
   }
 }

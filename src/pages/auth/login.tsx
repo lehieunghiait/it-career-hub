@@ -29,7 +29,7 @@ const LoginPage = () => {
     if (isAuthenticated) {
       window.location.href = '/';
     }
-  }, []);
+  }, [isAuthenticated, navigate]);
 
   const onFinish = async (values: any) => {
     const { username, password } = values;

@@ -37,6 +37,7 @@
     "@typescript-eslint/no-empty-function": "warn",
     "@typescript-eslint/ban-ts-comment": "warn",
     "unused-imports/no-unused-imports": "warn",
+    "no-unused-vars": "warn",
     "no-console": [
       "warn",
       {
