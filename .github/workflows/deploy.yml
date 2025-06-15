@@ -41,6 +41,7 @@ jobs:
           fi
 
       - name: 🚀 Deploy to Vercel
+        id: vercel
         uses: amondnet/vercel-action@v20
         with:
           vercel-token: ${{ secrets.VERCEL_TOKEN }}
