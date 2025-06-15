@@ -7,4 +7,4 @@ coverage
 .git
 public
 package-lock.json
-*.d.ts 
+*.d.ts

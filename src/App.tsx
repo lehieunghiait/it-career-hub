@@ -50,12 +50,11 @@ const LayoutClient = () => {
 
 export default function App() {
   const dispatch = useAppDispatch();
-  //const isLoading = useAppSelector(state => state.account.isLoading);
 
   useEffect(() => {
     if (window.location.pathname === '/login' || window.location.pathname === '/register') return;
     dispatch(fetchAccount());
-  }, []);
+  }, [dispatch]);
 
   const router = createBrowserRouter([
     {

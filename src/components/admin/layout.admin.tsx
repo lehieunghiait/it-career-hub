@@ -8,8 +8,6 @@ import {
   MenuFoldOutlined,
   MenuUnfoldOutlined,
   AliwangwangOutlined,
-  LogoutOutlined,
-  HeartTwoTone,
   BugOutlined,
   ScheduleOutlined,
 } from '@ant-design/icons';

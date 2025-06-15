@@ -4,7 +4,7 @@ import { ICompany } from '@/types/backend';
 import { callFetchCompanyById } from '@/config/api';
 import styles from 'styles/client.module.scss';
 import parse from 'html-react-parser';
-import { Avatar, Button, Card, Col, Divider, Row, Skeleton, Typography, Tag } from 'antd';
+import { Button, Card, Col, Row, Skeleton, Typography, Tag } from 'antd';
 import {
   EnvironmentOutlined,
   GlobalOutlined,
@@ -13,7 +13,6 @@ import {
   TeamOutlined,
   BankOutlined,
   CalendarOutlined,
-  LinkOutlined,
   ArrowLeftOutlined,
 } from '@ant-design/icons';
 
@@ -34,8 +33,8 @@ const ClientCompanyDetailPage = (props: any) => {
   const [isLoading, setIsLoading] = useState<boolean>(false);
   const navigate = useNavigate();
 
-  let location = useLocation();
-  let params = new URLSearchParams(location.search);
+  const location = useLocation();
+  const params = new URLSearchParams(location.search);
   const id = params?.get('id'); // company id
 
   useEffect(() => {

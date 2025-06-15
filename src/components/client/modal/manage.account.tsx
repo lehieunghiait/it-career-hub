@@ -68,6 +68,7 @@ const UserResume = (props: any) => {
           <a
             href={`${import.meta.env.VITE_BACKEND_URL}/images/resume/${record?.url}`}
             target='_blank'
+            rel='noreferrer'
           >
             Chi tiết
           </a>
@@ -89,7 +90,11 @@ const UserResume = (props: any) => {
 };
 
 const UserUpdateInfo = (props: any) => {
-  return <div>//todo</div>;
+  return (
+    <div>
+      <h1>UserUpdateInfo</h1>
+    </div>
+  );
 };
 
 const JobByEmail = (props: any) => {
