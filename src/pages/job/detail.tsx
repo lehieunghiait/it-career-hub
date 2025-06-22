@@ -242,19 +242,19 @@ const ClientJobDetailPage = () => {
                   <GlobalOutlined className={styles['icon']} />
                   <Text className={styles['value']}>
                     <a href='#' target='_blank' rel='noopener noreferrer'>
-                      company.com
+                      it-carerr-hub.com
                     </a>
                   </Text>
                 </div>
 
                 <div className={styles['company-info-item']}>
                   <MailOutlined className={styles['icon']} />
-                  <Text className={styles['value']}>contact@company.com</Text>
+                  <Text className={styles['value']}>contact@it-carerr-hub.com</Text>
                 </div>
 
                 <div className={styles['company-info-item']}>
                   <PhoneOutlined className={styles['icon']} />
-                  <Text className={styles['value']}>+84 xxx xxx xxx</Text>
+                  <Text className={styles['value']}>+84 909 090 909</Text>
                 </div>
 
                 <div className={styles['company-info-item']}>

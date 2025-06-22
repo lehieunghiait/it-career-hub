@@ -21,8 +21,8 @@ import { Link } from 'react-router-dom';
 import { useAppDispatch, useAppSelector } from '@/redux/hooks';
 import { callLogout } from '@/config/api';
 import { setLogoutAction } from '@/redux/slice/accountSlide';
-import ManageAccount from './modal/manage.account';
 import { useTranslation } from 'react-i18next';
+import ManageAccount from './modal/manage.account';
 
 const Header = () => {
   const navigate = useNavigate();
@@ -105,7 +105,7 @@ const Header = () => {
     {
       label: (
         <label style={{ cursor: 'pointer' }} onClick={() => setOpenManageAccount(true)}>
-          Quản lý tài khoản
+          {t('dropdown.manageAccount')}
         </label>
       ),
       key: 'manage-account',
@@ -119,7 +119,7 @@ const Header = () => {
     {
       label: (
         <label style={{ cursor: 'pointer' }} onClick={() => handleLogout()}>
-          Đăng xuất
+          {t('dropdown.logout')}
         </label>
       ),
       key: 'logout',

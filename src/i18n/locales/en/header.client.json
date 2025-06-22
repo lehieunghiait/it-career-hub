@@ -8,5 +8,10 @@
   "login": "Login",
   "logout": "Logout",
   "hello": "Hello {{name}}",
-  "admin": "Admin"
+  "admin": "Admin",
+  "dropdown": {
+    "manageAccount": "Manage Account",
+    "admin": "Admin",
+    "logout": "Logout"
+  }
 }

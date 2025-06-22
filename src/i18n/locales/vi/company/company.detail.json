@@ -1,0 +1,12 @@
+{
+  "Overview": {
+    "Introduction": "Giới thiệu công ty",
+    "NumberOfStaff": "Nhân viên",
+    "TypeOfBusiness": "Loại hình",
+    "YearOfFoundation": "Năm thành lập",
+    "OurSkills": "Công nghệ & kỹ thuật"
+  },
+  "Feature": {
+    "BackToList": "Quay về danh sách"
+  }
+}

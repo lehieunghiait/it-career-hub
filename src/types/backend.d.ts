@@ -49,6 +49,15 @@ export interface ICompany {
     createdAt?: string;
     updatedAt?: string;
 }
+export interface ICompanyDetail extends ICompany {
+  website?: string;
+  phone?: string;
+  email?: string;
+  size?: string | number;
+  companyType?: string;
+  skills?: string[];
+}
+
 
 
 

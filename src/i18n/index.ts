@@ -11,6 +11,8 @@ import enJobCard from './locales/en/job/job.card.json';
 import viJobCard from './locales/vi/job/job.card.json';
 import enSearch from './locales/en/search/search.json';
 import viSearch from './locales/vi/search/search.json';
+import enDetailCompany from './locales/en/company/company.detail.json';
+import viDetailCompany from './locales/vi/company/company.detail.json';
 
 i18n
   .use(LanguageDetector)
@@ -23,6 +25,7 @@ i18n
         companyCard: enCompanyCard,
         jobCard: enJobCard,
         search: enSearch,
+        companyDetail: enDetailCompany,
       },
       vi: {
         header: viHeaderClient,
@@ -30,10 +33,11 @@ i18n
         companyCard: viCompanyCard,
         jobCard: viJobCard,
         search: viSearch,
+        companyDetail: viDetailCompany,
       },
     },
     fallbackLng: 'en',
-    ns: ['header', 'about', 'companyCard', 'jobCard'],
+    ns: ['header', 'about', 'companyCard', 'jobCard', 'companyDetail'],
     defaultNS: 'jobCard',
     fallbackNS: 'jobCard',
     interpolation: {

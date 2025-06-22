@@ -7,6 +7,8 @@ $color-red: #f44336;
 $color-blue: #1a73e8;
 $color-gray: #80868b;
 $color-grayish: #dadce0;
+$color-primary: #1677ff;
+$color-brand: #e14000;
 
 $shadow-normal:
   0 1px 3px 0 rgba(0, 0, 0, 0.1),
@@ -197,6 +199,7 @@ $shadow-large:
   display: flex;
   min-height: 100vh;
   background-color: #f8f9fa;
+  background-image: linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%);
 }
 
 .main {
@@ -209,8 +212,8 @@ $shadow-large:
   margin: 0 auto;
   display: flex;
   background-color: #fff;
-  border-radius: 8px;
-  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+  border-radius: 12px;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
   overflow: hidden;
   transition:
     max-width 0.3s ease,
@@ -221,7 +224,7 @@ $shadow-large:
 
 .login-container {
   flex: 1;
-  padding: 30px;
+  padding: 40px;
   max-width: 500px;
 }
 
@@ -230,7 +233,22 @@ $shadow-large:
 }
 
 .heading {
-  margin-bottom: 24px;
+  margin-bottom: 30px;
+}
+
+.modern-title {
+  font-size: 28px !important;
+  font-weight: 700 !important;
+  margin-bottom: 16px !important;
+  background: linear-gradient(45deg, #333333, #000000);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  letter-spacing: -0.5px;
+  font-family:
+    'Segoe UI',
+    -apple-system,
+    BlinkMacSystemFont,
+    sans-serif !important;
 }
 
 .text-large {
@@ -240,78 +258,134 @@ $shadow-large:
 }
 
 .brand {
-  color: #e14000;
+  color: $color-brand !important;
   font-weight: 700;
+  position: relative;
+  display: inline-block;
+
+  &:after {
+    content: '';
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    height: 3px;
+    background-color: $color-brand;
+    transform: scaleX(0);
+    transition: transform 0.3s ease;
+  }
+
+  &:hover:after {
+    transform: scaleX(1);
+  }
 }
 
 .terms-privacy {
   font-size: 13px;
-  color: #444;
-  margin-bottom: 20px;
+  color: #666;
+  margin-bottom: 24px;
   line-height: 1.5;
 
   a {
-    color: #1890ff;
+    color: $color-primary;
     text-decoration: none;
+    font-weight: 500;
+    transition: all 0.2s ease;
 
     &:hover {
       text-decoration: underline;
+      color: darken($color-primary, 10%);
     }
   }
 }
 
 .google-login {
   width: 100%;
-  height: 42px;
+  height: 46px;
   margin-bottom: 16px;
   display: flex;
   align-items: center;
   justify-content: center;
-  border-radius: 4px;
+  border-radius: 8px !important;
+  border: 1px solid #ddd !important;
+  background-color: white !important;
+  color: #444 !important;
+  font-weight: 500;
+  font-size: 15px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
   transition: all 0.2s ease;
 
   &:hover,
   &:focus {
-    background-color: #f5f5f5;
-    color: #444;
+    background-color: #f5f5f5 !important;
+    border-color: #ccc !important;
+    transform: translateY(-2px);
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
   }
 
   svg {
-    margin-right: 8px;
-    font-size: 16px;
+    margin-right: 10px;
+    font-size: 18px;
+    color: #4285f4;
   }
 
   @media (max-width: 576px) {
-    height: 38px;
+    height: 42px;
+    font-size: 14px;
   }
 
   @media (max-width: 375px) {
-    height: 36px;
+    height: 40px;
   }
 }
 
 .divider {
-  margin: 24px 0;
+  margin: 28px 0;
 }
 
 .login-form {
   width: 100%;
 
+  :global(.ant-form-item-label) {
+    label {
+      font-weight: 500;
+      color: #333;
+      font-size: 15px;
+    }
+  }
+
   :global(.ant-form-item) {
-    margin-bottom: 18px;
+    margin-bottom: 20px;
   }
 
   :global(.ant-input),
   :global(.ant-input-password) {
-    height: 42px;
-    border-radius: 6px;
+    height: 46px;
+    border-radius: 8px;
+    font-size: 15px;
 
     @media (max-width: 576px) {
-      height: 38px;
+      height: 42px;
     }
 
     @media (max-width: 375px) {
-      height: 36px;
+      height: 40px;
+    }
+  }
+
+  .styled-input {
+    transition: all 0.3s ease;
+    border: 1px solid #d9d9d9;
+
+    &:hover,
+    &:focus {
+      border-color: $color-brand;
+      box-shadow: 0 0 0 2px rgba(225, 64, 0, 0.1);
+    }
+
+    .input-icon {
+      color: #bbb;
+      margin-right: 8px;
     }
   }
 
@@ -327,7 +401,7 @@ $shadow-large:
     :global(.ant-form-item-explain) {
       font-size: 12px;
       color: #ff4d4f;
-      margin-top: 2px;
+      margin-top: 4px;
     }
 
     :global(.ant-input),
@@ -356,112 +430,147 @@ $shadow-large:
 
 .forgot-password {
   text-align: right;
-  margin-bottom: 16px;
+  margin-bottom: 20px;
 
   button {
     padding: 0;
     height: auto;
     font-size: 14px;
+    color: $color-primary;
+
+    &:hover {
+      color: darken($color-primary, 10%);
+    }
   }
 }
 
 .login-button {
-  width: 100%;
-  height: 42px;
-  font-weight: 500;
-  border-radius: 4px;
-  background-color: #e14000;
-  border-color: #e14000;
-  transition: all 0.2s ease;
-
-  @media (max-width: 576px) {
-    height: 38px;
-  }
-
-  @media (max-width: 375px) {
-    height: 36px;
-  }
+  height: 46px !important;
+  font-size: 16px !important;
+  font-weight: 500 !important;
+  background-color: $color-brand !important;
+  border-color: $color-brand !important;
+  border-radius: 8px !important;
+  box-shadow: 0 2px 0 rgba(225, 64, 0, 0.1);
+  transition: all 0.3s ease !important;
 
   &:hover,
   &:focus {
-    background-color: #cc3c00;
-    border-color: #cc3c00;
+    background-color: darken($color-brand, 5%) !important;
+    border-color: darken($color-brand, 5%) !important;
+    transform: translateY(-2px);
+    box-shadow: 0 4px 8px rgba(225, 64, 0, 0.2);
+  }
+
+  &:active {
+    transform: translateY(0);
+  }
+
+  @media (max-width: 576px) {
+    height: 42px !important;
+    font-size: 15px !important;
   }
 }
 
 .register-link {
+  margin-top: 24px;
   text-align: center;
-  margin-top: 16px;
 
-  a {
-    color: #1890ff;
-    font-weight: 500;
+  p {
+    color: #666;
+    font-size: 15px;
+  }
+
+  .signup-link {
+    color: $color-brand;
+    font-weight: 600;
+    margin-left: 5px;
+    transition: all 0.2s ease;
 
     &:hover {
+      color: darken($color-brand, 10%);
       text-decoration: underline;
     }
   }
 }
 
-// Benefits section
+// Benefits section styling
 .benefits-section {
   flex: 1;
-  padding: 50px 40px;
-  background-color: #f5f7f9;
+  background-color: #f8fafc;
+  padding: 40px;
+  position: relative;
+  overflow: hidden;
   display: flex;
   flex-direction: column;
   justify-content: center;
 
+  &:before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(135deg, rgba(225, 64, 0, 0.05) 0%, rgba(225, 64, 0, 0.1) 100%);
+    z-index: 0;
+  }
+
   h2 {
     font-size: 22px;
     font-weight: 600;
+    color: #333;
     margin-bottom: 30px;
-    color: #222;
-    line-height: 1.3;
+    position: relative;
+    z-index: 1;
   }
-}
 
-.benefits-list {
-  list-style: none;
-  padding: 0;
-  margin: 0;
+  .benefits-list {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    position: relative;
+    z-index: 1;
 
-  li {
-    display: flex;
-    align-items: flex-start;
-    margin-bottom: 20px;
-    font-size: 16px;
-
-    .check-icon {
-      color: #52c41a;
+    li {
+      display: flex;
+      align-items: flex-start;
+      margin-bottom: 20px;
       font-size: 16px;
-      margin-right: 10px;
-      margin-top: 4px;
+      color: #444;
+
+      .check-icon {
+        color: $color-brand;
+        font-size: 16px;
+        margin-right: 12px;
+        margin-top: 3px;
+        background-color: rgba(225, 64, 0, 0.1);
+        padding: 4px;
+        border-radius: 50%;
+      }
+
+      span {
+        flex: 1;
+        line-height: 1.5;
+      }
+    }
+  }
+
+  @media (max-width: 992px) {
+    padding: 30px;
+
+    h2 {
+      font-size: 20px;
+      margin-bottom: 24px;
     }
 
-    span {
-      flex: 1;
-      line-height: 1.5;
+    .benefits-list li {
+      font-size: 15px;
+      margin-bottom: 16px;
     }
   }
 }
 
-// Responsive
-@media (max-width: 768px) {
-  .container {
-    flex-direction: column;
-  }
-
-  .login-container {
-    max-width: 100%;
-  }
-
-  .benefits-section {
-    padding: 30px 20px;
-  }
-}
-
-// Auth container with header and footer
 .auth-container {
   display: flex;
   flex-direction: column;
@@ -475,21 +584,22 @@ $shadow-large:
   }
 }
 
-// Fix các xung đột CSS
 :global(.layout-app) {
   display: flex;
   flex-direction: column;
   min-height: 100vh;
 }
 
-// Enhanced Responsive Design
-// Tablet và màn hình lớn
 @media (max-width: 1200px) {
   .container {
     max-width: 95%;
   }
 
-  .login-container,
+  .login-container {
+    padding: 30px;
+    max-width: none;
+  }
+
   .benefits-section {
     padding: 30px;
   }
@@ -503,12 +613,22 @@ $shadow-large:
 @media (max-width: 992px) {
   .container {
     max-width: 100%;
-    border-radius: 0;
-    box-shadow: none;
+    border-radius: 8px;
+    margin: 0 10px;
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.08);
   }
 
   .main {
     padding: 20px 10px;
+  }
+
+  .modern-title {
+    font-size: 24px !important;
+  }
+
+  .wrapper {
+    box-shadow: none;
+    margin: 0;
   }
 }
 
@@ -516,6 +636,7 @@ $shadow-large:
 @media (max-width: 768px) {
   .container {
     flex-direction: column;
+    margin: 0 15px;
   }
 
   .login-container {
@@ -523,13 +644,20 @@ $shadow-large:
     padding: 25px 20px;
   }
 
-  .benefits-section {
-    padding: 25px 20px;
+  .wrapper {
+    padding: 0;
   }
 
-  .benefits-list li {
-    margin-bottom: 15px;
-    font-size: 15px;
+  .google-login {
+    height: 44px;
+  }
+
+  .login-button {
+    height: 44px !important;
+  }
+
+  .auth-container {
+    background-image: linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%);
   }
 }
 
@@ -542,6 +670,7 @@ $shadow-large:
   .container {
     box-shadow: none;
     background-color: transparent;
+    margin: 0 10px;
   }
 
   .login-container {
@@ -549,31 +678,48 @@ $shadow-large:
     border-radius: 8px;
     margin-bottom: 20px;
     box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+    padding: 20px 15px;
   }
 
-  .benefits-section {
-    background-color: #fff;
-    border-radius: 8px;
-    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
-  }
-
-  .text-large {
-    font-size: 20px;
+  .modern-title {
+    font-size: 22px !important;
   }
 
   .terms-privacy {
     font-size: 12px;
   }
 
-  .benefits-section h2 {
-    font-size: 18px;
+  .login-form {
+    :global(.ant-form-item-label) {
+      label {
+        font-size: 14px;
+      }
+    }
+  }
+
+  .google-login {
+    height: 42px;
+    font-size: 14px;
+  }
+
+  .login-button {
+    height: 42px !important;
+    font-size: 15px !important;
+  }
+
+  // Fix for mobile Safari
+  .auth-container {
+    min-height: -webkit-fill-available;
+  }
+
+  .login-page {
+    min-height: -webkit-fill-available;
   }
 }
 
 // Mobile nhỏ
 @media (max-width: 375px) {
-  .login-container,
-  .benefits-section {
+  .login-container {
     padding: 20px 15px;
   }
 
@@ -587,23 +733,27 @@ $shadow-large:
   }
 
   .login-button {
-    height: 38px;
+    height: 38px !important;
+    font-size: 14px !important;
   }
 
-  .benefits-list li {
-    font-size: 14px;
-    margin-bottom: 12px;
+  .modern-title {
+    font-size: 20px !important;
   }
 
-  .text-large {
-    font-size: 18px;
+  .register-link p {
+    font-size: 13px;
+  }
+
+  // Fix for iPhone SE and other small devices
+  .wrapper {
+    padding: 15px 10px;
   }
 }
 
 // Màn hình siêu nhỏ
 @media (max-width: 320px) {
-  .login-container,
-  .benefits-section {
+  .login-container {
     padding: 15px 12px;
   }
 
@@ -611,9 +761,9 @@ $shadow-large:
     margin-bottom: 16px;
   }
 
-  .text-large {
-    font-size: 16px;
-    margin-bottom: 12px;
+  .modern-title {
+    font-size: 18px !important;
+    margin-bottom: 12px !important;
   }
 
   .terms-privacy {
@@ -621,570 +771,207 @@ $shadow-large:
     margin-bottom: 15px;
   }
 
-  .benefits-section h2 {
-    font-size: 16px;
-    margin-bottom: 20px;
+  .google-login {
+    height: 36px;
+    font-size: 13px;
+  }
+
+  .login-button {
+    height: 36px !important;
+    font-size: 13px !important;
   }
 }
 
-// Responsive container
-.responsive-container {
-  transition: all 0.3s ease;
-  width: 100%;
-}
+// Landscape mode for mobile devices
+@media (max-height: 480px) and (orientation: landscape) {
+  .login-page {
+    min-height: auto;
+    padding: 5px 0;
+  }
 
-// Thiết bị siêu to
-@media (min-width: 1400px) {
   .container {
-    max-width: 1300px;
-  }
-}
-
-// Thiết bị màn hình rộng
-@media (min-width: 1200px) and (max-width: 1399px) {
-  .container {
-    max-width: 1140px;
-  }
-}
-
-// Landscape orientation cho mobile
-@media (max-width: 768px) and (orientation: landscape) {
-  .container {
-    margin: 10px auto;
+    margin: 5px;
   }
 
-  .main {
+  .login-container {
     padding: 10px;
   }
 
-  .login-container,
-  .benefits-section {
-    padding: 20px;
-  }
-}
-
-// Thêm animation và hiệu ứng khi chuyển đổi giữa các breakpoint
-.container {
-  transition:
-    max-width 0.3s ease,
-    margin 0.3s ease,
-    padding 0.3s ease,
-    box-shadow 0.3s ease;
-}
-
-.login-container,
-.benefits-section {
-  transition:
-    padding 0.3s ease,
-    margin 0.3s ease,
-    max-width 0.3s ease;
-}
-
-// Tablet và màn hình lớn
-// ... existing code for @media (max-width: 1200px) ...
-
-// Tablet
-// ... existing code for @media (max-width: 992px) ...
-
-// Tablet nhỏ
-// ... existing code for @media (max-width: 768px) ...
-
-// Mobile lớn
-@media (max-width: 576px) {
-  .main {
-    padding: 15px 10px;
-  }
-
-  .container {
-    box-shadow: none;
-    background-color: transparent;
-    margin: 0;
-  }
-
-  .login-container {
-    background-color: #fff;
-    border-radius: 8px;
-    margin-bottom: 20px;
-    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
-    padding: 20px 15px;
-  }
-
-  .benefits-section {
-    background-color: #fff;
-    border-radius: 8px;
-    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
-    padding: 20px 15px;
-  }
-
-  .text-large {
-    font-size: 20px;
-  }
-
-  .terms-privacy {
-    font-size: 12px;
-  }
-
-  .benefits-section h2 {
-    font-size: 18px;
-  }
-
-  .wrapper {
-    padding: 0;
-  }
-
-  .google-login {
+  .heading {
     margin-bottom: 10px;
   }
 
+  .modern-title {
+    font-size: 18px !important;
+    margin-bottom: 8px !important;
+  }
+
+  .terms-privacy {
+    margin-bottom: 10px;
+    font-size: 11px;
+  }
+
   .login-form :global(.ant-form-item) {
-    margin-bottom: 12px;
+    margin-bottom: 10px;
   }
 
-  .auth-container {
-    .login-page {
-      padding-top: 10px;
-      padding-bottom: 10px;
-    }
+  .forgot-password {
+    margin-bottom: 10px;
   }
-}
 
-// Mobile nhỏ
-// ... existing code for @media (max-width: 375px) ...
-
-// Màn hình siêu nhỏ
-// ... existing code for @media (max-width: 320px) ...
-
-// Password requirements styling
-.password-requirements {
-  background-color: #f9f9f9;
-  border-radius: 4px;
-  padding: 10px 15px;
-  margin-bottom: 20px;
-  margin-top: -10px;
-  transition: all 0.3s ease;
-
-  p {
-    margin: 5px 0;
+  .google-login {
+    height: 34px;
     font-size: 13px;
-    color: #666;
-    display: flex;
-    align-items: center;
-    transition: all 0.3s ease;
-
-    &:before {
-      content: '•';
-      color: #999;
-      margin-right: 8px;
-      font-size: 16px;
-      transition: all 0.3s ease;
-    }
-
-    &.requirement-met {
-      color: #52c41a;
-
-      &:before {
-        content: '✓';
-        color: #52c41a;
-      }
-    }
+    margin-bottom: 8px;
   }
 
-  @media (max-width: 576px) {
-    p {
-      font-size: 12px;
-    }
+  .divider {
+    margin: 10px 0;
+  }
+
+  .login-button {
+    height: 34px !important;
+    font-size: 13px !important;
+  }
+
+  .register-link {
+    margin-top: 10px;
   }
 }
 
-// Select box styling
-.styled-select {
-  :global(.ant-select-selector) {
-    height: 42px !important;
-    padding: 5px 11px !important;
-    display: flex;
-    align-items: center;
-    border-radius: 6px !important;
-    transition: all 0.3s ease-in-out;
-
-    &:hover {
-      border-color: #e14000 !important;
-    }
-  }
-
-  &:global(.ant-select-focused) {
-    :global(.ant-select-selector) {
-      border-color: #e14000 !important;
-      box-shadow: 0 0 0 2px rgba(225, 64, 0, 0.1) !important;
-    }
-  }
-
-  :global(.ant-select-selection-placeholder) {
-    line-height: 30px !important;
-  }
-
-  :global(.ant-select-selection-item) {
-    line-height: 30px !important;
-  }
-
-  @media (max-width: 576px) {
-    :global(.ant-select-selector) {
-      height: 38px !important;
-    }
-
-    :global(.ant-select-selection-placeholder),
-    :global(.ant-select-selection-item) {
-      line-height: 26px !important;
-    }
-  }
-
-  @media (max-width: 375px) {
-    :global(.ant-select-selector) {
-      height: 36px !important;
-    }
-
-    :global(.ant-select-selection-placeholder),
-    :global(.ant-select-selection-item) {
-      line-height: 24px !important;
-    }
-  }
-}
-
-// Form row improvements
-.form-row {
-  display: flex;
-  margin-left: -10px;
-  margin-right: -10px;
-
-  .form-col {
-    flex: 1;
-    padding: 0 10px;
-    min-width: 0;
-
-    .ant-form-item {
-      margin-bottom: 0;
-    }
-  }
-
-  @media (max-width: 576px) {
-    flex-direction: column;
-    margin: 0;
-
-    .form-col {
-      flex: none;
-      width: 100%;
-      padding: 0;
-      margin-bottom: 18px;
-
-      &:last-child {
-        margin-bottom: 0;
-      }
-    }
-  }
-}
-
-// Agreement checkbox improvements
-.agreement {
-  margin-top: 20px;
-
-  :global(.ant-checkbox-wrapper) {
-    align-items: flex-start;
-
-    :global(.ant-checkbox) {
-      top: 2px;
-
-      &:hover {
-        :global(.ant-checkbox-inner) {
-          border-color: #e14000;
-        }
-      }
-
-      &:global(.ant-checkbox-checked) {
-        :global(.ant-checkbox-inner) {
-          background-color: #e14000;
-          border-color: #e14000;
-        }
-      }
-    }
-
-    span:last-child {
-      color: #444;
-      font-size: 14px;
-      line-height: 1.5;
-      padding-left: 8px;
-
-      a {
-        color: #1890ff;
-
-        &:hover {
-          text-decoration: underline;
-        }
-      }
-    }
-  }
-
-  @media (max-width: 576px) {
-    :global(.ant-checkbox-wrapper) {
-      span:last-child {
-        font-size: 12px;
-      }
-    }
-  }
-}
-
-// Responsive container for register page
-.register-page {
+// Larger screens
+@media (min-width: 1600px) {
   .container {
-    max-width: 600px;
-
-    .login-container {
-      max-width: 100%;
-    }
+    max-width: 1400px;
   }
 
-  @media (max-width: 768px) {
-    .wrapper {
-      padding: 20px;
-    }
-  }
-}
-
-// Custom validation message
-.custom-error {
-  color: #ff4d4f;
-  font-size: 12px;
-  margin-top: 2px;
-  margin-bottom: 8px;
-  display: flex;
-  align-items: center;
-
-  &:before {
-    content: '!';
-    color: #fff;
-    background-color: #ff4d4f;
-    border-radius: 50%;
-    width: 14px;
-    height: 14px;
-    display: inline-flex;
-    align-items: center;
-    justify-content: center;
-    font-size: 10px;
-    margin-right: 6px;
-    font-weight: bold;
-  }
-}
-
-// Helper text
-.helper-text {
-  font-size: 12px;
-  color: #777;
-  margin-top: 2px;
-}
-
-// Additional responsive fixes for register page
-@media (max-width: 576px) {
-  .register-page {
-    .container {
-      margin: 0 10px;
-    }
-
-    .login-form {
-      :global(.ant-form-item) {
-        margin-bottom: 15px;
-      }
-    }
-
-    .password-requirements {
-      margin-bottom: 15px;
-      padding: 8px 12px;
-    }
-  }
-
-  .signup-checkbox {
-    :global(.ant-checkbox) + span {
-      font-size: 12px;
-      line-height: 1.4;
-    }
-  }
-}
-
-// Styling cho input
-.styled-input {
-  transition: all 0.3s ease-in-out;
-
-  &:hover,
-  &:focus {
-    border-color: #e14000;
-    box-shadow: 0 0 0 2px rgba(225, 64, 0, 0.1);
-  }
-
-  .input-icon {
-    color: #bbb;
-    margin-right: 8px;
-  }
-}
-
-// Hiệu ứng hover cho login button
-.login-button {
-  &:hover {
-    background-color: #d93c00;
-    border-color: #d93c00;
-    transform: translateY(-2px);
-    box-shadow: 0 4px 8px rgba(225, 64, 0, 0.2);
-  }
-
-  &:active {
-    transform: translateY(0);
-  }
-}
-
-// Cải thiện Google login button
-.google-login {
-  transition: all 0.3s ease;
-  border: 1px solid #e8e8e8;
-
-  &:hover {
-    background-color: #f5f5f5;
-    border-color: #d9d9d9;
-    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
-  }
-
-  svg {
-    color: #ea4335;
-    transition: transform 0.3s ease;
-  }
-
-  &:hover svg {
-    transform: scale(1.1);
-  }
-}
-
-// Cải thiện forgot password button
-.forgot-btn {
-  color: #1677ff;
-  font-weight: 500;
-  padding: 0;
-
-  &:hover {
-    color: #0958d9;
-    text-decoration: underline;
-  }
-}
-
-// Animation cho checkbox icon
-.check-icon {
-  animation: fadeInLeft 0.5s;
-  transition: transform 0.3s ease;
-}
-
-.benefits-list li:hover .check-icon {
-  transform: scale(1.2);
-  color: #52c41a;
-}
-
-@keyframes fadeInLeft {
-  from {
-    opacity: 0;
-    transform: translateX(-20px);
-  }
-
-  to {
-    opacity: 1;
-    transform: translateX(0);
-  }
-}
-
-// Cải thiện benefits section
-.benefits-section {
-  position: relative;
-  overflow: hidden;
-
-  &:before {
-    content: '';
-    position: absolute;
-    top: 0;
-    left: 0;
-    right: 0;
-    bottom: 0;
-    background: linear-gradient(135deg, rgba(245, 247, 249, 0.9) 0%, rgba(245, 247, 249, 0.4) 100%);
-    z-index: 1;
-  }
-
-  h2,
-  ul {
-    position: relative;
-    z-index: 2;
-  }
-
-  h2 {
-    animation: fadeIn 0.8s;
-  }
-}
-
-@keyframes fadeIn {
-  from {
-    opacity: 0;
-    transform: translateY(-10px);
-  }
-
-  to {
-    opacity: 1;
-    transform: translateY(0);
-  }
-}
-
-// Hiệu ứng cho link
-.terms-privacy a,
-.register-link a {
-  position: relative;
-
-  &:after {
-    content: '';
-    position: absolute;
-    width: 100%;
-    transform: scaleX(0);
-    height: 1px;
-    bottom: 0;
-    left: 0;
-    background-color: #1890ff;
-    transform-origin: bottom right;
-    transition: transform 0.3s ease-out;
-  }
-
-  &:hover:after {
-    transform: scaleX(1);
-    transform-origin: bottom left;
-  }
-}
-
-// Responsive improvements
-@media (max-width: 768px) {
   .login-container {
-    .wrapper {
-      box-shadow: 0 2px 10px rgba(0, 0, 0, 0.08);
-      border-radius: 8px;
-      transition:
-        transform 0.3s ease,
-        box-shadow 0.3s ease;
+    padding: 50px;
+  }
 
-      &:hover {
-        transform: translateY(-5px);
-        box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
-      }
+  .modern-title {
+    font-size: 32px !important;
+  }
+}
+
+// High pixel density screens (Retina displays)
+@media (-webkit-min-device-pixel-ratio: 2), (min-resolution: 192dpi) {
+  .modern-title {
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+  }
+
+  .login-button,
+  .google-login {
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+  }
+}
+
+// Specific device fixes
+// iPhone X, 11, 12, 13 with notch
+@media only screen and (device-width: 375px) and (device-height: 812px) and (-webkit-device-pixel-ratio: 3),
+  only screen and (device-width: 390px) and (device-height: 844px) and (-webkit-device-pixel-ratio: 3),
+  only screen and (device-width: 428px) and (device-height: 926px) and (-webkit-device-pixel-ratio: 3) {
+  .auth-container {
+    padding-top: env(safe-area-inset-top);
+    padding-bottom: env(safe-area-inset-bottom);
+  }
+}
+
+// iPad Pro
+@media only screen and (min-device-width: 1024px) and (max-device-width: 1366px) and (-webkit-min-device-pixel-ratio: 2) {
+  .container {
+    max-width: 90%;
+  }
+
+  .login-container {
+    padding: 40px;
+  }
+}
+
+// Fix for foldable devices
+@supports (display: flex) and ((overflow-inline: contain) or (-ms-overflow-inline: contain)) {
+  .container {
+    overflow-inline: contain;
+  }
+}
+
+// Fix for iOS Safari
+@supports (-webkit-touch-callout: none) {
+  .auth-container,
+  .login-page {
+    height: -webkit-fill-available;
+  }
+}
+
+// Landscape mode styling
+.landscape-mode {
+  .login-page {
+    min-height: auto;
+    padding: 10px 0;
+  }
+
+  .container {
+    margin: 0 10px;
+  }
+
+  .login-container {
+    padding: 15px !important;
+  }
+
+  .wrapper {
+    margin: 0 !important;
+    padding: 15px !important;
+  }
+
+  .heading {
+    margin-bottom: 15px !important;
+  }
+
+  .modern-title {
+    font-size: 20px !important;
+    margin-bottom: 10px !important;
+  }
+
+  .terms-privacy {
+    margin-bottom: 15px !important;
+    font-size: 12px !important;
+  }
+
+  .google-login {
+    height: 36px !important;
+    margin-bottom: 10px !important;
+  }
+
+  .divider {
+    margin: 15px 0 !important;
+  }
+
+  .login-form {
+    :global(.ant-form-item) {
+      margin-bottom: 12px !important;
+    }
+
+    :global(.ant-form-item-label) {
+      padding-bottom: 2px !important;
     }
   }
 
-  .benefits-section {
-    margin-top: 20px;
-    border-radius: 8px;
-    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.08);
+  .login-button {
+    height: 36px !important;
+  }
 
-    h2 {
-      font-size: 20px;
-    }
+  .register-link {
+    margin-top: 15px !important;
   }
 }
 
 // Container animation
 .container {
   transition: all 0.5s cubic-bezier(0.25, 0.8, 0.25, 1);
+}
+
+.full-width {
+  width: 100%;
 }

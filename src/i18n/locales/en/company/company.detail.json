@@ -1,0 +1,12 @@
+{
+  "Overview": {
+    "Introduction": "Introduction",
+    "NumberOfStaff": "Employees",
+    "TypeOfBusiness": "Type",
+    "YearOfFoundation": "Year",
+    "OurSkills": "Our Skills"
+  },
+  "Feature": {
+    "BackToList": "Back to list"
+  }
+}

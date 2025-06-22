@@ -1,10 +1,9 @@
 import { useLocation, useNavigate } from 'react-router-dom';
 import { useState, useEffect } from 'react';
-import { ICompany } from '@/types/backend';
+import { ICompanyDetail } from '@/types/backend';
 import { callFetchCompanyById } from '@/config/api';
 import styles from 'styles/client.module.scss';
-import parse from 'html-react-parser';
-import { Button, Card, Col, Row, Skeleton, Typography, Tag } from 'antd';
+import { Card, Col, Row, Typography } from 'antd';
 import {
   EnvironmentOutlined,
   GlobalOutlined,
@@ -13,22 +12,17 @@ import {
   TeamOutlined,
   BankOutlined,
   CalendarOutlined,
-  ArrowLeftOutlined,
 } from '@ant-design/icons';
+import { useTranslation } from 'react-i18next';
+import CompanyHeader from '@/components/client/company/company.detail.ts/CompanyHeader';
+import CompanySkills from '@/components/client/company/company.detail.ts/CompanySkills';
+import CompanyDetailSkeleton from '@/components/client/company/company.detail.ts/CompanyDetailSkeleton';
+import CompanyDescription from '@/components/client/company/company.detail.ts/CompanyDescription';
 
-const { Title, Paragraph, Text } = Typography;
+const { Title, Text } = Typography;
 
-// Sử dụng interface mở rộng từ ICompany để thêm các thuộc tính mới
-interface ICompanyDetail extends ICompany {
-  website?: string;
-  phone?: string;
-  email?: string;
-  size?: string | number;
-  companyType?: string;
-  skills?: string[];
-}
-
-const ClientCompanyDetailPage = (props: any) => {
+const ClientCompanyDetailPage = () => {
+  const { t } = useTranslation('companyDetail');
   const [companyDetail, setCompanyDetail] = useState<ICompanyDetail | null>(null);
   const [isLoading, setIsLoading] = useState<boolean>(false);
   const navigate = useNavigate();
@@ -55,22 +49,14 @@ const ClientCompanyDetailPage = (props: any) => {
     navigate('/company');
   };
 
+  const skills = companyDetail?.skills || ['Computer', 'Engineering', 'IT'];
   return (
     <div className={`${styles['container']} ${styles['company-detail-page']}`}>
-      <div className={styles['company-detail-header']}>
-        <Button
-          onClick={handleGoBack}
-          icon={<ArrowLeftOutlined />}
-          className={styles['back-button']}
-        >
-          Quay lại danh sách công ty
-        </Button>
-      </div>
+      {/* Button back */}
+      <CompanyHeader onGoBack={handleGoBack} />
 
       {isLoading ? (
-        <Card className={styles['company-detail-skeleton']}>
-          <Skeleton active avatar paragraph={{ rows: 6 }} />
-        </Card>
+        <CompanyDetailSkeleton />
       ) : (
         companyDetail &&
         companyDetail._id && (
@@ -92,14 +78,14 @@ const ClientCompanyDetailPage = (props: any) => {
 
                     <div className={styles['company-info-item']}>
                       <EnvironmentOutlined className={styles['info-icon']} />
-                      <Text>{companyDetail?.address || 'Chưa cập nhật địa chỉ'}</Text>
+                      <Text>{companyDetail?.address || 'N/A'}</Text>
                     </div>
 
                     {companyDetail.website && (
                       <div className={styles['company-info-item']}>
                         <GlobalOutlined className={styles['info-icon']} />
                         <a href={companyDetail.website} target='_blank' rel='noopener noreferrer'>
-                          {companyDetail.website}
+                          {companyDetail.website || 'Not update website'}
                         </a>
                       </div>
                     )}
@@ -123,7 +109,7 @@ const ClientCompanyDetailPage = (props: any) => {
                         <TeamOutlined className={styles['stat-icon']} />
                         <div className={styles['stat-content']}>
                           <div className={styles['stat-value']}>{companyDetail.size || 'N/A'}</div>
-                          <div className={styles['stat-label']}>Nhân viên</div>
+                          <div className={styles['stat-label']}>{t('Overview.NumberOfStaff')}</div>
                         </div>
                       </div>
 
@@ -131,9 +117,9 @@ const ClientCompanyDetailPage = (props: any) => {
                         <BankOutlined className={styles['stat-icon']} />
                         <div className={styles['stat-content']}>
                           <div className={styles['stat-value']}>
-                            {companyDetail.companyType || 'N/A'}
+                            {companyDetail.companyType || 'Computer'}
                           </div>
-                          <div className={styles['stat-label']}>Loại hình</div>
+                          <div className={styles['stat-label']}>{t('Overview.TypeOfBusiness')}</div>
                         </div>
                       </div>
 
@@ -145,42 +131,21 @@ const ClientCompanyDetailPage = (props: any) => {
                               ? new Date(companyDetail.createdAt).getFullYear()
                               : 'N/A'}
                           </div>
-                          <div className={styles['stat-label']}>Thành lập</div>
+                          <div className={styles['stat-label']}>
+                            {t('Overview.YearOfFoundation')}
+                          </div>
                         </div>
                       </div>
                     </div>
                   </div>
                 </Col>
-
                 <Col xs={24} md={16} className={styles['company-profile-right']}>
-                  <Card
-                    title={<Title level={4}>Giới thiệu công ty</Title>}
-                    className={styles['company-description-card']}
-                  >
-                    <div className={styles['company-description']}>
-                      {parse(
-                        companyDetail?.description ?? 'Chưa có thông tin giới thiệu về công ty'
-                      )}
-                    </div>
-                  </Card>
+                  <CompanyDescription description={companyDetail.description} />
                 </Col>
               </Row>
             </Card>
 
-            {companyDetail.skills && companyDetail.skills.length > 0 && (
-              <Card
-                className={styles['company-skills-card']}
-                title={<Title level={4}>Công nghệ & Kỹ năng</Title>}
-              >
-                <div className={styles['skills-container']}>
-                  {companyDetail.skills.map((skill, index) => (
-                    <Tag key={index} className={styles['skill-tag']}>
-                      {skill}
-                    </Tag>
-                  ))}
-                </div>
-              </Card>
-            )}
+            {skills && skills.length > 0 && <CompanySkills skills={skills} />}
           </>
         )
       )}

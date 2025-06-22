@@ -8,5 +8,10 @@
   "login": "Đăng Nhập",
   "logout": "Đăng xuất",
   "hello": "Xin chào {{name}}",
-  "admin": "Quản Trị"
+  "admin": "Quản Trị",
+  "dropdown": {
+    "manageAccount": "Quản Lý Tài Khoản",
+    "admin": "Quản Trị",
+    "logout": "Đăng Xuất"
+  }
 }
