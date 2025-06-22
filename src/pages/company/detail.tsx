@@ -3,7 +3,9 @@ import { useState, useEffect } from 'react';
 import { ICompanyDetail } from '@/types/backend';
 import { callFetchCompanyById } from '@/config/api';
 import styles from 'styles/client.module.scss';
-import { Card, Col, Row, Typography } from 'antd';
+import { Card, Col, Row, Typography, Carousel } from 'antd';
+const { Title } = Typography;
+
 import {
   EnvironmentOutlined,
   GlobalOutlined,
@@ -18,8 +20,13 @@ import CompanyHeader from '@/components/client/company/company.detail.ts/Company
 import CompanySkills from '@/components/client/company/company.detail.ts/CompanySkills';
 import CompanyDetailSkeleton from '@/components/client/company/company.detail.ts/CompanyDetailSkeleton';
 import CompanyDescription from '@/components/client/company/company.detail.ts/CompanyDescription';
+import CompanyProfile from '@/components/client/company/company.detail.ts/CompanyProfile';
+import CompanyCarousel from '@/components/client/company/company.detail.ts/CompanyCarousel';
 
-const { Title, Text } = Typography;
+const images = [
+  'https://itviec.com/rails/active_storage/representations/proxy/eyJfcmFpbHMiOnsibWVzc2FnZSI6IkJBaHBBNmhMUFE9PSIsImV4cCI6bnVsbCwicHVyIjoiYmxvYl9pZCJ9fQ==--088fec3df7eefb9dbf5bb0a3fee94c68bdb86faa/eyJfcmFpbHMiOnsibWVzc2FnZSI6IkJBaDdCem9MWm05eWJXRjBPZ2wzWldKd09oTnlaWE5wZW1WZmRHOWZabWxzYkZzSGFRS2VBbWtDdlFFPSIsImV4cCI6bnVsbCwicHVyIjoidmFyaWF0aW9uIn19--22ae3c60c8cd4ceb8906930c6fd9de4e83ffa644/MicrosoftTeams-image%20(1).png',
+  'https://itviec.com/rails/active_storage/representations/proxy/eyJfcmFpbHMiOnsibWVzc2FnZSI6IkJBaHBBMExFVXc9PSIsImV4cCI6bnVsbCwicHVyIjoiYmxvYl9pZCJ9fQ==--b8b35cbf897f4bdd659d1e169b374173b95976c8/eyJfcmFpbHMiOnsibWVzc2FnZSI6IkJBaDdCem9MWm05eWJXRjBPZ2wzWldKd09oTnlaWE5wZW1WZmRHOWZabWxzYkZzSGFRS2VBbWtDdlFFPSIsImV4cCI6bnVsbCwicHVyIjoidmFyaWF0aW9uIn19--22ae3c60c8cd4ceb8906930c6fd9de4e83ffa644/5f0aab3cecfe48a011ef.jpg',
+];
 
 const ClientCompanyDetailPage = () => {
   const { t } = useTranslation('companyDetail');
@@ -29,6 +36,7 @@ const ClientCompanyDetailPage = () => {
 
   const location = useLocation();
   const params = new URLSearchParams(location.search);
+
   const id = params?.get('id'); // company id
 
   useEffect(() => {
@@ -52,7 +60,6 @@ const ClientCompanyDetailPage = () => {
   const skills = companyDetail?.skills || ['Computer', 'Engineering', 'IT'];
   return (
     <div className={`${styles['container']} ${styles['company-detail-page']}`}>
-      {/* Button back */}
       <CompanyHeader onGoBack={handleGoBack} />
 
       {isLoading ? (
@@ -61,7 +68,8 @@ const ClientCompanyDetailPage = () => {
         companyDetail &&
         companyDetail._id && (
           <>
-            <Card className={styles['company-detail-card']}>
+            <CompanyProfile company={companyDetail} />
+            {/* <Card className={styles['company-detail-card']}>
               <Row gutter={[24, 24]} className={styles['company-profile']}>
                 <Col xs={24} md={8} className={styles['company-profile-left']}>
                   <div className={styles['company-logo-container']}>
@@ -143,9 +151,10 @@ const ClientCompanyDetailPage = () => {
                   <CompanyDescription description={companyDetail.description} />
                 </Col>
               </Row>
-            </Card>
+            </Card> */}
 
             {skills && skills.length > 0 && <CompanySkills skills={skills} />}
+            <CompanyCarousel images={images || []} loading={isLoading} />
           </>
         )
       )}

@@ -4,7 +4,8 @@
     "NumberOfStaff": "Employees",
     "TypeOfBusiness": "Type",
     "YearOfFoundation": "Year",
-    "OurSkills": "Our Skills"
+    "OurSkills": "Our Skills",
+    "CompanyImage": "Company Image"
   },
   "Feature": {
     "BackToList": "Back to list"
