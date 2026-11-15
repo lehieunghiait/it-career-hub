@@ -1,0 +1,336 @@
+// CV builder editor (the landing page lives in cv-landing.module.scss)
+$brand: #e14000;
+$navy: #0b1120;
+$ink: #1f2937;
+$muted: #6b7280;
+$line: #eef0f3;
+$bg: #f5f6f8;
+$header-h: 55px;
+
+// ===== Template thumbnails (CSS drawing) =====
+.thumb {
+  position: relative;
+  aspect-ratio: 210 / 297;
+  background: #fff;
+  border: 1px solid $line;
+  border-radius: 6px;
+  overflow: hidden;
+  padding: 10px 12px;
+
+  i,
+  b {
+    display: block;
+  }
+}
+
+.t-line {
+  height: 4px;
+  margin-bottom: 4px;
+  border-radius: 2px;
+  background: #e5e7eb;
+}
+
+.t-name {
+  width: 55%;
+  height: 9px;
+  margin-bottom: 6px;
+  border-radius: 3px;
+  background: $ink;
+}
+
+.t-head {
+  width: 35%;
+  height: 5px;
+  margin: 8px 0 5px;
+  border-radius: 2px;
+}
+
+.thumb-modern {
+  display: flex;
+  padding: 0;
+
+  .t-side {
+    width: 34%;
+    padding: 10px 7px;
+
+    .t-line {
+      background: rgba(255, 255, 255, 0.55);
+    }
+  }
+
+  .t-avatar {
+    display: block;
+    width: 60%;
+    aspect-ratio: 1;
+    margin: 0 auto 10px;
+    border-radius: 50%;
+    background: rgba(255, 255, 255, 0.75);
+  }
+
+  .t-main {
+    flex: 1;
+    padding: 10px 8px;
+  }
+}
+
+.thumb-minimal {
+  .t-row {
+    display: flex;
+    gap: 8px;
+    padding: 6px 0;
+    border-top: 1px solid $line;
+
+    &:first-child {
+      border-top: none;
+      align-items: center;
+    }
+  }
+
+  .t-photo {
+    width: 22%;
+    aspect-ratio: 1;
+    border-radius: 3px;
+    background: #e5e7eb;
+  }
+
+  .t-label {
+    width: 22%;
+    height: 5px;
+    border-radius: 2px;
+  }
+}
+
+// ===== Editor =====
+.editor {
+  max-width: 1440px;
+  margin: 0 auto;
+  padding: 16px 16px 48px;
+}
+
+.toolbar {
+  position: sticky;
+  top: $header-h;
+  z-index: 5;
+  display: flex;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 8px 12px;
+  margin: -16px -16px 16px;
+  padding: 10px 16px;
+  background: #fff;
+  border-bottom: 1px solid $line;
+}
+
+.back {
+  display: inline-flex;
+  padding: 6px;
+  color: $ink;
+  font-size: 16px;
+}
+
+.title-input {
+  flex: 1;
+  min-width: 160px;
+  font-size: 16px;
+  font-weight: 700;
+}
+
+.save-state {
+  font-size: 13px;
+  color: $muted;
+  white-space: nowrap;
+}
+
+.toolbar-actions {
+  display: flex;
+  gap: 8px;
+
+  @media (max-width: 520px) {
+    width: 100%;
+
+    > * {
+      flex: 1;
+    }
+  }
+}
+
+.workspace {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
+  gap: 20px;
+  align-items: start;
+}
+
+.form-pane {
+  min-width: 0;
+}
+
+.design {
+  padding: 14px;
+  margin-bottom: 14px;
+  background: #fff;
+  border: 1px solid $line;
+  border-radius: 12px;
+}
+
+.design-row {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 10px;
+  max-width: 360px;
+}
+
+.template-pick {
+  padding: 4px;
+  border: 2px solid transparent;
+  border-radius: 8px;
+  background: transparent;
+  cursor: pointer;
+  font-size: 12px;
+  font-weight: 600;
+  color: $muted;
+
+  .thumb {
+    margin-bottom: 4px;
+    padding: 6px 7px;
+  }
+
+  &.active {
+    border-color: $brand;
+    color: $brand;
+  }
+}
+
+.colors {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  margin-top: 12px;
+}
+
+.swatch {
+  width: 26px;
+  height: 26px;
+  border: 2px solid #fff;
+  border-radius: 50%;
+  box-shadow: 0 0 0 1px #d1d5db;
+  cursor: pointer;
+
+  &.active {
+    box-shadow: 0 0 0 2px $ink;
+  }
+}
+
+.sample-hint {
+  margin-bottom: 12px;
+  padding: 8px 12px;
+  background: #fff7ed;
+  border: 1px solid #fed7aa;
+  border-radius: 10px;
+  font-size: 13px;
+}
+
+.sections {
+  background: #fff;
+
+  :global(.ant-collapse-header) {
+    font-weight: 700;
+  }
+}
+
+.photo-row {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  margin-bottom: 16px;
+}
+
+.hint {
+  margin-top: 4px;
+  font-size: 12px;
+  color: $muted;
+}
+
+.item-block {
+  position: relative;
+  padding: 14px 14px 0;
+  margin-bottom: 12px;
+  border: 1px solid $line;
+  border-radius: 10px;
+  background: #fafafa;
+
+  :global(.ant-row) > :global(.ant-col):first-child {
+    padding-right: 28px !important;
+  }
+}
+
+.item-remove {
+  position: absolute !important;
+  top: 6px;
+  right: 6px;
+  z-index: 1;
+}
+
+.preview-pane {
+  position: sticky;
+  top: calc(#{$header-h} + 70px);
+  max-height: calc(100vh - #{$header-h} - 86px);
+  overflow-y: auto;
+  padding: 16px;
+  background: #e5e7eb;
+  border-radius: 12px;
+}
+
+.mobile-switch {
+  margin-bottom: 14px;
+}
+
+
+@media (max-width: 991px) {
+  .preview-pane {
+    position: static;
+    max-height: none;
+    padding: 10px;
+  }
+}
+
+// ===== Instant HTML preview =====
+.html-preview {
+  width: 100%;
+  overflow: hidden;
+}
+
+.sheet-wrap {
+  position: absolute;
+  top: 0;
+  left: 0;
+  transform-origin: top left;
+  background: #fff;
+  box-shadow: 0 10px 30px rgba(15, 23, 42, 0.12);
+}
+
+.sheet {
+  position: relative;
+  width: 100%;
+  overflow: hidden;
+  -webkit-font-smoothing: antialiased;
+}
+
+// Dashed guide where the PDF will start a new page
+.page-break {
+  position: absolute;
+  left: 0;
+  right: 0;
+  border-top: 1px dashed #9ca3af;
+  pointer-events: none;
+
+  span {
+    position: absolute;
+    right: 8px;
+    top: -9px;
+    padding: 0 6px;
+    background: #fff;
+    font-size: 9px;
+    color: #9ca3af;
+  }
+}

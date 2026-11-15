@@ -7,7 +7,7 @@ import {
   ProFormTextArea,
 } from '@ant-design/pro-components';
 import { Col, Form, Row, message, notification } from 'antd';
-import { isMobile } from 'react-device-detect';
+import { useIsMobile } from '@/hooks/useIsMobile';
 import { callCreateRole, callFetchPermission, callUpdateRole } from '@/config/api';
 import { IPermission } from '@/types/backend';
 import { CheckSquareOutlined } from '@ant-design/icons';
@@ -24,6 +24,7 @@ interface IProps {
 }
 
 const ModalRole = (props: IProps) => {
+  const isMobile = useIsMobile();
   const { openModal, setOpenModal, reloadTable } = props;
   const singleRole = useAppSelector(state => state.role.singleRole);
   const dispatch = useAppDispatch();
@@ -177,15 +178,15 @@ const ModalRole = (props: IProps) => {
         <Row gutter={16}>
           <Col lg={12} md={12} sm={24} xs={24}>
             <ProFormText
-              label='Tên Role'
+              label='Name'
               name='name'
-              rules={[{ required: true, message: 'Vui lòng không bỏ trống' }]}
-              placeholder='Nhập name'
+              rules={[{ required: true, message: 'Please do not leave blank' }]}
+              placeholder='Enter name'
             />
           </Col>
           <Col lg={12} md={12} sm={24} xs={24}>
             <ProFormSwitch
-              label='Trạng thái'
+              label='Status'
               name='isActive'
               checkedChildren='ACTIVE'
               unCheckedChildren='INACTIVE'
@@ -198,10 +199,10 @@ const ModalRole = (props: IProps) => {
 
           <Col span={24}>
             <ProFormTextArea
-              label='Miêu tả'
+              label='Description'
               name='description'
-              rules={[{ required: true, message: 'Vui lòng không bỏ trống' }]}
-              placeholder='Nhập miêu tả role'
+              rules={[{ required: true, message: 'Please do not leave blank' }]}
+              placeholder='Enter description'
               fieldProps={{
                 autoSize: { minRows: 2 },
               }}
@@ -209,8 +210,8 @@ const ModalRole = (props: IProps) => {
           </Col>
           <Col span={24}>
             <ProCard
-              title='Quyền hạn'
-              subTitle='Các quyền hạn được phép cho vai trò này'
+              title='Permissions'
+              subTitle='The permissions allowed for this role'
               headStyle={{ color: '#d81921' }}
               style={{ marginBottom: 20 }}
               headerBordered

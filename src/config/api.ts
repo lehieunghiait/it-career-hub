@@ -1,7 +1,6 @@
 import {
   IBackendRes,
   ICompany,
-  IAccount,
   IUser,
   IModelPaginate,
   IGetAccount,
@@ -10,60 +9,45 @@ import {
   IPermission,
   IRole,
   ISubscribers,
+  IIDashboardOverview,
+  IDashboardResumesStats,
+  IDashboardInsights,
+  ICompanyDetail,
+  ISavedJob,
 } from '@/types/backend';
 import axios from 'config/axios-customize';
+import type { ICv } from '@/components/cv/cv-model';
 
 /**
  * 
 Module Auth
  */
-export const callRegister = (
-  name: string,
-  email: string,
-  password: string,
-  age: number,
-  gender: string,
-  address: string
-) => {
-  return axios.post<IBackendRes<IUser>>('/api/v1/auth/register', {
-    name,
-    email,
-    password,
-    age,
-    gender,
-    address,
-  });
-};
-
-export const callLogin = (username: string, password: string) => {
-  return axios.post<IBackendRes<IAccount>>('/api/v1/auth/login', { username, password });
-};
-
 export const callFetchAccount = () => {
   return axios.get<IBackendRes<IGetAccount>>('/api/v1/auth/account');
-};
-
-export const callRefreshToken = () => {
-  return axios.get<IBackendRes<IAccount>>('/api/v1/auth/refresh');
-};
-
-export const callLogout = () => {
-  return axios.post<IBackendRes<string>>('/api/v1/auth/logout');
 };
 
 /**
  * Upload single file
  */
-export const callUploadSingleFile = (file: any, folderType: string) => {
+export const callUploadSingleFile = (file: any, folder: string) => {
   const bodyFormData = new FormData();
   bodyFormData.append('fileUpload', file);
-  return axios<IBackendRes<{ fileName: string }>>({
+  bodyFormData.append('folder', folder);
+  return axios<
+    IBackendRes<{
+      url: string;
+      key: string;
+      originalName: string;
+      mimeType: string;
+      size: number;
+      fileName?: string;
+    }>
+  >({
     method: 'post',
     url: '/api/v1/files/upload',
     data: bodyFormData,
     headers: {
       'Content-Type': 'multipart/form-data',
-      folder_type: folderType,
     },
   });
 };
@@ -76,13 +60,19 @@ export const callCreateCompany = (
   name: string,
   address: string,
   description: string,
-  logo: string
+  logo: string,
+  phone?: string,
+  email?: string,
+  website?: string
 ) => {
   return axios.post<IBackendRes<ICompany>>('/api/v1/companies', {
     name,
     address,
     description,
     logo,
+    phone,
+    email,
+    website,
   });
 };
 
@@ -109,8 +99,21 @@ export const callFetchCompany = (query: string) => {
   return axios.get<IBackendRes<IModelPaginate<ICompany>>>(`/api/v1/companies?${query}`);
 };
 
+export interface ICompanyHighlight {
+  companyId: string;
+  openJobs: number;
+  locations: string[];
+  topSkills: string[];
+  rating: number;
+  reviewCount: number;
+}
+
+export const callFetchCompanyHighlights = () => {
+  return axios.get<IBackendRes<ICompanyHighlight[]>>('/api/v1/companies/highlights');
+};
+
 export const callFetchCompanyById = (id: string) => {
-  return axios.get<IBackendRes<ICompany>>(`/api/v1/companies/${id}`);
+  return axios.get<IBackendRes<ICompanyDetail>>(`/api/v1/companies/${id}`);
 };
 
 /**
@@ -153,6 +156,17 @@ export const callFetchJob = (query: string) => {
   return axios.get<IBackendRes<IModelPaginate<IJob>>>(`/api/v1/jobs?${query}`);
 };
 
+export interface IJobSuggestions {
+  jobs: { name: string; count: number }[];
+  companies: { _id: string; name: string; logo?: string; jobs: number }[];
+}
+
+export const callFetchJobSuggestions = (q: string) => {
+  return axios.get<IBackendRes<IJobSuggestions>>(
+    `/api/v1/jobs/suggestions?q=${encodeURIComponent(q)}`
+  );
+};
+
 export const callFetchJobById = (id: string) => {
   return axios.get<IBackendRes<IJob>>(`/api/v1/jobs/${id}`);
 };
@@ -165,8 +179,9 @@ export const callCreateResume = (url: string, companyId: any, jobId: any) => {
   return axios.post<IBackendRes<IResume>>('/api/v1/resumes', { url, companyId, jobId });
 };
 
-export const callUpdateResumeStatus = (id: any, status: string) => {
-  return axios.patch<IBackendRes<IResume>>(`/api/v1/resumes/${id}`, { status });
+// note is shown to the candidate on their timeline (e.g. interview time and place)
+export const callUpdateResumeStatus = (id: any, status: string, note?: string) => {
+  return axios.patch<IBackendRes<IResume>>(`/api/v1/resumes/${id}`, { status, note });
 };
 
 export const callDeleteResume = (id: string) => {
@@ -181,8 +196,114 @@ export const callFetchResumeById = (id: string) => {
   return axios.get<IBackendRes<IResume>>(`/api/v1/resumes/${id}`);
 };
 
+/**
+ * Short-lived (10 min) presigned link to a CV stored in the private bucket
+ */
+export const callFetchResumeFileUrl = (id: string) => {
+  return axios.get<IBackendRes<{ url: string; expiresIn: number }>>(`/api/v1/resumes/${id}/file`);
+};
+
+export interface IPipelineJob {
+  _id: string;
+  name: string;
+  companyName?: string;
+  count: number;
+}
+
+export interface IPipelineItem {
+  _id: string;
+  email: string;
+  userId?: string;
+  candidateName: string;
+  status: string;
+  rating?: number;
+  notesCount: number;
+  jobId?: { _id: string; name: string } | null;
+  companyId?: { _id: string; name: string; logo?: string } | null;
+  createdAt: string;
+  updatedAt: string;
+}
+
+export interface IResumeNote {
+  _id: string;
+  content: string;
+  createdBy: { _id: string; email: string; name?: string };
+  createdAt: string;
+}
+
+export interface IPipelineDetail extends Omit<IPipelineItem, 'notesCount' | 'jobId'> {
+  jobId?: {
+    _id: string;
+    name: string;
+    location?: string;
+    level?: string;
+    skills?: string[];
+  } | null;
+  notes: IResumeNote[];
+  history?: { status: string; note?: string; updatedAt: string; updatedBy?: { email: string } }[];
+}
+
+export const callFetchPipeline = (jobId?: string) => {
+  return axios.get<IBackendRes<{ jobs: IPipelineJob[]; items: IPipelineItem[] }>>(
+    '/api/v1/resumes/pipeline',
+    { params: jobId ? { jobId } : {} }
+  );
+};
+
+export const callFetchPipelineDetail = (id: string) => {
+  return axios.get<IBackendRes<IPipelineDetail>>(`/api/v1/resumes/pipeline/${id}`);
+};
+
+export const callRateResume = (id: string, rating: number) => {
+  return axios.patch<IBackendRes<{ rating: number | null }>>(`/api/v1/resumes/${id}/rating`, {
+    rating,
+  });
+};
+
+export const callAddResumeNote = (id: string, content: string) => {
+  return axios.post<IBackendRes<IResumeNote>>(`/api/v1/resumes/${id}/notes`, { content });
+};
+
+export const callDeleteResumeNote = (id: string, noteId: string) => {
+  return axios.delete<IBackendRes<{ deleted: boolean }>>(`/api/v1/resumes/${id}/notes/${noteId}`);
+};
+
 export const callFetchResumeByUser = () => {
   return axios.post<IBackendRes<IResume[]>>(`/api/v1/resumes/by-user`);
+};
+
+export interface IAppliedJob {
+  jobId: string;
+  status: string;
+  appliedAt: string;
+}
+
+export const callFetchAppliedJobs = () => {
+  return axios.get<IBackendRes<IAppliedJob[]>>('/api/v1/resumes/applied-jobs');
+};
+
+/**
+ * 
+Module Saved jobs (current user's bookmarks)
+ */
+export const callFetchSavedJobs = () => {
+  return axios.get<IBackendRes<ISavedJob[]>>('/api/v1/saved-jobs');
+};
+
+export const callFetchSavedJobIds = () => {
+  return axios.get<IBackendRes<string[]>>('/api/v1/saved-jobs/ids');
+};
+
+export const callSaveJob = (jobId: string) => {
+  return axios.post<IBackendRes<{ jobId: string; saved: boolean }>>('/api/v1/saved-jobs', {
+    jobId,
+  });
+};
+
+export const callUnsaveJob = (jobId: string) => {
+  return axios.delete<IBackendRes<{ jobId: string; saved: boolean }>>(
+    `/api/v1/saved-jobs/${jobId}`
+  );
 };
 
 /**
@@ -259,4 +380,145 @@ export const callFetchSubscriber = (query: string) => {
 
 export const callFetchSubscriberById = (id: string) => {
   return axios.get<IBackendRes<ISubscribers>>(`/api/v1/subscribers/${id}`);
+};
+
+/**
+ * Module Dashboard
+ **/
+//get overview statistics //
+export const callFetchDashboardOverview = () => {
+  return axios.get<IBackendRes<IIDashboardOverview>>('/api/v1/admin/dashboard/stats/overview');
+};
+
+//get resumes statistics
+export const callFetchDashboardResumes = () => {
+  return axios.get<IBackendRes<IDashboardResumesStats>>('/api/v1/admin/dashboard/stats/resumes');
+};
+
+//get chart data for the dashboard (distributions, 30-day activity, recent items)
+export const callFetchDashboardInsights = () => {
+  return axios.get<IBackendRes<IDashboardInsights>>('/api/v1/admin/dashboard/stats/insights');
+};
+
+/**
+ * 
+Module CV builder (current user's online CVs)
+ */
+export const callFetchMyCvs = () => {
+  return axios.get<IBackendRes<ICv[]>>('/api/v1/cvs');
+};
+
+export const callFetchCvById = (id: string) => {
+  return axios.get<IBackendRes<ICv>>(`/api/v1/cvs/${id}`);
+};
+
+export const callCreateCv = (cv: Omit<ICv, '_id'>) => {
+  return axios.post<IBackendRes<ICv>>('/api/v1/cvs', cv);
+};
+
+export const callUpdateCv = (id: string, cv: Partial<ICv>) => {
+  return axios.patch<IBackendRes<ICv>>(`/api/v1/cvs/${id}`, cv);
+};
+
+export const callDeleteCv = (id: string) => {
+  return axios.delete<IBackendRes<{ _id: string }>>(`/api/v1/cvs/${id}`);
+};
+
+/**
+ * 
+Module Salary insights (computed from job postings)
+ */
+export interface ISalaryStats {
+  key: string;
+  label?: string;
+  count: number;
+  min: number;
+  p25: number;
+  median: number;
+  p75: number;
+  max: number;
+}
+
+export interface ISalaryInsights {
+  overall: ISalaryStats;
+  byLevel: ISalaryStats[];
+  byRole: ISalaryStats[];
+  bySkill: ISalaryStats[];
+  byLocation: ISalaryStats[];
+  roles: { key: string; label: string }[];
+  lastUpdated: string | null;
+}
+
+export const callFetchSalaryInsights = (query: string) => {
+  return axios.get<IBackendRes<ISalaryInsights>>(`/api/v1/salaries/insights?${query}`);
+};
+
+/**
+ * 
+Module Company reviews & interviews (anonymous)
+ */
+export interface ICompanyReview {
+  _id: string;
+  rating: number;
+  ratings?: Partial<
+    Record<'salary' | 'culture' | 'management' | 'workLifeBalance' | 'growth', number>
+  >;
+  title: string;
+  pros: string;
+  cons: string;
+  advice?: string;
+  recommend?: boolean;
+  jobTitle?: string;
+  employmentStatus: 'current' | 'former';
+  createdAt: string;
+}
+
+export interface ICompanyInterview {
+  _id: string;
+  jobTitle: string;
+  difficulty: number;
+  experience: 'positive' | 'neutral' | 'negative';
+  outcome: 'offer' | 'no_offer' | 'pending';
+  process: string;
+  questions?: string;
+  createdAt: string;
+}
+
+export interface IReviewSummary {
+  reviews: {
+    count: number;
+    rating: number;
+    recommendPercent: number;
+    distribution: number[];
+    categories: Record<string, number>;
+  };
+  interviews: { count: number; difficulty: number; positivePercent: number; offerPercent: number };
+}
+
+export const callFetchReviewSummary = (companyId: string) => {
+  return axios.get<IBackendRes<IReviewSummary>>(`/api/v1/company-reviews/summary/${companyId}`);
+};
+
+export const callFetchCompanyReviews = (companyId: string, current = 1, pageSize = 5) => {
+  return axios.get<IBackendRes<IModelPaginate<ICompanyReview>>>(
+    `/api/v1/company-reviews/reviews?companyId=${companyId}&current=${current}&pageSize=${pageSize}`
+  );
+};
+
+export const callFetchCompanyInterviews = (companyId: string, current = 1, pageSize = 5) => {
+  return axios.get<IBackendRes<IModelPaginate<ICompanyInterview>>>(
+    `/api/v1/company-reviews/interviews?companyId=${companyId}&current=${current}&pageSize=${pageSize}`
+  );
+};
+
+export const callCreateCompanyReview = (
+  review: Omit<ICompanyReview, '_id' | 'createdAt'> & { companyId: string }
+) => {
+  return axios.post<IBackendRes<{ _id: string }>>('/api/v1/company-reviews/reviews', review);
+};
+
+export const callCreateCompanyInterview = (
+  interview: Omit<ICompanyInterview, '_id' | 'createdAt'> & { companyId: string }
+) => {
+  return axios.post<IBackendRes<{ _id: string }>>('/api/v1/company-reviews/interviews', interview);
 };

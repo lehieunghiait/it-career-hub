@@ -6,7 +6,7 @@ const AboutTeamMember = ({ teamMembers }: { teamMembers: any[] }) => {
   return (
     <section style={{ marginBottom: 40 }}>
       <Typography.Title level={3} style={{ textAlign: 'center' }}>
-        Đội Ngũ Của Chúng Tôi
+        Our Team
       </Typography.Title>
       <Row gutter={[24, 24]} style={{ marginTop: 20 }}>
         {teamMembers.map((member, index) => (

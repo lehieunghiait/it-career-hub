@@ -2,16 +2,20 @@ import { createAsyncThunk, createSlice } from '@reduxjs/toolkit';
 import { callFetchAccount } from '@/config/api';
 
 // First, create the thunk
-export const fetchAccount = createAsyncThunk('account/fetchAccount', async () => {
-  const response = await callFetchAccount();
-  return response.data;
-});
+export const fetchAccount = createAsyncThunk(
+  'account/fetchAccount',
+  async (_, { rejectWithValue }) => {
+    const response = await callFetchAccount();
+    // The axios interceptor resolves API errors as { statusCode, message } instead of throwing
+    if (!response.data) return rejectWithValue(response.message);
+    return response.data;
+  }
+);
 
 interface IState {
   isAuthenticated: boolean;
   isLoading: boolean;
-  isRefreshToken: boolean;
-  errorRefreshToken: string;
+  authError?: string;
   user: {
     _id: string;
     email: string;
@@ -31,21 +35,21 @@ interface IState {
   activeMenu: string;
 }
 
+const emptyUser: IState['user'] = {
+  _id: '',
+  email: '',
+  name: '',
+  role: {
+    _id: '',
+    name: '',
+  },
+  permissions: [],
+};
+
 const initialState: IState = {
   isAuthenticated: false,
   isLoading: true,
-  isRefreshToken: false,
-  errorRefreshToken: '',
-  user: {
-    _id: '',
-    email: '',
-    name: '',
-    role: {
-      _id: '',
-      name: '',
-    },
-    permissions: [],
-  },
+  user: emptyUser,
 
   activeMenu: 'home',
 };
@@ -59,65 +63,43 @@ export const accountSlide = createSlice({
     setActiveMenu: (state, action) => {
       state.activeMenu = action.payload;
     },
-    setUserLoginInfo: (state, action) => {
-      state.isAuthenticated = true;
-      state.isLoading = false;
-      state.user._id = action?.payload?._id;
-      state.user.email = action.payload.email;
-      state.user.name = action.payload.name;
-      state.user.role = action?.payload?.role;
-      state.user.permissions = action?.payload?.permissions;
-    },
-    setLogoutAction: (state, action) => {
-      localStorage.removeItem('access_token');
+    setLogoutAction: state => {
       state.isAuthenticated = false;
-      state.user = {
-        _id: '',
-        email: '',
-        name: '',
-        role: {
-          _id: '',
-          name: '',
-        },
-        permissions: [],
-      };
-    },
-    setRefreshTokenAction: (state, action) => {
-      state.isRefreshToken = action.payload?.status ?? false;
-      state.errorRefreshToken = action.payload?.message ?? '';
+      state.isLoading = false;
+      state.user = emptyUser;
     },
   },
   extraReducers: builder => {
     // Add reducers for additional action types here, and handle loading state as needed
-    builder.addCase(fetchAccount.pending, (state, action) => {
-      if (action.payload) {
-        state.isAuthenticated = false;
-        state.isLoading = true;
-      }
+    builder.addCase(fetchAccount.pending, state => {
+      state.isLoading = true;
+      state.authError = undefined;
     });
 
     builder.addCase(fetchAccount.fulfilled, (state, action) => {
+      state.isLoading = false;
       if (action.payload) {
         state.isAuthenticated = true;
-        state.isLoading = false;
         state.user._id = action?.payload?.user?._id;
         state.user.email = action.payload.user?.email;
         state.user.name = action.payload.user?.name;
         state.user.role = action?.payload?.user?.role;
         state.user.permissions = action?.payload?.user?.permissions;
+      } else {
+        state.isAuthenticated = false;
       }
     });
 
     builder.addCase(fetchAccount.rejected, (state, action) => {
-      if (action.payload) {
-        state.isAuthenticated = false;
-        state.isLoading = false;
-      }
+      state.isAuthenticated = false;
+      state.isLoading = false;
+      state.authError = Array.isArray(action.payload)
+        ? action.payload.join(', ')
+        : (action.payload as string | undefined);
     });
   },
 });
 
-export const { setActiveMenu, setUserLoginInfo, setLogoutAction, setRefreshTokenAction } =
-  accountSlide.actions;
+export const { setActiveMenu, setLogoutAction } = accountSlide.actions;
 
 export default accountSlide.reducer;

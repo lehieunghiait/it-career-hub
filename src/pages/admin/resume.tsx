@@ -1,18 +1,24 @@
 import DataTable from '@/components/client/data-table';
 import { useAppDispatch, useAppSelector } from '@/redux/hooks';
-import { IResume } from '@/types/backend';
+import { ICompany, IJob, IResume } from '@/types/backend';
 import { ActionType, ProColumns, ProFormSelect } from '@ant-design/pro-components';
 import { message, notification } from 'antd';
 import { useState, useRef } from 'react';
 import dayjs from 'dayjs';
-import { callDeleteResume } from '@/config/api';
+import { callDeleteResume, callFetchJob } from '@/config/api';
 import queryString from 'query-string';
 import { fetchResume } from '@/redux/slice/resumeSlide';
 import ViewDetailResume from '@/components/admin/resume/view.resume';
 import { ALL_PERMISSIONS } from '@/config/permissions';
 import Access from '@/components/share/access';
+import { Space, Popconfirm, Button } from 'antd';
+import { EditOutlined, DeleteOutlined, EyeOutlined, FileOutlined } from '@ant-design/icons';
+import { callFetchCompany } from '@/config/api';
+import { useEffect } from 'react';
+import { useOpenResume } from '@/hooks/useOpenResume';
 
 const ResumePage = () => {
+  const { openResume, openingId } = useOpenResume();
   const tableRef = useRef<ActionType>();
 
   const isFetching = useAppSelector(state => state.resume.isFetching);
@@ -22,16 +28,42 @@ const ResumePage = () => {
 
   const [dataInit, setDataInit] = useState<IResume | null>(null);
   const [openViewDetail, setOpenViewDetail] = useState<boolean>(false);
+  const [companies, setCompanies] = useState<ICompany[]>([]);
+  const [jobs, setJobs] = useState<IJob[]>([]);
 
+  useEffect(() => {
+    const fetchCompanies = async () => {
+      try {
+        const res = await callFetchCompany('current=1&pageSize=100');
+        if (res?.data?.result) {
+          setCompanies(res.data.result);
+        }
+      } catch (error) {
+        console.error('Error fetching companies:', error);
+      }
+    };
+    fetchCompanies();
+    fetchJobs();
+  }, []);
+  const fetchJobs = async () => {
+    try {
+      const res = await callFetchJob('current=1&pageSize=100');
+      if (res?.data?.result) {
+        setJobs(res.data.result);
+      }
+    } catch (error) {
+      console.error('Error fetching jobs:', error);
+    }
+  };
   const handleDeleteResume = async (_id: string | undefined) => {
     if (_id) {
       const res = await callDeleteResume(_id);
       if (res && res.data) {
-        message.success('Xóa Resume thành công');
+        message.success('Remove Resume successfully');
         reloadTable();
       } else {
         notification.error({
-          message: 'Có lỗi xảy ra',
+          message: 'An error occurred',
           description: res.message,
         });
       }
@@ -39,12 +71,14 @@ const ResumePage = () => {
   };
 
   const reloadTable = () => {
+    //reload table
     tableRef?.current?.reload();
   };
 
   const columns: ProColumns<IResume>[] = [
     {
       title: 'Id',
+      responsive: ['xl'],
       dataIndex: '_id',
       width: 250,
       render: (text, record, index, action) => {
@@ -62,8 +96,9 @@ const ResumePage = () => {
       },
       hideInSearch: true,
     },
+    // Status filed
     {
-      title: 'Trạng Thái',
+      title: 'Status',
       dataIndex: 'status',
       sorter: true,
       renderFormItem: (item, props, form) => (
@@ -74,27 +109,63 @@ const ResumePage = () => {
           valueEnum={{
             PENDING: 'PENDING',
             REVIEWING: 'REVIEWING',
+            INTERVIEW: 'INTERVIEW',
             APPROVED: 'APPROVED',
             REJECTED: 'REJECTED',
           }}
-          placeholder='Chọn level'
+          placeholder='Select level'
         />
       ),
     },
-
     {
       title: 'Job',
       dataIndex: ['jobId', 'name'],
-      hideInSearch: true,
+      renderFormItem: (item, props, form) => {
+        return (
+          <ProFormSelect
+            placeholder='Filter by job name'
+            options={jobs.map(job => ({
+              label: job.name as string,
+              value: job._id as string,
+            }))}
+            fieldProps={{
+              loading: jobs.length === 0,
+              filterOption: (input, option) =>
+                (option?.label as string)?.toLowerCase().includes(input.toLowerCase()),
+              allowClear: true,
+              showSearch: true,
+            }}
+          />
+        );
+      },
     },
     {
       title: 'Company',
+      responsive: ['md'],
       dataIndex: ['companyId', 'name'],
-      hideInSearch: true,
+      renderFormItem: (item, props, form) => {
+        return (
+          <ProFormSelect
+            placeholder='Filter by company'
+            allowClear
+            showSearch
+            options={companies.map(company => ({
+              label: company.name as string,
+              value: company._id as string,
+            }))}
+            fieldProps={{
+              loading: companies.length === 0,
+              filterOption: (input, option) =>
+                (option?.label as string)?.toLowerCase().includes(input.toLowerCase()),
+            }}
+          />
+        );
+      },
     },
 
     {
       title: 'CreatedAt',
+      responsive: ['lg'],
       dataIndex: 'createdAt',
       width: 200,
       sorter: true,
@@ -105,53 +176,86 @@ const ResumePage = () => {
     },
     {
       title: 'UpdatedAt',
+      responsive: ['xl'],
       dataIndex: 'updatedAt',
-      width: 200,
+      width: 150,
       sorter: true,
       render: (text, record, index, action) => {
         return <>{dayjs(record.updatedAt).format('DD-MM-YYYY HH:mm:ss')}</>;
       },
       hideInSearch: true,
     },
-    // {
+    {
+      title: 'CV',
+      responsive: ['sm'],
+      dataIndex: 'url',
+      hideInSearch: true,
+      width: 100,
+      render: (text, record) => {
+        return (
+          <Space direction='vertical' size='small' align='center'>
+            <Button
+              type='link'
+              icon={<FileOutlined />}
+              style={{ color: '#15bdd7' }}
+              loading={openingId === record._id}
+              onClick={() => openResume(record._id)}
+            >
+              View CV
+            </Button>
+          </Space>
+        );
+      },
+    },
+    {
+      title: 'Actions',
+      fixed: 'right',
+      hideInSearch: true,
+      width: 130,
+      render: (_value, entity, _index, _action) => (
+        <Space>
+          <EditOutlined
+            style={{
+              fontSize: 20,
+              fontWeight: 'bold',
+              color: '#ffa500',
+            }}
+            type=''
+            onClick={() => {
+              // navigate(`/admin/job/upsert?id=${entity._id}`);
+            }}
+          />
 
-    //     title: 'Actions',
-    //     hideInSearch: true,
-    //     width: 50,
-    //     render: (_value, entity, _index, _action) => (
-    //         <Space>
-    //             <EditOutlined
-    //                 style={{
-    //                     fontSize: 20,
-    //                     color: '#ffa500',
-    //                 }}
-    //                 type=""
-    //                 onClick={() => {
-    //                     navigate(`/admin/job/upsert?id=${entity._id}`)
-    //                 }}
-    //             />
+          <Popconfirm
+            placement='leftTop'
+            title={'Confirm delete'}
+            description={'Are you sure you want to delete this resume?'}
+            onConfirm={() => handleDeleteResume(entity._id)}
+            okText='Confirm'
+            cancelText='Cancel'
+          >
+            <span style={{ cursor: 'pointer', margin: '0 10px' }}>
+              <DeleteOutlined
+                style={{
+                  fontSize: 20,
+                  color: '#ff4d4f',
+                }}
+              />
+            </span>
+          </Popconfirm>
 
-    //             <Popconfirm
-    //                 placement="leftTop"
-    //                 title={"Xác nhận xóa resume"}
-    //                 description={"Bạn có chắc chắn muốn xóa resume này ?"}
-    //                 onConfirm={() => handleDeleteResume(entity._id)}
-    //                 okText="Xác nhận"
-    //                 cancelText="Hủy"
-    //             >
-    //                 <span style={{ cursor: "pointer", margin: "0 10px" }}>
-    //                     <DeleteOutlined
-    //                         style={{
-    //                             fontSize: 20,
-    //                             color: '#ff4d4f',
-    //                         }}
-    //                     />
-    //                 </span>
-    //             </Popconfirm>
-    //         </Space>
-    //     ),
-
-    // },
+          <EyeOutlined
+            style={{ fontSize: 20, color: '#1890ff' }}
+            type=''
+            onClick={() => {
+              setOpenViewDetail(true);
+              setDataInit(entity);
+            }}
+            title='View Details'
+          />
+        </Space>
+      ),
+    },
   ];
 
   const buildQuery = (params: any, sort: any, filter: any) => {
@@ -193,7 +297,7 @@ const ResumePage = () => {
       <Access permission={ALL_PERMISSIONS.RESUMES.GET_PAGINATE}>
         <DataTable<IResume>
           actionRef={tableRef}
-          headerTitle='Danh sách Resumes'
+          headerTitle='List Resume'
           rowKey='_id'
           loading={isFetching}
           columns={columns}
@@ -212,7 +316,7 @@ const ResumePage = () => {
               return (
                 <div>
                   {' '}
-                  {range[0]}-{range[1]} trên {total} rows
+                  {range[0]}-{range[1]} of {total} rows
                 </div>
               );
             },

@@ -1,7 +1,7 @@
 import { callFetchCompany } from '@/config/api';
 import { convertSlug } from '@/config/utils';
 import { ICompany } from '@/types/backend';
-import { Card, Col, Empty, Pagination, Row, Spin, Typography, Button } from 'antd';
+import { Card, Col, Empty, Pagination, Row, Spin, Typography, Button, Skeleton } from 'antd';
 import { useState, useEffect } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import styles from 'styles/client.module.scss';
@@ -10,9 +10,9 @@ import 'slick-carousel/slick/slick.css';
 import 'slick-carousel/slick/slick-theme.css';
 import { LeftOutlined, RightOutlined } from '@ant-design/icons';
 import { useTranslation } from 'react-i18next';
-
+import { ArrowRightOutlined } from '@ant-design/icons';
 const { Title } = Typography;
-
+import SeeMoreLink from '@/components/client/common/SeeMoreLink';
 interface IProps {
   showPagination?: boolean;
 }
@@ -45,7 +45,6 @@ const PrevArrow = (props: any) => {
 
 const CompanyCard = (props: IProps) => {
   const { showPagination = false } = props;
-  const { t, i18n } = useTranslation('companyCard');
   const [displayCompany, setDisplayCompany] = useState<ICompany[] | null>(null);
   const [isLoading, setIsLoading] = useState<boolean>(false);
 
@@ -130,13 +129,26 @@ const CompanyCard = (props: IProps) => {
       },
     ],
   };
-
+  /**
+   *
+   * @returns Render company cards in slider for homepage and grid for other pages
+   */
   const renderCompanyCards = () => {
     if (!displayCompany || displayCompany.length === 0) {
       return (
-        <div className={styles['empty']}>
-          <Empty description={t('no-data')} />
-        </div>
+        <Row gutter={[24, 24]} className={styles['row-company-grid']}>
+          {Array.from({ length: showPagination ? pageSize : 4 }).map((_, index) => (
+            <Col span={24} md={12} lg={6} key={index}>
+              <Card className={styles['company-card']}>
+                <Skeleton.Image active style={{ width: '100%', height: '250px' }} />
+                <div style={{ padding: '20px' }}>
+                  <Skeleton active paragraph={{ rows: 3 }} />
+                  <Skeleton.Button active block style={{ marginTop: '12px' }} />
+                </div>
+              </Card>
+            </Col>
+          ))}
+        </Row>
       );
     }
 
@@ -173,45 +185,21 @@ const CompanyCard = (props: IProps) => {
         hoverable
         cover={
           <div className={styles['card-image-container']}>
-            <img
-              alt={item.name}
-              src={`${import.meta.env.VITE_BACKEND_URL}/images/company/${item?.logo}`}
-              className={styles['company-image']}
-            />
+            <img alt={item.name} src={item.logo} className={styles['company-image']} />
           </div>
         }
       >
         <div className={styles['company-card-content']}>
-          <Title
-            level={5}
-            className={styles['company-name']}
-            style={{
-              overflow: 'hidden',
-              textOverflow: 'ellipsis',
-              whiteSpace: 'nowrap',
-              marginBottom: '8px',
-            }}
-          >
+          <Title level={5} className={styles['company-name']} title={item.name}>
             {item.name}
           </Title>
           {cleanDescription && (
-            <p
-              className={styles['company-description']}
-              style={{
-                height: '60px',
-                overflow: 'hidden',
-                textOverflow: 'ellipsis',
-                display: '-webkit-box',
-                WebkitLineClamp: 3,
-                WebkitBoxOrient: 'vertical',
-                marginBottom: '12px',
-              }}
-            >
+            <p className={styles['company-description']} title={cleanDescription}>
               {cleanDescription}
             </p>
           )}
-          <Button type='primary' className={styles['view-btn']} style={{ width: '100%' }}>
-            {t('view-detail')}
+          <Button type='primary' className={styles['view-btn']}>
+            {'See more'}
           </Button>
         </div>
       </Card>
@@ -224,13 +212,9 @@ const CompanyCard = (props: IProps) => {
         <Spin spinning={isLoading} tip='Loading...'>
           <div className={styles['section-header']}>
             <Title level={3} className={styles['section-title']}>
-              {t('top-it-companies')}
+              {'Top IT Companies in Vietnam 🇻🇳'}
             </Title>
-            {!showPagination && (
-              <Link to='/company' className={styles['view-all-link']}>
-                {t('view-all')}
-              </Link>
-            )}
+            {!showPagination && <SeeMoreLink to='company' />}
           </div>
 
           {renderCompanyCards()}

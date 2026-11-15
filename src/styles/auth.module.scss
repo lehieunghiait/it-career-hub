@@ -205,12 +205,18 @@ $shadow-large:
 .main {
   width: 100%;
   padding: 40px 20px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-height: 100vh;
 }
 
 .container {
-  max-width: 1200px;
+  max-width: 600px;
   margin: 0 auto;
   display: flex;
+  justify-content: center;
+  align-items: center;
   background-color: #fff;
   border-radius: 12px;
   box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
@@ -225,11 +231,18 @@ $shadow-large:
 .login-container {
   flex: 1;
   padding: 40px;
-  max-width: 500px;
+  max-width: 600px;
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }
 
 .wrapper {
   width: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
 }
 
 .heading {
@@ -592,12 +605,12 @@ $shadow-large:
 
 @media (max-width: 1200px) {
   .container {
-    max-width: 95%;
+    max-width: 600px;
   }
 
   .login-container {
     padding: 30px;
-    max-width: none;
+    max-width: 600px;
   }
 
   .benefits-section {
@@ -612,9 +625,9 @@ $shadow-large:
 // Tablet
 @media (max-width: 992px) {
   .container {
-    max-width: 100%;
+    max-width: 600px;
     border-radius: 8px;
-    margin: 0 10px;
+    margin: 0 auto;
     box-shadow: 0 5px 15px rgba(0, 0, 0, 0.08);
   }
 
@@ -636,7 +649,8 @@ $shadow-large:
 @media (max-width: 768px) {
   .container {
     flex-direction: column;
-    margin: 0 15px;
+    margin: 0 auto;
+    max-width: 90%;
   }
 
   .login-container {
@@ -664,13 +678,14 @@ $shadow-large:
 // Mobile lớn
 @media (max-width: 576px) {
   .main {
-    padding: 15px 0;
+    padding: 15px 10px;
   }
 
   .container {
     box-shadow: none;
     background-color: transparent;
-    margin: 0 10px;
+    margin: 0 auto;
+    max-width: 95%;
   }
 
   .login-container {
@@ -790,7 +805,8 @@ $shadow-large:
   }
 
   .container {
-    margin: 5px;
+    margin: 5px auto;
+    max-width: 600px;
   }
 
   .login-container {
@@ -842,11 +858,12 @@ $shadow-large:
 // Larger screens
 @media (min-width: 1600px) {
   .container {
-    max-width: 1400px;
+    max-width: 700px;
   }
 
   .login-container {
     padding: 50px;
+    max-width: 700px;
   }
 
   .modern-title {
@@ -882,11 +899,13 @@ $shadow-large:
 // iPad Pro
 @media only screen and (min-device-width: 1024px) and (max-device-width: 1366px) and (-webkit-min-device-pixel-ratio: 2) {
   .container {
-    max-width: 90%;
+    max-width: 600px;
+    margin: 0 auto;
   }
 
   .login-container {
     padding: 40px;
+    max-width: 600px;
   }
 }
 
@@ -913,7 +932,8 @@ $shadow-large:
   }
 
   .container {
-    margin: 0 10px;
+    margin: 0 auto;
+    max-width: 600px;
   }
 
   .login-container {
@@ -974,4 +994,12 @@ $shadow-large:
 
 .full-width {
   width: 100%;
+}
+
+.clerk-wrapper {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-height: 100vh;
+  padding: 24px 16px;
 }

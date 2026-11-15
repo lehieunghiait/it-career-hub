@@ -1,0 +1,173 @@
+name: Deploy to UAT and Production
+
+on:
+  push:
+    branches:
+      - develop  # Trigger UAT deployment
+      - main     # Trigger Production deployment
+  workflow_dispatch:
+    inputs:
+      environment:
+        description: 'Environment to deploy'
+        required: true
+        type: choice 
+        options:
+          - uat
+          - production
+
+env:
+  REGISTRY: ghcr.io # Github Container Registry
+  IMAGE_NAME: ${{ github.repository }} 
+
+jobs:
+  # Job 1: Build and Push Docker Image
+  build:
+    runs-on: ubuntu-latest
+    permissions:
+      contents: read
+      packages: write
+    outputs:
+      image_tag: ${{ steps.meta.outputs.tags }}
+      environment: ${{ steps.set-env.outputs.environment }}
+    
+    steps:
+      - name: 📥 Checkout code
+        uses: actions/checkout@v4
+
+      - name: 🎯 Determine environment
+        id: set-env
+        run: |
+          if [[ "${{ github.event_name }}" == "workflow_dispatch" ]]; then
+            echo "environment=${{ github.event.inputs.environment }}" >> $GITHUB_OUTPUT
+          elif [[ "${{ github.ref }}" == "refs/heads/main" ]]; then
+            echo "environment=production" >> $GITHUB_OUTPUT
+          elif [[ "${{ github.ref }}" == "refs/heads/develop" ]]; then
+            echo "environment=uat" >> $GITHUB_OUTPUT
+          fi
+
+      - name: 🔧 Set up Docker Buildx
+        uses: docker/setup-buildx-action@v3
+
+      - name: 🔑 Log in to Container Registry
+        uses: docker/login-action@v3
+        with:
+          registry: ${{ env.REGISTRY }}
+          username: ${{ github.actor }}
+          password: ${{ secrets.GITHUB_TOKEN }}
+
+      - name: 📝 Extract metadata
+        id: meta
+        uses: docker/metadata-action@v5
+        with:
+          images: ${{ env.REGISTRY }}/${{ env.IMAGE_NAME }}
+          tags: |
+            type=raw,value=${{ steps.set-env.outputs.environment }}
+            type=raw,value=${{ steps.set-env.outputs.environment }}-${{ github.sha }}
+            type=raw,value=latest,enable=${{ steps.set-env.outputs.environment == 'production' }}
+
+      - name: 🏗️ Build and push Docker image
+        uses: docker/build-push-action@v5
+        with:
+          context: .
+          push: true
+          tags: ${{ steps.meta.outputs.tags }}
+          labels: ${{ steps.meta.outputs.labels }}
+          build-args: |
+            BUILD_ENV=${{ steps.set-env.outputs.environment }}
+            VITE_BACKEND_URL=${{ steps.set-env.outputs.environment == 'production' && secrets.PROD_BACKEND_URL || secrets.UAT_BACKEND_URL }}
+            VITE_APP_NAME=${{ steps.set-env.outputs.environment == 'production' && 'Career Hub' || 'Career Hub - UAT' }}
+          cache-from: type=gha
+          cache-to: type=gha,mode=max
+
+  # Job 2: Deploy to Server
+  deploy:
+    needs: build
+    runs-on: ubuntu-latest
+    environment:
+      name: ${{ needs.build.outputs.environment }}
+      url: ${{ needs.build.outputs.environment == 'production' && 'http://103.75.184.146:8080' || 'http://103.75.184.146:8081' }}
+    
+    steps:
+      - name: 📥 Checkout code
+        uses: actions/checkout@v4
+
+      - name: 🚀 Deploy to Ubuntu Server
+        uses: appleboy/ssh-action@v1.0.0
+        env:
+          ENVIRONMENT: ${{ needs.build.outputs.environment }}
+          REGISTRY: ${{ env.REGISTRY }}
+          IMAGE_NAME: ${{ env.IMAGE_NAME }}
+        with:
+          host: ${{ secrets.SERVER_HOST }}
+          port: ${{ secrets.SERVER_PORT }}
+          username: ${{ secrets.SERVER_USER }}
+          password: ${{ secrets.SERVER_PASSWORD }}
+          envs: ENVIRONMENT,REGISTRY,IMAGE_NAME
+          script: |
+            # Create app directory if not exists
+            mkdir -p ~/it-career-hub
+            cd ~/it-career-hub
+
+            # Login to GitHub Container Registry
+            echo ${{ secrets.GITHUB_TOKEN }} | docker login ghcr.io -u ${{ github.actor }} --password-stdin
+
+            # Pull latest image
+            docker pull ${REGISTRY}/${IMAGE_NAME}:${ENVIRONMENT}
+
+            # Stop and remove old container
+            docker stop it-career-hub-${ENVIRONMENT} 2>/dev/null || true
+            docker rm it-career-hub-${ENVIRONMENT} 2>/dev/null || true
+
+            # Run new container
+            if [ "$ENVIRONMENT" = "production" ]; then
+              PORT=8080
+            else
+              PORT=8081
+            fi
+
+            docker run -d \
+              --name it-career-hub-${ENVIRONMENT} \
+              --restart unless-stopped \
+              -p ${PORT}:80 \
+              -e NODE_ENV=production \
+              ${REGISTRY}/${IMAGE_NAME}:${ENVIRONMENT}
+
+            # Clean up old images
+            docker image prune -af --filter "until=72h"
+
+            # Show running containers
+            docker ps | grep it-career-hub
+
+      - name: ✅ Deployment Summary
+        run: |
+          echo "### 🎉 Deployment Successful!" >> $GITHUB_STEP_SUMMARY
+          echo "" >> $GITHUB_STEP_SUMMARY
+          echo "**Environment:** ${{ needs.build.outputs.environment }}" >> $GITHUB_STEP_SUMMARY
+          echo "**Image:** ${{ env.REGISTRY }}/${{ env.IMAGE_NAME }}:${{ needs.build.outputs.environment }}" >> $GITHUB_STEP_SUMMARY
+          echo "**URL:** http://103.75.184.146:${{ needs.build.outputs.environment == 'production' && '8080' || '8081' }}" >> $GITHUB_STEP_SUMMARY
+          echo "**Commit:** ${{ github.sha }}" >> $GITHUB_STEP_SUMMARY
+
+  # Job 3: Health Check
+  health-check:
+    needs: [build, deploy]
+    runs-on: ubuntu-latest
+    steps:
+      - name: 🏥 Check application health
+        run: |
+          PORT=${{ needs.build.outputs.environment == 'production' && '8080' || '8081' }}
+          URL="http://103.75.184.146:${PORT}"
+          
+          echo "Waiting for application to start..."
+          sleep 10
+          
+          for i in {1..5}; do
+            if curl -f -s -o /dev/null -w "%{http_code}" ${URL} | grep -q "200"; then
+              echo "✅ Application is healthy!"
+              exit 0
+            fi
+            echo "Attempt $i failed, retrying..."
+            sleep 5
+          done
+          
+          echo "❌ Health check failed"
+          exit 1

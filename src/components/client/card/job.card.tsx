@@ -2,14 +2,17 @@ import { callFetchJob } from '@/config/api';
 import { convertSlug, getLocationName } from '@/config/utils';
 import { IJob } from '@/types/backend';
 import { EnvironmentOutlined, ThunderboltOutlined } from '@ant-design/icons';
-import { Card, Col, Empty, Pagination, Row, Spin } from 'antd';
+import { Avatar, Card, Col, Empty, Pagination, Row, Typography } from 'antd';
 import { useState, useEffect } from 'react';
-import { isMobile } from 'react-device-detect';
-import { Link, useNavigate } from 'react-router-dom';
+import { useIsMobile } from '@/hooks/useIsMobile';
+import { useNavigate } from 'react-router-dom';
 import styles from 'styles/client.module.scss';
 import dayjs from 'dayjs';
 import relativeTime from 'dayjs/plugin/relativeTime';
-import { useTranslation } from 'react-i18next';
+import 'dayjs/locale/vi';
+import SeeMoreLink from '@/components/client/common/SeeMoreLink';
+import JobCardSkeleton from './JobCardSkeleton';
+const { Title } = Typography;
 dayjs.extend(relativeTime);
 
 interface IProps {
@@ -17,8 +20,8 @@ interface IProps {
 }
 
 const JobCard = (props: IProps) => {
+  const isMobile = useIsMobile('md');
   const { showPagination = false } = props;
-  const { t, i18n } = useTranslation('jobCard');
 
   const [displayJob, setDisplayJob] = useState<IJob[] | null>(null);
   const [isLoading, setIsLoading] = useState<boolean>(false);
@@ -33,7 +36,6 @@ const JobCard = (props: IProps) => {
   useEffect(() => {
     fetchJob();
   }, [current, pageSize, filter, sortQuery]);
-
   const fetchJob = async () => {
     setIsLoading(true);
     let query = `current=${current}&pageSize=${pageSize}`;
@@ -70,74 +72,66 @@ const JobCard = (props: IProps) => {
   return (
     <div className={`${styles['card-job-section']}`}>
       <div className={`${styles['job-content']}`}>
-        <Spin spinning={isLoading} tip='Loading...'>
-          <Row gutter={[20, 20]}>
-            <Col span={24}>
-              <div className={isMobile ? styles['dflex-mobile'] : styles['dflex-pc']}>
-                <span className={styles['title']}>{t('new-jobs')}</span>
-                {!showPagination && <Link to='job'>{t('view-all')}</Link>}
-              </div>
-            </Col>
+        <Row gutter={[20, 20]}>
+          <Col span={24}>
+            <div className={isMobile ? styles['dflex-mobile'] : styles['dflex-pc']}>
+              <Title level={3} className={styles['section-title']}>
+                {'New IT Jobs 🔥'}
+              </Title>
+              {!showPagination && <SeeMoreLink to='job' />}
+            </div>
+          </Col>
 
-            {displayJob?.map(item => {
-              return (
-                <Col span={24} md={12} key={item._id}>
-                  <Card
-                    size='small'
-                    title={null}
-                    hoverable
-                    onClick={() => handleViewDetailJob(item)}
-                  >
-                    <div className={styles['card-job-content']}>
-                      <div className={styles['card-job-left']}>
-                        <img
-                          alt='example'
-                          src={`${import.meta.env.VITE_BACKEND_URL}/images/company/${item?.company?.logo}`}
-                        />
+          {isLoading ? (
+            <JobCardSkeleton count={5} />
+          ) : (
+            displayJob?.map(item => (
+              <Col span={24} md={12} key={item._id}>
+                <Card size='small' title={null} hoverable onClick={() => handleViewDetailJob(item)}>
+                  <div className={styles['card-job-content']}>
+                    <div className={styles['card-job-left']}>
+                      <Avatar size={50} src={item?.company?.logo} shape='square' />
+                    </div>
+                    <div className={styles['card-job-right']}>
+                      <div className={styles['job-title']}>{item.name}</div>
+                      <div className={styles['job-location']}>
+                        <EnvironmentOutlined style={{ color: '#58aaab' }} />
+                        &nbsp;{getLocationName(item.location)}
                       </div>
-                      <div className={styles['card-job-right']}>
-                        <div className={styles['job-title']}>{item.name}</div>
-                        <div className={styles['job-location']}>
-                          <EnvironmentOutlined style={{ color: '#58aaab' }} />
-                          &nbsp;{getLocationName(item.location)}
-                        </div>
-                        <div>
-                          <ThunderboltOutlined style={{ color: 'orange' }} />
-                          &nbsp;{(item.salary + '')?.replace(/\B(?=(\d{3})+(?!\d))/g, ',')} đ
-                        </div>
-                        <div className={styles['job-updatedAt']}>
-                          {dayjs(item.updatedAt).fromNow()}
-                        </div>
+                      <div>
+                        <ThunderboltOutlined style={{ color: 'orange' }} />
+                        &nbsp;{(item.salary + '')?.replace(/\B(?=(\d{3})+(?!\d))/g, ',')} đ
+                      </div>
+                      <div className={styles['job-updatedAt']}>
+                        {dayjs(item.updatedAt).locale('en').fromNow()}
                       </div>
                     </div>
-                  </Card>
-                </Col>
-              );
-            })}
-
-            {(!displayJob || (displayJob && displayJob.length === 0)) && !isLoading && (
-              <div className={styles['empty']}>
-                <Empty description='Không có dữ liệu' />
-              </div>
-            )}
-          </Row>
-          {showPagination && (
-            <>
-              <div style={{ marginTop: 30 }}></div>
-              <Row style={{ display: 'flex', justifyContent: 'center' }}>
-                <Pagination
-                  current={current}
-                  total={total}
-                  pageSize={pageSize}
-                  responsive
-                  onChange={(p: number, s: number) =>
-                    handleOnchangePage({ current: p, pageSize: s })
-                  }
-                />
-              </Row>
-            </>
+                  </div>
+                </Card>
+              </Col>
+            ))
           )}
-        </Spin>
+
+          {(!displayJob || (displayJob && displayJob.length === 0)) && !isLoading && (
+            <div className={styles['empty']}>
+              <Empty description='No data' />
+            </div>
+          )}
+        </Row>
+        {showPagination && (
+          <>
+            <div style={{ marginTop: 30 }}></div>
+            <Row style={{ display: 'flex', justifyContent: 'center' }}>
+              <Pagination
+                current={current}
+                total={total}
+                pageSize={pageSize}
+                responsive
+                onChange={(p: number, s: number) => handleOnchangePage({ current: p, pageSize: s })}
+              />
+            </Row>
+          </>
+        )}
       </div>
     </div>
   );

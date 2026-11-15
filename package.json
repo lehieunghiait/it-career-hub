@@ -1,7 +1,7 @@
 {
   "name": "it-career-hub-client",
-  "author": "Nghia Le",
-  "description": "IT Career Hub Client",
+  "author": "Le Hieu Nghia",
+  "description": "Platform for IT professionals to find jobs and companies",
   "private": true,
   "version": "1.0.0",
   "type": "commonjs",
@@ -14,13 +14,15 @@
     "preview": "vite preview",
     "lint": "eslint . --ext .ts,.tsx",
     "lint:fix": "eslint . --ext .ts,.tsx --fix",
-    "lint:ts": "eslint './src/**/*.{ts,tsx}' --quiet",
-    "prepare": "husky"
+    "lint:ts": "eslint './src/**/*.{ts,tsx}' --quiet"
   },
   "dependencies": {
     "@ant-design/icons": "4.8.0",
     "@ant-design/pro-components": "2.6.46",
     "@ant-design/pro-layout": "7.17.19",
+    "@clerk/react": "^6.18.6",
+    "@expo-google-fonts/be-vietnam-pro": "^0.2.3",
+    "@react-pdf/renderer": "^3.4.4",
     "@reduxjs/toolkit": "1.9.3",
     "antd": "5.13.1",
     "async-mutex": "0.4.0",
@@ -43,8 +45,10 @@
     "react-router-dom": "6.11.2",
     "react-slick": "^0.30.3",
     "react-spinners": "0.13.8",
+    "recharts": "^2.15.4",
     "slick-carousel": "^1.8.1",
-    "uuid": "9.0.0"
+    "uuid": "9.0.0",
+    "xlsx": "^0.18.5"
   },
   "devDependencies": {
     "@commitlint/cli": "^19.8.1",
@@ -56,6 +60,7 @@
     "@types/react-router-dom": "5.3.3",
     "@types/react-slick": "^0.23.13",
     "@types/uuid": "9.0.2",
+    "@types/xlsx": "^0.0.35",
     "@typescript-eslint/eslint-plugin": "5.62.0",
     "@typescript-eslint/parser": "5.62.0",
     "@vitejs/plugin-react-swc": "3.0.0",
@@ -65,7 +70,6 @@
     "eslint-plugin-react": "7.33.2",
     "eslint-plugin-react-hooks": "4.6.0",
     "eslint-plugin-unused-imports": "^4.1.4",
-    "husky": "^9.1.7",
     "lint-staged": "^16.1.1",
     "prettier": "^3.5.3",
     "rollup-plugin-visualizer": "5.9.0",
