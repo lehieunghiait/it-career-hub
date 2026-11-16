@@ -1,0 +1,365 @@
+// Salary explorer
+$brand: #e14000;
+$navy: #0b1120;
+$ink: #111827;
+$muted: #6b7280;
+$line: #eaecf0;
+$bg: #f7f7f9;
+// One hue for magnitude; the median dot uses ink so it reads on the bar
+$bar: #2a78d6;
+$bar-soft: #c9ddf5;
+
+.page {
+  background: $bg;
+  min-height: 100vh;
+  padding-bottom: 72px;
+}
+
+.hero {
+  background: radial-gradient(520px 300px at 85% 0%, rgba(42, 120, 214, 0.35), transparent 70%), $navy;
+  color: #fff;
+  padding: 44px 0 34px;
+
+  h1 {
+    margin: 10px 0 8px;
+    color: #fff;
+    font-size: clamp(26px, 3.6vw, 38px);
+    font-weight: 800;
+    letter-spacing: -0.01em;
+  }
+
+  p {
+    max-width: 640px;
+    margin: 0 0 22px;
+    color: rgba(255, 255, 255, 0.75);
+  }
+}
+
+.eyebrow {
+  display: inline-flex;
+  gap: 6px;
+  padding: 4px 12px;
+  border-radius: 999px;
+  background: rgba(255, 255, 255, 0.08);
+  border: 1px solid rgba(255, 255, 255, 0.16);
+  font-size: 13px;
+  font-weight: 600;
+  color: #bfdbfe;
+}
+
+.filters {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+}
+
+.filter-input {
+  flex: 1 1 280px;
+}
+
+.filter-select {
+  flex: 0 1 200px;
+  min-width: 160px;
+
+  @media (max-width: 520px) {
+    flex: 1 1 140px;
+  }
+}
+
+.kpis {
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  gap: 14px;
+  margin: 24px 0 18px;
+
+  @media (max-width: 860px) {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+}
+
+.kpi {
+  padding: 18px;
+  background: #fff;
+  border: 1px solid $line;
+  border-radius: 14px;
+
+  span {
+    display: block;
+    font-size: 13px;
+    color: $muted;
+  }
+
+  strong {
+    display: block;
+    margin: 4px 0 2px;
+    font-size: clamp(20px, 2.4vw, 26px);
+    font-weight: 800;
+    color: $ink;
+    font-variant-numeric: tabular-nums;
+  }
+
+  small {
+    font-size: 12px;
+    color: $muted;
+  }
+}
+
+.card {
+  margin-bottom: 18px;
+  padding: 22px;
+  background: #fff;
+  border: 1px solid $line;
+  border-radius: 16px;
+
+  @media (max-width: 520px) {
+    padding: 16px;
+  }
+}
+
+.card-head {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  gap: 12px;
+  margin-bottom: 18px;
+
+  h2 {
+    margin: 0 0 2px;
+    font-size: 18px;
+    font-weight: 800;
+    color: $ink;
+  }
+
+  p {
+    margin: 0;
+    font-size: 13px;
+    color: $muted;
+  }
+}
+
+.legend {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px 14px;
+  font-size: 12px;
+  color: $muted;
+
+  span {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+  }
+}
+
+.legend-whisker {
+  width: 18px;
+  height: 2px;
+  background: #9ca3af;
+}
+
+.legend-box {
+  width: 18px;
+  height: 10px;
+  border-radius: 4px;
+  background: $bar;
+}
+
+.legend-median {
+  width: 10px;
+  height: 10px;
+  border-radius: 50%;
+  background: $ink;
+  box-shadow: 0 0 0 2px #fff, 0 0 0 3px $ink;
+}
+
+// ===== Range chart =====
+.range-chart {
+  display: grid;
+  gap: 2px;
+}
+
+.range-row,
+.range-axis {
+  display: grid;
+  grid-template-columns: minmax(110px, 180px) minmax(0, 1fr) 96px;
+  align-items: center;
+  gap: 14px;
+
+  @media (max-width: 600px) {
+    grid-template-columns: minmax(0, 1fr) 84px;
+    gap: 4px 10px;
+  }
+}
+
+.range-row {
+  padding: 8px 6px;
+  border-radius: 10px;
+  transition: background 0.15s ease;
+
+  &:hover {
+    background: #f8fafc;
+  }
+
+  @media (max-width: 600px) {
+    padding: 10px 4px;
+    border-bottom: 1px solid $line;
+
+    .range-track {
+      grid-column: 1 / -1;
+      grid-row: 2;
+    }
+  }
+}
+
+.range-link {
+  color: inherit;
+  text-decoration: none !important;
+
+  &:hover .range-name {
+    color: $brand;
+    text-decoration: underline;
+  }
+}
+
+.range-label {
+  display: flex;
+  flex-direction: column;
+  min-width: 0;
+}
+
+.range-name {
+  font-weight: 700;
+  color: $ink;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.range-n {
+  font-size: 12px;
+  color: $muted;
+
+  em {
+    font-style: normal;
+    color: #b45309;
+  }
+}
+
+// Bigger hover target than the marks themselves
+.range-track {
+  position: relative;
+  height: 28px;
+  cursor: default;
+
+  &::before {
+    content: '';
+    position: absolute;
+    left: 0;
+    right: 0;
+    top: 50%;
+    border-top: 1px dashed $line;
+  }
+}
+
+.whisker {
+  position: absolute;
+  top: 50%;
+  height: 2px;
+  margin-top: -1px;
+  background: #9ca3af;
+  border-radius: 1px;
+}
+
+.box {
+  position: absolute;
+  top: 50%;
+  height: 12px;
+  margin-top: -6px;
+  min-width: 4px;
+  border-radius: 4px;
+  background: $bar;
+}
+
+.median {
+  position: absolute;
+  top: 50%;
+  width: 10px;
+  height: 10px;
+  margin: -5px 0 0 -5px;
+  border-radius: 50%;
+  background: $ink;
+  box-shadow: 0 0 0 2px #fff;
+}
+
+.limited {
+  .box {
+    background: $bar-soft;
+  }
+
+  .median {
+    background: #6b7280;
+  }
+}
+
+.range-value {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+  font-variant-numeric: tabular-nums;
+
+  strong {
+    color: $ink;
+    font-size: 15px;
+  }
+
+  span {
+    font-size: 12px;
+    color: $muted;
+  }
+}
+
+.range-axis {
+  margin-top: 6px;
+  font-size: 11px;
+  color: $muted;
+
+  @media (max-width: 600px) {
+    display: none;
+  }
+}
+
+.axis-track {
+  position: relative;
+  height: 16px;
+
+  span {
+    position: absolute;
+    transform: translateX(-50%);
+    font-variant-numeric: tabular-nums;
+  }
+}
+
+.tip {
+  font-size: 12px;
+  line-height: 1.6;
+
+  strong {
+    font-size: 13px;
+  }
+}
+
+.no-data {
+  padding: 28px 8px;
+  text-align: center;
+  color: $muted;
+}
+
+.method {
+  font-size: 13px;
+  color: $muted;
+
+  :global(.anticon) {
+    margin-right: 6px;
+  }
+}

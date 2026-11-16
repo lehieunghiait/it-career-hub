@@ -75,27 +75,27 @@ export const faqItems: FaqItemType[] = [
       'IT Việc cung cấp công cụ quản lý ứng viên giúp bạn sàng lọc hiệu quả. Bạn có thể đánh giá CV, ghi chú, phân loại ứng viên và theo dõi tiến trình tuyển dụng. Ngoài ra, chúng tôi cũng cung cấp tính năng gửi email hàng loạt và lên lịch phỏng vấn trực tiếp từ hệ thống.',
     category: 'Nhà tuyển dụng',
   },
-  {
-    id: 10,
-    question: 'IT Việc chấp nhận những phương thức thanh toán nào?',
-    answer:
-      'IT Việc chấp nhận nhiều phương thức thanh toán bao gồm thẻ tín dụng/ghi nợ (Visa, MasterCard), chuyển khoản ngân hàng, và các ví điện tử phổ biến như Momo, ZaloPay, VNPay. Bạn có thể chọn phương thức thanh toán thuận tiện nhất khi tiến hành thanh toán.',
-    category: 'Thanh toán',
-  },
-  {
-    id: 11,
-    question: 'Làm thế nào để nhận hóa đơn VAT?',
-    answer:
-      'Để nhận hóa đơn VAT, bạn cần cung cấp thông tin xuất hóa đơn khi thanh toán hoặc liên hệ với bộ phận hỗ trợ khách hàng của chúng tôi qua email support@itviec.com sau khi hoàn tất thanh toán. Hóa đơn điện tử sẽ được gửi đến email của bạn trong vòng 3-5 ngày làm việc.',
-    category: 'Thanh toán',
-  },
-  {
-    id: 12,
-    question: 'Chính sách hoàn tiền của IT Việc như thế nào?',
-    answer:
-      'IT Việc có chính sách hoàn tiền trong vòng 7 ngày nếu bạn không hài lòng với dịch vụ. Tuy nhiên, việc hoàn tiền sẽ không áp dụng nếu bạn đã sử dụng một phần dịch vụ như đăng tin tuyển dụng, xem thông tin ứng viên hoặc sử dụng các tính năng khác. Vui lòng liên hệ với bộ phận hỗ trợ để biết thêm chi tiết.',
-    category: 'Thanh toán',
-  },
+  // {
+  //   id: 10,
+  //   question: 'IT Việc chấp nhận những phương thức thanh toán nào?',
+  //   answer:
+  //     'IT Việc chấp nhận nhiều phương thức thanh toán bao gồm thẻ tín dụng/ghi nợ (Visa, MasterCard), chuyển khoản ngân hàng, và các ví điện tử phổ biến như Momo, ZaloPay, VNPay. Bạn có thể chọn phương thức thanh toán thuận tiện nhất khi tiến hành thanh toán.',
+  //   category: 'Thanh toán',
+  // },
+  // {
+  //   id: 11,
+  //   question: 'Làm thế nào để nhận hóa đơn VAT?',
+  //   answer:
+  //     'Để nhận hóa đơn VAT, bạn cần cung cấp thông tin xuất hóa đơn khi thanh toán hoặc liên hệ với bộ phận hỗ trợ khách hàng của chúng tôi qua email support@itviec.com sau khi hoàn tất thanh toán. Hóa đơn điện tử sẽ được gửi đến email của bạn trong vòng 3-5 ngày làm việc.',
+  //   category: 'Thanh toán',
+  // },
+  // {
+  //   id: 12,
+  //   question: 'Chính sách hoàn tiền của IT Việc như thế nào?',
+  //   answer:
+  //     'IT Việc có chính sách hoàn tiền trong vòng 7 ngày nếu bạn không hài lòng với dịch vụ. Tuy nhiên, việc hoàn tiền sẽ không áp dụng nếu bạn đã sử dụng một phần dịch vụ như đăng tin tuyển dụng, xem thông tin ứng viên hoặc sử dụng các tính năng khác. Vui lòng liên hệ với bộ phận hỗ trợ để biết thêm chi tiết.',
+  //   category: 'Thanh toán',
+  // },
   {
     id: 13,
     question: 'IT Việc bảo vệ dữ liệu cá nhân của tôi như thế nào?',

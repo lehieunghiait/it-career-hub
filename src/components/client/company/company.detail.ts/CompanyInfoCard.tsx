@@ -5,8 +5,8 @@ import {
   PhoneOutlined,
   MailOutlined,
 } from '@ant-design/icons';
-import { Typography } from 'antd';
-const { Text } = Typography;
+import { Typography, Space, Divider } from 'antd';
+const { Text, Title } = Typography;
 import styles from 'styles/client.module.scss';
 
 interface CompanyInfoCardProps {
@@ -16,37 +16,56 @@ interface CompanyInfoCardProps {
 const CompanyInfoCard = ({ company }: CompanyInfoCardProps) => {
   return (
     <div className={styles['company-info-container']}>
-      <Typography.Title level={3} className={styles['company-name']}>
+      <Title level={3} className={styles['company-name']}>
         {company.name}
-      </Typography.Title>
+      </Title>
 
-      <div className={styles['company-info-item']}>
-        <EnvironmentOutlined className={styles['info-icon']} />
-        <Text>{company?.address || 'Not update address'}</Text>
-      </div>
+      <Divider style={{ margin: '16px 0' }} />
 
-      {company.website && (
+      <Space direction='vertical' size='middle' style={{ width: '100%' }}>
         <div className={styles['company-info-item']}>
-          <GlobalOutlined className={styles['info-icon']} />
-          <a href={company.website} target='_blank' rel='noopener noreferrer'>
-            {company.website}
-          </a>
+          <EnvironmentOutlined className={styles['info-icon']} />
+          <Text
+            className={styles['info-text']}
+            style={{ whiteSpace: 'normal', wordBreak: 'break-word' }}
+          >
+            {company?.address || 'Address not updated'}
+          </Text>
         </div>
-      )}
+        {/* wesbite */}
+        {company.website && (
+          <div className={styles['company-info-item']}>
+            <GlobalOutlined className={styles['info-icon']} />
+            <a
+              href={company.website}
+              target='_blank'
+              rel='noopener nofollow noreferrer'
+              className={styles['info-link']}
+              title={company.website}
+            >
+              {company.website.replace(/(^\w+:|^)\/\//, '')}
+            </a>
+          </div>
+        )}
+        {/* Phone */}
+        {company.phone && (
+          <div className={styles['company-info-item']}>
+            <PhoneOutlined className={styles['info-icon']} />
+            <a href={`tel:${company.phone}`} className={styles['info-link']} title={company.phone}>
+              {company.phone}
+            </a>
+          </div>
+        )}
 
-      {company.phone && (
-        <div className={styles['company-info-item']}>
-          <PhoneOutlined className={styles['info-icon']} />
-          <Text>{company.phone}</Text>
-        </div>
-      )}
-
-      {company.email && (
-        <div className={styles['company-info-item']}>
-          <MailOutlined className={styles['info-icon']} />
-          <a href={`mailto:${company.email}`}>{company.email}</a>
-        </div>
-      )}
+        {company.email && (
+          <div className={styles['company-info-item']}>
+            <MailOutlined className={styles['info-icon']} />
+            <a href={`mailto:${company.email}`} className={styles['info-link']}>
+              {company.email}
+            </a>
+          </div>
+        )}
+      </Space>
     </div>
   );
 };

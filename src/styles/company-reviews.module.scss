@@ -1,0 +1,269 @@
+// Anonymous reviews & interviews on the company page
+$brand: #e14000;
+$ink: #111827;
+$muted: #6b7280;
+$line: #eaecf0;
+$star: #f59e0b;
+
+.section {
+  padding: 24px;
+  background: #fff;
+  border: 1px solid $line;
+  border-radius: 16px;
+
+  @media (max-width: 520px) {
+    padding: 16px;
+  }
+}
+
+.head {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  gap: 12px;
+  margin-bottom: 20px;
+
+  h2 {
+    margin: 0 0 4px;
+    font-size: 20px;
+    font-weight: 800;
+    color: $ink;
+  }
+
+  p {
+    margin: 0;
+    font-size: 13px;
+    color: $muted;
+  }
+}
+
+.head-actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+}
+
+.summary {
+  display: grid;
+  grid-template-columns: 170px minmax(0, 1fr) minmax(0, 1.2fr);
+  gap: 24px;
+  padding: 18px;
+  margin-bottom: 18px;
+  background: #fafafa;
+  border-radius: 14px;
+
+  @media (max-width: 860px) {
+    grid-template-columns: 150px minmax(0, 1fr);
+
+    .categories {
+      grid-column: 1 / -1;
+    }
+  }
+
+  @media (max-width: 520px) {
+    grid-template-columns: minmax(0, 1fr);
+  }
+}
+
+.score {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 2px;
+
+  strong {
+    font-size: 44px;
+    line-height: 1;
+    font-weight: 800;
+    color: $ink;
+  }
+
+  :global(.ant-rate) {
+    font-size: 16px;
+    color: $star;
+  }
+
+  span {
+    font-size: 13px;
+    color: $muted;
+  }
+}
+
+.recommend {
+  margin-top: 6px;
+  color: #15803d !important;
+  font-weight: 600;
+}
+
+.bars,
+.categories {
+  display: grid;
+  gap: 6px;
+  align-content: center;
+}
+
+.bar-row,
+.category {
+  display: grid;
+  align-items: center;
+  gap: 10px;
+  font-size: 13px;
+  color: $muted;
+}
+
+.bar-row {
+  grid-template-columns: 28px minmax(0, 1fr) 24px;
+}
+
+.category {
+  grid-template-columns: 130px minmax(0, 1fr) 28px;
+
+  strong {
+    color: $ink;
+    text-align: right;
+  }
+}
+
+.bar {
+  height: 8px;
+  border-radius: 4px;
+  background: #e5e7eb;
+  overflow: hidden;
+
+  i {
+    display: block;
+    height: 100%;
+    border-radius: 4px;
+    background: $star;
+  }
+}
+
+.bar-n {
+  text-align: right;
+}
+
+.tabs {
+  margin-bottom: 14px;
+}
+
+.interview-stats {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px 22px;
+  margin-bottom: 14px;
+  font-size: 13px;
+  color: $muted;
+
+  strong {
+    color: $ink;
+  }
+}
+
+.list {
+  display: grid;
+}
+
+.item {
+  padding: 18px 0;
+  border-top: 1px solid $line;
+
+  h3 {
+    margin: 4px 0 2px;
+    font-size: 16px;
+    font-weight: 700;
+    color: $ink;
+    word-break: break-word;
+  }
+}
+
+.item-head {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.item-rate {
+  font-size: 14px !important;
+  color: $star !important;
+}
+
+.author {
+  margin-bottom: 10px;
+  font-size: 12.5px;
+  color: $muted;
+}
+
+.tags {
+  margin-bottom: 8px;
+}
+
+.block {
+  margin-top: 8px;
+
+  span {
+    display: inline-block;
+    margin-bottom: 2px;
+    font-size: 12px;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+  }
+
+  p {
+    margin: 0 0 4px;
+    color: #374151;
+    white-space: pre-line;
+    word-break: break-word;
+  }
+}
+
+.pros {
+  color: #15803d;
+}
+
+.cons {
+  color: #b91c1c;
+}
+
+.advice {
+  color: $muted;
+}
+
+.empty {
+  padding: 24px 0;
+}
+
+.more {
+  display: flex;
+  justify-content: center;
+  margin-top: 8px;
+}
+
+.anon-note {
+  margin-bottom: 16px;
+  padding: 10px 12px;
+  border-radius: 10px;
+  background: #f0f9ff;
+  border: 1px solid #bae6fd;
+  font-size: 13px;
+  color: #075985;
+
+  :global(.anticon) {
+    margin-right: 6px;
+  }
+}
+
+.form-grid {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 0 16px;
+
+  @media (max-width: 520px) {
+    grid-template-columns: minmax(0, 1fr);
+  }
+}
+
+.small-rate {
+  font-size: 16px !important;
+}

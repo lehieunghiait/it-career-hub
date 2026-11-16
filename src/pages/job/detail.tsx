@@ -1,7 +1,7 @@
-import { useLocation } from 'react-router-dom';
+import { useLocation, useNavigate } from 'react-router-dom';
 import { useState, useEffect } from 'react';
-import { IJob } from '@/types/backend';
-import { callFetchJobById } from '@/config/api';
+import { ICompanyDetail, IJob } from '@/types/backend';
+import { callFetchJobById, callFetchCompanyById } from '@/config/api';
 import styles from 'styles/client.module.scss';
 import parse from 'html-react-parser';
 import {
@@ -28,15 +28,20 @@ import {
   MailOutlined,
   PhoneOutlined,
   GlobalOutlined,
-  HeartOutlined,
   ShareAltOutlined,
   SendOutlined,
   PrinterOutlined,
+  WarningOutlined,
+  CheckCircleOutlined,
 } from '@ant-design/icons';
 import { getLocationName } from '@/config/utils';
 import dayjs from 'dayjs';
 import relativeTime from 'dayjs/plugin/relativeTime';
 import ApplyModal from '@/components/client/modal/apply.modal';
+import SaveJobButton from '@/components/client/job/SaveJobButton';
+import { useAppSelector } from '@/redux/hooks';
+import { RESUME_STATUS, ResumeStatus } from '@/config/resume-status';
+import 'dayjs/locale/vi';
 dayjs.extend(relativeTime);
 
 const { Title, Text } = Typography;
@@ -44,12 +49,13 @@ const { Title, Text } = Typography;
 const ClientJobDetailPage = () => {
   const [jobDetail, setJobDetail] = useState<IJob | null>(null);
   const [isLoading, setIsLoading] = useState<boolean>(false);
-  const [isSaved, setIsSaved] = useState<boolean>(false);
   const [isModalOpen, setIsModalOpen] = useState<boolean>(false);
-
+  const [companyDetail, setCompanyDetail] = useState<ICompanyDetail | null>(null);
   const location = useLocation();
+  const navigate = useNavigate();
   const params = new URLSearchParams(location.search);
   const id = params?.get('id');
+  const applied = useAppSelector(state => (id ? state.appliedJob.byJob[id] : undefined));
 
   useEffect(() => {
     const init = async () => {
@@ -58,7 +64,7 @@ const ClientJobDetailPage = () => {
         const res = await callFetchJobById(id);
         if (res?.data) {
           setJobDetail(res.data);
-          // Scroll to top when new job loads
+          fetchCompanyDetail();
           window.scrollTo(0, 0);
         }
         setIsLoading(false);
@@ -66,15 +72,19 @@ const ClientJobDetailPage = () => {
     };
     init();
   }, [id]);
-
-  const handleSaveJob = () => {
-    setIsSaved(!isSaved);
-    message.success(isSaved ? 'Đã xóa khỏi danh sách công việc đã lưu' : 'Đã lưu công việc này');
+  const fetchCompanyDetail = async () => {
+    try {
+      const res = await callFetchCompanyById(jobDetail?.company?._id || '');
+      if (res?.data) {
+        setCompanyDetail(res.data);
+      }
+    } catch (error) {
+      console.error(error);
+    }
   };
-
   const handleShareJob = () => {
     navigator.clipboard.writeText(window.location.href);
-    message.success('Đã sao chép liên kết vào clipboard');
+    message.success('Copied link to clipboard');
   };
 
   const handlePrintJob = () => {
@@ -89,12 +99,12 @@ const ClientJobDetailPage = () => {
         <Row gutter={[24, 24]}>
           <Col span={24}>
             <Card className={styles['job-header-card']} bordered={false}>
-              <Row gutter={[16, 16]} align='middle'>
-                <Col xs={24} sm={4} md={3} lg={2}>
+              <Row gutter={[20, 20]} align='middle'>
+                <Col xs={24} sm={4} md={4} lg={2}>
                   <Avatar
-                    src={`${import.meta.env.VITE_BACKEND_URL}/images/company/${jobDetail.company?.logo}`}
+                    src={jobDetail.company?.logo}
                     shape='square'
-                    size={80}
+                    size={90}
                     className={styles['company-logo']}
                   />
                 </Col>
@@ -107,27 +117,48 @@ const ClientJobDetailPage = () => {
                     <Text strong>{jobDetail.company?.name}</Text>
                   </Space>
                   <div className={styles['job-actions']}>
-                    <Button
-                      type='primary'
-                      size='large'
-                      icon={<SendOutlined />}
-                      onClick={() => setIsModalOpen(true)}
-                      className={styles['btn-apply-header']}
-                    >
-                      Rải CV đi người đẹp 😍
-                    </Button>
-                    <Button
-                      icon={<HeartOutlined />}
-                      className={`${styles['btn-save']} ${isSaved ? styles['saved'] : ''}`}
-                      onClick={handleSaveJob}
-                    >
-                      {isSaved ? 'Saved' : 'Save'}
-                    </Button>
+                    {applied ? (
+                      // One application per job: show its status instead of a second apply
+                      <Button
+                        size='large'
+                        icon={<CheckCircleOutlined />}
+                        onClick={() => navigate('/my-jobs')}
+                        className={styles['btn-applied']}
+                      >
+                        Applied ·{' '}
+                        {RESUME_STATUS[applied.status as ResumeStatus]?.label ?? applied.status}
+                      </Button>
+                    ) : (
+                      <Button
+                        type='primary'
+                        size='large'
+                        icon={<SendOutlined />}
+                        onClick={() => setIsModalOpen(true)}
+                        className={styles['btn-apply-header']}
+                        disabled={jobDetail.isActive === false}
+                      >
+                        {jobDetail.isActive === false ? 'No longer accepting' : 'Apply now'}
+                      </Button>
+                    )}
+                    <SaveJobButton
+                      jobId={jobDetail._id}
+                      variant='button'
+                      className={styles['btn-save']}
+                    />
                     <Button icon={<ShareAltOutlined />} onClick={handleShareJob}>
                       Share
                     </Button>
                     <Button icon={<PrinterOutlined />} onClick={handlePrintJob}>
                       Print
+                    </Button>
+                    {/* report company */}
+                    <Button
+                      icon={<WarningOutlined />}
+                      onClick={() => {
+                        alert('Report');
+                      }}
+                    >
+                      Report this company
                     </Button>
                   </div>
                 </Col>
@@ -138,34 +169,38 @@ const ClientJobDetailPage = () => {
           <Col xs={24} md={16}>
             <Card
               className={styles['job-detail-card']}
-              title={<Title level={4}>Chi tiết công việc</Title>}
+              title={<Title level={4}>Job Details</Title>}
               bordered={false}
             >
+              {/* Job Overview */}
               <Row gutter={[16, 24]}>
                 <Col span={24}>
                   <div className={styles['job-overview']}>
+                    {/* Salary */}
                     <div className={styles['overview-item']}>
                       <DollarOutlined className={styles['icon']} />
                       <div>
-                        <Text type='secondary'>Salary</Text>
+                        <Text type='secondary'>Salary: </Text>
                         <Text strong className={styles['value']}>
                           {(jobDetail.salary + '')?.replace(/\B(?=(\d{3})+(?!\d))/g, ',')} đ
                         </Text>
                       </div>
                     </div>
+                    {/* Location */}
                     <div className={styles['overview-item']}>
                       <EnvironmentOutlined className={styles['icon']} />
                       <div>
-                        <Text type='secondary'>Location</Text>
+                        <Text type='secondary'>Location: </Text>
                         <Text strong className={styles['value']}>
                           {getLocationName(jobDetail.location)}
                         </Text>
                       </div>
                     </div>
+                    {/* Job Type */}
                     <div className={styles['overview-item']}>
                       <ClockCircleOutlined className={styles['icon']} />
                       <div>
-                        <Text type='secondary'>Loại công việc</Text>
+                        <Text type='secondary'>Job Type: </Text>
                         <Text strong className={styles['value']}>
                           Full Time
                         </Text>
@@ -174,7 +209,7 @@ const ClientJobDetailPage = () => {
                     <div className={styles['overview-item']}>
                       <TeamOutlined className={styles['icon']} />
                       <div>
-                        <Text type='secondary'>Cấp bậc</Text>
+                        <Text type='secondary'>Level: </Text>
                         <Text strong className={styles['value']}>
                           {jobDetail.level || 'All Levels'}
                         </Text>
@@ -183,23 +218,33 @@ const ClientJobDetailPage = () => {
                     <div className={styles['overview-item']}>
                       <HistoryOutlined className={styles['icon']} />
                       <div>
-                        <Text type='secondary'>Ngày đăng</Text>
+                        <Text type='secondary'>Posted On: </Text>
                         <Text strong className={styles['value']}>
-                          {dayjs(jobDetail.updatedAt).format('DD/MM/YYYY')}
+                          {dayjs(jobDetail.updatedAt).locale('en').fromNow()}
                         </Text>
                       </div>
                     </div>
+                    {/* Updated At */}
+                    {/* <div className={styles['overview-item']}> 
+                      <ClockCircleOutlined className={styles['icon']} />
+                      <div>
+                        <Text type='secondary'>Updated At: </Text>
+                        <Text strong className={styles['value']}>
+                          {dayjs(jobDetail.updatedAt).locale('vi').fromNow()}
+                        </Text>
+                      </div>
+                    </div> */}
                   </div>
                 </Col>
 
                 <Col span={24}>
                   <div className={styles['skills-section']}>
                     <Title level={5}>
-                      <TagsOutlined /> Kỹ năng cần thiết
+                      <TagsOutlined /> Required Skills
                     </Title>
                     <div className={styles['skills']}>
                       {jobDetail?.skills?.map((item, index) => (
-                        <Tag key={`${index}-key`} color='blue' className={styles['skill-tag']}>
+                        <Tag key={`${index}-${item}`} color='blue' className={styles['skill-tag']}>
                           {item}
                         </Tag>
                       ))}
@@ -207,7 +252,8 @@ const ClientJobDetailPage = () => {
                   </div>
                 </Col>
 
-                <Col span={24}>
+                <Col className={styles['job-description-col']} span={24}>
+                  {/* Job Description */}
                   <Title level={5}>Job Description</Title>
                   <div className={styles['job-description']}>{parse(jobDetail.description)}</div>
                 </Col>
@@ -226,40 +272,53 @@ const ClientJobDetailPage = () => {
               bordered={false}
             >
               <div className={styles['company-detail']}>
+                {/* Avatar */}
                 <Avatar
-                  src={`${import.meta.env.VITE_BACKEND_URL}/images/company/${jobDetail.company?.logo}`}
+                  src={jobDetail.company?.logo}
                   shape='square'
-                  size={100}
+                  size={90}
                   className={styles['company-logo-lg']}
                 />
+                {/* Name */}
                 <Title level={4} className={styles['company-name']}>
-                  {jobDetail.company?.name}
+                  {jobDetail.company?.name || 'Unknown Company'}
                 </Title>
 
                 <Divider />
 
                 <div className={styles['company-info-item']}>
                   <GlobalOutlined className={styles['icon']} />
-                  <Text className={styles['value']}>
-                    <a href='#' target='_blank' rel='noopener noreferrer'>
-                      it-carerr-hub.com
-                    </a>
-                  </Text>
+                  {companyDetail?.website && (
+                    <Text className={styles['value']}>
+                      <a
+                        href={`https://${companyDetail?.website}` || '#'}
+                        target='_blank'
+                        rel='noopener noreferrer'
+                      >
+                        {companyDetail?.website.replace(/(^\w+:|^)\/\//, '')}
+                      </a>
+                    </Text>
+                  )}
+                  {!companyDetail?.website && (
+                    <Text className={styles['value']}>Unknown Website</Text>
+                  )}
                 </div>
-
+                {/* Email  */}
                 <div className={styles['company-info-item']}>
                   <MailOutlined className={styles['icon']} />
-                  <Text className={styles['value']}>contact@it-carerr-hub.com</Text>
+                  <Text className={styles['value']}>{companyDetail?.email || 'Unknown Email'}</Text>
                 </div>
-
+                {/* Phone number */}
                 <div className={styles['company-info-item']}>
                   <PhoneOutlined className={styles['icon']} />
-                  <Text className={styles['value']}>+84 909 090 909</Text>
+                  <Text className={styles['value']}>{companyDetail?.phone || 'Unknown Phone'}</Text>
                 </div>
 
                 <div className={styles['company-info-item']}>
                   <EnvironmentOutlined className={styles['icon']} />
-                  <Text className={styles['value']}>Ho Chi Minh City, Vietnam</Text>
+                  <Text className={styles['value']}>
+                    {companyDetail?.address || 'Unknown Address'}
+                  </Text>
                 </div>
 
                 <Divider />

@@ -13,6 +13,7 @@ import ModalUser from '@/components/admin/user/modal.user';
 import ViewDetailUser from '@/components/admin/user/view.user';
 import Access from '@/components/share/access';
 import { ALL_PERMISSIONS } from '@/config/permissions';
+import { EyeOutlined } from '@ant-design/icons';
 
 const UserPage = () => {
   const [openModal, setOpenModal] = useState<boolean>(false);
@@ -48,6 +49,7 @@ const UserPage = () => {
   const columns: ProColumns<IUser>[] = [
     {
       title: 'Id',
+      responsive: ['xl'],
       dataIndex: '_id',
       width: 250,
       render: (text, record, index, action) => {
@@ -67,6 +69,7 @@ const UserPage = () => {
     },
     {
       title: 'Name',
+      responsive: ['sm'],
       dataIndex: 'name',
       sorter: true,
     },
@@ -78,6 +81,7 @@ const UserPage = () => {
 
     {
       title: 'CreatedAt',
+      responsive: ['xl'],
       dataIndex: 'createdAt',
       width: 200,
       sorter: true,
@@ -88,6 +92,7 @@ const UserPage = () => {
     },
     {
       title: 'UpdatedAt',
+      responsive: ['lg'],
       dataIndex: 'updatedAt',
       width: 200,
       sorter: true,
@@ -98,8 +103,9 @@ const UserPage = () => {
     },
     {
       title: 'Actions',
+      fixed: 'right',
       hideInSearch: true,
-      width: 50,
+      width: 100,
       render: (_value, entity, _index, _action) => (
         <Space>
           <Access permission={ALL_PERMISSIONS.USERS.UPDATE} hideChildren>
@@ -115,15 +121,15 @@ const UserPage = () => {
               }}
             />
           </Access>
-
+          {/* Action delete user  */}
           <Access permission={ALL_PERMISSIONS.USERS.DELETE} hideChildren>
             <Popconfirm
               placement='leftTop'
-              title={'Xác nhận xóa user'}
-              description={'Bạn có chắc chắn muốn xóa user này ?'}
+              title={'Confirm delete'}
+              description={'Are you sure you want to delete this user?'}
               onConfirm={() => handleDeleteUser(entity._id)}
-              okText='Xác nhận'
-              cancelText='Hủy'
+              okText='Confirm'
+              cancelText='Cancel'
             >
               <span style={{ cursor: 'pointer', margin: '0 10px' }}>
                 <DeleteOutlined
@@ -134,6 +140,19 @@ const UserPage = () => {
                 />
               </span>
             </Popconfirm>
+          </Access>
+          {/* Action view detail user */}
+          <Access permission={ALL_PERMISSIONS.USERS.GET_DETAIL} hideChildren>
+            <EyeOutlined
+              style={{
+                fontSize: 20,
+                color: '#1890ff',
+              }}
+              type=''
+              onClick={() => {
+                alert('Feature is developing...');
+              }}
+            />
           </Access>
         </Space>
       ),
@@ -177,7 +196,7 @@ const UserPage = () => {
       <Access permission={ALL_PERMISSIONS.USERS.GET_PAGINATE}>
         <DataTable<IUser>
           actionRef={tableRef}
-          headerTitle='Danh sách Users'
+          headerTitle='List of Users'
           rowKey='_id'
           loading={isFetching}
           columns={columns}
@@ -196,7 +215,7 @@ const UserPage = () => {
               return (
                 <div>
                   {' '}
-                  {range[0]}-{range[1]} trên {total} rows
+                  {range[0]}-{range[1]} of {total} rows
                 </div>
               );
             },
@@ -205,7 +224,7 @@ const UserPage = () => {
           toolBarRender={(_action, _rows): any => {
             return (
               <Button icon={<PlusOutlined />} type='primary' onClick={() => setOpenModal(true)}>
-                Thêm mới
+                Add new
               </Button>
             );
           }}
@@ -218,12 +237,7 @@ const UserPage = () => {
         dataInit={dataInit}
         setDataInit={setDataInit}
       />
-      <ViewDetailUser
-        onClose={setOpenViewDetail}
-        open={openViewDetail}
-        dataInit={dataInit}
-        setDataInit={setDataInit}
-      />
+      <ViewDetailUser />
     </div>
   );
 };

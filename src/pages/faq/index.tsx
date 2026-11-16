@@ -11,10 +11,7 @@ import {
 } from '@/components/client/faq';
 
 const FaqPage: React.FC = () => {
-  // State cho từ khóa tìm kiếm
   const [searchValue, setSearchValue] = useState<string>('');
-
-  // State cho danh mục được chọn
   const [activeCategory, setActiveCategory] = useState<string>(faqCategories[0]);
 
   // State cho danh sách câu hỏi được lọc theo từ khóa
@@ -44,19 +41,15 @@ const FaqPage: React.FC = () => {
 
   return (
     <div className={styles['container']}>
-      {/* Component tìm kiếm */}
       <FaqSearch searchValue={searchValue} onSearch={handleSearch} />
 
       <Divider />
-
-      {/* Component chọn danh mục */}
       <FaqCategory
         categories={faqCategories}
         activeCategory={activeCategory}
         onChangeCategory={handleChangeCategory}
       />
 
-      {/* Component hiển thị danh sách câu hỏi */}
       <FaqItem faqItems={filteredItems} activeCategory={activeCategory} />
     </div>
   );

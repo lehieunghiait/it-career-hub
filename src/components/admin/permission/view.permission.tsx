@@ -1,6 +1,7 @@
 import { IPermission } from '@/types/backend';
 import { Descriptions, Drawer } from 'antd';
 import dayjs from 'dayjs';
+import { useIsMobile } from '@/hooks/useIsMobile';
 
 interface IProps {
   onClose: (v: boolean) => void;
@@ -9,22 +10,23 @@ interface IProps {
   setDataInit: (v: any) => void;
 }
 const ViewDetailPermission = (props: IProps) => {
+  const isMobile = useIsMobile('md');
   const { onClose, open, dataInit, setDataInit } = props;
 
   return (
     <>
       <Drawer
-        title='Thông Tin Permission'
+        title='Detail'
         placement='right'
         onClose={() => {
           onClose(false);
           setDataInit(null);
         }}
         open={open}
-        width={'40vw'}
+        width={isMobile ? '100%' : 640}
         maskClosable={false}
       >
-        <Descriptions title='' bordered column={2} layout='vertical'>
+        <Descriptions title='' bordered column={isMobile ? 1 : 2} layout='vertical'>
           <Descriptions.Item label='Tên Permission'>{dataInit?.name}</Descriptions.Item>
           <Descriptions.Item label='API Path'>{dataInit?.apiPath}</Descriptions.Item>
 

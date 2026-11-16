@@ -17,6 +17,7 @@ export const fetchResume = createAsyncThunk(
   'resume/fetchResume',
   async ({ query }: { query: string }) => {
     const response = await callFetchResume(query);
+    console.log('🟢 API Response - fetchResume:', response);
     return response;
   }
 );

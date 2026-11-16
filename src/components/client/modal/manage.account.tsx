@@ -1,5 +1,19 @@
-import { Button, Col, Form, Modal, Row, Select, Table, Tabs, message, notification } from 'antd';
-import { isMobile } from 'react-device-detect';
+import {
+  Button,
+  Col,
+  Form,
+  Modal,
+  Row,
+  Select,
+  Table,
+  Tabs,
+  Tag,
+  message,
+  notification,
+} from 'antd';
+import { Link } from 'react-router-dom';
+import { RESUME_STATUS, ResumeStatus } from '@/config/resume-status';
+import { useIsMobile } from '@/hooks/useIsMobile';
 import type { TabsProps } from 'antd';
 import { IResume } from '@/types/backend';
 import { useState, useEffect } from 'react';
@@ -9,6 +23,20 @@ import dayjs from 'dayjs';
 import { MonitorOutlined } from '@ant-design/icons';
 import { SKILLS_LIST } from '@/config/utils';
 import { useAppSelector } from '@/redux/hooks';
+import UpdateProfileUser from '@/components/admin/user/update.profile.user';
+import { useClerk } from '@clerk/react';
+import { useOpenResume } from '@/hooks/useOpenResume';
+// Password, email and connected accounts are managed by Clerk
+const AccountSecurity = () => {
+  const { openUserProfile } = useClerk();
+  return (
+    <div style={{ textAlign: 'center', marginTop: 20 }}>
+      <Button type='primary' onClick={() => openUserProfile()}>
+        Manage password &amp; security
+      </Button>
+    </div>
+  );
+};
 
 interface IProps {
   open: boolean;
@@ -16,6 +44,7 @@ interface IProps {
 }
 
 const UserResume = (props: any) => {
+  const { openResume, openingId } = useOpenResume();
   const [listCV, setListCV] = useState<IResume[]>([]);
   const [isFetching, setIsFetching] = useState<boolean>(false);
 
@@ -42,22 +71,26 @@ const UserResume = (props: any) => {
       },
     },
     {
-      title: 'Công Ty',
+      title: 'Company',
       dataIndex: ['companyId', 'name'],
     },
     {
-      title: 'Vị trí',
+      title: 'Position',
       dataIndex: ['jobId', 'name'],
     },
     {
-      title: 'Trạng thái',
+      title: 'Status',
       dataIndex: 'status',
+      render: (status: string) => {
+        const meta = RESUME_STATUS[status as ResumeStatus];
+        return <Tag color={meta?.color}>{meta?.label ?? status}</Tag>;
+      },
     },
     {
-      title: 'Ngày rải CV',
+      title: 'Date of CV release',
       dataIndex: 'createdAt',
       render(value, record, index) {
-        return <>{dayjs(record.createdAt).format('DD-MM-YYYY HH:mm:ss')}</>;
+        return <>{dayjs(record.createdAt).format('DD/MM/YYYY HH:mm:ss')}</>;
       },
     },
     {
@@ -65,13 +98,14 @@ const UserResume = (props: any) => {
       dataIndex: '',
       render(value, record, index) {
         return (
-          <a
-            href={`${import.meta.env.VITE_BACKEND_URL}/images/resume/${record?.url}`}
-            target='_blank'
-            rel='noreferrer'
+          <Button
+            type='link'
+            size='small'
+            loading={openingId === record._id}
+            onClick={() => openResume(record._id)}
           >
-            Chi tiết
-          </a>
+            View CV
+          </Button>
         );
       },
     },
@@ -79,6 +113,11 @@ const UserResume = (props: any) => {
 
   return (
     <div>
+      <div style={{ marginBottom: 12 }}>
+        <Link to='/my-jobs' onClick={() => props.onNavigate?.()}>
+          Track progress of each application in My jobs →
+        </Link>
+      </div>
       <Table<IResume>
         columns={columns}
         dataSource={listCV}
@@ -90,11 +129,7 @@ const UserResume = (props: any) => {
 };
 
 const UserUpdateInfo = (props: any) => {
-  return (
-    <div>
-      <h1>UserUpdateInfo</h1>
-    </div>
-  );
+  return <div>UserUpdateInfo</div>;
 };
 
 const JobByEmail = (props: any) => {
@@ -119,10 +154,10 @@ const JobByEmail = (props: any) => {
       skills: skills ? skills : [],
     });
     if (res.data) {
-      message.success('Cập nhật thông tin thành công');
+      message.success('Update information successfully');
     } else {
       notification.error({
-        message: 'Có lỗi xảy ra',
+        message: 'An error occurred',
         description: res.message,
       });
     }
@@ -134,9 +169,9 @@ const JobByEmail = (props: any) => {
         <Row gutter={[20, 20]}>
           <Col span={24}>
             <Form.Item
-              label={'Kỹ năng'}
+              label={'Skills'}
               name={'skills'}
-              rules={[{ required: true, message: 'Vui lòng chọn ít nhất 1 skill!' }]}
+              rules={[{ required: true, message: 'Please select at least 1 skill!' }]}
             >
               <Select
                 mode='multiple'
@@ -145,7 +180,7 @@ const JobByEmail = (props: any) => {
                 style={{ width: '100%' }}
                 placeholder={
                   <>
-                    <MonitorOutlined /> Tìm theo kỹ năng...
+                    <MonitorOutlined /> Search by skills...
                   </>
                 }
                 optionLabelProp='label'
@@ -153,8 +188,17 @@ const JobByEmail = (props: any) => {
               />
             </Form.Item>
           </Col>
-          <Col span={24}>
-            <Button onClick={() => form.submit()}>Cập nhật</Button>
+          <Col
+            span={24}
+            style={{
+              textAlign: 'center',
+              marginTop: 20,
+              color: 'white',
+            }}
+          >
+            <Button type='primary' onClick={() => form.submit()}>
+              Update
+            </Button>
           </Col>
         </Row>
       </Form>
@@ -163,6 +207,7 @@ const JobByEmail = (props: any) => {
 };
 
 const ManageAccount = (props: IProps) => {
+  const isMobile = useIsMobile();
   const { open, onClose } = props;
 
   const onChange = (key: string) => {
@@ -172,30 +217,30 @@ const ManageAccount = (props: IProps) => {
   const items: TabsProps['items'] = [
     {
       key: 'user-resume',
-      label: `Rải CV`,
-      children: <UserResume />,
+      label: `CV`,
+      children: <UserResume onNavigate={() => onClose(false)} />,
     },
     {
       key: 'email-by-skills',
-      label: `Nhận Jobs qua Email`,
+      label: `Receive jobs by skills`,
       children: <JobByEmail />,
     },
     {
       key: 'user-update-info',
-      label: `Cập nhật thông tin`,
-      children: <UserUpdateInfo />,
+      label: `Update profile`,
+      children: <UpdateProfileUser />,
     },
     {
       key: 'user-password',
-      label: `Thay đổi mật khẩu`,
-      children: `//todo`,
+      label: `Account security`,
+      children: <AccountSecurity />,
     },
   ];
 
   return (
     <>
       <Modal
-        title='Quản lý tài khoản'
+        title='Manage Account'
         open={open}
         onCancel={() => onClose(false)}
         maskClosable={false}

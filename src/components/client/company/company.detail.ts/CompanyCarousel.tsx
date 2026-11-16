@@ -1,6 +1,6 @@
-import { Card, Carousel, Skeleton } from 'antd';
+import { Card, Carousel, Skeleton, Empty } from 'antd';
 import styles from '@/styles/client.module.scss';
-import { useTranslation } from 'react-i18next';
+import { PictureOutlined } from '@ant-design/icons';
 import Title from 'antd/lib/typography/Title';
 
 interface ICompanyCarouselProps {
@@ -9,31 +9,83 @@ interface ICompanyCarouselProps {
 }
 
 const CompanyCarousel = ({ images, loading = false }: ICompanyCarouselProps) => {
-  const { t } = useTranslation('companyDetail');
-
   if (loading) {
     return (
-      <Card className={styles['company-slider-image']}>
-        <Skeleton.Input active block style={{ marginBottom: '20px', width: '200px' }} />
+      <Card className={styles['company-slider-image']} bordered={false}>
+        <Skeleton.Input
+          active
+          block
+          style={{ marginBottom: '20px', width: '200px', height: '32px' }}
+        />
         <div className={styles['company-slider']}>
-          <Skeleton.Image active className={styles['company-slider-image-item']} />
+          <Skeleton.Image active style={{ width: '100%', height: '500px' }} />
         </div>
+      </Card>
+    );
+  }
+  // If no images, show empty card
+  if (!images || images.length === 0) {
+    return (
+      <Card
+        className={styles['company-slider-image']}
+        bordered={false}
+        title={
+          <div style={{ display: 'flex', alignItems: 'center', gap: '8px' }}>
+            <PictureOutlined style={{ color: '#1677ff' }} />
+            <Title level={4} style={{ margin: 0 }}>
+              Company Image
+            </Title>
+          </div>
+        }
+      >
+        <Empty description='No images available' image={Empty.PRESENTED_IMAGE_SIMPLE} />
       </Card>
     );
   }
 
   return (
-    <Card className={styles['company-slider-image']}>
-      <Title level={4}>{t('Overview.CompanyImage')}</Title>
-      <Carousel autoplay arrows={true} dots={true} className={styles['company-slider']}>
+    // If images, show carousel
+    <Card
+      className={styles['company-slider-image']}
+      bordered={false}
+      title={
+        <div style={{ display: 'flex', alignItems: 'center', gap: '8px' }}>
+          <PictureOutlined style={{ color: '#1677ff' }} />
+          <Title level={4} style={{ margin: 0 }}>
+            Company Image
+          </Title>
+        </div>
+      }
+    >
+      <Carousel
+        autoplay
+        autoplaySpeed={4000}
+        arrows={true}
+        dots={true}
+        className={styles['company-slider']}
+        pauseOnHover={true}
+        draggable={true}
+      >
         {images.map((image, index) => (
-          <div className={styles['company-slider-image-item']} key={index}>
-            <img src={image} alt={`company-slider-image-${index}`} />
+          <div
+            className={styles['company-slider-image-item']}
+            key={index}
+            style={{ height: '500px', width: '100%' }}
+          >
+            <img
+              src={image}
+              alt={`Company workspace ${index + 1}`}
+              loading='lazy'
+              style={{
+                height: '500px',
+                width: '100%',
+                objectFit: 'cover',
+              }}
+            />
           </div>
         ))}
       </Carousel>
     </Card>
   );
 };
-
 export default CompanyCarousel;

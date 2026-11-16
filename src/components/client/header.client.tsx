@@ -1,40 +1,42 @@
 import { useState, useEffect } from 'react';
 import {
   CodeOutlined,
-  ContactsOutlined,
-  DashOutlined,
+  DollarOutlined,
+  DashboardOutlined,
   FileTextOutlined,
   HomeOutlined,
-  InfoCircleOutlined,
   LogoutOutlined,
   MenuFoldOutlined,
-  QuestionCircleOutlined,
+  ProfileOutlined,
   RiseOutlined,
+  SettingFilled,
+  SolutionOutlined,
 } from '@ant-design/icons';
 import { Avatar, Drawer, Dropdown, MenuProps, Space, message } from 'antd';
 import { Menu, ConfigProvider } from 'antd';
-import styles from '@/styles/client.module.scss';
-import { isMobile } from 'react-device-detect';
-import { FaReact } from 'react-icons/fa';
+import { useIsMobile } from '@/hooks/useIsMobile';
 import { useLocation, useNavigate } from 'react-router-dom';
 import { Link } from 'react-router-dom';
 import { useAppDispatch, useAppSelector } from '@/redux/hooks';
-import { callLogout } from '@/config/api';
+import { useClerk, useUser } from '@clerk/react';
 import { setLogoutAction } from '@/redux/slice/accountSlide';
 import { useTranslation } from 'react-i18next';
 import ManageAccount from './modal/manage.account';
+import styles from '@/styles/client.module.scss';
 
 const Header = () => {
+  const isMobile = useIsMobile();
   const navigate = useNavigate();
   const dispatch = useAppDispatch();
+  const { signOut } = useClerk();
+  const { isSignedIn, user: clerkUser } = useUser();
 
-  const isAuthenticated = useAppSelector(state => state.account.isAuthenticated);
   const user = useAppSelector(state => state.account.user);
   const [openMobileMenu, setOpenMobileMenu] = useState<boolean>(false);
 
   const [current, setCurrent] = useState('home');
   const location = useLocation();
-  const { t, i18n } = useTranslation('header');
+  const { t } = useTranslation('header');
   const [openMangeAccount, setOpenManageAccount] = useState<boolean>(false);
 
   useEffect(() => {
@@ -43,33 +45,33 @@ const Header = () => {
 
   const items: MenuProps['items'] = [
     {
-      label: <Link to={'/'}>{t('home')}</Link>,
+      label: <Link to={'/'}>{'Home'}</Link>,
       key: '/',
       icon: <HomeOutlined />,
     },
     {
-      label: <Link to={'/job'}>{t('job')}</Link>,
+      label: <Link to={'/job'}>{'IT Jobs'}</Link>,
       key: '/job',
       icon: <CodeOutlined />,
     },
     {
-      label: <Link to={'/company'}>{t('company')}</Link>,
+      label: <Link to={'/company'}>{'Top IT Companies'}</Link>,
       key: '/company',
       icon: <RiseOutlined />,
     },
     {
-      label: <Link to={'/about'}>{t('about')}</Link>,
-      key: '/about',
-      icon: <InfoCircleOutlined />,
+      label: <Link to={'/cv'}>{'Create CV'}</Link>,
+      key: '/cv',
+      icon: <SolutionOutlined />,
     },
     {
-      label: <Link to={'/faq'}>{t('faq')}</Link>,
-      key: '/faq',
-      icon: <QuestionCircleOutlined />,
+      label: <Link to={'/salary'}>{'Salary'}</Link>,
+      key: '/salary',
+      icon: <DollarOutlined />,
     },
     {
-      label: <Link to={'/blog'}>{t('blog')}</Link>,
-      key: '/blog',
+      label: <Link to={'/ats'}>{'ATS'}</Link>,
+      key: '/ats',
       icon: <FileTextOutlined />,
     },
   ];
@@ -77,49 +79,43 @@ const Header = () => {
   const onClick: MenuProps['onClick'] = e => {
     setCurrent(e.key);
   };
-
+  /**
+   * Handle logout
+   */
   const handleLogout = async () => {
-    const res = await callLogout();
-    if (res && res.data) {
-      dispatch(setLogoutAction({}));
-      message.success('Logout success');
-      navigate('/');
-    }
+    await signOut();
+    dispatch(setLogoutAction());
+    message.success('Logout successfully');
+    //Redirect to home page
+    navigate('/');
   };
-  const handleChangeLanguage = ({ key }: { key: string }) => {
-    i18n.changeLanguage(key);
-  };
-
-  const itemsLanguage = [
-    {
-      label: 'English',
-      key: 'en',
-    },
-    {
-      label: 'Vietnamese',
-      key: 'vi',
-    },
-  ];
-
+  /**
+   * List items dropdown
+   */
   const itemsDropdown = [
+    {
+      label: <Link to={'/my-jobs'}>My jobs</Link>,
+      key: 'my-jobs',
+      icon: <ProfileOutlined />,
+    },
     {
       label: (
         <label style={{ cursor: 'pointer' }} onClick={() => setOpenManageAccount(true)}>
-          {t('dropdown.manageAccount')}
+          Manage Account
         </label>
       ),
       key: 'manage-account',
-      icon: <ContactsOutlined />,
+      icon: <SettingFilled />,
     },
     {
       label: <Link to={'/admin'}>{t('admin')}</Link>,
       key: 'admin',
-      icon: <DashOutlined />,
+      icon: <DashboardOutlined />,
     },
     {
       label: (
         <label style={{ cursor: 'pointer' }} onClick={() => handleLogout()}>
-          {t('dropdown.logout')}
+          Logout
         </label>
       ),
       key: 'logout',
@@ -136,64 +132,62 @@ const Header = () => {
           {!isMobile ? (
             <div style={{ display: 'flex', gap: 30 }}>
               <div className={styles['brand']}>
-                <FaReact onClick={() => navigate('/')} title='IT Career' />
+                {/* Logo */}
+                {/* <span className={styles['brand-text']}>{import.meta.env.VITE_APP_NAME}</span> */}
               </div>
               <div className={styles['top-menu']}>
                 <ConfigProvider
                   theme={{
                     token: {
-                      colorPrimary: '#fff',
+                      colorPrimary: '#ffffff',
                       colorBgContainer: '#222831',
-                      colorText: '#a7a7a7',
+                      colorText: '#ffffff',
                     },
                   }}
                 >
                   <Menu
-                    // onClick={onClick}
                     selectedKeys={[current]}
                     mode='horizontal'
                     items={items}
+                    overflowedIndicator={null}
                   />
                 </ConfigProvider>
                 <div className={styles['extra']}>
-                  {isAuthenticated === false ? (
-                    <Link to={'/login'}>{t('login')}</Link>
+                  {!isSignedIn ? (
+                    <Link to={'/login'}>Login</Link>
                   ) : (
                     <Dropdown menu={{ items: itemsDropdown }} trigger={['click']}>
                       <Space style={{ cursor: 'pointer' }}>
-                        <span style={{ fontSize: 16, fontWeight: 600, color: '#fff' }}>
-                          {t('hello', { name: user?.name })}
+                        <span style={{ fontSize: 13, fontWeight: 500, color: '#fff' }}>
+                          {user?.name || clerkUser?.fullName || 'Guest'}
                         </span>
                         <Avatar style={{ backgroundColor: '#fff' }}>
-                          {user?.name?.substring(0, 2)?.toUpperCase()}
+                          <img
+                            src={
+                              clerkUser?.imageUrl ||
+                              'https://cdn3d.iconscout.com/3d/premium/thumb/man-avatar-3d-icon-png-download-8330274.png'
+                            }
+                            alt='avatar'
+                            width={30}
+                            height={30}
+                          />
                         </Avatar>
                       </Space>
                     </Dropdown>
                   )}
                 </div>
-                {/* dropdown language */}
-                <Dropdown
-                  menu={{ items: itemsLanguage, onClick: handleChangeLanguage }}
-                  trigger={['click']}
-                >
-                  <Space style={{ cursor: 'pointer' }}>
-                    <span style={{ fontSize: 16, fontWeight: 600, color: '#fff' }}>
-                      {i18n.language === 'en' ? 'English' : 'Vietnamese'}
-                    </span>
-                  </Space>
-                </Dropdown>
               </div>
             </div>
           ) : (
             <div className={styles['header-mobile']}>
-              <span>IT Career</span>
+              <span className={styles['brand-text']}>{import.meta.env.VITE_APP_NAME}</span>
               <MenuFoldOutlined onClick={() => setOpenMobileMenu(true)} />
             </div>
           )}
         </div>
       </div>
       <Drawer
-        title='Chức năng'
+        title='Features'
         placement='right'
         onClose={() => setOpenMobileMenu(false)}
         open={openMobileMenu}

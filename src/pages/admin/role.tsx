@@ -45,6 +45,7 @@ const RolePage = () => {
   const columns: ProColumns<IRole>[] = [
     {
       title: 'Id',
+      responsive: ['xl'],
       dataIndex: '_id',
       width: 250,
       render: (text, record, index, action) => {
@@ -73,6 +74,7 @@ const RolePage = () => {
     },
     {
       title: 'CreatedAt',
+      responsive: ['xl'],
       dataIndex: 'createdAt',
       width: 200,
       sorter: true,
@@ -83,6 +85,7 @@ const RolePage = () => {
     },
     {
       title: 'UpdatedAt',
+      responsive: ['lg'],
       dataIndex: 'updatedAt',
       width: 200,
       sorter: true,
@@ -93,8 +96,9 @@ const RolePage = () => {
     },
     {
       title: 'Actions',
+      fixed: 'right',
       hideInSearch: true,
-      width: 50,
+      width: 100,
       render: (_value, entity, _index, _action) => (
         <Space>
           <Access permission={ALL_PERMISSIONS.ROLES.UPDATE} hideChildren>
@@ -166,7 +170,7 @@ const RolePage = () => {
       <Access permission={ALL_PERMISSIONS.ROLES.GET_PAGINATE}>
         <DataTable<IRole>
           actionRef={tableRef}
-          headerTitle='Danh sách Roles (Vai Trò)'
+          headerTitle='List of Roles'
           rowKey='_id'
           loading={isFetching}
           columns={columns}
@@ -185,7 +189,7 @@ const RolePage = () => {
               return (
                 <div>
                   {' '}
-                  {range[0]}-{range[1]} trên {total} rows
+                  {range[0]}-{range[1]} of {total} rows
                 </div>
               );
             },
@@ -194,7 +198,7 @@ const RolePage = () => {
           toolBarRender={(_action, _rows): any => {
             return (
               <Button icon={<PlusOutlined />} type='primary' onClick={() => setOpenModal(true)}>
-                Thêm mới
+                Add new
               </Button>
             );
           }}

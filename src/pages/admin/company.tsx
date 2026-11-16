@@ -3,20 +3,26 @@ import DataTable from '@/components/client/data-table';
 import { useAppDispatch, useAppSelector } from '@/redux/hooks';
 import { fetchCompany } from '@/redux/slice/companySlide';
 import { ICompany } from '@/types/backend';
-import { DeleteOutlined, EditOutlined, PlusOutlined } from '@ant-design/icons';
+import { DeleteOutlined, EditOutlined, LinkOutlined, PlusOutlined } from '@ant-design/icons';
 import { ActionType, ProColumns } from '@ant-design/pro-components';
-import { Button, Popconfirm, Space, message, notification } from 'antd';
+import { Button, Dropdown, Popconfirm, Space, message, notification } from 'antd';
 import { useState, useRef } from 'react';
 import dayjs from 'dayjs';
 import { callDeleteCompany } from '@/config/api';
 import queryString from 'query-string';
 import Access from '@/components/share/access';
+import { EyeOutlined } from '@ant-design/icons';
 import { ALL_PERMISSIONS } from '@/config/permissions';
+import CompanyLogo from '@/components/client/common/CompanyLogo';
+import styles from '@/styles/dashboard.module.scss';
+import { useNavigate } from 'react-router-dom';
+import ViewDetailCompany from '@/components/admin/company/view.detail.company';
 
 const CompanyPage = () => {
   const [openModal, setOpenModal] = useState<boolean>(false);
   const [dataInit, setDataInit] = useState<ICompany | null>(null);
-
+  const [openViewDetail, setOpenViewDetail] = useState<boolean>(false);
+  const [selectedCompanyId, setSelectedCompanyId] = useState<string | null>(null);
   const tableRef = useRef<ActionType>();
 
   const isFetching = useAppSelector(state => state.company.isFetching);
@@ -28,38 +34,30 @@ const CompanyPage = () => {
     if (_id) {
       const res = await callDeleteCompany(_id);
       if (res && res.data) {
-        message.success('Xóa Company thành công');
+        message.success('Delete Company successfully');
         reloadTable();
       } else {
         notification.error({
-          message: 'Có lỗi xảy ra',
+          message: 'An error occurred',
           description: res.message,
         });
       }
     }
   };
-
+  // reload table
   const reloadTable = () => {
     tableRef?.current?.reload();
   };
 
   const columns: ProColumns<ICompany>[] = [
     {
-      title: 'STT',
+      title: 'Index',
+      responsive: ['md'],
       key: 'index',
       width: 50,
       align: 'center',
       render: (text, record, index) => {
-        return <>{index + 1 + (meta.current - 1) * meta.pageSize}</>;
-      },
-      hideInSearch: true,
-    },
-    {
-      title: 'Id',
-      dataIndex: '_id',
-      width: 250,
-      render: (text, record, index, action) => {
-        return <span>{record._id}</span>;
+        return <>{index + 1}</>;
       },
       hideInSearch: true,
     },
@@ -67,15 +65,19 @@ const CompanyPage = () => {
       title: 'Name',
       dataIndex: 'name',
       sorter: true,
+      render: (_dom, record) => (
+        <div style={{ display: 'flex', alignItems: 'center', gap: 10, minWidth: 220 }}>
+          <CompanyLogo className={styles['mini-logo']} src={record.logo} name={record.name} />
+          <div style={{ minWidth: 0 }}>
+            <div style={{ fontWeight: 600 }}>{record.name}</div>
+            <small style={{ color: '#6b7280' }}>{record.address}</small>
+          </div>
+        </div>
+      ),
     },
-    {
-      title: 'Address',
-      dataIndex: 'address',
-      sorter: true,
-    },
-
     {
       title: 'CreatedAt',
+      responsive: ['xl'],
       dataIndex: 'createdAt',
       width: 200,
       sorter: true,
@@ -86,6 +88,7 @@ const CompanyPage = () => {
     },
     {
       title: 'UpdatedAt',
+      responsive: ['lg'],
       dataIndex: 'updatedAt',
       width: 200,
       sorter: true,
@@ -96,10 +99,12 @@ const CompanyPage = () => {
     },
     {
       title: 'Actions',
+      fixed: 'right',
       hideInSearch: true,
-      width: 50,
+      width: 100,
       render: (_value, entity, _index, _action) => (
         <Space>
+          {/* Action update company */}
           <Access permission={ALL_PERMISSIONS.COMPANIES.UPDATE} hideChildren>
             <EditOutlined
               style={{
@@ -113,6 +118,7 @@ const CompanyPage = () => {
               }}
             />
           </Access>
+          {/* Action remove company */}
           <Access permission={ALL_PERMISSIONS.COMPANIES.DELETE} hideChildren>
             <Popconfirm
               placement='leftTop'
@@ -131,6 +137,20 @@ const CompanyPage = () => {
                 />
               </span>
             </Popconfirm>
+          </Access>
+          {/* Action view detail company */}
+          <Access permission={ALL_PERMISSIONS.COMPANIES.GET_DETAIL} hideChildren>
+            <EyeOutlined
+              style={{
+                fontSize: 20,
+                color: '#1890ff',
+              }}
+              type=''
+              onClick={() => {
+                setOpenViewDetail(true);
+                setSelectedCompanyId(entity._id ?? null);
+              }}
+            />
           </Access>
         </Space>
       ),
@@ -173,7 +193,7 @@ const CompanyPage = () => {
       <Access permission={ALL_PERMISSIONS.COMPANIES.GET_PAGINATE}>
         <DataTable<ICompany>
           actionRef={tableRef}
-          headerTitle='Danh sách Công Ty'
+          headerTitle='List of Companies'
           rowKey='_id'
           loading={isFetching}
           columns={columns}
@@ -200,11 +220,42 @@ const CompanyPage = () => {
           rowSelection={false}
           toolBarRender={(_action, _rows): any => {
             return (
-              <Access permission={ALL_PERMISSIONS.COMPANIES.CREATE} hideChildren>
-                <Button icon={<PlusOutlined />} type='primary' onClick={() => setOpenModal(true)}>
-                  Thêm mới
-                </Button>
-              </Access>
+              <Space>
+                <Access permission={ALL_PERMISSIONS.COMPANIES.CREATE} hideChildren>
+                  <Button icon={<PlusOutlined />} type='primary' onClick={() => setOpenModal(true)}>
+                    Add new
+                  </Button>
+                </Access>
+                <Dropdown
+                  menu={{
+                    items: [
+                      {
+                        key: 'export-excel',
+                        label: (
+                          <span
+                            onClick={() => {
+                              // Export to Excel logic here
+                              // You would replace this with a real export function as needed
+                              message.info('Export to Excel');
+                            }}
+                          >
+                            Export to Excel
+                          </span>
+                        ),
+                      },
+                    ],
+                  }}
+                  trigger={['click']}
+                >
+                  <Button
+                    style={{
+                      color: '#1890ff',
+                    }}
+                  >
+                    Export
+                  </Button>
+                </Dropdown>
+              </Space>
             );
           }}
         />
@@ -215,6 +266,11 @@ const CompanyPage = () => {
         reloadTable={reloadTable}
         dataInit={dataInit}
         setDataInit={setDataInit}
+      />
+      <ViewDetailCompany
+        openViewDetail={openViewDetail}
+        setOpenViewDetail={setOpenViewDetail}
+        companyId={selectedCompanyId}
       />
     </div>
   );

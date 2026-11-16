@@ -1,7 +1,7 @@
-import { Button, Col, Form, Row, Select } from 'antd';
-import { EnvironmentOutlined, MonitorOutlined } from '@ant-design/icons';
+import { Button, Col, Form, notification, Row, Select } from 'antd';
+import { EnvironmentOutlined, MonitorOutlined, UploadOutlined } from '@ant-design/icons';
 import { LOCATION_LIST, SKILLS_LIST } from '@/config/utils';
-import { ProForm } from '@ant-design/pro-components';
+import { ProForm, ProFormUploadButton } from '@ant-design/pro-components';
 import styles from 'styles/client.module.scss';
 import { useTranslation } from 'react-i18next';
 
@@ -9,8 +9,12 @@ const SearchClient = () => {
   const optionsSkills = SKILLS_LIST;
   const optionsLocations = LOCATION_LIST;
   const [form] = Form.useForm();
-  const { t, i18n } = useTranslation('search');
-  const onFinish = async (values: any) => {};
+  const { t } = useTranslation('search');
+  const onFinish = async () => {
+    notification.success({
+      message: 'Feature is under development',
+    });
+  };
 
   return (
     <ProForm
@@ -29,11 +33,10 @@ const SearchClient = () => {
             <Select
               mode='multiple'
               allowClear
-              showArrow={false}
               style={{ width: '100%' }}
               placeholder={
                 <>
-                  <MonitorOutlined /> Tìm theo kỹ năng của bạn...
+                  <MonitorOutlined /> Search by skills....
                 </>
               }
               optionLabelProp='label'
@@ -41,16 +44,29 @@ const SearchClient = () => {
             />
           </ProForm.Item>
         </Col>
+        {/* Search job with CV */}
+        <Col span={12} md={8}>
+          <ProFormUploadButton
+            name='cv'
+            label='Upload CV'
+            max={1}
+            fieldProps={{
+              beforeUpload: () => false, // Để file không tự upload, chỉ giữ local
+              accept: '.pdf,.doc,.docx',
+            }}
+            title='Chọn CV (.pdf, .doc, .docx)'
+            icon={<UploadOutlined />}
+          />
+        </Col>
         <Col span={12} md={4}>
           <ProForm.Item name='location'>
             <Select
               mode='multiple'
               allowClear
-              showArrow={false}
               style={{ width: '100%' }}
               placeholder={
                 <>
-                  <EnvironmentOutlined /> {t('location')}...
+                  <EnvironmentOutlined /> {'Location'}...
                 </>
               }
               optionLabelProp='label'
@@ -58,7 +74,8 @@ const SearchClient = () => {
             />
           </ProForm.Item>
         </Col>
-        <Col span={12} md={4}>
+        {/* Search button */}
+        <Col span={8} md={3}>
           <Button type='primary' onClick={() => form.submit()} className={styles['search-button']}>
             {t('search')}
           </Button>

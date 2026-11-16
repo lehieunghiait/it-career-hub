@@ -42,6 +42,7 @@ export interface ICompany {
     name?: string;
     address?: string;
     logo: string;
+    phone: string;
     description?: string;
     createdBy?: string;
     isDeleted?: boolean;
@@ -50,12 +51,13 @@ export interface ICompany {
     updatedAt?: string;
 }
 export interface ICompanyDetail extends ICompany {
-  website?: string;
-  phone?: string;
-  email?: string;
-  size?: string | number;
-  companyType?: string;
-  skills?: string[];
+    website?: string;
+    phone?: string;
+    email?: string;
+    size?: string | number;
+    companyType?: string;
+    skills?: string[];
+    url: string;
 }
 
 
@@ -124,11 +126,17 @@ export interface IResume {
     jobId: string | {
         _id: string;
         name: string;
+        company?: { _id: string; name: string; logo?: string };
+        location?: string;
+        salary?: number;
+        level?: string;
+        isActive?: boolean;
     };
     history?: {
         status: string;
+        note?: string;
         updatedAt: Date;
-        updatedBy: { _id: string; email: string }
+        updatedBy?: { _id: string; email: string }
     }[]
     createdBy?: string;
     isDeleted?: boolean;
@@ -176,4 +184,56 @@ export interface ISubscribers {
     deletedAt?: boolean | null;
     createdAt?: string;
     updatedAt?: string;
+}
+
+export interface IIDashboardOverview {
+    totalUsers: number; 
+    totalJobs: number;
+    totalCompanies: number; 
+    totalResumes: number; 
+    activeJobs: number;
+    inactiveJobs: number; 
+}
+
+export interface IDashboardResumesStats {
+    total: number; 
+    byStatus: {
+        PENDING: number; 
+        REVIEWING: number; 
+        INTERVIEW: number; 
+        APPROVED: number; 
+        REJECTED: number; 
+    };
+    details: Array<{
+        count: number; 
+        status: 'PENDING' | 'REVIEWING' | 'INTERVIEW' | 'APPROVED' | 'REJECTED';
+    }>;
+}
+export interface IDashboardInsights {
+    jobsByLevel: { key: string; count: number }[];
+    jobsByLocation: { key: string; count: number }[];
+    topSkills: { key: string; count: number }[];
+    topCompanies: { name: string; logo?: string; jobs: number; openings: number }[];
+    resumesByStatus: { key: string; count: number }[];
+    activity: { date: string; jobs: number; resumes: number }[];
+    recentResumes: {
+        _id: string;
+        email: string;
+        status: string;
+        createdAt: string;
+        jobId?: { _id: string; name: string };
+        companyId?: { _id: string; name: string; logo?: string };
+    }[];
+    expiringJobs: {
+        _id: string;
+        name: string;
+        endDate: string;
+        company?: { _id: string; name: string; logo?: string };
+    }[];
+}
+
+export interface ISavedJob {
+    _id: string;
+    savedAt: string;
+    job: IJob;
 }

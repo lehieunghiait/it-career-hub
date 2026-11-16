@@ -1,252 +1,264 @@
-import React, { useState, useEffect } from 'react';
+import { useEffect, useMemo, useState } from 'react';
 import {
-  AppstoreOutlined,
-  ExceptionOutlined,
-  ApiOutlined,
-  UserOutlined,
-  BankOutlined,
-  MenuFoldOutlined,
-  MenuUnfoldOutlined,
   AliwangwangOutlined,
-  BugOutlined,
+  ApiOutlined,
+  AppstoreOutlined,
+  BankOutlined,
+  ExceptionOutlined,
+  ExportOutlined,
+  ProjectOutlined,
+  LogoutOutlined,
+  MenuFoldOutlined,
+  MenuOutlined,
+  MenuUnfoldOutlined,
   ScheduleOutlined,
+  UserOutlined,
 } from '@ant-design/icons';
-import { Layout, Menu, Dropdown, Space, message, Avatar, Button } from 'antd';
-import { Outlet, useLocation, useNavigate } from 'react-router-dom';
-import { Link } from 'react-router-dom';
-import { callLogout } from 'config/api';
-import { useAppDispatch, useAppSelector } from '@/redux/hooks';
-import { isMobile } from 'react-device-detect';
+import { Avatar, Button, ConfigProvider, Drawer, Dropdown, Layout, Menu, message } from 'antd';
 import type { MenuProps } from 'antd';
+import { Link, Outlet, useLocation, useNavigate } from 'react-router-dom';
+import { useClerk, useUser } from '@clerk/react';
+import { useAppDispatch, useAppSelector } from '@/redux/hooks';
+import { useIsMobile } from '@/hooks/useIsMobile';
 import { setLogoutAction } from '@/redux/slice/accountSlide';
 import { ALL_PERMISSIONS } from '@/config/permissions';
+import s from '@/styles/admin.module.scss';
 
-const { Content, Footer, Sider } = Layout;
+const { Content, Sider } = Layout;
+
+const BRAND = '#e14000';
+
+const PAGE_TITLES: Record<string, string> = {
+  '/admin': 'Dashboard',
+  '/admin/job': 'Jobs',
+  '/admin/job/upsert': 'Job editor',
+  '/admin/company': 'Companies',
+  '/admin/resume': 'Applications',
+  '/admin/pipeline': 'Pipeline',
+  '/admin/user': 'Users',
+  '/admin/role': 'Roles',
+  '/admin/permission': 'Permissions',
+};
+
+type Permission = { apiPath: string; method: string };
+const can = (permissions: Permission[], target: Permission) =>
+  permissions?.some(p => p.apiPath === target.apiPath && p.method === target.method);
 
 const LayoutAdmin = () => {
+  const isMobile = useIsMobile();
   const location = useLocation();
-
-  const [collapsed, setCollapsed] = useState(false);
-  const [activeMenu, setActiveMenu] = useState('');
-  const user = useAppSelector(state => state.account.user);
-
-  const permissions = useAppSelector(state => state.account.user.permissions);
-  const [menuItems, setMenuItems] = useState<MenuProps['items']>([]);
-
   const navigate = useNavigate();
   const dispatch = useAppDispatch();
+  const { signOut } = useClerk();
+  const { user: clerkUser } = useUser();
 
-  useEffect(() => {
-    if (permissions?.length) {
-      const viewCompany = permissions.find(
-        item =>
-          item.apiPath === ALL_PERMISSIONS.COMPANIES.GET_PAGINATE.apiPath &&
-          item.method === ALL_PERMISSIONS.COMPANIES.GET_PAGINATE.method
-      );
+  const [collapsed, setCollapsed] = useState(false);
+  const [openDrawer, setOpenDrawer] = useState(false);
+  const user = useAppSelector(state => state.account.user);
+  const permissions = useAppSelector(state => state.account.user.permissions) as Permission[];
 
-      const viewUser = permissions.find(
-        item =>
-          item.apiPath === ALL_PERMISSIONS.USERS.GET_PAGINATE.apiPath &&
-          item.method === ALL_PERMISSIONS.USERS.GET_PAGINATE.method
-      );
+  useEffect(() => setOpenDrawer(false), [location.pathname]);
 
-      const viewJob = permissions.find(
-        item =>
-          item.apiPath === ALL_PERMISSIONS.JOBS.GET_PAGINATE.apiPath &&
-          item.method === ALL_PERMISSIONS.JOBS.GET_PAGINATE.method
-      );
+  const menuItems = useMemo<MenuProps['items']>(() => {
+    const item = (to: string, label: string, icon: React.ReactNode, allowed = true) =>
+      allowed ? [{ key: to, icon, label: <Link to={to}>{label}</Link> }] : [];
 
-      const viewResume = permissions.find(
-        item =>
-          item.apiPath === ALL_PERMISSIONS.RESUMES.GET_PAGINATE.apiPath &&
-          item.method === ALL_PERMISSIONS.RESUMES.GET_PAGINATE.method
-      );
+    const recruitment = [
+      ...item(
+        '/admin/job',
+        'Jobs',
+        <ScheduleOutlined />,
+        can(permissions, ALL_PERMISSIONS.JOBS.GET_PAGINATE)
+      ),
+      ...item(
+        '/admin/company',
+        'Companies',
+        <BankOutlined />,
+        can(permissions, ALL_PERMISSIONS.COMPANIES.GET_PAGINATE)
+      ),
+      ...item(
+        '/admin/resume',
+        'Applications',
+        <AliwangwangOutlined />,
+        can(permissions, ALL_PERMISSIONS.RESUMES.GET_PAGINATE)
+      ),
+      ...item(
+        '/admin/pipeline',
+        'Pipeline',
+        <ProjectOutlined />,
+        can(permissions, ALL_PERMISSIONS.RESUMES.GET_PAGINATE)
+      ),
+    ];
+    const access = [
+      ...item(
+        '/admin/user',
+        'Users',
+        <UserOutlined />,
+        can(permissions, ALL_PERMISSIONS.USERS.GET_PAGINATE)
+      ),
+      ...item(
+        '/admin/role',
+        'Roles',
+        <ExceptionOutlined />,
+        can(permissions, ALL_PERMISSIONS.ROLES.GET_PAGINATE)
+      ),
+      ...item(
+        '/admin/permission',
+        'Permissions',
+        <ApiOutlined />,
+        can(permissions, ALL_PERMISSIONS.PERMISSIONS.GET_PAGINATE)
+      ),
+    ];
 
-      const viewRole = permissions.find(
-        item =>
-          item.apiPath === ALL_PERMISSIONS.ROLES.GET_PAGINATE.apiPath &&
-          item.method === ALL_PERMISSIONS.ROLES.GET_PAGINATE.method
-      );
-
-      const viewPermission = permissions.find(
-        item =>
-          item.apiPath === ALL_PERMISSIONS.PERMISSIONS.GET_PAGINATE.apiPath &&
-          item.method === ALL_PERMISSIONS.USERS.GET_PAGINATE.method
-      );
-
-      const full = [
-        {
-          label: <Link to='/admin'>Dashboard</Link>,
-          key: '/admin',
-          icon: <AppstoreOutlined />,
-        },
-        ...(viewCompany
-          ? [
-              {
-                label: <Link to='/admin/company'>Company</Link>,
-                key: '/admin/company',
-                icon: <BankOutlined />,
-              },
-            ]
-          : []),
-
-        ...(viewUser
-          ? [
-              {
-                label: <Link to='/admin/user'>User</Link>,
-                key: '/admin/user',
-                icon: <UserOutlined />,
-              },
-            ]
-          : []),
-        ...(viewJob
-          ? [
-              {
-                label: <Link to='/admin/job'>Job</Link>,
-                key: '/admin/job',
-                icon: <ScheduleOutlined />,
-              },
-            ]
-          : []),
-
-        ...(viewResume
-          ? [
-              {
-                label: <Link to='/admin/resume'>Resume</Link>,
-                key: '/admin/resume',
-                icon: <AliwangwangOutlined />,
-              },
-            ]
-          : []),
-        ...(viewPermission
-          ? [
-              {
-                label: <Link to='/admin/permission'>Permission</Link>,
-                key: '/admin/permission',
-                icon: <ApiOutlined />,
-              },
-            ]
-          : []),
-        ...(viewRole
-          ? [
-              {
-                label: <Link to='/admin/role'>Role</Link>,
-                key: '/admin/role',
-                icon: <ExceptionOutlined />,
-              },
-            ]
-          : []),
-      ];
-
-      setMenuItems(full);
-    }
+    return [
+      {
+        type: 'group',
+        label: 'Overview',
+        children: item('/admin', 'Dashboard', <AppstoreOutlined />),
+      },
+      ...(recruitment.length
+        ? [{ type: 'group' as const, label: 'Recruitment', children: recruitment }]
+        : []),
+      ...(access.length
+        ? [{ type: 'group' as const, label: 'Access control', children: access }]
+        : []),
+    ];
   }, [permissions]);
-  useEffect(() => {
-    setActiveMenu(location.pathname);
-  }, [location]);
+
+  // Highlight the closest menu entry, e.g. /admin/job/upsert -> /admin/job
+  const selectedKey =
+    Object.keys(PAGE_TITLES)
+      .filter(key => key !== '/admin/job/upsert' && location.pathname.startsWith(key))
+      .sort((a, b) => b.length - a.length)[0] ?? '/admin';
+  const pageTitle = PAGE_TITLES[location.pathname] ?? PAGE_TITLES[selectedKey];
 
   const handleLogout = async () => {
-    const res = await callLogout();
-    if (res && res.data) {
-      dispatch(setLogoutAction({}));
-      message.success('Đăng xuất thành công');
-      navigate('/');
-    }
+    await signOut();
+    dispatch(setLogoutAction());
+    message.success('Logout successfully');
+    navigate('/');
   };
 
-  // if (isMobile) {
-  //     items.push({
-  //         label: <label
-  //             style={{ cursor: 'pointer' }}
-  //             onClick={() => handleLogout()}
-  //         >Đăng xuất</label>,
-  //         key: 'logout',
-  //         icon: <LogoutOutlined />
-  //     })
-  // }
-
-  const itemsDropdown = [
+  const accountMenu: MenuProps['items'] = [
+    { key: 'site', icon: <ExportOutlined />, label: <Link to='/'>Back to site</Link> },
+    { type: 'divider' },
     {
-      label: <Link to={'/'}>Trang chủ</Link>,
-      key: 'home',
-    },
-    {
-      label: (
-        <label style={{ cursor: 'pointer' }} onClick={() => handleLogout()}>
-          Đăng xuất
-        </label>
-      ),
       key: 'logout',
+      icon: <LogoutOutlined />,
+      danger: true,
+      label: 'Logout',
+      onClick: handleLogout,
     },
   ];
 
+  const brand = (compact: boolean) => (
+    <Link to='/admin' className={s['brand']}>
+      <span className={s['brand-mark']}>C</span>
+      {!compact && (
+        <span className={s['brand-text']}>
+          Career Hub <small>Recruiter</small>
+        </span>
+      )}
+    </Link>
+  );
+
+  const sideMenu = (
+    <Menu
+      theme='dark'
+      mode='inline'
+      selectedKeys={[selectedKey]}
+      items={menuItems}
+      className={s['side-menu']}
+    />
+  );
+
   return (
-    <>
-      <Layout style={{ minHeight: '100vh' }} className='layout-admin'>
-        {!isMobile ? (
+    <ConfigProvider
+      theme={{
+        token: { colorPrimary: BRAND, borderRadius: 10, colorBgLayout: '#f5f6f8' },
+        components: {
+          Menu: {
+            darkItemBg: 'transparent',
+            darkSubMenuItemBg: 'transparent',
+            darkItemSelectedBg: BRAND,
+            darkGroupTitleColor: 'rgba(255,255,255,0.4)',
+            itemBorderRadius: 10,
+          },
+        },
+      }}
+    >
+      <Layout className={s['admin-root']}>
+        {!isMobile && (
           <Sider
-            theme='light'
-            collapsible
+            width={240}
+            collapsedWidth={76}
             collapsed={collapsed}
-            onCollapse={value => setCollapsed(value)}
+            className={s['sider']}
+            trigger={null}
           >
-            <div style={{ height: 32, margin: 16, textAlign: 'center' }}>
-              <BugOutlined /> ADMIN
-            </div>
-            <Menu
-              selectedKeys={[activeMenu]}
-              mode='inline'
-              items={menuItems}
-              onClick={e => setActiveMenu(e.key)}
-            />
+            {brand(collapsed)}
+            {sideMenu}
           </Sider>
-        ) : (
-          <Menu
-            selectedKeys={[activeMenu]}
-            items={menuItems}
-            onClick={e => setActiveMenu(e.key)}
-            mode='horizontal'
-          />
         )}
 
+        <Drawer
+          placement='left'
+          open={isMobile && openDrawer}
+          onClose={() => setOpenDrawer(false)}
+          width={260}
+          closable={false}
+          styles={{ body: { padding: 0, background: '#0f1528' } }}
+        >
+          {brand(false)}
+          {sideMenu}
+        </Drawer>
+
         <Layout>
-          {!isMobile && (
-            <div
-              className='admin-header'
-              style={{ display: 'flex', justifyContent: 'space-between', marginRight: 20 }}
-            >
+          <header className={s['topbar']}>
+            <div className={s['topbar-left']}>
               <Button
                 type='text'
+                aria-label='Toggle menu'
                 icon={
-                  collapsed
-                    ? React.createElement(MenuUnfoldOutlined)
-                    : React.createElement(MenuFoldOutlined)
+                  isMobile ? (
+                    <MenuOutlined />
+                  ) : collapsed ? (
+                    <MenuUnfoldOutlined />
+                  ) : (
+                    <MenuFoldOutlined />
+                  )
                 }
-                onClick={() => setCollapsed(!collapsed)}
-                style={{
-                  fontSize: '16px',
-                  width: 64,
-                  height: 64,
-                }}
+                onClick={() => (isMobile ? setOpenDrawer(true) : setCollapsed(v => !v))}
               />
-
-              <Dropdown menu={{ items: itemsDropdown }} trigger={['click']}>
-                <Space style={{ cursor: 'pointer' }}>
-                  Welcome {user?.name}
-                  <Avatar> {user?.name?.substring(0, 2)?.toUpperCase()} </Avatar>
-                </Space>
+              <h1>{pageTitle}</h1>
+            </div>
+            <div className={s['topbar-right']}>
+              {!isMobile && (
+                <Button icon={<ExportOutlined />} onClick={() => navigate('/')}>
+                  View site
+                </Button>
+              )}
+              <Dropdown menu={{ items: accountMenu }} trigger={['click']} placement='bottomRight'>
+                <button className={s['account']}>
+                  <Avatar src={clerkUser?.imageUrl} size={34}>
+                    {user?.name?.substring(0, 1)?.toUpperCase()}
+                  </Avatar>
+                  {!isMobile && (
+                    <span className={s['account-text']}>
+                      <b>{user?.name}</b>
+                      <small>{user?.role?.name?.replace('_', ' ')}</small>
+                    </span>
+                  )}
+                </button>
               </Dropdown>
             </div>
-          )}
-          <Content style={{ padding: '15px' }}>
+          </header>
+          <Content className={s['content']}>
             <Outlet />
           </Content>
-          {/* <Footer style={{ padding: 10, textAlign: 'center' }}>
-                        React Typescript series Nest.JS &copy; Hỏi Dân IT - Made with <HeartTwoTone />
-                    </Footer> */}
         </Layout>
       </Layout>
-    </>
+    </ConfigProvider>
   );
 };
 

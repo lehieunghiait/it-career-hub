@@ -8,39 +8,47 @@ import {
 } from '@ant-design/pro-components';
 import { Col, ConfigProvider, Form, Modal, Row, Upload, message, notification } from 'antd';
 import 'styles/reset.scss';
-import { isMobile } from 'react-device-detect';
+import { useIsMobile } from '@/hooks/useIsMobile';
 import ReactQuill from 'react-quill';
 import 'react-quill/dist/quill.snow.css';
 import { useEffect, useState } from 'react';
 import { callCreateCompany, callUpdateCompany, callUploadSingleFile } from '@/config/api';
-import { ICompany } from '@/types/backend';
+import { ICompanyDetail } from '@/types/backend';
 import { v4 as uuidv4 } from 'uuid';
 import enUS from 'antd/lib/locale/en_US';
 
 interface IProps {
   openModal: boolean;
   setOpenModal: (v: boolean) => void;
-  dataInit?: ICompany | null;
-  setDataInit: (v: any) => void;
+  dataInit?: ICompanyDetail | null;
+  setDataInit: (v: ICompanyDetail | null) => void;
   reloadTable: () => void;
 }
 
 interface ICompanyForm {
   name: string;
   address: string;
+  phone: string;
+  email: string;
+  website: string;
 }
 
 interface ICompanyLogo {
   name: string;
   uid: string;
+  url: string;
+  email: string;
+  address: string;
+  website: string;
+  originalName?: string;
 }
 
 const ModalCompany = (props: IProps) => {
+  const isMobile = useIsMobile();
   const { openModal, setOpenModal, reloadTable, dataInit, setDataInit } = props;
 
-  //modal animation
+  //Modal animation
   const [animation, setAnimation] = useState<string>('open');
-
   const [loadingUpload, setLoadingUpload] = useState<boolean>(false);
   const [dataLogo, setDataLogo] = useState<ICompanyLogo[]>([]);
   const [previewOpen, setPreviewOpen] = useState(false);
@@ -51,42 +59,67 @@ const ModalCompany = (props: IProps) => {
   const [form] = Form.useForm();
 
   useEffect(() => {
-    if (dataInit?._id && dataInit?.description) {
-      setValue(dataInit.description);
+    if (dataInit?._id) {
+      if (dataInit?.description) {
+        setValue(dataInit.description);
+      }
+      if (dataInit?.logo) {
+        setDataLogo([
+          {
+            name: dataInit.logo,
+            uid: uuidv4(),
+            url: dataInit.logo,
+            email: dataInit?.email ?? '',
+            address: dataInit?.address ?? '',
+            website: dataInit?.website ?? '',
+          },
+        ]);
+      }
     }
   }, [dataInit]);
 
+  /**
+   * Submit company form
+   * @param valuesForm
+   * @returns
+   */
   const submitCompany = async (valuesForm: ICompanyForm) => {
-    const { name, address } = valuesForm;
+    const { name, address, phone, email, website } = valuesForm;
 
     if (dataLogo.length === 0) {
-      message.error('Vui lòng upload ảnh Logo');
+      message.error('Please upload a logo');
       return;
     }
 
     if (dataInit?._id) {
-      //update
-      const res = await callUpdateCompany(dataInit._id, name, address, value, dataLogo[0].name);
+      const res = await callUpdateCompany(dataInit._id, name, address, value, dataLogo[0].url);
       if (res.data) {
-        message.success('Cập nhật company thành công');
+        message.success('Update Company successfully');
         handleReset();
         reloadTable();
       } else {
         notification.error({
-          message: 'Có lỗi xảy ra',
+          message: 'An error occurred',
           description: res.message,
         });
       }
     } else {
-      //create
-      const res = await callCreateCompany(name, address, value, dataLogo[0].name);
+      const res = await callCreateCompany(
+        name,
+        address,
+        value,
+        dataLogo[0].url,
+        phone,
+        email,
+        website
+      );
       if (res.data) {
-        message.success('Thêm mới company thành công');
+        message.success('Create Company successfully');
         handleReset();
         reloadTable();
       } else {
         notification.error({
-          message: 'Có lỗi xảy ra',
+          message: 'An error occurred',
           description: res.message,
         });
       }
@@ -97,6 +130,7 @@ const ModalCompany = (props: IProps) => {
     form.resetFields();
     setValue('');
     setDataInit(null);
+    setDataLogo([]);
 
     //add animation when closing modal
     setAnimation('close');
@@ -130,9 +164,9 @@ const ModalCompany = (props: IProps) => {
   };
 
   const beforeUpload = (file: any) => {
-    const isJpgOrPng = file.type === 'image/jpeg' || file.type === 'image/png';
+    const isJpgOrPng = ['image/jpeg', 'image/png', 'image/webp'].includes(file.type);
     if (!isJpgOrPng) {
-      message.error('You can only upload JPG/PNG file!');
+      message.error('You can only upload JPG/PNG/WEBP file!');
     }
     const isLt2M = file.size / 1024 / 1024 < 2;
     if (!isLt2M) {
@@ -155,16 +189,27 @@ const ModalCompany = (props: IProps) => {
   };
 
   const handleUploadFileLogo = async ({ file, onSuccess, onError }: any) => {
-    const res = await callUploadSingleFile(file, 'company');
+    const res = await callUploadSingleFile(file, 'logo-companies');
     if (res && res.data) {
+      const logoUrl = res.data.fileName || res.data.url || '';
+
       setDataLogo([
         {
-          name: res.data.fileName,
+          name: logoUrl,
           uid: uuidv4(),
+          url: logoUrl,
+          email: '',
+          address: '',
+          website: '',
         },
       ]);
       if (onSuccess) onSuccess('ok');
+      message.success('Cập nhật logo thành công!');
     } else {
+      notification.error({
+        message: 'Cập nhật logo thất bại',
+        description: res.message,
+      });
       if (onError) {
         setDataLogo([]);
         const error = new Error(res.message);
@@ -178,7 +223,7 @@ const ModalCompany = (props: IProps) => {
       {openModal && (
         <>
           <ModalForm
-            title={<>{dataInit?._id ? 'Cập nhật Company' : 'Tạo mới Company'}</>}
+            title={<>{dataInit?._id ? 'Update Company' : 'Create Company'}</>}
             open={openModal}
             modalProps={{
               onCancel: () => {
@@ -205,30 +250,32 @@ const ModalCompany = (props: IProps) => {
               },
               searchConfig: {
                 resetText: 'Hủy',
-                submitText: <>{dataInit?._id ? 'Cập nhật' : 'Tạo mới'}</>,
+                submitText: <>{dataInit?._id ? 'Update' : 'Create'}</>,
               },
             }}
           >
+            {/* Tên công ty */}
             <Row gutter={16}>
               <Col span={24}>
                 <ProFormText
-                  label='Tên công ty'
+                  label='Company Name'
                   name='name'
-                  rules={[{ required: true, message: 'Vui lòng không bỏ trống' }]}
-                  placeholder='Nhập tên công ty'
+                  rules={[{ required: true, message: 'Please enter company name' }]}
+                  placeholder='Enter company name'
                 />
               </Col>
+              {/* Logo công ty */}
               <Col span={8}>
                 <Form.Item
                   labelCol={{ span: 24 }}
-                  label='Ảnh Logo'
+                  label='Logo'
                   name='logo'
                   rules={[
                     {
                       required: true,
-                      message: 'Vui lòng không bỏ trống',
+                      message: 'Please enter logo',
                       validator: () => {
-                        if (dataLogo.length > 0) return Promise.resolve();
+                        if (dataLogo.length > 0 && dataLogo[0].url) return Promise.resolve();
                         else return Promise.reject(false);
                       },
                     },
@@ -253,7 +300,7 @@ const ModalCompany = (props: IProps) => {
                                 uid: uuidv4(),
                                 name: dataInit?.logo ?? '',
                                 status: 'done',
-                                url: `${import.meta.env.VITE_BACKEND_URL}/images/company/${dataInit?.logo}`,
+                                url: dataInit?.logo,
                               },
                             ]
                           : []
@@ -267,34 +314,68 @@ const ModalCompany = (props: IProps) => {
                   </ConfigProvider>
                 </Form.Item>
               </Col>
-
+              {/* Địa chỉ công ty */}
               <Col span={16}>
                 <ProFormTextArea
-                  label='Địa chỉ'
+                  label='Address'
                   name='address'
-                  rules={[{ required: true, message: 'Vui lòng không bỏ trống' }]}
-                  placeholder='Nhập địa chỉ công ty'
+                  rules={[{ required: true, message: 'Please enter address' }]}
+                  placeholder='Enter address'
                   fieldProps={{
                     autoSize: { minRows: 4 },
                   }}
                 />
               </Col>
-
+              {/* Số điện thoại */}
+              <Col span={24}>
+                <ProFormText
+                  label='Phone Number'
+                  name='phone'
+                  rules={[
+                    { required: true, message: 'Please enter phone number' },
+                    {
+                      pattern: /^[0-9\b]+$/,
+                      message: 'Only type phone number',
+                    },
+                  ]}
+                  placeholder='Enter phone number'
+                />
+              </Col>
+              {/* Email công ty */}
+              <Col span={24}>
+                <ProFormText
+                  label='Email'
+                  name='email'
+                  rules={[{ required: true, message: 'Please enter CONTACT' }]}
+                  placeholder='Enter email'
+                />
+              </Col>
+              {/* Website công ty */}
+              <Col span={12}>
+                <ProFormText
+                  label='Website'
+                  name='website'
+                  rules={[{ required: true, message: 'Please enter website' }]}
+                  placeholder='Enter website'
+                />
+              </Col>
+              {/* Mô tả công ty */}
               <ProCard
-                title='Miêu tả'
-                // subTitle="mô tả công ty"
+                title='Description'
                 headStyle={{ color: '#d81921' }}
                 style={{ marginBottom: 20 }}
                 headerBordered
                 size='small'
                 bordered
               >
+                {/* Quill editor */}
                 <Col span={24}>
                   <ReactQuill theme='snow' value={value} onChange={setValue} />
                 </Col>
               </ProCard>
             </Row>
           </ModalForm>
+          {/* Modal preview image */}
           <Modal
             open={previewOpen}
             title={previewTitle}

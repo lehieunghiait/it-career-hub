@@ -1,5 +1,6 @@
-import { useEffect, useRef, useState } from 'react';
+import { useEffect, useState } from 'react';
 import { createBrowserRouter, Outlet, RouterProvider, useLocation } from 'react-router-dom';
+import { useAuth } from '@clerk/react';
 import { useAppDispatch } from '@/redux/hooks';
 import NotFound from 'components/share/not.found';
 import LoginPage from 'pages/auth/login';
@@ -11,11 +12,14 @@ import HomePage from 'pages/home';
 import styles from 'styles/app.module.scss';
 import DashboardPage from './pages/admin/dashboard';
 import CompanyPage from './pages/admin/company';
+import PipelinePage from './pages/admin/pipeline';
 import PermissionPage from './pages/admin/permission';
 import ResumePage from './pages/admin/resume';
 import RolePage from './pages/admin/role';
 import UserPage from './pages/admin/user';
-import { fetchAccount } from './redux/slice/accountSlide';
+import { fetchAccount, setLogoutAction } from './redux/slice/accountSlide';
+import { fetchSavedJobIds } from './redux/slice/savedJobSlide';
+import { fetchAppliedJobs } from './redux/slice/appliedJobSlide';
 import LayoutApp from './components/share/layout.app';
 import JobPage from './pages/admin/job';
 import ViewUpsertJob from './components/admin/job/upsert.job';
@@ -26,20 +30,23 @@ import ClientCompanyDetailPage from './pages/company/detail';
 import AboutPage from './pages/about';
 import FaqPage from './pages/faq';
 import BlogPage from './pages/blog';
+import ATSLandingPage from './pages/ats';
+import MyJobsPage from './pages/my-jobs';
+import CvListPage from './pages/cv';
+import CvEditorPage from './pages/cv/editor';
+import SalaryPage from './pages/salary';
 
 const LayoutClient = () => {
   const [searchTerm, setSearchTerm] = useState('');
-  const location = useLocation();
-  const rootRef = useRef<HTMLDivElement>(null);
+  const { pathname } = useLocation();
 
+  // Scroll to top on page change only, so filter/query-string updates keep the scroll position
   useEffect(() => {
-    if (rootRef && rootRef.current) {
-      rootRef.current.scrollIntoView({ behavior: 'smooth' });
-    }
-  }, [location]);
+    window.scrollTo({ top: 0 });
+  }, [pathname]);
 
   return (
-    <div className='layout-app' ref={rootRef}>
+    <div className='layout-app'>
       <div className={styles['content-app']}>
         <Outlet context={[searchTerm, setSearchTerm]} />
       </div>
@@ -50,11 +57,18 @@ const LayoutClient = () => {
 
 export default function App() {
   const dispatch = useAppDispatch();
+  const { isLoaded, isSignedIn, userId } = useAuth();
 
   useEffect(() => {
-    if (window.location.pathname === '/login' || window.location.pathname === '/register') return;
-    dispatch(fetchAccount());
-  }, [dispatch]);
+    if (!isLoaded) return;
+    if (isSignedIn) {
+      dispatch(fetchAccount());
+      dispatch(fetchSavedJobIds());
+      dispatch(fetchAppliedJobs());
+    } else {
+      dispatch(setLogoutAction());
+    }
+  }, [dispatch, isLoaded, isSignedIn, userId]);
 
   const router = createBrowserRouter([
     {
@@ -67,23 +81,23 @@ export default function App() {
       errorElement: <NotFound />,
       children: [
         { index: true, element: <HomePage /> },
-        { path: 'login', element: <LoginPage /> },
         { path: 'job', element: <ClientJobPage /> },
         { path: 'job/:id', element: <ClientJobDetailPage /> },
         { path: 'company', element: <ClientCompanyPage /> },
         { path: 'company/:id', element: <ClientCompanyDetailPage /> },
         { path: 'about', element: <AboutPage /> },
         { path: 'faq', element: <FaqPage /> },
+        { path: 'ats', element: <ATSLandingPage /> },
+        { path: 'my-jobs', element: <MyJobsPage /> },
+        { path: 'cv', element: <CvListPage /> },
+        { path: 'cv/:id', element: <CvEditorPage /> },
+        { path: 'salary', element: <SalaryPage /> },
       ],
     },
 
     {
       path: '/admin',
-      element: (
-        <LayoutApp>
-          <LayoutAdmin />{' '}
-        </LayoutApp>
-      ),
+      element: <LayoutAdmin />,
       errorElement: <NotFound />,
       children: [
         {
@@ -143,6 +157,14 @@ export default function App() {
           ),
         },
         {
+          path: 'pipeline',
+          element: (
+            <ProtectedRoute>
+              <PipelinePage />
+            </ProtectedRoute>
+          ),
+        },
+        {
           path: 'permission',
           element: (
             <ProtectedRoute>
@@ -162,12 +184,12 @@ export default function App() {
     },
 
     {
-      path: '/login',
+      path: '/login/*',
       element: <LoginPage />,
     },
 
     {
-      path: '/register',
+      path: '/register/*',
       element: <RegisterPage />,
     },
     {

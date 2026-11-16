@@ -1,10 +1,10 @@
 import DataTable from '@/components/client/data-table';
 import { useAppDispatch, useAppSelector } from '@/redux/hooks';
 import { IJob } from '@/types/backend';
-import { DeleteOutlined, EditOutlined, PlusOutlined } from '@ant-design/icons';
+import { DeleteOutlined, EditOutlined, EyeOutlined, PlusOutlined } from '@ant-design/icons';
 import { ActionType, ProColumns, ProFormSelect } from '@ant-design/pro-components';
-import { Button, Popconfirm, Space, Tag, message, notification } from 'antd';
-import { useRef } from 'react';
+import { Button, Popconfirm, Space, Tag, Tooltip, message, notification } from 'antd';
+import { useRef, useState } from 'react';
 import dayjs from 'dayjs';
 import { callDeleteJob } from '@/config/api';
 import queryString from 'query-string';
@@ -12,9 +12,14 @@ import { useNavigate } from 'react-router-dom';
 import { fetchJob } from '@/redux/slice/jobSlide';
 import Access from '@/components/share/access';
 import { ALL_PERMISSIONS } from '@/config/permissions';
+import ViewDetailJob from '@/components/admin/job/view.detail.job';
+import { getLocationName } from '@/config/utils';
+import CompanyLogo from '@/components/client/common/CompanyLogo';
+import styles from '@/styles/dashboard.module.scss';
 
 const JobPage = () => {
   const tableRef = useRef<ActionType>();
+  const [viewJobId, setViewJobId] = useState<string | null>(null);
 
   const isFetching = useAppSelector(state => state.job.isFetching);
   const meta = useAppSelector(state => state.job.meta);
@@ -26,11 +31,11 @@ const JobPage = () => {
     if (_id) {
       const res = await callDeleteJob(_id);
       if (res && res.data) {
-        message.success('Xóa Job thành công');
+        message.success('Delete Job successfully');
         reloadTable();
       } else {
         notification.error({
-          message: 'Có lỗi xảy ra',
+          message: 'An error occurred',
           description: res.message,
         });
       }
@@ -44,6 +49,7 @@ const JobPage = () => {
   const columns: ProColumns<IJob>[] = [
     {
       title: 'STT',
+      responsive: ['md'],
       key: 'index',
       width: 50,
       align: 'center',
@@ -53,12 +59,33 @@ const JobPage = () => {
       hideInSearch: true,
     },
     {
-      title: 'Tên Job',
+      title: 'Name',
       dataIndex: 'name',
       sorter: true,
+      render: (_dom, entity) => (
+        <div style={{ display: 'flex', alignItems: 'center', gap: 10, minWidth: 220 }}>
+          <CompanyLogo
+            className={styles['mini-logo']}
+            src={entity.company?.logo}
+            name={entity.company?.name}
+          />
+          <div style={{ minWidth: 0 }}>
+            <div style={{ fontWeight: 600 }}>{entity.name}</div>
+            <small style={{ color: '#6b7280' }}>{entity.company?.name}</small>
+          </div>
+        </div>
+      ),
     },
     {
-      title: 'Mức lương',
+      title: 'Location',
+      responsive: ['lg'],
+      dataIndex: 'location',
+      hideInSearch: true,
+      render: (_dom, entity) => getLocationName(entity.location),
+    },
+    {
+      title: 'Salary',
+      responsive: ['sm'],
       dataIndex: 'salary',
       sorter: true,
       render(dom, entity, index, action, schema) {
@@ -68,6 +95,7 @@ const JobPage = () => {
     },
     {
       title: 'Level',
+      responsive: ['md'],
       dataIndex: 'level',
       renderFormItem: (item, props, form) => (
         <ProFormSelect
@@ -81,12 +109,12 @@ const JobPage = () => {
             MIDDLE: 'MIDDLE',
             SENIOR: 'SENIOR',
           }}
-          placeholder='Chọn level'
+          placeholder='Select level'
         />
       ),
     },
     {
-      title: 'Trạng thái',
+      title: 'Status',
       dataIndex: 'isActive',
       render(dom, entity, index, action, schema) {
         return (
@@ -102,6 +130,7 @@ const JobPage = () => {
 
     {
       title: 'CreatedAt',
+      responsive: ['xxl'],
       dataIndex: 'createdAt',
       width: 200,
       sorter: true,
@@ -112,6 +141,7 @@ const JobPage = () => {
     },
     {
       title: 'UpdatedAt',
+      responsive: ['xl'],
       dataIndex: 'updatedAt',
       width: 200,
       sorter: true,
@@ -122,10 +152,18 @@ const JobPage = () => {
     },
     {
       title: 'Actions',
+      fixed: 'right',
       hideInSearch: true,
-      width: 50,
+      width: 130,
       render: (_value, entity, _index, _action) => (
         <Space>
+          <Tooltip title='View details'>
+            <EyeOutlined
+              aria-label='View details'
+              style={{ fontSize: 20, color: '#2a78d6', cursor: 'pointer' }}
+              onClick={() => setViewJobId(entity._id ?? null)}
+            />
+          </Tooltip>
           <Access permission={ALL_PERMISSIONS.JOBS.UPDATE} hideChildren>
             <EditOutlined
               style={{
@@ -141,11 +179,11 @@ const JobPage = () => {
           <Access permission={ALL_PERMISSIONS.JOBS.DELETE} hideChildren>
             <Popconfirm
               placement='leftTop'
-              title={'Xác nhận xóa job'}
-              description={'Bạn có chắc chắn muốn xóa job này ?'}
+              title={'Confirm delete'}
+              description={'Are you sure you want to delete this job?'}
               onConfirm={() => handleDeleteJob(entity._id)}
-              okText='Xác nhận'
-              cancelText='Hủy'
+              okText='Confirm'
+              cancelText='Cancel'
             >
               <span style={{ cursor: 'pointer', margin: '0 10px' }}>
                 <DeleteOutlined
@@ -186,7 +224,7 @@ const JobPage = () => {
       sortBy = sort.updatedAt === 'ascend' ? 'sort=updatedAt' : 'sort=-updatedAt';
     }
 
-    //mặc định sort theo updatedAt
+    //default sort by updatedAt
     if (Object.keys(sortBy).length === 0) {
       temp = `${temp}&sort=-updatedAt`;
     } else {
@@ -201,7 +239,7 @@ const JobPage = () => {
       <Access permission={ALL_PERMISSIONS.JOBS.GET_PAGINATE}>
         <DataTable<IJob>
           actionRef={tableRef}
-          headerTitle='Danh sách Jobs'
+          headerTitle='List of Jobs'
           rowKey='_id'
           loading={isFetching}
           columns={columns}
@@ -220,7 +258,7 @@ const JobPage = () => {
               return (
                 <div>
                   {' '}
-                  {range[0]}-{range[1]} trên {total} rows
+                  {range[0]}-{range[1]} of {total} rows
                 </div>
               );
             },
@@ -229,12 +267,13 @@ const JobPage = () => {
           toolBarRender={(_action, _rows): any => {
             return (
               <Button icon={<PlusOutlined />} type='primary' onClick={() => navigate('upsert')}>
-                Thêm mới
+                Add new
               </Button>
             );
           }}
         />
       </Access>
+      <ViewDetailJob open={!!viewJobId} jobId={viewJobId} onClose={() => setViewJobId(null)} />
     </div>
   );
 };

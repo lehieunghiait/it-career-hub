@@ -1,32 +1,32 @@
 version: '3.8'
 
 services:
-  # Dịch vụ frontend
-  app:
-    build:
-      context: .
-      dockerfile: Dockerfile
-    container_name: it-career-hub-client
+  it-career-hub-uat:
+    image: ghcr.io/${GITHUB_REPOSITORY}:uat
+    container_name: it-career-hub-uat
+    restart: unless-stopped
     ports:
-      - '8080:80' # Maps port 8080 on host to port 80 in container
-    volumes:
-      - ./:/app # Mount source code for development
-      - /app/node_modules
+      - "8081:80"
     environment:
-      - NODE_ENV=development
-      # Add other environment variables as needed
+      - NODE_ENV=production
+    networks:
+      - career-hub-network
+    labels:
+      - "com.centurylinklabs.watchtower.enable=true"
 
-  # Dịch vụ phát triển với hot reload
-  dev:
-    image: node:18-alpine
-    container_name: it-career-hub-client-dev
-    working_dir: /app
-    command: sh -c "npm install && npm run dev"
+  it-career-hub-prod:
+    image: ghcr.io/${GITHUB_REPOSITORY}:latest
+    container_name: it-career-hub-prod
+    restart: unless-stopped
     ports:
-      - '5173:5173'
-    volumes:
-      - ./:/app
-      - /app/node_modules
+      - "8080:80"
     environment:
-      - NODE_ENV=development
-      - VITE_API_URL=http://localhost:3000 # Thay đổi URL API theo nhu cầu
+      - NODE_ENV=production
+    networks:
+      - career-hub-network
+    labels:
+      - "com.centurylinklabs.watchtower.enable=true"
+
+networks:
+  career-hub-network:
+    driver: bridge

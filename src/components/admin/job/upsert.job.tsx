@@ -184,19 +184,19 @@ const ViewUpsertJob = (props: any) => {
             <Row gutter={[20, 20]}>
               <Col span={24} md={12}>
                 <ProFormText
-                  label='Tên Job'
+                  label='Title '
                   name='name'
-                  rules={[{ required: true, message: 'Vui lòng không bỏ trống' }]}
-                  placeholder='Nhập tên job'
+                  rules={[{ required: true, message: 'Please enter a name!' }]}
+                  placeholder='Please enter a title'
                 />
               </Col>
               <Col span={24} md={6}>
                 <ProFormSelect
                   name='skills'
-                  label='Kỹ năng yêu cầu'
+                  label='Skills'
                   options={SKILLS_LIST}
-                  placeholder='Please select a skill'
-                  rules={[{ required: true, message: 'Vui lòng chọn kỹ năng!' }]}
+                  placeholder='Please select a skill required'
+                  rules={[{ required: true, message: 'Please select a skill required!' }]}
                   allowClear
                   mode='multiple'
                   fieldProps={{
@@ -207,18 +207,29 @@ const ViewUpsertJob = (props: any) => {
               <Col span={24} md={6}>
                 <ProFormSelect
                   name='location'
-                  label='Địa điểm'
+                  label='Location'
                   options={LOCATION_LIST.filter(item => item.value !== 'ALL')}
                   placeholder='Please select a location'
-                  rules={[{ required: true, message: 'Vui lòng chọn địa điểm!' }]}
+                  rules={[{ required: true, message: 'Please select a location!' }]}
+                  fieldProps={{
+                    showSearch: true,
+                    filterOption: (input: string, option: any) => {
+                      const label =
+                        typeof option?.label === 'string'
+                          ? option.label
+                          : String(option?.label ?? '');
+                      return label.toLowerCase().includes(input.toLowerCase());
+                    },
+                    allowClear: true,
+                  }}
                 />
               </Col>
               <Col span={24} md={6}>
                 <ProFormDigit
-                  label='Mức lương'
+                  label='Salary'
                   name='salary'
-                  rules={[{ required: true, message: 'Vui lòng không bỏ trống' }]}
-                  placeholder='Nhập mức lương'
+                  rules={[{ required: true, message: 'Please enter salary!' }]}
+                  placeholder='Please enter salary'
                   fieldProps={{
                     addonAfter: ' đ',
                     formatter: value => `${value}`.replace(/\B(?=(\d{3})+(?!\d))/g, ','),
@@ -228,16 +239,16 @@ const ViewUpsertJob = (props: any) => {
               </Col>
               <Col span={24} md={6}>
                 <ProFormDigit
-                  label='Số lượng'
+                  label='Quantity'
                   name='quantity'
-                  rules={[{ required: true, message: 'Vui lòng không bỏ trống' }]}
-                  placeholder='Nhập số lượng'
+                  rules={[{ required: true, message: 'Please enter quantity!' }]}
+                  placeholder='Please enter quantity'
                 />
               </Col>
               <Col span={24} md={6}>
                 <ProFormSelect
                   name='level'
-                  label='Trình độ'
+                  label='Level'
                   valueEnum={{
                     INTERN: 'INTERN',
                     FRESHER: 'FRESHER',
@@ -246,7 +257,7 @@ const ViewUpsertJob = (props: any) => {
                     SENIOR: 'SENIOR',
                   }}
                   placeholder='Please select a level'
-                  rules={[{ required: true, message: 'Vui lòng chọn level!' }]}
+                  rules={[{ required: true, message: 'Please select a level!' }]}
                 />
               </Col>
 
@@ -254,15 +265,15 @@ const ViewUpsertJob = (props: any) => {
                 <Col span={24} md={6}>
                   <ProForm.Item
                     name='company'
-                    label='Thuộc Công Ty'
-                    rules={[{ required: true, message: 'Vui lòng chọn company!' }]}
+                    label='Company'
+                    rules={[{ required: true, message: 'Please select a company!' }]}
                   >
                     <DebounceSelect
                       allowClear
                       showSearch
                       defaultValue={companies}
                       value={companies}
-                      placeholder='Chọn công ty'
+                      placeholder='Please select a company'
                       fetchOptions={fetchCompanyList}
                       onChange={(newValue: any) => {
                         if (newValue?.length === 0 || newValue?.length === 1) {
@@ -278,32 +289,32 @@ const ViewUpsertJob = (props: any) => {
             <Row gutter={[20, 20]}>
               <Col span={24} md={6}>
                 <ProFormDatePicker
-                  label='Ngày bắt đầu'
+                  label='Start Date'
                   name='startDate'
                   normalize={value => value && dayjs(value, 'DD/MM/YYYY')}
                   fieldProps={{
                     format: 'DD/MM/YYYY',
                   }}
-                  rules={[{ required: true, message: 'Vui lòng chọn ngày cấp' }]}
+                  rules={[{ required: true, message: 'Please select a start date!' }]}
                   placeholder='dd/mm/yyyy'
                 />
               </Col>
               <Col span={24} md={6}>
                 <ProFormDatePicker
-                  label='Ngày kết thúc'
+                  label='End Date'
                   name='endDate'
                   normalize={value => value && dayjs(value, 'DD/MM/YYYY')}
                   fieldProps={{
                     format: 'DD/MM/YYYY',
                   }}
                   // width="auto"
-                  rules={[{ required: true, message: 'Vui lòng chọn ngày cấp' }]}
+                  rules={[{ required: true, message: 'Please select a end date!' }]}
                   placeholder='dd/mm/yyyy'
                 />
               </Col>
               <Col span={24} md={6}>
                 <ProFormSwitch
-                  label='Trạng thái'
+                  label='Status'
                   name='isActive'
                   checkedChildren='ACTIVE'
                   unCheckedChildren='INACTIVE'
@@ -316,8 +327,8 @@ const ViewUpsertJob = (props: any) => {
               <Col span={24}>
                 <ProForm.Item
                   name='description'
-                  label='Miêu tả job'
-                  rules={[{ required: true, message: 'Vui lòng nhập miêu tả job!' }]}
+                  label='Description'
+                  rules={[{ required: true, message: 'Please enter a description!' }]}
                 >
                   <ReactQuill theme='snow' value={value} onChange={setValue} />
                 </ProForm.Item>

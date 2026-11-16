@@ -49,6 +49,7 @@ const PermissionPage = () => {
   const columns: ProColumns<IPermission>[] = [
     {
       title: 'Id',
+      responsive: ['xxl'],
       dataIndex: '_id',
       width: 250,
       render: (text, record, index, action) => {
@@ -73,11 +74,13 @@ const PermissionPage = () => {
     },
     {
       title: 'API',
+      responsive: ['md'],
       dataIndex: 'apiPath',
       sorter: true,
     },
     {
       title: 'Method',
+      responsive: ['sm'],
       dataIndex: 'method',
       sorter: true,
       render(dom, entity, index, action, schema) {
@@ -97,11 +100,13 @@ const PermissionPage = () => {
     },
     {
       title: 'Module',
+      responsive: ['lg'],
       dataIndex: 'module',
       sorter: true,
     },
     {
       title: 'CreatedAt',
+      responsive: ['xxl'],
       dataIndex: 'createdAt',
       width: 200,
       sorter: true,
@@ -112,6 +117,7 @@ const PermissionPage = () => {
     },
     {
       title: 'UpdatedAt',
+      responsive: ['xl'],
       dataIndex: 'updatedAt',
       width: 200,
       sorter: true,
@@ -122,8 +128,9 @@ const PermissionPage = () => {
     },
     {
       title: 'Actions',
+      fixed: 'right',
       hideInSearch: true,
-      width: 50,
+      width: 100,
       render: (_value, entity, _index, _action) => (
         <Space>
           <Access permission={ALL_PERMISSIONS.PERMISSIONS.UPDATE} hideChildren>
@@ -207,7 +214,7 @@ const PermissionPage = () => {
       <Access permission={ALL_PERMISSIONS.PERMISSIONS.GET_PAGINATE}>
         <DataTable<IPermission>
           actionRef={tableRef}
-          headerTitle='Danh sách Permissions (Quyền Hạn)'
+          headerTitle='List of permissions'
           rowKey='_id'
           loading={isFetching}
           columns={columns}
@@ -235,7 +242,7 @@ const PermissionPage = () => {
           toolBarRender={(_action, _rows): any => {
             return (
               <Button icon={<PlusOutlined />} type='primary' onClick={() => setOpenModal(true)}>
-                Thêm mới
+                Add new
               </Button>
             );
           }}

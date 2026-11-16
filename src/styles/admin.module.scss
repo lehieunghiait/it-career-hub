@@ -1,11 +1,266 @@
+// Admin (recruiter) area
+$brand: #e14000;
+$brand-light: #ff7a45;
+$navy: #0f1528;
+$ink: #1f2937;
+$muted: #6b7280;
+$line: #eef0f3;
+$bg: #f5f6f8;
+
+.admin-root {
+  min-height: 100vh;
+  background: $bg;
+}
+
+// ===== Sidebar =====
+.sider {
+  position: sticky !important;
+  top: 0;
+  height: 100vh;
+  overflow: auto;
+  background: $navy !important;
+}
+
+.brand {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  height: 72px;
+  padding: 0 22px;
+  color: #fff;
+  text-decoration: none;
+
+  &:hover {
+    color: #fff;
+  }
+}
+
+.brand-mark {
+  flex-shrink: 0;
+  width: 34px;
+  height: 34px;
+  border-radius: 10px;
+  display: grid;
+  place-items: center;
+  font-weight: 900;
+  font-size: 18px;
+  color: #fff;
+  background: linear-gradient(135deg, $brand-light, $brand);
+  box-shadow: 0 6px 16px rgba(225, 64, 0, 0.4);
+}
+
+.brand-text {
+  display: flex;
+  flex-direction: column;
+  font-weight: 800;
+  font-size: 17px;
+  line-height: 1.1;
+  white-space: nowrap;
+
+  small {
+    font-size: 11px;
+    font-weight: 600;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    color: rgba(255, 255, 255, 0.5);
+  }
+}
+
+.side-menu {
+  padding: 0 10px 24px;
+  border-inline-end: none !important;
+}
+
+// ===== Top bar =====
+.topbar {
+  position: sticky;
+  top: 0;
+  z-index: 20;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 12px;
+  height: 64px;
+  padding: 0 24px 0 12px;
+  background: rgba(255, 255, 255, 0.9);
+  backdrop-filter: blur(8px);
+  border-bottom: 1px solid $line;
+
+  @media (max-width: 576px) {
+    padding: 0 12px 0 4px;
+  }
+}
+
+.topbar-left {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  min-width: 0;
+
+  h1 {
+    margin: 0;
+    font-size: 19px;
+    font-weight: 800;
+    color: $ink;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+  }
+}
+
+.topbar-right {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.account {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 4px 10px 4px 4px;
+  border: 1px solid $line;
+  border-radius: 999px;
+  background: #fff;
+  cursor: pointer;
+
+  &:hover {
+    border-color: rgba(225, 64, 0, 0.35);
+  }
+}
+
+.account-text {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  line-height: 1.15;
+
+  b {
+    font-size: 13px;
+    color: $ink;
+    max-width: 160px;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+  }
+
+  small {
+    font-size: 11px;
+    color: $muted;
+    text-transform: capitalize;
+  }
+}
+
+// ===== Content + shared polish for every management page =====
+.content {
+  padding: 24px;
+  min-width: 0;
+
+  @media (max-width: 576px) {
+    padding: 12px;
+  }
+
+  // ProTable / Card pages
+  :global(.ant-pro-table),
+  :global(.ant-pro-card) {
+    border-radius: 16px;
+  }
+
+  :global(.ant-pro-table .ant-pro-card),
+  :global(.ant-pro-table-search) {
+    border: 1px solid $line;
+    border-radius: 16px !important;
+    box-shadow: 0 2px 10px rgba(15, 23, 42, 0.04);
+  }
+
+  :global(.ant-pro-table-search) {
+    margin-bottom: 16px;
+  }
+
+  :global(.ant-pro-table-list-toolbar-title) {
+    font-weight: 800;
+    font-size: 17px;
+    color: $ink;
+  }
+
+  :global(.ant-table-thead > tr > th) {
+    background: #fafbfc !important;
+    font-size: 12px;
+    font-weight: 700 !important;
+    text-transform: uppercase;
+    letter-spacing: 0.04em;
+    color: $muted !important;
+  }
+
+  :global(.ant-table-tbody > tr:hover > td) {
+    background: #fff8f4 !important;
+  }
+
+  :global(.ant-table-wrapper) {
+    overflow-x: auto;
+  }
+
+  // The query filter's collapse button sits on the row edge and pokes out by a few px
+  :global(.ant-pro-table-search) {
+    overflow: hidden;
+  }
+
+  :global(.ant-pagination) {
+    flex-wrap: wrap;
+    row-gap: 8px;
+  }
+
+  @media (max-width: 576px) {
+    :global(.ant-pro-table-search) {
+      padding: 16px 16px 0;
+    }
+
+    :global(.ant-pro-card-body) {
+      padding-inline: 12px !important;
+    }
+
+    // Toolbar: title on its own line, actions wrap underneath
+    :global(.ant-pro-table-list-toolbar-container) {
+      flex-direction: column;
+      align-items: stretch;
+      gap: 8px;
+    }
+
+    :global(.ant-pro-table-list-toolbar-right) {
+      justify-content: flex-start;
+      flex-wrap: wrap;
+    }
+
+    :global(.ant-table) {
+      font-size: 13px;
+    }
+
+    :global(.ant-table-thead > tr > th),
+    :global(.ant-table-tbody > tr:not(.ant-table-measure-row) > td) {
+      padding: 10px 8px !important;
+    }
+
+    :global(.ant-pagination-total-text),
+    :global(.ant-pagination-options) {
+      display: none;
+    }
+  }
+}
+
+// Job editor page (used by components/admin/job/upsert.job.tsx)
 .upsert-job-container {
   background-color: white;
   padding: 10px 30px;
-  border-radius: 5px;
+  border-radius: 16px;
+  border: 1px solid $line;
   min-height: 100vh;
   height: auto;
 
   .title {
     padding: 10px 0 20px 0;
+  }
+
+  @media (max-width: 576px) {
+    padding: 10px 16px;
   }
 }

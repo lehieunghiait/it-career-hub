@@ -3,7 +3,6 @@ import AboutTeamMember from '@/components/client/about/about.teammember';
 import { Typography, Row, Col, Card, Divider } from 'antd';
 import styles from 'styles/client.module.scss';
 
-// Khai báo component AboutPage
 const AboutPage = () => {
   // Khai báo các thông tin về công ty
   const companyInfo = {
@@ -19,47 +18,35 @@ const AboutPage = () => {
   // Khai báo thông tin về đội ngũ
   const teamMembers = [
     {
-      name: 'Nguyễn Văn A',
-      position: 'CEO & Founder',
-      avatar: 'https://xsgames.co/randomusers/avatar.php?g=male&i=1',
-      description: 'Có hơn 10 năm kinh nghiệm trong lĩnh vực nhân sự và tuyển dụng.',
-    },
-    {
-      name: 'Trần Thị B',
-      position: 'CTO',
-      avatar: 'https://xsgames.co/randomusers/avatar.php?g=female&i=2',
-      description:
-        'Chuyên gia công nghệ với sự am hiểu sâu rộng về các giải pháp kỹ thuật hiện đại.',
-    },
-    {
-      name: 'Lê Văn C',
-      position: 'Marketing Director',
-      avatar: 'https://xsgames.co/randomusers/avatar.php?g=male&i=3',
-      description: 'Có kinh nghiệm phong phú trong việc xây dựng chiến lược marketing hiệu quả.',
-    },
+      name: 'Nghia Le',
+      position: 'Developer',
+      address: 'Thu Duc City, Ho Chi Minh City, Vietnam',
+      avatar: 'https://avatars.githubusercontent.com/u/1234567890?v=4',
+      description: 'I am a developer with a passion for building web applications.',
+    }
   ];
 
-  // Định nghĩa các giá trị cốt lõi
+  // Define core values
   const coreValues = [
     {
-      title: 'Đổi mới',
+      title: 'Innovative',
       description:
-        'Chúng tôi luôn tìm kiếm những phương pháp và giải pháp mới để phục vụ khách hàng tốt hơn.',
+        'We always seek new methods and solutions to serve customers better.',
     },
     {
-      title: 'Chính trực',
+      title: 'Honest',
       description:
-        'Chúng tôi hoạt động với tiêu chuẩn đạo đức cao nhất, luôn minh bạch và trung thực.',
+        'We operate with the highest ethical standards, always transparent and honest.',
     },
     {
-      title: 'Hợp tác',
+      title: 'Collaborative',
       description:
-        'Chúng tôi tin vào sức mạnh của làm việc nhóm và xây dựng mối quan hệ đối tác bền vững.',
+        'We believe in the power of teamwork and building strong partner relationships.',
     },
     {
-      title: 'Xuất sắc',
+      title: 'Exceptional',
       description:
-        'Chúng tôi không ngừng phấn đấu để đạt được kết quả tốt nhất trong mọi việc chúng tôi làm.',
+        'We never stop striving to achieve the best results in everything we do.',
     },
   ];
 
