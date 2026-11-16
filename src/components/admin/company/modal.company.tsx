@@ -13,15 +13,15 @@ import ReactQuill from 'react-quill';
 import 'react-quill/dist/quill.snow.css';
 import { useEffect, useState } from 'react';
 import { callCreateCompany, callUpdateCompany, callUploadSingleFile } from '@/config/api';
-import { ICompanyDetail } from '@/types/backend';
+import { ICompany, ICompanyDetail } from '@/types/backend';
 import { v4 as uuidv4 } from 'uuid';
 import enUS from 'antd/lib/locale/en_US';
 
 interface IProps {
   openModal: boolean;
   setOpenModal: (v: boolean) => void;
-  dataInit?: ICompanyDetail | null;
-  setDataInit: (v: ICompanyDetail | null) => void;
+  dataInit?: (ICompany & Partial<ICompanyDetail>) | null;
+  setDataInit: (v: ICompany | null) => void;
   reloadTable: () => void;
 }
 
