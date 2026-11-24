@@ -3,6 +3,8 @@ import { Collapse, Typography } from 'antd';
 import type { CollapseProps } from 'antd';
 import styles from 'styles/client.module.scss';
 
+import i18next from 'i18next';
+
 // Khai báo interface cho câu hỏi thường gặp
 export interface FaqItemType {
   id: string | number;
@@ -48,7 +50,7 @@ const FaqItem: React.FC<FaqItemProps> = ({ faqItems, activeCategory }) => {
         />
       ) : (
         <Typography.Paragraph className={styles['faq-empty']}>
-          Không có câu hỏi nào trong danh mục này.
+          {i18next.t('app:components.client.faq.faq_item.khong_co_cau_hoi_nao_trong')}
         </Typography.Paragraph>
       )}
     </div>

@@ -17,6 +17,8 @@ import JobListItem, { skillLabel } from '@/components/client/job/JobListItem';
 import styles from 'styles/client.module.scss';
 import s from 'styles/job-board.module.scss';
 
+import i18next from 'i18next';
+
 const CITIES = [
   { value: 'HA_NOI', tone: 'c1' },
   { value: 'HO_CHI_MINH', tone: 'c2' },
@@ -28,7 +30,7 @@ const SectionHeader = ({ title, to, label }: { title: string; to?: string; label
     <h2>{title}</h2>
     {to && (
       <Link to={to} className={s['see-all']}>
-        {label ?? 'View all'} <ArrowRightOutlined />
+        {label ?? i18next.t('app:pages.home.index.view_all')} <ArrowRightOutlined />
       </Link>
     )}
   </div>
@@ -97,15 +99,15 @@ const HomePage = () => {
         <div className={styles['container']}>
           <div className={s['hero-inner']}>
             <h1>
-              <span className={s['accent']}>{totalJobs || '…'}</span> IT jobs for developers
+              <span className={s['accent']}>{totalJobs || '…'}</span> {i18next.t('app:pages.home.index.it_jobs_for_developers')}
               <br />
-              who want to grow
+              {i18next.t('app:pages.home.index.who_want_to_grow')}
             </h1>
-            <p>Real openings from top tech companies in Vietnam, updated every day.</p>
+            <p>{i18next.t('app:pages.home.index.real_openings_from_top_tech_companies')}</p>
             <JobSearchBar />
             {topSkills.length > 0 && (
               <div className={s['hero-chips']}>
-                <span>Suggestions for you:</span>
+                <span>{i18next.t('app:pages.home.index.suggestions_for_you')}</span>
                 {topSkills.slice(0, 7).map(([skill]) => (
                   <Link key={skill} to={`/job?skills=${encodeURIComponent(skill)}`}>
                     {skillLabel(skill)}
@@ -116,15 +118,15 @@ const HomePage = () => {
             <div className={s['hero-stats']}>
               <div>
                 <b>{totalJobs}</b>
-                <span>Active jobs</span>
+                <span>{i18next.t('app:pages.home.index.active_jobs')}</span>
               </div>
               <div>
                 <b>{totalCompanies}</b>
-                <span>Tech companies</span>
+                <span>{i18next.t('app:pages.home.index.tech_companies')}</span>
               </div>
               <div>
                 <b>{openings}</b>
-                <span>Open headcount</span>
+                <span>{i18next.t('app:pages.home.index.open_headcount')}</span>
               </div>
             </div>
           </div>
@@ -134,7 +136,7 @@ const HomePage = () => {
       <div className={styles['container']}>
         {/* TOP EMPLOYERS */}
         <section className={s['section']}>
-          <SectionHeader title='Top employers' to='/company' label='All companies' />
+          <SectionHeader title={i18next.t('app:pages.home.index.top_employers')} to='/company' label={i18next.t('app:pages.home.index.all_companies')} />
           <div className={s['employer-grid']}>
             {isLoading
               ? Array.from({ length: 8 }).map((_, i) => (
@@ -165,7 +167,7 @@ const HomePage = () => {
 
         {/* LATEST JOBS */}
         <section className={s['section']}>
-          <SectionHeader title='Latest IT jobs' to='/job' label='All jobs' />
+          <SectionHeader title={i18next.t('app:pages.home.index.latest_it_jobs')} to='/job' label={i18next.t('app:pages.home.index.all_jobs')} />
           <div className={s['job-grid']}>
             {isLoading
               ? Array.from({ length: 6 }).map((_, i) => (
@@ -181,14 +183,14 @@ const HomePage = () => {
           </div>
           <div className={s['center']}>
             <Button size='large' className={s['outline-btn']} onClick={() => navigate('/job')}>
-              Browse all {totalJobs} jobs <ArrowRightOutlined />
+              {i18next.t('app:pages.home.index.browse_all')}{' '}{totalJobs} jobs <ArrowRightOutlined />
             </Button>
           </div>
         </section>
 
         {/* CITIES */}
         <section className={s['section']}>
-          <SectionHeader title='Jobs by city' />
+          <SectionHeader title={i18next.t('app:pages.home.index.jobs_by_city')} />
           <div className={s['city-grid']}>
             {CITIES.map(city => (
               <Link
@@ -213,7 +215,7 @@ const HomePage = () => {
         {/* SKILLS */}
         {topSkills.length > 0 && (
           <section className={s['section']}>
-            <SectionHeader title='Popular skills' />
+            <SectionHeader title={i18next.t('app:pages.home.index.popular_skills')} />
             <div className={s['skill-cloud']}>
               {topSkills.map(([skill, count]) => (
                 <Link key={skill} to={`/job?skills=${encodeURIComponent(skill)}`}>
@@ -228,18 +230,18 @@ const HomePage = () => {
         <section className={`${s['section']} ${s['cta-grid']}`}>
           <div className={`${s['cta-card']} ${s['cta-dark']}`}>
             <FileSearchOutlined className={s['cta-icon']} />
-            <h3>Is your CV ready for ATS?</h3>
-            <p>Score your CV against real job requirements and see exactly what to improve.</p>
+            <h3>{i18next.t('app:pages.home.index.is_your_cv_ready_for_ats')}</h3>
+            <p>{i18next.t('app:pages.home.index.score_your_cv_against_real_job')}</p>
             <Button size='large' className={s['cta-btn']} onClick={() => navigate('/ats')}>
-              <RocketOutlined /> Check my CV
+              <RocketOutlined /> {i18next.t('app:pages.home.index.check_my_cv')}
             </Button>
           </div>
           <div className={`${s['cta-card']} ${s['cta-light']}`}>
             <TeamOutlined className={s['cta-icon']} />
-            <h3>Hiring IT talent?</h3>
-            <p>Post jobs, track applicants and review CVs in one recruiter dashboard.</p>
+            <h3>{i18next.t('app:pages.home.index.hiring_it_talent')}</h3>
+            <p>{i18next.t('app:pages.home.index.post_jobs_track_applicants_and_review')}</p>
             <Button size='large' className={s['outline-btn']} onClick={() => navigate('/admin')}>
-              Recruiter dashboard <ArrowRightOutlined />
+              {i18next.t('app:pages.home.index.recruiter_dashboard')}{' '}<ArrowRightOutlined />
             </Button>
           </div>
         </section>

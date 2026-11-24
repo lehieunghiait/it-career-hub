@@ -10,30 +10,22 @@ on:
       environment:
         description: 'Environment to deploy'
         required: true
-        type: choice 
+        type: choice
         options:
           - uat
           - production
 
 env:
-  REGISTRY: ghcr.io # Github Container Registry
-  IMAGE_NAME: ${{ github.repository }} 
+  AWS_REGION: ${{ vars.AWS_REGION || 'ap-southeast-1' }}
+  ECR_REPOSITORY: ${{ vars.ECR_REPOSITORY || 'it-career-hub' }}
 
 jobs:
-  # Job 1: Build and Push Docker Image
-  build:
+  # Job 1: Determine target environment
+  setup:
     runs-on: ubuntu-latest
-    permissions:
-      contents: read
-      packages: write
     outputs:
-      image_tag: ${{ steps.meta.outputs.tags }}
       environment: ${{ steps.set-env.outputs.environment }}
-    
     steps:
-      - name: 📥 Checkout code
-        uses: actions/checkout@v4
-
       - name: 🎯 Determine environment
         id: set-env
         run: |
@@ -45,121 +37,135 @@ jobs:
             echo "environment=uat" >> $GITHUB_OUTPUT
           fi
 
+  # Job 2: Build and Push Docker Image to Amazon ECR
+  build:
+    needs: setup
+    runs-on: ubuntu-latest
+    environment: ${{ needs.setup.outputs.environment }}
+    permissions:
+      contents: read
+    outputs:
+      image: ${{ steps.image.outputs.image }}
+
+    steps:
+      - name: 📥 Checkout code
+        uses: actions/checkout@v4
+
+      - name: 🔑 Configure AWS credentials
+        uses: aws-actions/configure-aws-credentials@v4
+        with:
+          aws-access-key-id: ${{ secrets.AWS_ACCESS_KEY_ID }}
+          aws-secret-access-key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
+          aws-region: ${{ env.AWS_REGION }}
+
+      - name: 🔑 Log in to Amazon ECR
+        id: ecr-login
+        uses: aws-actions/amazon-ecr-login@v2
+
+      - name: 📝 Set image tags
+        id: image
+        env:
+          REGISTRY: ${{ steps.ecr-login.outputs.registry }}
+          ENVIRONMENT: ${{ needs.setup.outputs.environment }}
+        run: |
+          IMAGE_BASE=${REGISTRY}/${ECR_REPOSITORY}
+          echo "image=${IMAGE_BASE}:${ENVIRONMENT}-${{ github.sha }}" >> $GITHUB_OUTPUT
+          {
+            echo "tags<<EOF"
+            echo "${IMAGE_BASE}:${ENVIRONMENT}-${{ github.sha }}"
+            echo "${IMAGE_BASE}:${ENVIRONMENT}"
+            if [[ "$ENVIRONMENT" == "production" ]]; then
+              echo "${IMAGE_BASE}:latest"
+            fi
+            echo "EOF"
+          } >> $GITHUB_OUTPUT
+
       - name: 🔧 Set up Docker Buildx
         uses: docker/setup-buildx-action@v3
-
-      - name: 🔑 Log in to Container Registry
-        uses: docker/login-action@v3
-        with:
-          registry: ${{ env.REGISTRY }}
-          username: ${{ github.actor }}
-          password: ${{ secrets.GITHUB_TOKEN }}
-
-      - name: 📝 Extract metadata
-        id: meta
-        uses: docker/metadata-action@v5
-        with:
-          images: ${{ env.REGISTRY }}/${{ env.IMAGE_NAME }}
-          tags: |
-            type=raw,value=${{ steps.set-env.outputs.environment }}
-            type=raw,value=${{ steps.set-env.outputs.environment }}-${{ github.sha }}
-            type=raw,value=latest,enable=${{ steps.set-env.outputs.environment == 'production' }}
 
       - name: 🏗️ Build and push Docker image
         uses: docker/build-push-action@v5
         with:
           context: .
           push: true
-          tags: ${{ steps.meta.outputs.tags }}
-          labels: ${{ steps.meta.outputs.labels }}
+          tags: ${{ steps.image.outputs.tags }}
           build-args: |
-            BUILD_ENV=${{ steps.set-env.outputs.environment }}
-            VITE_BACKEND_URL=${{ steps.set-env.outputs.environment == 'production' && secrets.PROD_BACKEND_URL || secrets.UAT_BACKEND_URL }}
-            VITE_APP_NAME=${{ steps.set-env.outputs.environment == 'production' && 'Career Hub' || 'Career Hub - UAT' }}
+            BUILD_ENV=${{ needs.setup.outputs.environment }}
+            VITE_BACKEND_URL=${{ needs.setup.outputs.environment == 'production' && secrets.PROD_BACKEND_URL || secrets.UAT_BACKEND_URL }}
+            VITE_APP_NAME=${{ needs.setup.outputs.environment == 'production' && 'Career Hub' || 'Career Hub - UAT' }}
+            VITE_CLERK_PUBLISHABLE_KEY=${{ needs.setup.outputs.environment == 'production' && secrets.PROD_CLERK_PUBLISHABLE_KEY || secrets.UAT_CLERK_PUBLISHABLE_KEY }}
           cache-from: type=gha
           cache-to: type=gha,mode=max
 
-  # Job 2: Deploy to Server
+  # Job 3: Deploy to Amazon ECS
   deploy:
-    needs: build
+    needs: [setup, build]
     runs-on: ubuntu-latest
     environment:
-      name: ${{ needs.build.outputs.environment }}
-      url: ${{ needs.build.outputs.environment == 'production' && 'http://103.75.184.146:8080' || 'http://103.75.184.146:8081' }}
-    
+      name: ${{ needs.setup.outputs.environment }}
+      url: ${{ vars.APP_URL }}
+    env:
+      ENVIRONMENT: ${{ needs.setup.outputs.environment }}
+      ECS_CLUSTER: ${{ vars.ECS_CLUSTER || format('it-career-hub-{0}', needs.setup.outputs.environment) }}
+      ECS_SERVICE: ${{ vars.ECS_SERVICE || format('it-career-hub-{0}', needs.setup.outputs.environment) }}
+      ECS_TASK_DEFINITION: ${{ vars.ECS_TASK_DEFINITION || format('it-career-hub-{0}', needs.setup.outputs.environment) }}
+      CONTAINER_NAME: ${{ vars.CONTAINER_NAME || 'it-career-hub' }}
+
     steps:
-      - name: 📥 Checkout code
-        uses: actions/checkout@v4
-
-      - name: 🚀 Deploy to Ubuntu Server
-        uses: appleboy/ssh-action@v1.0.0
-        env:
-          ENVIRONMENT: ${{ needs.build.outputs.environment }}
-          REGISTRY: ${{ env.REGISTRY }}
-          IMAGE_NAME: ${{ env.IMAGE_NAME }}
+      - name: 🔑 Configure AWS credentials
+        uses: aws-actions/configure-aws-credentials@v4
         with:
-          host: ${{ secrets.SERVER_HOST }}
-          port: ${{ secrets.SERVER_PORT }}
-          username: ${{ secrets.SERVER_USER }}
-          password: ${{ secrets.SERVER_PASSWORD }}
-          envs: ENVIRONMENT,REGISTRY,IMAGE_NAME
-          script: |
-            # Create app directory if not exists
-            mkdir -p ~/it-career-hub
-            cd ~/it-career-hub
+          aws-access-key-id: ${{ secrets.AWS_ACCESS_KEY_ID }}
+          aws-secret-access-key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
+          aws-region: ${{ env.AWS_REGION }}
 
-            # Login to GitHub Container Registry
-            echo ${{ secrets.GITHUB_TOKEN }} | docker login ghcr.io -u ${{ github.actor }} --password-stdin
+      - name: 📥 Download current task definition
+        run: |
+          aws ecs describe-task-definition \
+            --task-definition ${ECS_TASK_DEFINITION} \
+            --query taskDefinition > task-definition.json
 
-            # Pull latest image
-            docker pull ${REGISTRY}/${IMAGE_NAME}:${ENVIRONMENT}
+      - name: 📝 Render new task definition with image
+        id: render
+        uses: aws-actions/amazon-ecs-render-task-definition@v1
+        with:
+          task-definition: task-definition.json
+          container-name: ${{ env.CONTAINER_NAME }}
+          image: ${{ needs.build.outputs.image }}
 
-            # Stop and remove old container
-            docker stop it-career-hub-${ENVIRONMENT} 2>/dev/null || true
-            docker rm it-career-hub-${ENVIRONMENT} 2>/dev/null || true
-
-            # Run new container
-            if [ "$ENVIRONMENT" = "production" ]; then
-              PORT=8080
-            else
-              PORT=8081
-            fi
-
-            docker run -d \
-              --name it-career-hub-${ENVIRONMENT} \
-              --restart unless-stopped \
-              -p ${PORT}:80 \
-              -e NODE_ENV=production \
-              ${REGISTRY}/${IMAGE_NAME}:${ENVIRONMENT}
-
-            # Clean up old images
-            docker image prune -af --filter "until=72h"
-
-            # Show running containers
-            docker ps | grep it-career-hub
+      - name: 🚀 Deploy to Amazon ECS
+        uses: aws-actions/amazon-ecs-deploy-task-definition@v2
+        with:
+          task-definition: ${{ steps.render.outputs.task-definition }}
+          cluster: ${{ env.ECS_CLUSTER }}
+          service: ${{ env.ECS_SERVICE }}
+          wait-for-service-stability: true
 
       - name: ✅ Deployment Summary
         run: |
           echo "### 🎉 Deployment Successful!" >> $GITHUB_STEP_SUMMARY
           echo "" >> $GITHUB_STEP_SUMMARY
-          echo "**Environment:** ${{ needs.build.outputs.environment }}" >> $GITHUB_STEP_SUMMARY
-          echo "**Image:** ${{ env.REGISTRY }}/${{ env.IMAGE_NAME }}:${{ needs.build.outputs.environment }}" >> $GITHUB_STEP_SUMMARY
-          echo "**URL:** http://103.75.184.146:${{ needs.build.outputs.environment == 'production' && '8080' || '8081' }}" >> $GITHUB_STEP_SUMMARY
+          echo "**Environment:** ${ENVIRONMENT}" >> $GITHUB_STEP_SUMMARY
+          echo "**Image:** ${{ needs.build.outputs.image }}" >> $GITHUB_STEP_SUMMARY
+          echo "**Cluster / Service:** ${ECS_CLUSTER} / ${ECS_SERVICE}" >> $GITHUB_STEP_SUMMARY
+          echo "**URL:** ${{ vars.APP_URL || 'n/a' }}" >> $GITHUB_STEP_SUMMARY
           echo "**Commit:** ${{ github.sha }}" >> $GITHUB_STEP_SUMMARY
 
-  # Job 3: Health Check
+  # Job 4: Health Check (runs only when APP_URL is configured for the environment)
   health-check:
-    needs: [build, deploy]
+    needs: [setup, deploy]
     runs-on: ubuntu-latest
+    environment: ${{ needs.setup.outputs.environment }}
     steps:
       - name: 🏥 Check application health
+        env:
+          URL: ${{ vars.APP_URL }}
         run: |
-          PORT=${{ needs.build.outputs.environment == 'production' && '8080' || '8081' }}
-          URL="http://103.75.184.146:${PORT}"
-          
-          echo "Waiting for application to start..."
-          sleep 10
-          
+          if [ -z "$URL" ]; then
+            echo "APP_URL not set, skipping health check"
+            exit 0
+          fi
+
           for i in {1..5}; do
             if curl -f -s -o /dev/null -w "%{http_code}" ${URL} | grep -q "200"; then
               echo "✅ Application is healthy!"
@@ -168,6 +174,6 @@ jobs:
             echo "Attempt $i failed, retrying..."
             sleep 5
           done
-          
+
           echo "❌ Health check failed"
           exit 1

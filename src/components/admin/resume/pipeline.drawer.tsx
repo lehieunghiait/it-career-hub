@@ -27,6 +27,9 @@ import { PIPELINE_STAGES, stageOf } from '@/config/pipeline';
 import { useOpenResume } from '@/hooks/useOpenResume';
 import { useAppSelector } from '@/redux/hooks';
 import s from '@/styles/pipeline.module.scss';
+import AiInterviewSection from './ai-interview.section';
+
+import i18next from 'i18next';
 
 dayjs.extend(relativeTime);
 
@@ -58,7 +61,7 @@ const PipelineDrawer = ({ item, onClose, onMove, onChange }: IProps) => {
       if (ignore) return;
       setDetail(res?.data ?? null);
       setIsLoading(false);
-      if (!res?.data) message.error(res?.message ?? 'Cannot load this application');
+      if (!res?.data) message.error(res?.message ?? i18next.t('app:components.admin.resume.pipeline_drawer.cannot_load_this_application'));
     };
     load();
     return () => {
@@ -75,7 +78,7 @@ const PipelineDrawer = ({ item, onClose, onMove, onChange }: IProps) => {
     const res = await callRateResume(item._id, value);
     if (!res?.data) {
       onChange(item._id, { rating: previous });
-      message.error(res?.message ?? 'Cannot save the rating');
+      message.error(res?.message ?? i18next.t('app:components.admin.resume.pipeline_drawer.cannot_save_the_rating'));
     }
   };
 
@@ -90,7 +93,7 @@ const PipelineDrawer = ({ item, onClose, onMove, onChange }: IProps) => {
       onChange(item._id, { notesCount: item.notesCount + 1 });
       setDraft('');
     } else {
-      message.error(res?.message ?? 'Cannot add the note');
+      message.error(res?.message ?? i18next.t('app:components.admin.resume.pipeline_drawer.cannot_add_the_note'));
     }
   };
 
@@ -103,7 +106,7 @@ const PipelineDrawer = ({ item, onClose, onMove, onChange }: IProps) => {
       );
       onChange(item._id, { notesCount: Math.max(0, item.notesCount - 1) });
     } else {
-      message.error(res?.message ?? 'Cannot delete the note');
+      message.error(res?.message ?? i18next.t('app:components.admin.resume.pipeline_drawer.cannot_delete_the_note'));
     }
   };
 
@@ -128,7 +131,7 @@ const PipelineDrawer = ({ item, onClose, onMove, onChange }: IProps) => {
               <h2>{item.candidateName}</h2>
               <a href={`mailto:${item.email}`}>{item.email}</a>
               <p>
-                {item.jobId?.name ?? 'Job removed'}
+                {item.jobId?.name ?? i18next.t('app:components.admin.resume.pipeline_drawer.job_removed')}
                 {item.companyId?.name && ` · ${item.companyId.name}`}
               </p>
             </div>
@@ -155,39 +158,41 @@ const PipelineDrawer = ({ item, onClose, onMove, onChange }: IProps) => {
               loading={openingId === item._id}
               onClick={() => openResume(item._id)}
             >
-              View CV
+              {i18next.t('app:common.view_cv')}
             </Button>
           </div>
 
           <dl className={s['d-facts']}>
             <div>
-              <dt>Applied</dt>
+              <dt>{i18next.t('app:common.applied')}</dt>
               <dd title={dayjs(item.createdAt).format('DD/MM/YYYY HH:mm')}>
                 {dayjs(item.createdAt).format('DD MMM YYYY')}
               </dd>
             </div>
             <div>
-              <dt>Score</dt>
+              <dt>{i18next.t('app:components.admin.resume.pipeline_drawer.score')}</dt>
               <dd>
                 <Rate value={item.rating ?? 0} onChange={rate} className={s['d-rate']} />
               </dd>
             </div>
             {job?.level && (
               <div>
-                <dt>Level</dt>
+                <dt>{i18next.t('app:common.level')}</dt>
                 <dd>{job.level}</dd>
               </div>
             )}
           </dl>
 
+          <AiInterviewSection resumeId={item._id} status={item.status} />
+
           <section className={s['d-section']}>
             <h3>
-              Notes <span>Only visible to your team</span>
+              {i18next.t('app:components.admin.resume.pipeline_drawer.notes')}{' '}<span>{i18next.t('app:components.admin.resume.pipeline_drawer.only_visible_to_your_team')}</span>
             </h3>
             <Input.TextArea
               value={draft}
               onChange={event => setDraft(event.target.value)}
-              placeholder='Add a note about this candidate…'
+              placeholder={i18next.t('app:components.admin.resume.pipeline_drawer.add_a_note_about_this_candidate')}
               autoSize={{ minRows: 2, maxRows: 6 }}
               maxLength={1000}
               onPressEnter={event => {
@@ -195,7 +200,7 @@ const PipelineDrawer = ({ item, onClose, onMove, onChange }: IProps) => {
               }}
             />
             <div className={s['d-note-actions']}>
-              <small>⌘/Ctrl + Enter to save</small>
+              <small>{i18next.t('app:components.admin.resume.pipeline_drawer.ctrl_enter_to_save')}</small>
               <Button
                 type='primary'
                 size='small'
@@ -203,7 +208,7 @@ const PipelineDrawer = ({ item, onClose, onMove, onChange }: IProps) => {
                 disabled={!draft.trim()}
                 onClick={addNote}
               >
-                Add note
+                {i18next.t('app:components.admin.resume.pipeline_drawer.add_note')}
               </Button>
             </div>
 
@@ -220,8 +225,8 @@ const PipelineDrawer = ({ item, onClose, onMove, onChange }: IProps) => {
                       </span>
                       {note.createdBy?._id === userId && (
                         <Popconfirm
-                          title='Delete this note?'
-                          okText='Delete'
+                          title={i18next.t('app:components.admin.resume.pipeline_drawer.delete_this_note')}
+                          okText={i18next.t('app:components.admin.resume.pipeline_drawer.delete')}
                           okButtonProps={{ danger: true }}
                           onConfirm={() => removeNote(note._id)}
                         >
@@ -239,12 +244,12 @@ const PipelineDrawer = ({ item, onClose, onMove, onChange }: IProps) => {
                 ))}
               </ul>
             ) : (
-              <Empty image={Empty.PRESENTED_IMAGE_SIMPLE} description='No notes yet' />
+              <Empty image={Empty.PRESENTED_IMAGE_SIMPLE} description={i18next.t('app:components.admin.resume.pipeline_drawer.no_notes_yet')} />
             )}
           </section>
 
           <section className={s['d-section']}>
-            <h3>Activity</h3>
+            <h3>{i18next.t('app:components.admin.resume.pipeline_drawer.activity')}</h3>
             {isLoading || !detail ? (
               <Skeleton active title={false} paragraph={{ rows: 2 }} />
             ) : detail?.history?.length ? (
@@ -254,7 +259,7 @@ const PipelineDrawer = ({ item, onClose, onMove, onChange }: IProps) => {
                   color: stageOf(entry.status).color,
                   children: (
                     <>
-                      <b>Moved to {stageOf(entry.status).title}</b>
+                      <b>{i18next.t('app:components.admin.resume.pipeline_drawer.moved_to')}{' '}{stageOf(entry.status).title}</b>
                       <span>
                         {dayjs(entry.updatedAt).format('DD/MM/YYYY HH:mm')}
                         {entry.updatedBy?.email && ` · ${entry.updatedBy.email}`}
@@ -265,7 +270,7 @@ const PipelineDrawer = ({ item, onClose, onMove, onChange }: IProps) => {
                 }))}
               />
             ) : (
-              <p className={s['muted']}>No activity yet</p>
+              <p className={s['muted']}>{i18next.t('app:components.admin.resume.pipeline_drawer.no_activity_yet')}</p>
             )}
           </section>
         </>

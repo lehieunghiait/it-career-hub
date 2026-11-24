@@ -24,3 +24,7 @@ dist-ssr
 *.njsproj
 *.sln
 *.sw?
+
+# i18n codemod
+scripts/i18n/backup/
+scripts/i18n/out/preview-*.json

@@ -1,0 +1,209 @@
+451	An Giang	アンザン
+452	Ba Ria - Vung Tau	バリア＝ブンタウ
+453	Bac Giang	バクザン
+454	Bac Kan	バクカン
+455	Bac Lieu	バクリエウ
+456	Bac Ninh	バクニン
+457	Ben Tre	ベンチェー
+458	Binh Dinh	ビンディン
+459	Binh Duong	ビンズオン
+460	Binh Phuoc	ビンフオック
+461	Binh Thuan	ビントゥアン
+462	Ca Mau	カマウ
+463	Can Tho	カントー
+464	Cao Bang	カオバン
+465	Da Nang	ダナン
+466	Dak Lak	ダクラク
+467	Dak Nong	ダクノン
+468	Dien Bien	ディエンビエン
+469	Dong Nai	ドンナイ
+470	Dong Thap	ドンタップ
+471	Gia Lai	ザライ
+472	Ha Giang	ハザン
+473	Ha Nam	ハナム
+474	Hanoi	ハノイ
+475	Ha Tinh	ハティン
+476	Hai Duong	ハイズオン
+477	Hai Phong	ハイフォン
+478	Hau Giang	ハウザン
+479	Hoa Binh	ホアビン
+480	Hung Yen	フンイエン
+481	Khanh Hoa	カインホア
+482	Kien Giang	キエンザン
+483	Kon Tum	コントゥム
+484	Lai Chau	ライチャウ
+485	Lam Dong	ラムドン
+486	Lang Son	ランソン
+487	Lao Cai	ラオカイ
+488	Long An	ロンアン
+489	Nam Dinh	ナムディン
+490	Nghe An	ゲアン
+491	Ninh Binh	ニンビン
+492	Ninh Thuan	ニントゥアン
+493	Phu Tho	フート
+494	Phu Yen	フーイエン
+495	Quang Binh	クアンビン
+496	Quang Nam	クアンナム
+497	Quang Ngai	クアンガイ
+498	Quang Ninh	クアンニン
+499	Quang Tri	クアンチ
+500	Soc Trang	ソクチャン
+501	Son La	ソンラ
+502	Tay Ninh	タイニン
+503	Thai Binh	タイビン
+504	Thai Nguyen	タイグエン
+505	Thanh Hoa	タインホア
+506	Thua Thien Hue	トゥアティエン＝フエ
+507	Tien Giang	ティエンザン
+508	Ho Chi Minh City	ホーチミン市
+509	Tra Vinh	チャビン
+510	Tuyen Quang	トゥエンクアン
+511	Vinh Long	ヴィンロン
+512	Vinh Phuc	ヴィンフック
+513	Yen Bai	イエンバイ
+514	All provinces	すべての都市
+515	Không thể mở CV này	この CV を開けません
+516	Đã lưu việc làm	求人を保存しました
+517	Đã bỏ khỏi việc làm đã lưu	保存した求人から削除しました
+518	Đã có lỗi, vui lòng thử lại	問題が発生しました。もう一度お試しください
+519	We are a leading recruitment company, connecting talented candidates with the best businesses.	私たちは優秀な人材と優良企業をつなぐ、トップクラスの採用企業です。
+520	Tôi là một lập trình viên đam mê xây dựng ứng dụng web.	Web アプリケーション開発に情熱を持つ開発者です。
+521	Đổi mới	革新
+522	Chúng tôi luôn tìm kiếm phương pháp và giải pháp mới để phục vụ khách hàng tốt hơn.	お客様により良いサービスを提供するため、常に新しい方法と解決策を追求します。
+523	Trung thực	誠実
+524	Chúng tôi hoạt động với tiêu chuẩn đạo đức cao nhất, luôn minh bạch và trung thực.	最高の倫理基準のもと、常に透明かつ誠実に行動します。
+525	Hợp tác	協力
+526	Chúng tôi tin vào sức mạnh của tinh thần đồng đội và xây dựng quan hệ đối tác bền vững.	チームワークの力と、強固なパートナー関係の構築を大切にしています。
+527	Xuất sắc	卓越
+528	Chúng tôi không ngừng nỗ lực để đạt kết quả tốt nhất trong mọi việc.	あらゆる仕事で最高の成果を目指し、努力を続けます。
+529	About Us	私たちについて
+530	Mission	ミッション
+531	Vision	ビジョン
+532	Core Values	コアバリュー
+533	Xóa công ty thành công	会社を削除しました
+534	STT	No.
+535	Ngày tạo	作成日
+536	Ngày cập nhật	更新日
+537	Thao tác	操作
+538	Confirm deleting company	会社の削除を確認
+539	Are you sure you want to delete this company?	この会社を削除してもよろしいですか？
+540	Confirm	確認
+541	Danh sách công ty	会社一覧
+542	of	／
+543	Thêm mới	新規追加
+544	Xuất Excel	Excel に出力
+545	Xuất	出力
+546	Đang chờ	保留中
+547	Đã duyệt	承認済み
+548	Chào buổi sáng	おはようございます
+549	Chào buổi chiều	こんにちは
+550	Chào buổi tối	こんばんは
+551	Chưa có dữ liệu	データはまだありません
+552	Việc làm đang mở	公開中の求人
+553	Người dùng	ユーザー
+554	Việc làm	求人
+555	đang chờ xem xét	件が審査待ち
+556	Làm mới dữ liệu	データを更新
+557	Xem hồ sơ ứng tuyển	応募を確認
+558	Đăng việc làm	求人を掲載
+559	Hoạt động tuyển dụng	採用アクティビティ
+560	Việc làm đã đăng và hồ sơ nhận được · 30 ngày qua	掲載求人数と応募数 · 過去 30 日
+561	Việc làm đã đăng	掲載求人数
+562	Quy trình ứng tuyển	応募パイプライン
+563	Tổng cộng {{v0}} hồ sơ	合計 {{v0}} 件の応募
+564	Chưa có hồ sơ nào. Hồ sơ sẽ hiển thị ở đây khi ứng viên ứng tuyển.	まだ応募はありません。候補者が応募するとここに表示されます。
+565	Việc làm theo cấp bậc	レベル別の求人
+566	Cấp bậc của các vị trí đang tuyển	募集中ポジションのレベル
+567	Việc làm theo thành phố	都市別の求人
+568	Nơi có nhiều vị trí tuyển dụng	求人が多い地域
+569	Kỹ năng được tìm nhiều nhất	需要の高いスキル
+570	Trên tất cả tin tuyển dụng	全求人の集計
+571	Công ty tuyển nhiều nhất	採用数の多い企業
+572	Theo số lượng tin tuyển dụng	掲載求人数順
+573	Quản lý	管理
+574	việc làm ·	件の求人 ·
+575	Sắp hết hạn	まもなく締切
+576	Việc làm đang mở sẽ hết hạn trong 14 ngày tới	今後 14 日以内に締め切られる公開中の求人
+577	Tất cả việc làm	すべての求人
+578	Hôm nay	今日
+579	Còn {{v0}} ngày	残り {{v0}} 日
+580	Không có việc làm nào hết hạn trong 2 tuần tới	今後 2 週間で締め切られる求人はありません
+581	Hồ sơ mới nhất	最新の応募
+582	Xem tất cả	すべて表示
+583	Chưa có hồ sơ nào	まだ応募はありません
+584	Xóa việc làm thành công	求人を削除しました
+585	Chọn cấp bậc	レベルを選択
+586	Xem chi tiết	詳細を表示
+587	Xác nhận xóa	削除の確認
+588	Bạn có chắc chắn muốn xóa việc làm này?	この求人を削除してもよろしいですか？
+589	Xác nhận	確認
+590	Danh sách việc làm	求人一覧
+591	Permission deleted successfully	権限を削除しました
+592	=	=
+593	Confirm deleting permission	権限の削除を確認
+594	Are you sure you want to delete this permission?	この権限を削除してもよろしいですか？
+595	Danh sách quyền	権限一覧
+596	Không thể tải quy trình ứng tuyển	パイプラインを読み込めません
+597	Đã gửi lời mời phỏng vấn AI tới {{v0}}	{{v0}} に AI 面接の招待を送信しました
+598	Ứng viên đã nhận link qua email. Bạn cũng có thể tự chia sẻ, chỉ tài khoản của ứng viên mới mở được.	候補者にメールでリンクを送信しました。ご自身で共有することもできますが、開けるのは候補者のアカウントのみです。
+599	Không thể gửi lời mời phỏng vấn AI	AI 面接の招待を送信できません
+600	Đã chuyển {{v0}} sang {{v1}}	{{v0}} を {{v1}} に移動しました
+601	Không thể chuyển ứng viên này	この候補者を移動できません
+602	Quy trình ứng viên	候補者パイプライン
+603	Kéo thẻ để đổi giai đoạn. Ứng viên sẽ được thông báo qua email.	カードをドラッグしてステージを変更します。候補者にはメールで通知されます。
+604	Tất cả việc làm ({{v0}})	すべての求人（{{v0}}）
+605	Tìm ứng viên	候補者を検索
+606	Cột {{v0}}	{{v0}} 列
+607	Chuyển sang {{v0}}	{{v0}} に移動
+608	Chưa chấm điểm	未採点
+609	{{v0}} ghi chú	メモ {{v0}} 件
+610	Ứng tuyển {{v0}}	{{v0}} に応募
+611	Không có kết quả	該当なし
+612	Thả ứng viên vào đây	ここに候補者をドロップ
+613	Gửi lời mời	招待を送信
+614	Chuyển và thông báo	移動して通知
+615	Ứng viên nhận link dùng một lần cho buổi phỏng vấn giọng nói khoảng 15 phút với AI. Bạn nhận bản ghi và điểm gợi ý, quyết định vẫn là của bạn.	候補者は AI 面接官との約 15 分の音声面接用ワンタイムリンクを受け取ります。文字起こしと推奨スコアが届きますが、最終判断はあなたが行います。
+616	Ngôn ngữ phỏng vấn	面接の言語
+617	Ứng viên sẽ nhận email về thay đổi này. Thêm lời nhắn nếu bạn muốn đính kèm.	候補者にはこの変更がメールで通知されます。メッセージを添える場合は入力してください。
+618	Xóa hồ sơ thành công	応募を削除しました
+619	Lọc theo tên việc làm	求人名で絞り込み
+620	Lọc theo công ty	会社で絞り込み
+621	Bạn có chắc chắn muốn xóa hồ sơ này?	この応募を削除してもよろしいですか？
+622	Xem chi tiết	詳細を表示
+623	Danh sách hồ sơ	応募一覧
+624	Role deleted successfully	ロールを削除しました
+625	Status	ステータス
+626	Confirm deleting role	ロールの削除を確認
+627	Are you sure you want to delete this role?	このロールを削除してもよろしいですか？
+628	Danh sách vai trò	ロール一覧
+629	User deleted successfully	ユーザーを削除しました
+630	Bạn có chắc chắn muốn xóa người dùng này?	このユーザーを削除してもよろしいですか？
+631	Danh sách người dùng	ユーザー一覧
+632	=	=
+633	=	=
+634	=	=
+635	=	=
+636	=	=
+637	Đang phân tích	分析中
+638	Điểm ATS	ATS スコア
+639	Vượt qua vòng lọc đầu tiên	最初の選考を突破
+640	Tối ưu CV để xếp hạng cao hơn trong thuật toán chấm điểm ATS và đến được tay nhà tuyển dụng.	ATS のスコアリングで上位に入り、採用担当者の目に届くよう CV を最適化しましょう。
+641	Tăng cơ hội được phỏng vấn	面接のチャンスを広げる
+642	CV tối ưu cho ATS có cơ hội được gọi phỏng vấn cao gấp 3 lần.	ATS 最適化された CV は面接に呼ばれる確率が 3 倍です。
+643	Biết cần cải thiện gì	改善点がわかる
+644	Nhận gợi ý cụ thể về từ khóa, kỹ năng còn thiếu và lỗi định dạng.	不足しているキーワードやスキル、書式の問題について具体的なアドバイスを得られます。
+645	Nổi bật giữa các ứng viên	他の候補者と差をつける
+646	Vượt qua 80% ứng viên nộp CV chưa được tối ưu.	最適化されていない CV を出す候補者の 80% に差をつけましょう。
+647	Tải CV lên	CV をアップロード
+648	Tải CV dạng PDF hoặc DOC	PDF または DOC 形式で CV をアップロード
+649	Chọn việc làm mục tiêu	応募先の求人を選択
+650	Chọn vị trí bạn muốn ứng tuyển	応募したい職種を選択してください
+651	Phân tích bằng AI	AI 分析
+652	AI quét và so sánh CV của bạn với yêu cầu công việc	AI が CV をスキャンし、求人要件と比較します
+653	Nhận kết quả	結果を受け取る
+654	Nhận điểm ATS chi tiết và đề xuất cải thiện	詳細な ATS スコアと改善提案を受け取れます
+655	Mức khớp từ khóa	キーワード一致度
+656	Mức khớp kỹ năng	スキル一致度
+657	Mức khớp kinh nghiệm	経験一致度
+658	Chất lượng định dạng	書式の品質
+659	Báo cáo phân tích	分析レポート

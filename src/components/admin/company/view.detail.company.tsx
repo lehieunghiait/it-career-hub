@@ -15,6 +15,8 @@ import { callFetchCompanyById } from '@/config/api';
 import parse from 'html-react-parser';
 import dayjs from 'dayjs';
 
+import i18next from 'i18next';
+
 interface IProps {
   openViewDetail: boolean;
   setOpenViewDetail: (v: boolean) => void;
@@ -61,7 +63,7 @@ const ViewDetailCompany = (props: IProps) => {
             wordBreak: 'break-word',
           }}
         >
-          📋 Detail {companyDetail?.name}
+          {i18next.t('app:components.admin.company.view_detail_company.detail')}{' '}{companyDetail?.name}
         </div>
       }
       open={openViewDetail}
@@ -116,7 +118,7 @@ const ViewDetailCompany = (props: IProps) => {
                     label={
                       <span>
                         <EnvironmentOutlined style={{ marginRight: '8px', color: '#1890ff' }} />
-                        Address
+                        {i18next.t('app:common.address')}
                       </span>
                     }
                   >
@@ -128,7 +130,7 @@ const ViewDetailCompany = (props: IProps) => {
                       label={
                         <span>
                           <GlobalOutlined style={{ marginRight: '8px', color: '#1890ff' }} />
-                          Website
+                          {i18next.t('app:common.website')}
                         </span>
                       }
                     >
@@ -152,7 +154,7 @@ const ViewDetailCompany = (props: IProps) => {
                       label={
                         <span>
                           <PhoneOutlined style={{ marginRight: '8px', color: '#1890ff' }} />
-                          Phone
+                          {i18next.t('app:common.phone')}
                         </span>
                       }
                     >
@@ -164,7 +166,7 @@ const ViewDetailCompany = (props: IProps) => {
                       label={
                         <span>
                           <MailOutlined style={{ marginRight: '8px', color: '#1890ff' }} />
-                          Email
+                          {i18next.t('app:common.email')}
                         </span>
                       }
                     >
@@ -195,7 +197,7 @@ const ViewDetailCompany = (props: IProps) => {
                   <div style={{ fontSize: '16px', fontWeight: 'bold', marginBottom: '4px' }}>
                     {companyDetail.size || 'N/A'}
                   </div>
-                  <div style={{ fontSize: '12px', color: '#8c8c8c' }}>Number of staff</div>
+                  <div style={{ fontSize: '12px', color: '#8c8c8c' }}>{i18next.t('app:components.admin.company.view_detail_company.number_of_staff')}</div>
                 </div>
               </Col>
               <Col xs={24} sm={8}>
@@ -215,7 +217,7 @@ const ViewDetailCompany = (props: IProps) => {
                   <div style={{ fontSize: '16px', fontWeight: 'bold', marginBottom: '4px' }}>
                     {companyDetail.companyType || 'Technology'}
                   </div>
-                  <div style={{ fontSize: '12px', color: '#8c8c8c' }}>Type of business</div>
+                  <div style={{ fontSize: '12px', color: '#8c8c8c' }}>{i18next.t('app:components.admin.company.view_detail_company.type_of_business')}</div>
                 </div>
               </Col>
               <Col xs={24} sm={8}>
@@ -235,9 +237,9 @@ const ViewDetailCompany = (props: IProps) => {
                   <div style={{ fontSize: '16px', fontWeight: 'bold', marginBottom: '4px' }}>
                     {companyDetail.createdAt
                       ? dayjs(companyDetail.createdAt).format('YYYY')
-                      : 'N/A'}
+                      : i18next.t('app:components.admin.company.view_detail_company.n_a')}
                   </div>
-                  <div style={{ fontSize: '12px', color: '#8c8c8c' }}>Year of foundation</div>
+                  <div style={{ fontSize: '12px', color: '#8c8c8c' }}>{i18next.t('app:components.admin.company.view_detail_company.year_of_foundation')}</div>
                 </div>
                 {/* Số lượng nhân viên */}
                 <div
@@ -256,7 +258,7 @@ const ViewDetailCompany = (props: IProps) => {
             {/* Skills */}
             {companyDetail.skills && companyDetail.skills.length > 0 && (
               <>
-                <h3 style={{ marginBottom: '12px', fontSize: '16px' }}>🛠️ Skills</h3>
+                <h3 style={{ marginBottom: '12px', fontSize: '16px' }}>{i18next.t('app:components.admin.company.view_detail_company.skills')}</h3>
                 <div style={{ marginBottom: '24px' }}>
                   {companyDetail.skills.map((skill, index) => (
                     <Tag
@@ -287,7 +289,7 @@ const ViewDetailCompany = (props: IProps) => {
             {/* Description */}
             {companyDetail.description && (
               <>
-                <h3 style={{ marginBottom: '12px', fontSize: '16px' }}>📝 Description</h3>
+                <h3 style={{ marginBottom: '12px', fontSize: '16px' }}>{i18next.t('app:components.admin.company.view_detail_company.description')}</h3>
                 <div
                   style={{
                     backgroundColor: '#fafafa',
@@ -307,10 +309,10 @@ const ViewDetailCompany = (props: IProps) => {
 
             {/* Metadata */}
             <Descriptions column={2} size='small' bordered>
-              <Descriptions.Item label='Created At'>
+              <Descriptions.Item label={i18next.t('app:components.admin.company.view_detail_company.created_at')}>
                 {dayjs(companyDetail.createdAt).format('DD/MM/YYYY HH:mm:ss')}
               </Descriptions.Item>
-              <Descriptions.Item label='Updated At'>
+              <Descriptions.Item label={i18next.t('app:components.admin.company.view_detail_company.updated_at')}>
                 {dayjs(companyDetail.updatedAt).format('DD/MM/YYYY HH:mm:ss')}
               </Descriptions.Item>
               <Descriptions.Item label='ID' span={2}>

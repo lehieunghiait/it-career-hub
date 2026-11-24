@@ -2,6 +2,8 @@ import { useState } from 'react';
 import { message } from 'antd';
 import { callFetchResumeFileUrl } from '@/config/api';
 
+import i18next from 'i18next';
+
 /**
  * Opens a CV through a short-lived presigned link (the bucket is private).
  * The tab is opened synchronously on click so popup blockers allow it, then pointed at the link.
@@ -21,7 +23,7 @@ export const useOpenResume = () => {
         return;
       }
       tab?.close();
-      message.error(res?.message ?? 'Cannot open this CV');
+      message.error(res?.message ?? i18next.t('app:hooks.useOpenResume.cannot_open_this_cv'));
     } finally {
       setOpeningId(null);
     }

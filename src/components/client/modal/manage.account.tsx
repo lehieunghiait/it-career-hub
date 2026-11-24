@@ -26,13 +26,15 @@ import { useAppSelector } from '@/redux/hooks';
 import UpdateProfileUser from '@/components/admin/user/update.profile.user';
 import { useClerk } from '@clerk/react';
 import { useOpenResume } from '@/hooks/useOpenResume';
+import i18next from 'i18next';
+
 // Password, email and connected accounts are managed by Clerk
 const AccountSecurity = () => {
   const { openUserProfile } = useClerk();
   return (
     <div style={{ textAlign: 'center', marginTop: 20 }}>
       <Button type='primary' onClick={() => openUserProfile()}>
-        Manage password &amp; security
+        {i18next.t('app:components.client.modal.manage_account.manage_password_amp_security')}
       </Button>
     </div>
   );
@@ -71,15 +73,15 @@ const UserResume = (props: any) => {
       },
     },
     {
-      title: 'Company',
+      title: i18next.t('app:common.company'),
       dataIndex: ['companyId', 'name'],
     },
     {
-      title: 'Position',
+      title: i18next.t('app:common.position'),
       dataIndex: ['jobId', 'name'],
     },
     {
-      title: 'Status',
+      title: i18next.t('app:common.status'),
       dataIndex: 'status',
       render: (status: string) => {
         const meta = RESUME_STATUS[status as ResumeStatus];
@@ -87,7 +89,7 @@ const UserResume = (props: any) => {
       },
     },
     {
-      title: 'Date of CV release',
+      title: i18next.t('app:components.client.modal.manage_account.date_of_cv_release'),
       dataIndex: 'createdAt',
       render(value, record, index) {
         return <>{dayjs(record.createdAt).format('DD/MM/YYYY HH:mm:ss')}</>;
@@ -104,7 +106,7 @@ const UserResume = (props: any) => {
             loading={openingId === record._id}
             onClick={() => openResume(record._id)}
           >
-            View CV
+            {i18next.t('app:common.view_cv')}
           </Button>
         );
       },
@@ -115,7 +117,7 @@ const UserResume = (props: any) => {
     <div>
       <div style={{ marginBottom: 12 }}>
         <Link to='/my-jobs' onClick={() => props.onNavigate?.()}>
-          Track progress of each application in My jobs →
+          {i18next.t('app:components.client.modal.manage_account.track_progress_of_each_application_in')}
         </Link>
       </div>
       <Table<IResume>
@@ -129,7 +131,7 @@ const UserResume = (props: any) => {
 };
 
 const UserUpdateInfo = (props: any) => {
-  return <div>UserUpdateInfo</div>;
+  return <div>{i18next.t('app:components.client.modal.manage_account.userupdateinfo')}</div>;
 };
 
 const JobByEmail = (props: any) => {
@@ -154,10 +156,10 @@ const JobByEmail = (props: any) => {
       skills: skills ? skills : [],
     });
     if (res.data) {
-      message.success('Update information successfully');
+      message.success(i18next.t('app:components.client.modal.manage_account.update_information_successfully'));
     } else {
       notification.error({
-        message: 'An error occurred',
+        message: i18next.t('app:common.an_error_occurred'),
         description: res.message,
       });
     }
@@ -169,9 +171,9 @@ const JobByEmail = (props: any) => {
         <Row gutter={[20, 20]}>
           <Col span={24}>
             <Form.Item
-              label={'Skills'}
+              label={i18next.t('app:common.skills')}
               name={'skills'}
-              rules={[{ required: true, message: 'Please select at least 1 skill!' }]}
+              rules={[{ required: true, message: i18next.t('app:components.client.modal.manage_account.please_select_at_least_1_skill') }]}
             >
               <Select
                 mode='multiple'
@@ -180,7 +182,7 @@ const JobByEmail = (props: any) => {
                 style={{ width: '100%' }}
                 placeholder={
                   <>
-                    <MonitorOutlined /> Search by skills...
+                    <MonitorOutlined /> {i18next.t('app:components.client.modal.manage_account.search_by_skills')}
                   </>
                 }
                 optionLabelProp='label'
@@ -197,7 +199,7 @@ const JobByEmail = (props: any) => {
             }}
           >
             <Button type='primary' onClick={() => form.submit()}>
-              Update
+              {i18next.t('app:common.update')}
             </Button>
           </Col>
         </Row>
@@ -222,17 +224,17 @@ const ManageAccount = (props: IProps) => {
     },
     {
       key: 'email-by-skills',
-      label: `Receive jobs by skills`,
+      label: i18next.t('app:components.client.modal.manage_account.receive_jobs_by_skills'),
       children: <JobByEmail />,
     },
     {
       key: 'user-update-info',
-      label: `Update profile`,
+      label: i18next.t('app:components.client.modal.manage_account.update_profile'),
       children: <UpdateProfileUser />,
     },
     {
       key: 'user-password',
-      label: `Account security`,
+      label: i18next.t('app:components.client.modal.manage_account.account_security'),
       children: <AccountSecurity />,
     },
   ];
@@ -240,7 +242,7 @@ const ManageAccount = (props: IProps) => {
   return (
     <>
       <Modal
-        title='Manage Account'
+        title={i18next.t('app:components.client.modal.manage_account.manage_account')}
         open={open}
         onCancel={() => onClose(false)}
         maskClosable={false}

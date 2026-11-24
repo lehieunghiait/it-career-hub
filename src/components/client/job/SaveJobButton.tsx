@@ -3,6 +3,8 @@ import { HeartFilled, HeartOutlined } from '@ant-design/icons';
 import { useSaveJob } from '@/hooks/useSaveJob';
 import s from 'styles/job-board.module.scss';
 
+import i18next from 'i18next';
+
 interface SaveJobButtonProps {
   jobId?: string;
   // icon: round heart on job cards; button: labelled button on the job detail page
@@ -23,17 +25,17 @@ const SaveJobButton = ({ jobId, variant = 'icon', className }: SaveJobButtonProp
         disabled={isPending}
         aria-pressed={isSaved}
       >
-        {isSaved ? 'Saved' : 'Save'}
+        {isSaved ? i18next.t('app:components.client.job.SaveJobButton.saved') : i18next.t('app:components.client.job.SaveJobButton.save')}
       </Button>
     );
   }
 
   return (
-    <Tooltip title={isSaved ? 'Remove from saved jobs' : 'Save job'}>
+    <Tooltip title={isSaved ? i18next.t('app:components.client.job.SaveJobButton.remove_from_saved_jobs') : i18next.t('app:components.client.job.SaveJobButton.save_job')}>
       <button
         type='button'
         className={`${s['save-btn']} ${isSaved ? s['save-on'] : ''} ${className ?? ''}`}
-        aria-label={isSaved ? 'Remove from saved jobs' : 'Save job'}
+        aria-label={isSaved ? i18next.t('app:components.client.job.SaveJobButton.remove_from_saved_jobs') : i18next.t('app:components.client.job.SaveJobButton.save_job')}
         aria-pressed={isSaved}
         disabled={isPending}
         onClick={e => {

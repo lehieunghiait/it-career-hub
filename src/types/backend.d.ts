@@ -200,13 +200,14 @@ export interface IDashboardResumesStats {
     byStatus: {
         PENDING: number; 
         REVIEWING: number; 
+        AI_SCREENING: number; 
         INTERVIEW: number; 
         APPROVED: number; 
         REJECTED: number; 
     };
     details: Array<{
         count: number; 
-        status: 'PENDING' | 'REVIEWING' | 'INTERVIEW' | 'APPROVED' | 'REJECTED';
+        status: 'PENDING' | 'REVIEWING' | 'AI_SCREENING' | 'INTERVIEW' | 'APPROVED' | 'REJECTED';
     }>;
 }
 export interface IDashboardInsights {

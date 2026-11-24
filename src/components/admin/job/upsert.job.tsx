@@ -18,9 +18,10 @@ import { callCreateJob, callFetchCompany, callFetchJobById, callUpdateJob } from
 import ReactQuill from 'react-quill';
 import 'react-quill/dist/quill.snow.css';
 import { CheckSquareOutlined } from '@ant-design/icons';
-import enUS from 'antd/lib/locale/en_US';
 import dayjs from 'dayjs';
 import { IJob } from '@/types/backend';
+
+import i18next from 'i18next';
 
 const ViewUpsertJob = (props: any) => {
   const [companies, setCompanies] = useState<ICompanySelect[]>([]);
@@ -107,11 +108,11 @@ const ViewUpsertJob = (props: any) => {
 
       const res = await callUpdateJob(job, dataUpdate._id);
       if (res.data) {
-        message.success('Cập nhật job thành công');
+        message.success(i18next.t('app:components.admin.job.upsert_job.cap_nhat_job_thanh_cong'));
         navigate('/admin/job');
       } else {
         notification.error({
-          message: 'Có lỗi xảy ra',
+          message: i18next.t('app:common.co_loi_xay_ra'),
           description: res.message,
         });
       }
@@ -138,11 +139,11 @@ const ViewUpsertJob = (props: any) => {
 
       const res = await callCreateJob(job);
       if (res.data) {
-        message.success('Tạo mới job thành công');
+        message.success(i18next.t('app:components.admin.job.upsert_job.tao_moi_job_thanh_cong'));
         navigate('/admin/job');
       } else {
         notification.error({
-          message: 'Có lỗi xảy ra',
+          message: i18next.t('app:common.co_loi_xay_ra'),
           description: res.message,
         });
       }
@@ -156,23 +157,23 @@ const ViewUpsertJob = (props: any) => {
           separator='>'
           items={[
             {
-              title: <Link to='/admin/job'>Manage Job</Link>,
+              title: <Link to='/admin/job'>{i18next.t('app:components.admin.job.upsert_job.manage_job')}</Link>,
             },
             {
-              title: 'Upsert Job',
+              title: i18next.t('app:components.admin.job.upsert_job.upsert_job'),
             },
           ]}
         />
       </div>
       <div>
-        <ConfigProvider locale={enUS}>
+        <ConfigProvider>
           <ProForm
             form={form}
             onFinish={onFinish}
             submitter={{
               searchConfig: {
-                resetText: 'Hủy',
-                submitText: <>{dataUpdate?._id ? 'Cập nhật Job' : 'Tạo mới Job'}</>,
+                resetText: i18next.t('app:common.huy'),
+                submitText: <>{dataUpdate?._id ? i18next.t('app:components.admin.job.upsert_job.cap_nhat_job') : i18next.t('app:components.admin.job.upsert_job.tao_moi_job')}</>,
               },
               onReset: () => navigate('/admin/job'),
               render: (_: any, dom: any) => <FooterToolbar>{dom}</FooterToolbar>,
@@ -184,19 +185,19 @@ const ViewUpsertJob = (props: any) => {
             <Row gutter={[20, 20]}>
               <Col span={24} md={12}>
                 <ProFormText
-                  label='Title '
+                  label={i18next.t('app:components.admin.job.upsert_job.title')}
                   name='name'
-                  rules={[{ required: true, message: 'Please enter a name!' }]}
-                  placeholder='Please enter a title'
+                  rules={[{ required: true, message: i18next.t('app:components.admin.job.upsert_job.please_enter_a_name') }]}
+                  placeholder={i18next.t('app:components.admin.job.upsert_job.please_enter_a_title')}
                 />
               </Col>
               <Col span={24} md={6}>
                 <ProFormSelect
                   name='skills'
-                  label='Skills'
+                  label={i18next.t('app:common.skills')}
                   options={SKILLS_LIST}
-                  placeholder='Please select a skill required'
-                  rules={[{ required: true, message: 'Please select a skill required!' }]}
+                  placeholder={i18next.t('app:components.admin.job.upsert_job.please_select_a_skill_required')}
+                  rules={[{ required: true, message: i18next.t('app:components.admin.job.upsert_job.please_select_a_skill_required_2') }]}
                   allowClear
                   mode='multiple'
                   fieldProps={{
@@ -207,10 +208,10 @@ const ViewUpsertJob = (props: any) => {
               <Col span={24} md={6}>
                 <ProFormSelect
                   name='location'
-                  label='Location'
+                  label={i18next.t('app:common.location')}
                   options={LOCATION_LIST.filter(item => item.value !== 'ALL')}
-                  placeholder='Please select a location'
-                  rules={[{ required: true, message: 'Please select a location!' }]}
+                  placeholder={i18next.t('app:components.admin.job.upsert_job.please_select_a_location')}
+                  rules={[{ required: true, message: i18next.t('app:components.admin.job.upsert_job.please_select_a_location_2') }]}
                   fieldProps={{
                     showSearch: true,
                     filterOption: (input: string, option: any) => {
@@ -226,12 +227,12 @@ const ViewUpsertJob = (props: any) => {
               </Col>
               <Col span={24} md={6}>
                 <ProFormDigit
-                  label='Salary'
+                  label={i18next.t('app:common.salary')}
                   name='salary'
-                  rules={[{ required: true, message: 'Please enter salary!' }]}
-                  placeholder='Please enter salary'
+                  rules={[{ required: true, message: i18next.t('app:components.admin.job.upsert_job.please_enter_salary') }]}
+                  placeholder={i18next.t('app:components.admin.job.upsert_job.please_enter_salary_2')}
                   fieldProps={{
-                    addonAfter: ' đ',
+                    addonAfter: i18next.t('app:common.d'),
                     formatter: value => `${value}`.replace(/\B(?=(\d{3})+(?!\d))/g, ','),
                     parser: value => +(value || '').replace(/\$\s?|(,*)/g, ''),
                   }}
@@ -239,16 +240,16 @@ const ViewUpsertJob = (props: any) => {
               </Col>
               <Col span={24} md={6}>
                 <ProFormDigit
-                  label='Quantity'
+                  label={i18next.t('app:components.admin.job.upsert_job.quantity')}
                   name='quantity'
-                  rules={[{ required: true, message: 'Please enter quantity!' }]}
-                  placeholder='Please enter quantity'
+                  rules={[{ required: true, message: i18next.t('app:components.admin.job.upsert_job.please_enter_quantity') }]}
+                  placeholder={i18next.t('app:components.admin.job.upsert_job.please_enter_quantity_2')}
                 />
               </Col>
               <Col span={24} md={6}>
                 <ProFormSelect
                   name='level'
-                  label='Level'
+                  label={i18next.t('app:common.level')}
                   valueEnum={{
                     INTERN: 'INTERN',
                     FRESHER: 'FRESHER',
@@ -256,8 +257,8 @@ const ViewUpsertJob = (props: any) => {
                     MIDDLE: 'MIDDLE',
                     SENIOR: 'SENIOR',
                   }}
-                  placeholder='Please select a level'
-                  rules={[{ required: true, message: 'Please select a level!' }]}
+                  placeholder={i18next.t('app:components.admin.job.upsert_job.please_select_a_level')}
+                  rules={[{ required: true, message: i18next.t('app:components.admin.job.upsert_job.please_select_a_level_2') }]}
                 />
               </Col>
 
@@ -265,15 +266,15 @@ const ViewUpsertJob = (props: any) => {
                 <Col span={24} md={6}>
                   <ProForm.Item
                     name='company'
-                    label='Company'
-                    rules={[{ required: true, message: 'Please select a company!' }]}
+                    label={i18next.t('app:common.company')}
+                    rules={[{ required: true, message: i18next.t('app:components.admin.job.upsert_job.please_select_a_company') }]}
                   >
                     <DebounceSelect
                       allowClear
                       showSearch
                       defaultValue={companies}
                       value={companies}
-                      placeholder='Please select a company'
+                      placeholder={i18next.t('app:components.admin.job.upsert_job.please_select_a_company_2')}
                       fetchOptions={fetchCompanyList}
                       onChange={(newValue: any) => {
                         if (newValue?.length === 0 || newValue?.length === 1) {
@@ -289,32 +290,32 @@ const ViewUpsertJob = (props: any) => {
             <Row gutter={[20, 20]}>
               <Col span={24} md={6}>
                 <ProFormDatePicker
-                  label='Start Date'
+                  label={i18next.t('app:components.admin.job.upsert_job.start_date')}
                   name='startDate'
                   normalize={value => value && dayjs(value, 'DD/MM/YYYY')}
                   fieldProps={{
                     format: 'DD/MM/YYYY',
                   }}
-                  rules={[{ required: true, message: 'Please select a start date!' }]}
+                  rules={[{ required: true, message: i18next.t('app:components.admin.job.upsert_job.please_select_a_start_date') }]}
                   placeholder='dd/mm/yyyy'
                 />
               </Col>
               <Col span={24} md={6}>
                 <ProFormDatePicker
-                  label='End Date'
+                  label={i18next.t('app:components.admin.job.upsert_job.end_date')}
                   name='endDate'
                   normalize={value => value && dayjs(value, 'DD/MM/YYYY')}
                   fieldProps={{
                     format: 'DD/MM/YYYY',
                   }}
                   // width="auto"
-                  rules={[{ required: true, message: 'Please select a end date!' }]}
+                  rules={[{ required: true, message: i18next.t('app:components.admin.job.upsert_job.please_select_a_end_date') }]}
                   placeholder='dd/mm/yyyy'
                 />
               </Col>
               <Col span={24} md={6}>
                 <ProFormSwitch
-                  label='Status'
+                  label={i18next.t('app:common.status')}
                   name='isActive'
                   checkedChildren='ACTIVE'
                   unCheckedChildren='INACTIVE'
@@ -327,8 +328,8 @@ const ViewUpsertJob = (props: any) => {
               <Col span={24}>
                 <ProForm.Item
                   name='description'
-                  label='Description'
-                  rules={[{ required: true, message: 'Please enter a description!' }]}
+                  label={i18next.t('app:common.description')}
+                  rules={[{ required: true, message: i18next.t('app:components.admin.job.upsert_job.please_enter_a_description') }]}
                 >
                   <ReactQuill theme='snow' value={value} onChange={setValue} />
                 </ProForm.Item>

@@ -41,6 +41,8 @@ import ApplyModal from '@/components/client/modal/apply.modal';
 import SaveJobButton from '@/components/client/job/SaveJobButton';
 import { useAppSelector } from '@/redux/hooks';
 import { RESUME_STATUS, ResumeStatus } from '@/config/resume-status';
+import i18next from 'i18next';
+
 import 'dayjs/locale/vi';
 dayjs.extend(relativeTime);
 
@@ -84,7 +86,7 @@ const ClientJobDetailPage = () => {
   };
   const handleShareJob = () => {
     navigator.clipboard.writeText(window.location.href);
-    message.success('Copied link to clipboard');
+    message.success(i18next.t('app:pages.job.detail.copied_link_to_clipboard'));
   };
 
   const handlePrintJob = () => {
@@ -125,7 +127,7 @@ const ClientJobDetailPage = () => {
                         onClick={() => navigate('/my-jobs')}
                         className={styles['btn-applied']}
                       >
-                        Applied ·{' '}
+                        {i18next.t('app:pages.job.detail.applied')}{' '}
                         {RESUME_STATUS[applied.status as ResumeStatus]?.label ?? applied.status}
                       </Button>
                     ) : (
@@ -137,7 +139,7 @@ const ClientJobDetailPage = () => {
                         className={styles['btn-apply-header']}
                         disabled={jobDetail.isActive === false}
                       >
-                        {jobDetail.isActive === false ? 'No longer accepting' : 'Apply now'}
+                        {jobDetail.isActive === false ? i18next.t('app:pages.job.detail.no_longer_accepting') : i18next.t('app:pages.job.detail.apply_now')}
                       </Button>
                     )}
                     <SaveJobButton
@@ -146,10 +148,10 @@ const ClientJobDetailPage = () => {
                       className={styles['btn-save']}
                     />
                     <Button icon={<ShareAltOutlined />} onClick={handleShareJob}>
-                      Share
+                      {i18next.t('app:pages.job.detail.share')}
                     </Button>
                     <Button icon={<PrinterOutlined />} onClick={handlePrintJob}>
-                      Print
+                      {i18next.t('app:pages.job.detail.print')}
                     </Button>
                     {/* report company */}
                     <Button
@@ -158,7 +160,7 @@ const ClientJobDetailPage = () => {
                         alert('Report');
                       }}
                     >
-                      Report this company
+                      {i18next.t('app:pages.job.detail.report_this_company')}
                     </Button>
                   </div>
                 </Col>
@@ -169,7 +171,7 @@ const ClientJobDetailPage = () => {
           <Col xs={24} md={16}>
             <Card
               className={styles['job-detail-card']}
-              title={<Title level={4}>Job Details</Title>}
+              title={<Title level={4}>{i18next.t('app:pages.job.detail.job_details')}</Title>}
               bordered={false}
             >
               {/* Job Overview */}
@@ -180,9 +182,9 @@ const ClientJobDetailPage = () => {
                     <div className={styles['overview-item']}>
                       <DollarOutlined className={styles['icon']} />
                       <div>
-                        <Text type='secondary'>Salary: </Text>
+                        <Text type='secondary'>{i18next.t('app:pages.job.detail.salary')}{' '}</Text>
                         <Text strong className={styles['value']}>
-                          {(jobDetail.salary + '')?.replace(/\B(?=(\d{3})+(?!\d))/g, ',')} đ
+                          {(jobDetail.salary + '')?.replace(/\B(?=(\d{3})+(?!\d))/g, ',')} {i18next.t('app:common.d')}
                         </Text>
                       </div>
                     </div>
@@ -190,7 +192,7 @@ const ClientJobDetailPage = () => {
                     <div className={styles['overview-item']}>
                       <EnvironmentOutlined className={styles['icon']} />
                       <div>
-                        <Text type='secondary'>Location: </Text>
+                        <Text type='secondary'>{i18next.t('app:pages.job.detail.location')}{' '}</Text>
                         <Text strong className={styles['value']}>
                           {getLocationName(jobDetail.location)}
                         </Text>
@@ -200,25 +202,25 @@ const ClientJobDetailPage = () => {
                     <div className={styles['overview-item']}>
                       <ClockCircleOutlined className={styles['icon']} />
                       <div>
-                        <Text type='secondary'>Job Type: </Text>
+                        <Text type='secondary'>{i18next.t('app:pages.job.detail.job_type')}{' '}</Text>
                         <Text strong className={styles['value']}>
-                          Full Time
+                          {i18next.t('app:pages.job.detail.full_time')}
                         </Text>
                       </div>
                     </div>
                     <div className={styles['overview-item']}>
                       <TeamOutlined className={styles['icon']} />
                       <div>
-                        <Text type='secondary'>Level: </Text>
+                        <Text type='secondary'>{i18next.t('app:pages.job.detail.level')}{' '}</Text>
                         <Text strong className={styles['value']}>
-                          {jobDetail.level || 'All Levels'}
+                          {jobDetail.level || i18next.t('app:pages.job.detail.all_levels')}
                         </Text>
                       </div>
                     </div>
                     <div className={styles['overview-item']}>
                       <HistoryOutlined className={styles['icon']} />
                       <div>
-                        <Text type='secondary'>Posted On: </Text>
+                        <Text type='secondary'>{i18next.t('app:pages.job.detail.posted_on')}{' '}</Text>
                         <Text strong className={styles['value']}>
                           {dayjs(jobDetail.updatedAt).locale('en').fromNow()}
                         </Text>
@@ -240,7 +242,7 @@ const ClientJobDetailPage = () => {
                 <Col span={24}>
                   <div className={styles['skills-section']}>
                     <Title level={5}>
-                      <TagsOutlined /> Required Skills
+                      <TagsOutlined /> {i18next.t('app:pages.job.detail.required_skills')}
                     </Title>
                     <div className={styles['skills']}>
                       {jobDetail?.skills?.map((item, index) => (
@@ -254,7 +256,7 @@ const ClientJobDetailPage = () => {
 
                 <Col className={styles['job-description-col']} span={24}>
                   {/* Job Description */}
-                  <Title level={5}>Job Description</Title>
+                  <Title level={5}>{i18next.t('app:pages.job.detail.job_description')}</Title>
                   <div className={styles['job-description']}>{parse(jobDetail.description)}</div>
                 </Col>
               </Row>
@@ -266,7 +268,7 @@ const ClientJobDetailPage = () => {
               className={styles['company-card']}
               title={
                 <Title level={4}>
-                  <BankOutlined /> Company Info
+                  <BankOutlined /> {i18next.t('app:pages.job.detail.company_info')}
                 </Title>
               }
               bordered={false}
@@ -281,7 +283,7 @@ const ClientJobDetailPage = () => {
                 />
                 {/* Name */}
                 <Title level={4} className={styles['company-name']}>
-                  {jobDetail.company?.name || 'Unknown Company'}
+                  {jobDetail.company?.name || i18next.t('app:pages.job.detail.unknown_company')}
                 </Title>
 
                 <Divider />
@@ -300,24 +302,24 @@ const ClientJobDetailPage = () => {
                     </Text>
                   )}
                   {!companyDetail?.website && (
-                    <Text className={styles['value']}>Unknown Website</Text>
+                    <Text className={styles['value']}>{i18next.t('app:pages.job.detail.unknown_website')}</Text>
                   )}
                 </div>
                 {/* Email  */}
                 <div className={styles['company-info-item']}>
                   <MailOutlined className={styles['icon']} />
-                  <Text className={styles['value']}>{companyDetail?.email || 'Unknown Email'}</Text>
+                  <Text className={styles['value']}>{companyDetail?.email || i18next.t('app:pages.job.detail.unknown_email')}</Text>
                 </div>
                 {/* Phone number */}
                 <div className={styles['company-info-item']}>
                   <PhoneOutlined className={styles['icon']} />
-                  <Text className={styles['value']}>{companyDetail?.phone || 'Unknown Phone'}</Text>
+                  <Text className={styles['value']}>{companyDetail?.phone || i18next.t('app:pages.job.detail.unknown_phone')}</Text>
                 </div>
 
                 <div className={styles['company-info-item']}>
                   <EnvironmentOutlined className={styles['icon']} />
                   <Text className={styles['value']}>
-                    {companyDetail?.address || 'Unknown Address'}
+                    {companyDetail?.address || i18next.t('app:pages.job.detail.unknown_address')}
                   </Text>
                 </div>
 

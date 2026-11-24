@@ -1,0 +1,13 @@
+{
+  "Overview": {
+    "Introduction": "会社紹介",
+    "NumberOfStaff": "従業員数",
+    "TypeOfBusiness": "業種",
+    "YearOfFoundation": "設立年",
+    "OurSkills": "技術スタック",
+    "CompanyImage": "会社の写真"
+  },
+  "Feature": {
+    "BackToList": "一覧に戻る"
+  }
+}

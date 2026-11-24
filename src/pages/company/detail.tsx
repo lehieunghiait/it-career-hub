@@ -25,6 +25,8 @@ import { ICompanyDetail, IJob } from '@/types/backend';
 import styles from 'styles/client.module.scss';
 import s from 'styles/company-detail.module.scss';
 
+import i18next from 'i18next';
+
 dayjs.extend(relativeTime);
 
 const skillLabel = (value: string) =>
@@ -72,7 +74,7 @@ const JobRow = ({ job, logo }: { job: IJob; logo?: string }) => {
         <div className={s['job-title']}>{job.name}</div>
         <div className={s['job-meta']}>
           <span className={s['salary']}>
-            <DollarOutlined /> {(job.salary ?? 0).toLocaleString('en-US')} đ
+            <DollarOutlined /> {(job.salary ?? 0).toLocaleString('en-US')} {i18next.t('app:common.d')}
           </span>
           <span>
             <EnvironmentOutlined /> {getLocationName(job.location)}
@@ -163,9 +165,9 @@ const ClientCompanyDetailPage = () => {
   const copyLink = async () => {
     try {
       await navigator.clipboard.writeText(window.location.href);
-      message.success('Link copied');
+      message.success(i18next.t('app:pages.company.detail.link_copied'));
     } catch {
-      message.error('Could not copy the link');
+      message.error(i18next.t('app:pages.company.detail.could_not_copy_the_link'));
     }
   };
 
@@ -181,8 +183,8 @@ const ClientCompanyDetailPage = () => {
   if (!company?._id) {
     return (
       <div className={styles['container']} style={{ padding: '80px 15px' }}>
-        <Empty description='Company not found'>
-          <Link to='/company'>Back to companies</Link>
+        <Empty description={i18next.t('app:pages.company.detail.company_not_found')}>
+          <Link to='/company'>{i18next.t('app:pages.company.detail.back_to_companies')}</Link>
         </Empty>
       </div>
     );
@@ -200,9 +202,9 @@ const ClientCompanyDetailPage = () => {
           <CompanyLogo src={company.logo} name={company.name} />
           <div className={s['header-info']}>
             <nav className={s['breadcrumb']}>
-              <Link to='/'>Home</Link>
+              <Link to='/'>{i18next.t('app:common.home')}</Link>
               <RightOutlined />
-              <Link to='/company'>Companies</Link>
+              <Link to='/company'>{i18next.t('app:common.companies')}</Link>
             </nav>
             <h1 className={s['company-name']}>{company.name}</h1>
             <div className={s['header-meta']}>
@@ -214,11 +216,11 @@ const ClientCompanyDetailPage = () => {
               {!!reviewSummary?.reviews.count && (
                 <button className={s['rating-badge']} onClick={() => scrollTo('reviews')}>
                   <StarFilled /> {reviewSummary.reviews.rating.toFixed(1)}
-                  <span>({reviewSummary.reviews.count} reviews)</span>
+                  <span>({reviewSummary.reviews.count} {i18next.t('app:pages.company.detail.reviews')}</span>
                 </button>
               )}
               <span className={s['hiring-badge']}>
-                <span className={s['pulse']} /> {jobs.length} open position
+                <span className={s['pulse']} /> {jobs.length} {i18next.t('app:pages.company.detail.open_position')}
                 {jobs.length === 1 ? '' : 's'}
               </span>
             </div>
@@ -230,7 +232,7 @@ const ClientCompanyDetailPage = () => {
               className={s['primary-btn']}
               onClick={() => scrollTo('jobs')}
             >
-              View jobs <ArrowRightOutlined />
+              {i18next.t('app:pages.company.detail.view_jobs')}{' '}<ArrowRightOutlined />
             </Button>
             {company.website && (
               <Button
@@ -240,7 +242,7 @@ const ClientCompanyDetailPage = () => {
                 target='_blank'
                 rel='noopener nofollow noreferrer'
               >
-                Website
+                {i18next.t('app:common.website')}
               </Button>
             )}
           </div>
@@ -252,19 +254,19 @@ const ClientCompanyDetailPage = () => {
             className={activeTab === 'about' ? s['active'] : ''}
             onClick={() => scrollTo('about')}
           >
-            About
+            {i18next.t('app:pages.company.detail.about')}
           </button>
           <button
             className={activeTab === 'jobs' ? s['active'] : ''}
             onClick={() => scrollTo('jobs')}
           >
-            Jobs <span className={s['count']}>{jobs.length}</span>
+            {i18next.t('app:pages.company.detail.jobs')}{' '}<span className={s['count']}>{jobs.length}</span>
           </button>
           <button
             className={activeTab === 'reviews' ? s['active'] : ''}
             onClick={() => scrollTo('reviews')}
           >
-            Reviews <span className={s['count']}>{reviewSummary?.reviews.count ?? 0}</span>
+            {i18next.t('app:pages.company.detail.reviews_2')}{' '}<span className={s['count']}>{reviewSummary?.reviews.count ?? 0}</span>
           </button>
         </div>
 
@@ -272,23 +274,23 @@ const ClientCompanyDetailPage = () => {
           {/* MAIN */}
           <main className={s['main']}>
             <section className={s['card']} id='company-about'>
-              <h2 className={s['card-title']}>About {company.name}</h2>
+              <h2 className={s['card-title']}>{i18next.t('app:pages.company.detail.about')}{' '}{company.name}</h2>
               <div
                 ref={descRef}
                 className={`${s['description']} ${canExpand && !expanded ? s['clamped'] : ''}`}
               >
-                {company.description ? parse(company.description) : <p>No description yet.</p>}
+                {company.description ? parse(company.description) : <p>{i18next.t('app:pages.company.detail.no_description_yet')}</p>}
               </div>
               {canExpand && (
                 <button className={s['read-more']} onClick={() => setExpanded(v => !v)}>
-                  {expanded ? 'Show less' : 'Read more'}
+                  {expanded ? i18next.t('app:pages.company.detail.show_less') : i18next.t('app:pages.company.detail.read_more')}
                 </button>
               )}
             </section>
 
             {techStack.length > 0 && (
               <section className={s['card']}>
-                <h2 className={s['card-title']}>Tech stack</h2>
+                <h2 className={s['card-title']}>{i18next.t('app:pages.company.detail.tech_stack')}</h2>
                 <div className={s['stack']}>
                   {techStack.map(skill => (
                     <span key={skill} className={s['stack-item']}>
@@ -301,7 +303,7 @@ const ClientCompanyDetailPage = () => {
 
             <section className={s['card']} id='company-jobs'>
               <h2 className={s['card-title']}>
-                Open positions <span className={s['count']}>{jobs.length}</span>
+                {i18next.t('app:pages.company.detail.open_positions')}{' '}<span className={s['count']}>{jobs.length}</span>
               </h2>
               {jobs.length ? (
                 <div className={s['job-list']}>
@@ -310,7 +312,7 @@ const ClientCompanyDetailPage = () => {
                   ))}
                 </div>
               ) : (
-                <Empty description='This company has no open positions right now' />
+                <Empty description={i18next.t('app:pages.company.detail.this_company_has_no_open_positions')} />
               )}
             </section>
 
@@ -324,13 +326,13 @@ const ClientCompanyDetailPage = () => {
           {/* SIDEBAR */}
           <aside className={s['sidebar']}>
             <section className={s['card']}>
-              <h2 className={s['card-title']}>General information</h2>
+              <h2 className={s['card-title']}>{i18next.t('app:pages.company.detail.general_information')}</h2>
               <ul className={s['info-list']}>
                 {company.address && (
                   <li>
                     <EnvironmentOutlined />
                     <div>
-                      <span className={s['info-label']}>Address</span>
+                      <span className={s['info-label']}>{i18next.t('app:common.address')}</span>
                       <span>{company.address}</span>
                       <a
                         href={`https://www.google.com/maps/search/?api=1&query=${encodeURIComponent(
@@ -339,7 +341,7 @@ const ClientCompanyDetailPage = () => {
                         target='_blank'
                         rel='noopener noreferrer'
                       >
-                        View on map
+                        {i18next.t('app:pages.company.detail.view_on_map')}
                       </a>
                     </div>
                   </li>
@@ -348,7 +350,7 @@ const ClientCompanyDetailPage = () => {
                   <li>
                     <ShopOutlined />
                     <div>
-                      <span className={s['info-label']}>Working locations</span>
+                      <span className={s['info-label']}>{i18next.t('app:pages.company.detail.working_locations')}</span>
                       <span>{jobLocations.join(', ')}</span>
                     </div>
                   </li>
@@ -356,9 +358,9 @@ const ClientCompanyDetailPage = () => {
                 <li>
                   <TeamOutlined />
                   <div>
-                    <span className={s['info-label']}>Hiring now</span>
+                    <span className={s['info-label']}>{i18next.t('app:pages.company.detail.hiring_now')}</span>
                     <span>
-                      {jobs.reduce((sum, job) => sum + (job.quantity || 0), 0)} openings across{' '}
+                      {jobs.reduce((sum, job) => sum + (job.quantity || 0), 0)} {i18next.t('app:pages.company.detail.openings_across')}{' '}
                       {jobs.length} jobs
                     </span>
                   </div>
@@ -367,7 +369,7 @@ const ClientCompanyDetailPage = () => {
                   <li>
                     <GlobalOutlined />
                     <div>
-                      <span className={s['info-label']}>Website</span>
+                      <span className={s['info-label']}>{i18next.t('app:common.website')}</span>
                       <a href={company.website} target='_blank' rel='noopener nofollow noreferrer'>
                         {company.website.replace(/(^\w+:|^)\/\//, '')}
                       </a>
@@ -378,7 +380,7 @@ const ClientCompanyDetailPage = () => {
                   <li>
                     <PhoneOutlined />
                     <div>
-                      <span className={s['info-label']}>Phone</span>
+                      <span className={s['info-label']}>{i18next.t('app:common.phone')}</span>
                       <a href={`tel:${company.phone}`}>{company.phone}</a>
                     </div>
                   </li>
@@ -387,7 +389,7 @@ const ClientCompanyDetailPage = () => {
                   <li>
                     <MailOutlined />
                     <div>
-                      <span className={s['info-label']}>Email</span>
+                      <span className={s['info-label']}>{i18next.t('app:common.email')}</span>
                       <a href={`mailto:${company.email}`}>{company.email}</a>
                     </div>
                   </li>
@@ -396,9 +398,9 @@ const ClientCompanyDetailPage = () => {
             </section>
 
             <section className={`${s['card']} ${s['share-card']}`}>
-              <h2 className={s['card-title']}>Share this company</h2>
+              <h2 className={s['card-title']}>{i18next.t('app:pages.company.detail.share_this_company')}</h2>
               <Button block icon={<CopyOutlined />} onClick={copyLink}>
-                Copy link
+                {i18next.t('app:pages.company.detail.copy_link')}
               </Button>
             </section>
           </aside>

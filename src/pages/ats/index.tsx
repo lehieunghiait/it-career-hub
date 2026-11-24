@@ -18,6 +18,8 @@ import { useNavigate } from 'react-router-dom';
 import styles from '@/styles/client.module.scss';
 import s from '@/styles/ats-landing.module.scss';
 
+import i18next from 'i18next';
+
 // Becomes true once the element scrolls into view (used for reveal + count-up)
 const useInView = <T extends HTMLElement>(threshold = 0.2) => {
   const ref = useRef<T>(null);
@@ -111,11 +113,11 @@ const RING_RADIUS = 52;
 const RING_LENGTH = 2 * Math.PI * RING_RADIUS;
 
 const DEMO_KEYWORDS = [
-  { label: 'React', matched: true },
-  { label: 'TypeScript', matched: true },
-  { label: 'Node.js', matched: true },
-  { label: 'REST API', matched: true },
-  { label: 'Docker', matched: false },
+  { get label() { return i18next.t('app:pages.ats.index.react'); }, matched: true },
+  { get label() { return i18next.t('app:pages.ats.index.typescript'); }, matched: true },
+  { get label() { return i18next.t('app:pages.ats.index.node_js'); }, matched: true },
+  { get label() { return i18next.t('app:pages.ats.index.rest_api'); }, matched: true },
+  { get label() { return i18next.t('app:pages.ats.index.docker'); }, matched: false },
   { label: 'AWS', matched: false },
 ];
 
@@ -129,7 +131,7 @@ const ScanCard = () => {
         <div className={s['file-chip']}>
           <FileSearchOutlined /> nguyen-van-a_cv.pdf
         </div>
-        <span className={s['live-dot']}>Analyzing</span>
+        <span className={s['live-dot']}>{i18next.t('app:pages.ats.index.analyzing')}</span>
       </div>
 
       <div className={s['scan-body']}>
@@ -165,7 +167,7 @@ const ScanCard = () => {
           </svg>
           <div className={s['score-text']}>
             <span className={s['score-number']}>{score}</span>
-            <span className={s['score-caption']}>ATS Score</span>
+            <span className={s['score-caption']}>{i18next.t('app:pages.ats.index.ats_score')}</span>
           </div>
         </div>
       </div>
@@ -205,27 +207,26 @@ const MARQUEE_WORDS = [
 const BENEFITS = [
   {
     icon: <ThunderboltOutlined />,
-    title: 'Get Past the First Filter',
-    description:
-      'Optimize your CV to rank higher in ATS scoring algorithms and reach human recruiters.',
+    get title() { return i18next.t('app:pages.ats.index.get_past_the_first_filter'); },
+    get description() { return i18next.t('app:pages.ats.index.optimize_your_cv_to_rank_higher'); },
     tone: 'orange',
   },
   {
     icon: <LineChartOutlined />,
-    title: 'Increase Interview Chances',
-    description: 'ATS-optimized CVs have 3x higher chance of getting interview callbacks.',
+    get title() { return i18next.t('app:pages.ats.index.increase_interview_chances'); },
+    get description() { return i18next.t('app:pages.ats.index.ats_optimized_cvs_have_3x_higher'); },
     tone: 'green',
   },
   {
     icon: <BulbOutlined />,
-    title: 'Know What to Improve',
-    description: 'Get actionable insights on missing keywords, skills, and formatting issues.',
+    get title() { return i18next.t('app:pages.ats.index.know_what_to_improve'); },
+    get description() { return i18next.t('app:pages.ats.index.get_actionable_insights_on_missing_keywords'); },
     tone: 'gold',
   },
   {
     icon: <TrophyOutlined />,
-    title: 'Stand Out from Competition',
-    description: 'Beat 80% of candidates who submit non-optimized resumes.',
+    get title() { return i18next.t('app:pages.ats.index.stand_out_from_competition'); },
+    get description() { return i18next.t('app:pages.ats.index.beat_80_of_candidates_who_submit'); },
     tone: 'violet',
   },
 ];
@@ -233,31 +234,31 @@ const BENEFITS = [
 const STEPS = [
   {
     icon: <CloudUploadOutlined />,
-    title: 'Upload Your CV',
-    description: 'Upload your resume in PDF or DOC format',
+    get title() { return i18next.t('app:pages.ats.index.upload_your_cv'); },
+    get description() { return i18next.t('app:pages.ats.index.upload_your_resume_in_pdf_or'); },
   },
   {
     icon: <FileSearchOutlined />,
-    title: 'Select Target Job',
-    description: 'Choose the job position you want to apply for',
+    get title() { return i18next.t('app:pages.ats.index.select_target_job'); },
+    get description() { return i18next.t('app:pages.ats.index.choose_the_job_position_you_want'); },
   },
   {
     icon: <ThunderboltOutlined />,
-    title: 'AI Analysis',
-    description: 'Our AI scans and compares your CV with job requirements',
+    get title() { return i18next.t('app:pages.ats.index.ai_analysis'); },
+    get description() { return i18next.t('app:pages.ats.index.our_ai_scans_and_compares_your'); },
   },
   {
     icon: <TrophyOutlined />,
-    title: 'Get Results',
-    description: 'Receive detailed ATS score and improvement recommendations',
+    get title() { return i18next.t('app:pages.ats.index.get_results'); },
+    get description() { return i18next.t('app:pages.ats.index.receive_detailed_ats_score_and_improvement'); },
   },
 ];
 
 const REPORT_BARS = [
-  { label: 'Keyword match', value: 82 },
-  { label: 'Skills match', value: 90 },
-  { label: 'Experience match', value: 75 },
-  { label: 'Format quality', value: 95 },
+  { get label() { return i18next.t('app:pages.ats.index.keyword_match'); }, value: 82 },
+  { get label() { return i18next.t('app:pages.ats.index.skills_match'); }, value: 90 },
+  { get label() { return i18next.t('app:pages.ats.index.experience_match'); }, value: 75 },
+  { get label() { return i18next.t('app:pages.ats.index.format_quality'); }, value: 95 },
 ];
 
 const TESTIMONIALS = [
@@ -289,7 +290,7 @@ const ReportPreview = () => {
   return (
     <div ref={ref} className={`${s['report-card']} ${inView ? s['is-active'] : ''}`}>
       <div className={s['report-header']}>
-        <span>Analysis report</span>
+        <span>{i18next.t('app:pages.ats.index.analysis_report')}</span>
         <span className={s['report-score']}>87 / 100</span>
       </div>
       {REPORT_BARS.map((bar, i) => (
@@ -310,8 +311,7 @@ const ReportPreview = () => {
         </div>
       ))}
       <div className={s['report-tip']}>
-        <BulbOutlined /> Add <b>Docker</b> and <b>AWS</b> experience to raise your score by ~9
-        points.
+        <BulbOutlined /> {i18next.t('app:pages.ats.index.add')}{' '}<b>{i18next.t('app:pages.ats.index.docker')}</b> and <b>AWS</b> {i18next.t('app:pages.ats.index.experience_to_raise_your_score_by')}
       </div>
     </div>
   );
@@ -333,17 +333,15 @@ const ATSLandingPage = () => {
             <Col xs={24} lg={12}>
               <div className={s['hero-content']}>
                 <div className={s['badge']}>
-                  <span className={s['badge-dot']} /> AI-Powered CV Analysis
+                  <span className={s['badge-dot']} /> {i18next.t('app:pages.ats.index.ai_powered_cv_analysis')}
                 </div>
                 <h1 className={s['hero-title']}>
-                  Beat the ATS System,
+                  {i18next.t('app:pages.ats.index.beat_the_ats_system')}
                   <br />
-                  <span className={s['highlight']}>Land Your Dream Job</span>
+                  <span className={s['highlight']}>{i18next.t('app:pages.ats.index.land_your_dream_job')}</span>
                 </h1>
                 <p className={s['hero-description']}>
-                  75% of resumes are rejected by ATS before reaching human recruiters. Our
-                  AI-powered analyzer scores your CV against real job requirements and shows you
-                  exactly what to fix.
+                  {i18next.t('app:pages.ats.index.t_75_of_resumes_are_rejected_by')}
                 </p>
                 <div className={s['hero-actions']}>
                   <Button
@@ -353,7 +351,7 @@ const ATSLandingPage = () => {
                     onClick={goAnalyze}
                     className={s['cta-button']}
                   >
-                    Analyze Your CV Now
+                    {i18next.t('app:pages.ats.index.analyze_your_cv_now')}
                   </Button>
                   <Button
                     size='large'
@@ -365,13 +363,13 @@ const ATSLandingPage = () => {
                         ?.scrollIntoView({ behavior: 'smooth' })
                     }
                   >
-                    How It Works
+                    {i18next.t('app:pages.ats.index.how_it_works')}
                   </Button>
                 </div>
                 <div className={s['hero-stats']}>
-                  <CountStat value={10000} suffix='+' label='CVs Analyzed' />
-                  <CountStat value={85} suffix='%' label='Success Rate' />
-                  <CountStat value={4.8} decimals={1} suffix='/5' label='User Rating' />
+                  <CountStat value={10000} suffix='+' label={i18next.t('app:pages.ats.index.cvs_analyzed')} />
+                  <CountStat value={85} suffix='%' label={i18next.t('app:pages.ats.index.success_rate')} />
+                  <CountStat value={4.8} decimals={1} suffix='/5' label={i18next.t('app:pages.ats.index.user_rating')} />
                 </div>
               </div>
             </Col>
@@ -398,10 +396,10 @@ const ATSLandingPage = () => {
         <div className={styles['container']}>
           <Reveal>
             <div className={s['section-header']}>
-              <span className={s['eyebrow']}>The basics</span>
-              <h2 className={s['section-title']}>What is an Applicant Tracking System?</h2>
+              <span className={s['eyebrow']}>{i18next.t('app:pages.ats.index.the_basics')}</span>
+              <h2 className={s['section-title']}>{i18next.t('app:pages.ats.index.what_is_an_applicant_tracking_system')}</h2>
               <p className={s['section-subtitle']}>
-                Understanding the technology that screens your resume
+                {i18next.t('app:pages.ats.index.understanding_the_technology_that_screens_your')}
               </p>
             </div>
           </Reveal>
@@ -412,10 +410,9 @@ const ATSLandingPage = () => {
                   <div className={`${s['icon-badge']} ${s['orange']}`}>
                     <SafetyCertificateOutlined />
                   </div>
-                  <h3>The Challenge</h3>
+                  <h3>{i18next.t('app:pages.ats.index.the_challenge')}</h3>
                   <p>
-                    <strong>ATS</strong> is software used by 99% of Fortune 500 companies to
-                    automatically screen resumes. It scans, parses, and ranks candidates based on:
+                    <strong>ATS</strong> {i18next.t('app:pages.ats.index.is_software_used_by_99_of')}
                   </p>
                   <ul className={s['check-list']}>
                     {[
@@ -439,14 +436,14 @@ const ATSLandingPage = () => {
                   <div className={`${s['icon-badge']} ${s['violet']}`}>
                     <TrophyOutlined />
                   </div>
-                  <h3>The Reality</h3>
+                  <h3>{i18next.t('app:pages.ats.index.the_reality')}</h3>
                   <div className={s['reality-grid']}>
                     {[
-                      { big: '75%', text: 'of resumes never reach human recruiters' },
-                      { big: '6 sec', text: 'average time ATS spends scanning a resume' },
+                      { big: '75%', text: i18next.t('app:pages.ats.index.of_resumes_never_reach_human_recruiters') },
+                      { big: '6 sec', text: i18next.t('app:pages.ats.index.average_time_ats_spends_scanning_a') },
                       {
                         big: '43%',
-                        text: 'of qualified candidates are rejected due to poor CV formatting',
+                        text: i18next.t('app:pages.ats.index.of_qualified_candidates_are_rejected_due'),
                       },
                     ].map(item => (
                       <div key={item.big} className={s['reality-item']}>
@@ -467,8 +464,8 @@ const ATSLandingPage = () => {
         <div className={styles['container']}>
           <Reveal>
             <div className={s['section-header']}>
-              <span className={s['eyebrow']}>Why it matters</span>
-              <h2 className={s['section-title']}>Why Your CV Needs ATS Optimization</h2>
+              <span className={s['eyebrow']}>{i18next.t('app:pages.ats.index.why_it_matters')}</span>
+              <h2 className={s['section-title']}>{i18next.t('app:pages.ats.index.why_your_cv_needs_ats_optimization')}</h2>
             </div>
           </Reveal>
           <Row gutter={[24, 24]}>
@@ -492,9 +489,9 @@ const ATSLandingPage = () => {
         <div className={styles['container']}>
           <Reveal>
             <div className={s['section-header']}>
-              <span className={s['eyebrow']}>How it works</span>
-              <h2 className={s['section-title']}>From upload to insights in 4 steps</h2>
-              <p className={s['section-subtitle']}>It takes about 10 seconds</p>
+              <span className={s['eyebrow']}>{i18next.t('app:pages.ats.index.how_it_works_2')}</span>
+              <h2 className={s['section-title']}>{i18next.t('app:pages.ats.index.from_upload_to_insights_in_4')}</h2>
+              <p className={s['section-subtitle']}>{i18next.t('app:pages.ats.index.it_takes_about_10_seconds')}</p>
             </div>
           </Reveal>
           <div className={s['steps']}>
@@ -518,9 +515,9 @@ const ATSLandingPage = () => {
           <Row gutter={[{ xs: 0, lg: 30 }, 40]} align='middle'>
             <Col xs={24} lg={11}>
               <Reveal>
-                <span className={s['eyebrow']}>What you get</span>
+                <span className={s['eyebrow']}>{i18next.t('app:pages.ats.index.what_you_get')}</span>
                 <h2 className={s['section-title']} style={{ textAlign: 'left' }}>
-                  A report that tells you exactly what to fix
+                  {i18next.t('app:pages.ats.index.a_report_that_tells_you_exactly')}
                 </h2>
                 <ul className={s['feature-list']}>
                   {[
@@ -552,8 +549,8 @@ const ATSLandingPage = () => {
         <div className={styles['container']}>
           <Reveal>
             <div className={s['section-header']}>
-              <span className={s['eyebrow']}>Testimonials</span>
-              <h2 className={s['section-title']}>What Our Users Say</h2>
+              <span className={s['eyebrow']}>{i18next.t('app:pages.ats.index.testimonials')}</span>
+              <h2 className={s['section-title']}>{i18next.t('app:pages.ats.index.what_our_users_say')}</h2>
             </div>
           </Reveal>
           <Row gutter={[24, 24]}>
@@ -587,8 +584,8 @@ const ATSLandingPage = () => {
         <div className={styles['container']}>
           <Reveal>
             <div className={s['cta-content']}>
-              <h2>Ready to optimize your CV?</h2>
-              <p>Get your ATS score and a personalized improvement plan in seconds.</p>
+              <h2>{i18next.t('app:pages.ats.index.ready_to_optimize_your_cv')}</h2>
+              <p>{i18next.t('app:pages.ats.index.get_your_ats_score_and_a')}</p>
               <div className={s['hero-actions']} style={{ justifyContent: 'center' }}>
                 <Button
                   size='large'
@@ -596,7 +593,7 @@ const ATSLandingPage = () => {
                   onClick={goAnalyze}
                   className={s['cta-light']}
                 >
-                  Analyze Your CV Now
+                  {i18next.t('app:pages.ats.index.analyze_your_cv_now')}
                 </Button>
                 <Button
                   size='large'
@@ -604,11 +601,11 @@ const ATSLandingPage = () => {
                   className={s['ghost-button']}
                   onClick={() => navigate('/job')}
                 >
-                  Browse IT Jobs <ArrowRightOutlined />
+                  {i18next.t('app:pages.ats.index.browse_it_jobs')}{' '}<ArrowRightOutlined />
                 </Button>
               </div>
               <div className={s['cta-note']}>
-                <CheckCircleFilled /> Free to use · Instant results · Powered by AI
+                <CheckCircleFilled /> {i18next.t('app:pages.ats.index.free_to_use_instant_results_powered')}
               </div>
             </div>
           </Reveal>

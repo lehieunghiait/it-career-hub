@@ -18,6 +18,8 @@ import dayjs from 'dayjs';
 import { useIsMobile } from '@/hooks/useIsMobile';
 import { useState, useEffect } from 'react';
 
+import i18next from 'i18next';
+
 interface IProps {
   onClose: (v: boolean) => void;
   open: boolean;
@@ -37,19 +39,19 @@ const ViewDetailResume = (props: IProps) => {
 
     const { status, note } = form.getFieldsValue();
     if (status === dataInit?.status && !note?.trim()) {
-      message.info('Choose a new status or write a note for the candidate');
+      message.info(i18next.t('app:components.admin.resume.view_resume.choose_a_new_status_or_write'));
       setIsSubmit(false);
       return;
     }
     const res = await callUpdateResumeStatus(dataInit?._id, status, note?.trim() || undefined);
     if (res.data) {
-      message.success('Update Resume status successfully!');
+      message.success(i18next.t('app:components.admin.resume.view_resume.update_resume_status_successfully'));
       setDataInit(null);
       onClose(false);
       reloadTable();
     } else {
       notification.error({
-        message: 'An error occurred',
+        message: i18next.t('app:common.an_error_occurred'),
         description: res.message,
       });
     }
@@ -67,7 +69,7 @@ const ViewDetailResume = (props: IProps) => {
   return (
     <>
       <Drawer
-        title={'Resume Detail'}
+        title={i18next.t('app:components.admin.resume.view_resume.resume_detail')}
         placement='right'
         onClose={() => {
           onClose(false);
@@ -84,14 +86,14 @@ const ViewDetailResume = (props: IProps) => {
             type='primary'
             onClick={handleChangeStatus}
           >
-            Update Status
+            {i18next.t('app:components.admin.resume.view_resume.update_status')}
           </Button>
         }
       >
         <Form form={form} layout='vertical'>
           <Descriptions title='' bordered column={isMobile ? 1 : 2} layout='vertical'>
-            <Descriptions.Item label='Email'>{dataInit?.email}</Descriptions.Item>
-            <Descriptions.Item label='Status'>
+            <Descriptions.Item label={i18next.t('app:common.email')}>{dataInit?.email}</Descriptions.Item>
+            <Descriptions.Item label={i18next.t('app:common.status')}>
               <Form.Item name={'status'} style={{ marginBottom: 0 }}>
                 <Select
                   style={{ width: '100%' }}
@@ -102,14 +104,14 @@ const ViewDetailResume = (props: IProps) => {
                 />
               </Form.Item>
             </Descriptions.Item>
-            <Descriptions.Item label='Job Name'>{dataInit?.jobId?.name}</Descriptions.Item>
-            <Descriptions.Item label='Company Name'>{dataInit?.companyId?.name}</Descriptions.Item>
-            <Descriptions.Item label='Created At'>
+            <Descriptions.Item label={i18next.t('app:components.admin.resume.view_resume.job_name')}>{dataInit?.jobId?.name}</Descriptions.Item>
+            <Descriptions.Item label={i18next.t('app:components.admin.resume.view_resume.company_name')}>{dataInit?.companyId?.name}</Descriptions.Item>
+            <Descriptions.Item label={i18next.t('app:components.admin.resume.view_resume.created_at')}>
               {dataInit && dataInit.createdAt
                 ? dayjs(dataInit.createdAt).format('DD-MM-YYYY HH:mm:ss')
                 : ''}
             </Descriptions.Item>
-            <Descriptions.Item label='Modified At'>
+            <Descriptions.Item label={i18next.t('app:components.admin.resume.view_resume.modified_at')}>
               {dataInit && dataInit.updatedAt
                 ? dayjs(dataInit.updatedAt).format('DD-MM-YYYY HH:mm:ss')
                 : ''}
@@ -119,8 +121,8 @@ const ViewDetailResume = (props: IProps) => {
           <Form.Item
             style={{ marginTop: 20 }}
             name='note'
-            label='Message to the candidate (optional)'
-            extra='Shown on the candidate timeline, e.g. interview time, place or meeting link.'
+            label={i18next.t('app:components.admin.resume.view_resume.message_to_the_candidate_optional')}
+            extra={i18next.t('app:components.admin.resume.view_resume.shown_on_the_candidate_timeline_e')}
           >
             <Input.TextArea rows={3} maxLength={500} showCount />
           </Form.Item>
@@ -128,7 +130,7 @@ const ViewDetailResume = (props: IProps) => {
 
         {dataInit?.history?.length > 0 && (
           <>
-            <h4 style={{ margin: '8px 0 16px' }}>Status history</h4>
+            <h4 style={{ margin: '8px 0 16px' }}>{i18next.t('app:components.admin.resume.view_resume.status_history')}</h4>
             <Timeline
               items={[...dataInit.history].reverse().map((item: any) => ({
                 color: RESUME_STATUS[item.status as ResumeStatus]?.color ?? 'gray',

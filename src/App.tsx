@@ -35,6 +35,7 @@ import MyJobsPage from './pages/my-jobs';
 import CvListPage from './pages/cv';
 import CvEditorPage from './pages/cv/editor';
 import SalaryPage from './pages/salary';
+import InterviewPage from './pages/interview';
 
 const LayoutClient = () => {
   const [searchTerm, setSearchTerm] = useState('');
@@ -92,6 +93,7 @@ export default function App() {
         { path: 'cv', element: <CvListPage /> },
         { path: 'cv/:id', element: <CvEditorPage /> },
         { path: 'salary', element: <SalaryPage /> },
+        { path: 'interview/:token', element: <InterviewPage /> },
       ],
     },
 

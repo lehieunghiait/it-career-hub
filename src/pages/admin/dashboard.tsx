@@ -5,6 +5,7 @@ import type { ColumnsType } from 'antd/es/table';
 import {
   BankOutlined,
   CalendarFilled,
+  RobotFilled,
   CheckCircleFilled,
   ClockCircleFilled,
   CloseCircleFilled,
@@ -36,6 +37,8 @@ import { useAppSelector } from '@/redux/hooks';
 import CompanyLogo from '@/components/client/common/CompanyLogo';
 import s from '@/styles/dashboard.module.scss';
 
+import i18next from 'i18next';
+
 dayjs.extend(relativeTime);
 
 // Validated categorical slots (dataviz reference palette) + chart chrome
@@ -45,11 +48,12 @@ const AXIS_INK = '#898781';
 
 // Status colors are reserved for state and always shown with an icon + label
 const STATUS: Record<string, { label: string; color: string; icon: React.ReactNode }> = {
-  PENDING: { label: 'Pending', color: '#fab219', icon: <ClockCircleFilled /> },
-  REVIEWING: { label: 'Reviewing', color: '#2a78d6', icon: <EyeFilled /> },
-  INTERVIEW: { label: 'Interview', color: '#7a5cc8', icon: <CalendarFilled /> },
-  APPROVED: { label: 'Approved', color: '#0ca30c', icon: <CheckCircleFilled /> },
-  REJECTED: { label: 'Rejected', color: '#d03b3b', icon: <CloseCircleFilled /> },
+  PENDING: { get label() { return i18next.t('app:pages.admin.dashboard.pending'); }, color: '#fab219', icon: <ClockCircleFilled /> },
+  REVIEWING: { get label() { return i18next.t('app:pages.admin.dashboard.reviewing'); }, color: '#2a78d6', icon: <EyeFilled /> },
+  AI_SCREENING: { get label() { return i18next.t('app:common.ai_interview'); }, color: '#0891b2', icon: <RobotFilled /> },
+  INTERVIEW: { get label() { return i18next.t('app:common.interview'); }, color: '#7a5cc8', icon: <CalendarFilled /> },
+  APPROVED: { get label() { return i18next.t('app:pages.admin.dashboard.approved'); }, color: '#0ca30c', icon: <CheckCircleFilled /> },
+  REJECTED: { get label() { return i18next.t('app:pages.admin.dashboard.rejected'); }, color: '#d03b3b', icon: <CloseCircleFilled /> },
 };
 const LEVEL_ORDER = ['INTERN', 'FRESHER', 'JUNIOR', 'MIDDLE', 'SENIOR'];
 
@@ -57,9 +61,9 @@ const skillLabel = (value: string) => SKILLS_LIST.find(i => i.value === value)?.
 
 const greeting = () => {
   const hour = new Date().getHours();
-  if (hour < 12) return 'Good morning';
-  if (hour < 18) return 'Good afternoon';
-  return 'Good evening';
+  if (hour < 12) return i18next.t('app:pages.admin.dashboard.good_morning');
+  if (hour < 18) return i18next.t('app:pages.admin.dashboard.good_afternoon');
+  return i18next.t('app:pages.admin.dashboard.good_evening');
 };
 
 const ChartTooltip = ({ active, payload, label, unit = 'jobs' }: any) => {
@@ -144,7 +148,7 @@ const HBarChart = ({
       </BarChart>
     </ResponsiveContainer>
   ) : (
-    <Empty image={Empty.PRESENTED_IMAGE_SIMPLE} description='No data yet' />
+    <Empty image={Empty.PRESENTED_IMAGE_SIMPLE} description={i18next.t('app:pages.admin.dashboard.no_data_yet')} />
   );
 
 const DashboardPage = () => {
@@ -192,7 +196,7 @@ const DashboardPage = () => {
 
   const kpis = [
     {
-      label: 'Active jobs',
+      label: i18next.t('app:pages.admin.dashboard.active_jobs'),
       value: overview?.activeJobs ?? 0,
       note: `${overview?.totalJobs ?? 0} total · ${overview?.inactiveJobs ?? 0} inactive`,
       icon: <ScheduleOutlined />,
@@ -200,7 +204,7 @@ const DashboardPage = () => {
       to: '/admin/job',
     },
     {
-      label: 'Applications',
+      label: i18next.t('app:pages.admin.dashboard.applications'),
       value: totalResumes,
       note: `${pending} waiting for review`,
       icon: <FileDoneOutlined />,
@@ -208,7 +212,7 @@ const DashboardPage = () => {
       to: '/admin/resume',
     },
     {
-      label: 'Companies',
+      label: i18next.t('app:common.companies'),
       value: overview?.totalCompanies ?? 0,
       note: `${insights?.topCompanies.filter(c => c.jobs > 0).length ?? 0} hiring now`,
       icon: <BankOutlined />,
@@ -216,7 +220,7 @@ const DashboardPage = () => {
       to: '/admin/company',
     },
     {
-      label: 'Users',
+      label: i18next.t('app:pages.admin.dashboard.users'),
       value: overview?.totalUsers ?? 0,
       note: 'Candidates & recruiters',
       icon: <TeamOutlined />,
@@ -227,13 +231,13 @@ const DashboardPage = () => {
 
   const recentColumns: ColumnsType<IDashboardInsights['recentResumes'][number]> = [
     {
-      title: 'Candidate',
+      title: i18next.t('app:pages.admin.dashboard.candidate'),
       dataIndex: 'email',
       ellipsis: true,
       render: (email: string) => <span className={s['strong']}>{email}</span>,
     },
     {
-      title: 'Job',
+      title: i18next.t('app:pages.admin.dashboard.job'),
       ellipsis: true,
       render: (_, r) => (
         <div className={s['job-cell']}>
@@ -250,7 +254,7 @@ const DashboardPage = () => {
       ),
     },
     {
-      title: 'Status',
+      title: i18next.t('app:common.status'),
       dataIndex: 'status',
       width: 130,
       render: (status: string) => {
@@ -265,7 +269,7 @@ const DashboardPage = () => {
       },
     },
     {
-      title: 'Applied',
+      title: i18next.t('app:common.applied'),
       dataIndex: 'createdAt',
       width: 130,
       render: (date: string) => dayjs(date).locale('en').fromNow(),
@@ -300,20 +304,20 @@ const DashboardPage = () => {
           </h2>
           <p>
             {dayjs().locale('en').format('dddd, D MMMM YYYY')} · {pending} application
-            {pending === 1 ? '' : 's'} waiting for review
+            {pending === 1 ? '' : 's'} {i18next.t('app:pages.admin.dashboard.waiting_for_review')}
           </p>
         </div>
         <div className={s['actions']}>
-          <AntTooltip title='Refresh data'>
+          <AntTooltip title={i18next.t('app:pages.admin.dashboard.refresh_data')}>
             <Button icon={<ReloadOutlined spin={loading} />} onClick={load} aria-label='Refresh' />
           </AntTooltip>
-          <Button onClick={() => navigate('/admin/resume')}>Review applications</Button>
+          <Button onClick={() => navigate('/admin/resume')}>{i18next.t('app:pages.admin.dashboard.review_applications')}</Button>
           <Button
             type='primary'
             icon={<PlusOutlined />}
             onClick={() => navigate('/admin/job/upsert')}
           >
-            Post a job
+            {i18next.t('app:pages.admin.dashboard.post_a_job')}
           </Button>
         </div>
       </div>
@@ -335,15 +339,15 @@ const DashboardPage = () => {
       {/* ACTIVITY + PIPELINE */}
       <div className={s['grid-2-1']}>
         <Panel
-          title='Hiring activity'
-          subtitle='Jobs posted and applications received · last 30 days'
+          title={i18next.t('app:pages.admin.dashboard.hiring_activity')}
+          subtitle={i18next.t('app:pages.admin.dashboard.jobs_posted_and_applications_received_last')}
           extra={
             <div className={s['legend']}>
               <span>
-                <i style={{ background: SERIES.jobs }} /> Jobs posted <b>{activityTotals.jobs}</b>
+                <i style={{ background: SERIES.jobs }} /> {i18next.t('app:pages.admin.dashboard.jobs_posted')}{' '}<b>{activityTotals.jobs}</b>
               </span>
               <span>
-                <i style={{ background: SERIES.resumes }} /> Applications{' '}
+                <i style={{ background: SERIES.resumes }} /> {i18next.t('app:pages.admin.dashboard.applications')}{' '}
                 <b>{activityTotals.resumes}</b>
               </span>
             </div>
@@ -402,7 +406,7 @@ const DashboardPage = () => {
           </ResponsiveContainer>
         </Panel>
 
-        <Panel title='Application pipeline' subtitle={`${totalResumes} applications in total`}>
+        <Panel title={i18next.t('app:pages.admin.dashboard.application_pipeline')} subtitle={i18next.t('app:pages.admin.dashboard.applications_in_total', { v0: totalResumes })}>
           <div className={s['pipeline']}>
             {statusCounts.map(({ key, count }) => {
               const meta = STATUS[key];
@@ -425,7 +429,7 @@ const DashboardPage = () => {
             })}
             {totalResumes === 0 && (
               <p className={s['hint']}>
-                No applications yet. They will show up here as candidates apply.
+                {i18next.t('app:pages.admin.dashboard.no_applications_yet_they_will_show')}
               </p>
             )}
           </div>
@@ -434,7 +438,7 @@ const DashboardPage = () => {
 
       {/* DISTRIBUTIONS */}
       <div className={s['grid-3']}>
-        <Panel title='Jobs by level' subtitle='Seniority of open roles'>
+        <Panel title={i18next.t('app:pages.admin.dashboard.jobs_by_level')} subtitle={i18next.t('app:pages.admin.dashboard.seniority_of_open_roles')}>
           <ResponsiveContainer width='100%' height={220}>
             <BarChart data={levels} margin={{ top: 18, right: 8, bottom: 0, left: -24 }}>
               <CartesianGrid vertical={false} stroke={GRID} />
@@ -463,7 +467,7 @@ const DashboardPage = () => {
           </ResponsiveContainer>
         </Panel>
 
-        <Panel title='Jobs by city' subtitle='Where the openings are'>
+        <Panel title={i18next.t('app:pages.admin.dashboard.jobs_by_city')} subtitle={i18next.t('app:pages.admin.dashboard.where_the_openings_are')}>
           <HBarChart
             height={220}
             data={(insights?.jobsByLocation ?? []).map(r => ({
@@ -473,7 +477,7 @@ const DashboardPage = () => {
           />
         </Panel>
 
-        <Panel title='Most wanted skills' subtitle='Across all job posts'>
+        <Panel title={i18next.t('app:pages.admin.dashboard.most_wanted_skills')} subtitle={i18next.t('app:pages.admin.dashboard.across_all_job_posts')}>
           <HBarChart
             height={220}
             data={(insights?.topSkills ?? [])
@@ -486,11 +490,11 @@ const DashboardPage = () => {
       {/* COMPANIES + EXPIRING */}
       <div className={s['grid-2']}>
         <Panel
-          title='Top hiring companies'
-          subtitle='By number of job posts'
+          title={i18next.t('app:pages.admin.dashboard.top_hiring_companies')}
+          subtitle={i18next.t('app:pages.admin.dashboard.by_number_of_job_posts')}
           extra={
             <Button type='link' onClick={() => navigate('/admin/company')}>
-              Manage
+              {i18next.t('app:pages.admin.dashboard.manage')}
             </Button>
           }
         >
@@ -511,7 +515,7 @@ const DashboardPage = () => {
                   </div>
                 </div>
                 <span className={s['company-count']}>
-                  <b>{c.jobs}</b> jobs · {c.openings} seats
+                  <b>{c.jobs}</b> {i18next.t('app:pages.admin.dashboard.jobs')}{' '}{c.openings} seats
                 </span>
               </div>
             ))}
@@ -520,11 +524,11 @@ const DashboardPage = () => {
         </Panel>
 
         <Panel
-          title='Closing soon'
-          subtitle='Active jobs ending in the next 14 days'
+          title={i18next.t('app:pages.admin.dashboard.closing_soon')}
+          subtitle={i18next.t('app:pages.admin.dashboard.active_jobs_ending_in_the_next')}
           extra={
             <Button type='link' onClick={() => navigate('/admin/job')}>
-              All jobs
+              {i18next.t('app:pages.admin.dashboard.all_jobs')}
             </Button>
           }
         >
@@ -548,7 +552,7 @@ const DashboardPage = () => {
                   </div>
                   <span className={`${s['days']} ${days <= 3 ? s['urgent'] : ''}`}>
                     <ClockCircleFilled />{' '}
-                    {days === 0 ? 'Today' : `${days} day${days === 1 ? '' : 's'} left`}
+                    {days === 0 ? i18next.t('app:pages.admin.dashboard.today') : i18next.t('app:pages.admin.dashboard.day_left', { v0: days, v1: days === 1 ? '' : 's' })}
                   </span>
                 </button>
               );
@@ -556,7 +560,7 @@ const DashboardPage = () => {
             {!insights?.expiringJobs.length && (
               <Empty
                 image={Empty.PRESENTED_IMAGE_SIMPLE}
-                description='Nothing closes in the next 2 weeks'
+                description={i18next.t('app:pages.admin.dashboard.nothing_closes_in_the_next_2')}
               />
             )}
           </div>
@@ -565,10 +569,10 @@ const DashboardPage = () => {
 
       {/* RECENT APPLICATIONS */}
       <Panel
-        title='Latest applications'
+        title={i18next.t('app:pages.admin.dashboard.latest_applications')}
         extra={
           <Button type='link' onClick={() => navigate('/admin/resume')}>
-            View all
+            {i18next.t('app:pages.admin.dashboard.view_all')}
           </Button>
         }
       >
@@ -581,7 +585,7 @@ const DashboardPage = () => {
           scroll={{ x: 640 }}
           locale={{
             emptyText: (
-              <Empty image={Empty.PRESENTED_IMAGE_SIMPLE} description='No applications yet' />
+              <Empty image={Empty.PRESENTED_IMAGE_SIMPLE} description={i18next.t('app:pages.admin.dashboard.no_applications_yet')} />
             ),
           }}
         />

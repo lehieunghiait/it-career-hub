@@ -13,6 +13,8 @@ import ModalRole from '@/components/admin/role/modal.role';
 import { ALL_PERMISSIONS } from '@/config/permissions';
 import Access from '@/components/share/access';
 
+import i18next from 'i18next';
+
 const RolePage = () => {
   const [openModal, setOpenModal] = useState<boolean>(false);
 
@@ -27,11 +29,11 @@ const RolePage = () => {
     if (_id) {
       const res = await callDeleteRole(_id);
       if (res && res.data) {
-        message.success('Xóa Role thành công');
+        message.success(i18next.t('app:pages.admin.role.xoa_role_thanh_cong'));
         reloadTable();
       } else {
         notification.error({
-          message: 'Có lỗi xảy ra',
+          message: i18next.t('app:common.co_loi_xay_ra'),
           description: res.message,
         });
       }
@@ -44,7 +46,7 @@ const RolePage = () => {
 
   const columns: ProColumns<IRole>[] = [
     {
-      title: 'Id',
+      title: i18next.t('app:common.id'),
       responsive: ['xl'],
       dataIndex: '_id',
       width: 250,
@@ -54,12 +56,12 @@ const RolePage = () => {
       hideInSearch: true,
     },
     {
-      title: 'Name',
+      title: i18next.t('app:common.name'),
       dataIndex: 'name',
       sorter: true,
     },
     {
-      title: 'Trạng thái',
+      title: i18next.t('app:pages.admin.role.trang_thai'),
       dataIndex: 'isActive',
       render(dom, entity, index, action, schema) {
         return (
@@ -73,7 +75,7 @@ const RolePage = () => {
       hideInSearch: true,
     },
     {
-      title: 'CreatedAt',
+      title: i18next.t('app:common.createdat'),
       responsive: ['xl'],
       dataIndex: 'createdAt',
       width: 200,
@@ -84,7 +86,7 @@ const RolePage = () => {
       hideInSearch: true,
     },
     {
-      title: 'UpdatedAt',
+      title: i18next.t('app:common.updatedat'),
       responsive: ['lg'],
       dataIndex: 'updatedAt',
       width: 200,
@@ -95,7 +97,7 @@ const RolePage = () => {
       hideInSearch: true,
     },
     {
-      title: 'Actions',
+      title: i18next.t('app:common.actions'),
       fixed: 'right',
       hideInSearch: true,
       width: 100,
@@ -117,11 +119,11 @@ const RolePage = () => {
           <Access permission={ALL_PERMISSIONS.ROLES.DELETE} hideChildren>
             <Popconfirm
               placement='leftTop'
-              title={'Xác nhận xóa role'}
-              description={'Bạn có chắc chắn muốn xóa role này ?'}
+              title={i18next.t('app:pages.admin.role.xac_nhan_xoa_role')}
+              description={i18next.t('app:pages.admin.role.ban_co_chac_chan_muon_xoa')}
               onConfirm={() => handleDeleteRole(entity._id)}
-              okText='Xác nhận'
-              cancelText='Hủy'
+              okText={i18next.t('app:common.xac_nhan')}
+              cancelText={i18next.t('app:common.huy')}
             >
               <span style={{ cursor: 'pointer', margin: '0 10px' }}>
                 <DeleteOutlined
@@ -170,7 +172,7 @@ const RolePage = () => {
       <Access permission={ALL_PERMISSIONS.ROLES.GET_PAGINATE}>
         <DataTable<IRole>
           actionRef={tableRef}
-          headerTitle='List of Roles'
+          headerTitle={i18next.t('app:pages.admin.role.list_of_roles')}
           rowKey='_id'
           loading={isFetching}
           columns={columns}
@@ -198,7 +200,7 @@ const RolePage = () => {
           toolBarRender={(_action, _rows): any => {
             return (
               <Button icon={<PlusOutlined />} type='primary' onClick={() => setOpenModal(true)}>
-                Add new
+                {i18next.t('app:common.add_new')}
               </Button>
             );
           }}

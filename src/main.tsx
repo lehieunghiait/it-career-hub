@@ -5,6 +5,7 @@ import App from './App';
 import { Provider } from 'react-redux';
 import { store } from '@/redux/store';
 import './i18n';
+import AppLocaleProvider from './i18n/AppLocaleProvider';
 
 const CLERK_PUBLISHABLE_KEY = import.meta.env.VITE_CLERK_PUBLISHABLE_KEY as string;
 
@@ -21,7 +22,9 @@ ReactDOM.createRoot(document.getElementById('root') as HTMLElement).render(
       afterSignOutUrl='/'
     >
       <Provider store={store}>
-        <App />
+        <AppLocaleProvider>
+          <App />
+        </AppLocaleProvider>
       </Provider>
     </ClerkProvider>
   </React.StrictMode>

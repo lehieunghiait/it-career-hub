@@ -17,6 +17,8 @@ import _ from 'lodash';
 import { useAppDispatch, useAppSelector } from '@/redux/hooks';
 import { resetSingleRole } from '@/redux/slice/roleSlide';
 
+import i18next from 'i18next';
+
 interface IProps {
   openModal: boolean;
   setOpenModal: (v: boolean) => void;
@@ -108,12 +110,12 @@ const ModalRole = (props: IProps) => {
       };
       const res = await callUpdateRole(role, singleRole._id);
       if (res.data) {
-        message.success('Cập nhật role thành công');
+        message.success(i18next.t('app:components.admin.role.modal_role.cap_nhat_role_thanh_cong'));
         handleReset();
         reloadTable();
       } else {
         notification.error({
-          message: 'Có lỗi xảy ra',
+          message: i18next.t('app:common.co_loi_xay_ra'),
           description: res.message,
         });
       }
@@ -127,12 +129,12 @@ const ModalRole = (props: IProps) => {
       };
       const res = await callCreateRole(role);
       if (res.data) {
-        message.success('Thêm mới role thành công');
+        message.success(i18next.t('app:components.admin.role.modal_role.them_moi_role_thanh_cong'));
         handleReset();
         reloadTable();
       } else {
         notification.error({
-          message: 'Có lỗi xảy ra',
+          message: i18next.t('app:common.co_loi_xay_ra'),
           description: res.message,
         });
       }
@@ -148,7 +150,7 @@ const ModalRole = (props: IProps) => {
   return (
     <>
       <ModalForm
-        title={<>{singleRole?._id ? 'Cập nhật Role' : 'Tạo mới Role'}</>}
+        title={<>{singleRole?._id ? i18next.t('app:components.admin.role.modal_role.cap_nhat_role') : i18next.t('app:components.admin.role.modal_role.tao_moi_role')}</>}
         open={openModal}
         modalProps={{
           onCancel: () => {
@@ -170,23 +172,23 @@ const ModalRole = (props: IProps) => {
             icon: <CheckSquareOutlined />,
           },
           searchConfig: {
-            resetText: 'Hủy',
-            submitText: <>{singleRole?._id ? 'Cập nhật' : 'Tạo mới'}</>,
+            resetText: i18next.t('app:common.huy'),
+            submitText: <>{singleRole?._id ? i18next.t('app:components.admin.role.modal_role.cap_nhat') : i18next.t('app:components.admin.role.modal_role.tao_moi')}</>,
           },
         }}
       >
         <Row gutter={16}>
           <Col lg={12} md={12} sm={24} xs={24}>
             <ProFormText
-              label='Name'
+              label={i18next.t('app:common.name')}
               name='name'
-              rules={[{ required: true, message: 'Please do not leave blank' }]}
-              placeholder='Enter name'
+              rules={[{ required: true, message: i18next.t('app:components.admin.role.modal_role.please_do_not_leave_blank') }]}
+              placeholder={i18next.t('app:components.admin.role.modal_role.enter_name')}
             />
           </Col>
           <Col lg={12} md={12} sm={24} xs={24}>
             <ProFormSwitch
-              label='Status'
+              label={i18next.t('app:common.status')}
               name='isActive'
               checkedChildren='ACTIVE'
               unCheckedChildren='INACTIVE'
@@ -199,10 +201,10 @@ const ModalRole = (props: IProps) => {
 
           <Col span={24}>
             <ProFormTextArea
-              label='Description'
+              label={i18next.t('app:common.description')}
               name='description'
-              rules={[{ required: true, message: 'Please do not leave blank' }]}
-              placeholder='Enter description'
+              rules={[{ required: true, message: i18next.t('app:components.admin.role.modal_role.please_do_not_leave_blank') }]}
+              placeholder={i18next.t('app:components.admin.role.modal_role.enter_description')}
               fieldProps={{
                 autoSize: { minRows: 2 },
               }}
@@ -210,8 +212,8 @@ const ModalRole = (props: IProps) => {
           </Col>
           <Col span={24}>
             <ProCard
-              title='Permissions'
-              subTitle='The permissions allowed for this role'
+              title={i18next.t('app:components.admin.role.modal_role.permissions')}
+              subTitle={i18next.t('app:components.admin.role.modal_role.the_permissions_allowed_for_this_role')}
               headStyle={{ color: '#d81921' }}
               style={{ marginBottom: 20 }}
               headerBordered

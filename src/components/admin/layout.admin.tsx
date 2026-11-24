@@ -24,6 +24,9 @@ import { setLogoutAction } from '@/redux/slice/accountSlide';
 import { ALL_PERMISSIONS } from '@/config/permissions';
 import s from '@/styles/admin.module.scss';
 
+import i18next from 'i18next';
+import LanguageSwitcher from '@/components/share/language.switcher';
+
 const { Content, Sider } = Layout;
 
 const BRAND = '#e14000';
@@ -113,14 +116,14 @@ const LayoutAdmin = () => {
     return [
       {
         type: 'group',
-        label: 'Overview',
+        label: i18next.t('app:components.admin.layout_admin.overview'),
         children: item('/admin', 'Dashboard', <AppstoreOutlined />),
       },
       ...(recruitment.length
-        ? [{ type: 'group' as const, label: 'Recruitment', children: recruitment }]
+        ? [{ type: 'group' as const, label: i18next.t('app:components.admin.layout_admin.recruitment'), children: recruitment }]
         : []),
       ...(access.length
-        ? [{ type: 'group' as const, label: 'Access control', children: access }]
+        ? [{ type: 'group' as const, label: i18next.t('app:components.admin.layout_admin.access_control'), children: access }]
         : []),
     ];
   }, [permissions]);
@@ -135,18 +138,18 @@ const LayoutAdmin = () => {
   const handleLogout = async () => {
     await signOut();
     dispatch(setLogoutAction());
-    message.success('Logout successfully');
+    message.success(i18next.t('app:components.admin.layout_admin.logout_successfully'));
     navigate('/');
   };
 
   const accountMenu: MenuProps['items'] = [
-    { key: 'site', icon: <ExportOutlined />, label: <Link to='/'>Back to site</Link> },
+    { key: 'site', icon: <ExportOutlined />, label: <Link to='/'>{i18next.t('app:components.admin.layout_admin.back_to_site')}</Link> },
     { type: 'divider' },
     {
       key: 'logout',
       icon: <LogoutOutlined />,
       danger: true,
-      label: 'Logout',
+      label: i18next.t('app:components.admin.layout_admin.logout'),
       onClick: handleLogout,
     },
   ];
@@ -156,7 +159,7 @@ const LayoutAdmin = () => {
       <span className={s['brand-mark']}>C</span>
       {!compact && (
         <span className={s['brand-text']}>
-          Career Hub <small>Recruiter</small>
+          {i18next.t('app:components.admin.layout_admin.career_hub')}{' '}<small>{i18next.t('app:components.admin.layout_admin.recruiter')}</small>
         </span>
       )}
     </Link>
@@ -233,9 +236,10 @@ const LayoutAdmin = () => {
               <h1>{pageTitle}</h1>
             </div>
             <div className={s['topbar-right']}>
+              <LanguageSwitcher />
               {!isMobile && (
                 <Button icon={<ExportOutlined />} onClick={() => navigate('/')}>
-                  View site
+                  {i18next.t('app:components.admin.layout_admin.view_site')}
                 </Button>
               )}
               <Dropdown menu={{ items: accountMenu }} trigger={['click']} placement='bottomRight'>

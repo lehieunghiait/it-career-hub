@@ -15,6 +15,8 @@ import { colorMethod } from '@/config/utils';
 import Access from '@/components/share/access';
 import { ALL_PERMISSIONS } from '@/config/permissions';
 
+import i18next from 'i18next';
+
 const PermissionPage = () => {
   const [openModal, setOpenModal] = useState<boolean>(false);
   const [dataInit, setDataInit] = useState<IPermission | null>(null);
@@ -31,11 +33,11 @@ const PermissionPage = () => {
     if (_id) {
       const res = await callDeletePermission(_id);
       if (res && res.data) {
-        message.success('Xóa Permission thành công');
+        message.success(i18next.t('app:pages.admin.permission.xoa_permission_thanh_cong'));
         reloadTable();
       } else {
         notification.error({
-          message: 'Có lỗi xảy ra',
+          message: i18next.t('app:common.co_loi_xay_ra'),
           description: res.message,
         });
       }
@@ -48,7 +50,7 @@ const PermissionPage = () => {
 
   const columns: ProColumns<IPermission>[] = [
     {
-      title: 'Id',
+      title: i18next.t('app:common.id'),
       responsive: ['xxl'],
       dataIndex: '_id',
       width: 250,
@@ -68,7 +70,7 @@ const PermissionPage = () => {
       hideInSearch: true,
     },
     {
-      title: 'Name',
+      title: i18next.t('app:common.name'),
       dataIndex: 'name',
       sorter: true,
     },
@@ -79,7 +81,7 @@ const PermissionPage = () => {
       sorter: true,
     },
     {
-      title: 'Method',
+      title: i18next.t('app:common.method'),
       responsive: ['sm'],
       dataIndex: 'method',
       sorter: true,
@@ -99,13 +101,13 @@ const PermissionPage = () => {
       },
     },
     {
-      title: 'Module',
+      title: i18next.t('app:pages.admin.permission.module'),
       responsive: ['lg'],
       dataIndex: 'module',
       sorter: true,
     },
     {
-      title: 'CreatedAt',
+      title: i18next.t('app:common.createdat'),
       responsive: ['xxl'],
       dataIndex: 'createdAt',
       width: 200,
@@ -116,7 +118,7 @@ const PermissionPage = () => {
       hideInSearch: true,
     },
     {
-      title: 'UpdatedAt',
+      title: i18next.t('app:common.updatedat'),
       responsive: ['xl'],
       dataIndex: 'updatedAt',
       width: 200,
@@ -127,7 +129,7 @@ const PermissionPage = () => {
       hideInSearch: true,
     },
     {
-      title: 'Actions',
+      title: i18next.t('app:common.actions'),
       fixed: 'right',
       hideInSearch: true,
       width: 100,
@@ -149,11 +151,11 @@ const PermissionPage = () => {
           <Access permission={ALL_PERMISSIONS.PERMISSIONS.DELETE} hideChildren>
             <Popconfirm
               placement='leftTop'
-              title={'Xác nhận xóa permission'}
-              description={'Bạn có chắc chắn muốn xóa permission này ?'}
+              title={i18next.t('app:pages.admin.permission.xac_nhan_xoa_permission')}
+              description={i18next.t('app:pages.admin.permission.ban_co_chac_chan_muon_xoa')}
               onConfirm={() => handleDeletePermission(entity._id)}
-              okText='Xác nhận'
-              cancelText='Hủy'
+              okText={i18next.t('app:common.xac_nhan')}
+              cancelText={i18next.t('app:common.huy')}
             >
               <span style={{ cursor: 'pointer', margin: '0 10px' }}>
                 <DeleteOutlined
@@ -214,7 +216,7 @@ const PermissionPage = () => {
       <Access permission={ALL_PERMISSIONS.PERMISSIONS.GET_PAGINATE}>
         <DataTable<IPermission>
           actionRef={tableRef}
-          headerTitle='List of permissions'
+          headerTitle={i18next.t('app:pages.admin.permission.list_of_permissions')}
           rowKey='_id'
           loading={isFetching}
           columns={columns}
@@ -233,7 +235,7 @@ const PermissionPage = () => {
               return (
                 <div>
                   {' '}
-                  {range[0]}-{range[1]} trên {total} rows
+                  {range[0]}-{range[1]} {i18next.t('app:pages.admin.permission.tren')}{' '}{total} rows
                 </div>
               );
             },
@@ -242,7 +244,7 @@ const PermissionPage = () => {
           toolBarRender={(_action, _rows): any => {
             return (
               <Button icon={<PlusOutlined />} type='primary' onClick={() => setOpenModal(true)}>
-                Add new
+                {i18next.t('app:common.add_new')}
               </Button>
             );
           }}

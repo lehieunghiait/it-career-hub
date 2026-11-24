@@ -29,6 +29,8 @@ import { useAppDispatch } from '@/redux/hooks';
 import { addAppliedJob } from '@/redux/slice/appliedJobSlide';
 import s from 'styles/apply-modal.module.scss';
 
+import i18next from 'i18next';
+
 dayjs.extend(relativeTime);
 
 interface IProps {
@@ -71,10 +73,10 @@ const ApplyModal = (props: IProps) => {
   // Exports the chosen online CV to PDF and uploads it like a regular CV file
   const uploadOnlineCv = async () => {
     const res = await callFetchCvById(cvId as string);
-    if (!res?.data) throw new Error(res?.message ?? 'Cannot load this CV');
+    if (!res?.data) throw new Error(res?.message ?? i18next.t('app:components.client.modal.apply_modal.cannot_load_this_cv'));
     const file = await renderCvPdfFile(res.data);
     const upload = await callUploadSingleFile(file, 'resume');
-    if (!upload?.data?.url) throw new Error(upload?.message ?? 'Cannot upload the CV');
+    if (!upload?.data?.url) throw new Error(upload?.message ?? i18next.t('app:components.client.modal.apply_modal.cannot_upload_the_cv'));
     return upload.data.url as string;
   };
 
@@ -83,11 +85,11 @@ const ApplyModal = (props: IProps) => {
 
   const handleOkButton = async () => {
     if (isAuthenticated && source === 'online' && !cvId) {
-      message.error('Please choose one of your CVs');
+      message.error(i18next.t('app:components.client.modal.apply_modal.please_choose_one_of_your_cvs'));
       return;
     }
     if (isAuthenticated && source === 'upload' && !urlCV) {
-      message.error('Please upload a file CV!');
+      message.error(i18next.t('app:components.client.modal.apply_modal.please_upload_a_file_cv'));
       return;
     }
 
@@ -105,7 +107,7 @@ const ApplyModal = (props: IProps) => {
           } catch (error) {
             setIsSubmitting(false);
             notification.error({
-              message: 'Cannot prepare your CV',
+              message: i18next.t('app:components.client.modal.apply_modal.cannot_prepare_your_cv'),
               description: (error as Error).message,
             });
             return;
@@ -114,7 +116,7 @@ const ApplyModal = (props: IProps) => {
         const res = await callCreateResume(cvUrl, jobDetail?.company?._id, jobDetail?._id);
         setIsSubmitting(false);
         if (res.data) {
-          message.success('Your application has been sent!');
+          message.success(i18next.t('app:components.client.modal.apply_modal.your_application_has_been_sent'));
           dispatch(
             addAppliedJob({
               jobId: jobDetail._id as string,
@@ -125,7 +127,7 @@ const ApplyModal = (props: IProps) => {
           setIsModalOpen(false);
         } else {
           notification.error({
-            message: 'Error uploading CV',
+            message: i18next.t('app:components.client.modal.apply_modal.error_uploading_cv'),
             description: res.message,
           });
         }
@@ -141,11 +143,11 @@ const ApplyModal = (props: IProps) => {
     beforeUpload(file) {
       const extension = file.name.slice(file.name.lastIndexOf('.')).toLowerCase();
       if (!CV_EXTENSIONS.includes(extension)) {
-        message.error('Only PDF, DOC or DOCX files are accepted');
+        message.error(i18next.t('app:components.client.modal.apply_modal.only_pdf_doc_or_docx_files'));
         return Upload.LIST_IGNORE;
       }
       if (file.size > CV_MAX_SIZE) {
-        message.error('Your CV must be smaller than 5MB');
+        message.error(i18next.t('app:components.client.modal.apply_modal.your_cv_must_be_smaller_than'));
         return Upload.LIST_IGNORE;
       }
       return true;
@@ -171,9 +173,9 @@ const ApplyModal = (props: IProps) => {
         // console.log(info.file, info.fileList);
       }
       if (info.file.status === 'done') {
-        message.success(`${info.file.name} file uploaded successfully`);
+        message.success(i18next.t('app:components.client.modal.apply_modal.file_uploaded_successfully', { v0: info.file.name }));
       } else if (info.file.status === 'error') {
-        message.error(info?.file?.error?.event?.message ?? 'Đã có lỗi xảy ra khi upload file.');
+        message.error(info?.file?.error?.event?.message ?? i18next.t('app:components.client.modal.apply_modal.da_co_loi_xay_ra_khi'));
       }
     },
   };
@@ -203,7 +205,7 @@ const ApplyModal = (props: IProps) => {
           )}
         </div>
         <div className={s['head-copy']}>
-          <small>Apply for</small>
+          <small>{i18next.t('app:components.client.modal.apply_modal.apply_for')}</small>
           <h3 title={jobDetail?.name}>{jobDetail?.name}</h3>
           <p title={jobDetail?.company?.name}>{jobDetail?.company?.name}</p>
           <div className={s['chips']}>
@@ -226,7 +228,7 @@ const ApplyModal = (props: IProps) => {
         <>
           <div className={s['body']}>
             <section className={s['section']}>
-              <p className={s['label']}>Applying as</p>
+              <p className={s['label']}>{i18next.t('app:components.client.modal.apply_modal.applying_as')}</p>
               <div className={s['applicant']}>
                 <Avatar src={clerkUser?.imageUrl} size={40}>
                   {clerkUser?.fullName?.charAt(0)}
@@ -239,7 +241,7 @@ const ApplyModal = (props: IProps) => {
             </section>
 
             <section className={s['section']}>
-              <p className={s['label']}>Your CV</p>
+              <p className={s['label']}>{i18next.t('app:components.client.modal.apply_modal.your_cv')}</p>
               <div className={s['sources']} role='radiogroup' aria-label='CV source'>
                 <button
                   type='button'
@@ -252,8 +254,8 @@ const ApplyModal = (props: IProps) => {
                     <FileTextOutlined />
                   </span>
                   <span>
-                    <b>Online CV</b>
-                    <small>{myCvs.length ? `${myCvs.length} saved` : 'Build one for free'}</small>
+                    <b>{i18next.t('app:components.client.modal.apply_modal.online_cv')}</b>
+                    <small>{myCvs.length ? i18next.t('app:components.client.modal.apply_modal.saved', { v0: myCvs.length }) : i18next.t('app:components.client.modal.apply_modal.build_one_for_free')}</small>
                   </span>
                 </button>
                 <button
@@ -267,8 +269,8 @@ const ApplyModal = (props: IProps) => {
                     <CloudUploadOutlined />
                   </span>
                   <span>
-                    <b>Upload a file</b>
-                    <small>PDF, DOC, DOCX · max 5MB</small>
+                    <b>{i18next.t('app:components.client.modal.apply_modal.upload_a_file')}</b>
+                    <small>{i18next.t('app:components.client.modal.apply_modal.pdf_doc_docx_max_5mb')}</small>
                   </span>
                 </button>
               </div>
@@ -302,17 +304,17 @@ const ApplyModal = (props: IProps) => {
                       ))}
                     </div>
                     <div className={s['hint']}>
-                      <span>The latest version is exported to PDF and attached.</span>
+                      <span>{i18next.t('app:components.client.modal.apply_modal.the_latest_version_is_exported_to')}</span>
                       <Link to='/cv' onClick={() => setIsModalOpen(false)}>
-                        Manage CVs
+                        {i18next.t('app:components.client.modal.apply_modal.manage_cvs')}
                       </Link>
                     </div>
                   </>
                 ) : (
                   <div className={s['empty']}>
-                    <p>You have no online CV yet.</p>
+                    <p>{i18next.t('app:components.client.modal.apply_modal.you_have_no_online_cv_yet')}</p>
                     <Link to='/cv' onClick={() => setIsModalOpen(false)}>
-                      <Button icon={<PlusOutlined />}>Create a CV in minutes</Button>
+                      <Button icon={<PlusOutlined />}>{i18next.t('app:components.client.modal.apply_modal.create_a_cv_in_minutes')}</Button>
                     </Link>
                   </div>
                 )
@@ -322,8 +324,8 @@ const ApplyModal = (props: IProps) => {
                     <p className='ant-upload-drag-icon'>
                       <InboxOutlined />
                     </p>
-                    <p className='ant-upload-text'>Click or drag your CV here</p>
-                    <p className='ant-upload-hint'>Supports PDF, DOC, DOCX up to 5MB</p>
+                    <p className='ant-upload-text'>{i18next.t('app:components.client.modal.apply_modal.click_or_drag_your_cv_here')}</p>
+                    <p className='ant-upload-hint'>{i18next.t('app:components.client.modal.apply_modal.supports_pdf_doc_docx_up_to')}</p>
                   </Upload.Dragger>
                 </div>
               )}
@@ -332,10 +334,10 @@ const ApplyModal = (props: IProps) => {
 
           <div className={s['foot']}>
             <span className={s['privacy']}>
-              <LockOutlined /> Shared only with this employer
+              <LockOutlined /> {i18next.t('app:components.client.modal.apply_modal.shared_only_with_this_employer')}
             </span>
             <div className={s['actions']}>
-              <Button onClick={() => setIsModalOpen(false)}>Cancel</Button>
+              <Button onClick={() => setIsModalOpen(false)}>{i18next.t('app:common.cancel')}</Button>
               <Button
                 type='primary'
                 className={s['submit']}
@@ -344,7 +346,7 @@ const ApplyModal = (props: IProps) => {
                 disabled={!canSubmit}
                 onClick={handleOkButton}
               >
-                {isSubmitting ? 'Sending...' : 'Submit application'}
+                {isSubmitting ? i18next.t('app:components.client.modal.apply_modal.sending') : i18next.t('app:components.client.modal.apply_modal.submit_application')}
               </Button>
             </div>
           </div>
@@ -355,15 +357,15 @@ const ApplyModal = (props: IProps) => {
             <div className={s['guest-icon']}>
               <LockOutlined />
             </div>
-            <h4>Sign in to apply</h4>
-            <p>Log in to send your CV and track this application in My jobs.</p>
+            <h4>{i18next.t('app:components.client.modal.apply_modal.sign_in_to_apply')}</h4>
+            <p>{i18next.t('app:components.client.modal.apply_modal.log_in_to_send_your_cv')}</p>
           </div>
           <div className={s['foot']}>
             <span />
             <div className={s['actions']}>
-              <Button onClick={() => setIsModalOpen(false)}>Cancel</Button>
+              <Button onClick={() => setIsModalOpen(false)}>{i18next.t('app:common.cancel')}</Button>
               <Button type='primary' className={s['submit']} onClick={handleOkButton}>
-                Log in to apply
+                {i18next.t('app:components.client.modal.apply_modal.log_in_to_apply')}
               </Button>
             </div>
           </div>

@@ -13,6 +13,8 @@ import { useTranslation } from 'react-i18next';
 import { ArrowRightOutlined } from '@ant-design/icons';
 const { Title } = Typography;
 import SeeMoreLink from '@/components/client/common/SeeMoreLink';
+import i18next from 'i18next';
+
 interface IProps {
   showPagination?: boolean;
 }
@@ -199,7 +201,7 @@ const CompanyCard = (props: IProps) => {
             </p>
           )}
           <Button type='primary' className={styles['view-btn']}>
-            {'See more'}
+            {i18next.t('app:components.client.card.company_card.see_more')}
           </Button>
         </div>
       </Card>
@@ -209,10 +211,10 @@ const CompanyCard = (props: IProps) => {
   return (
     <div className={`${styles['company-section']}`}>
       <div className={styles['company-content']}>
-        <Spin spinning={isLoading} tip='Loading...'>
+        <Spin spinning={isLoading} tip={i18next.t('app:components.client.card.company_card.loading')}>
           <div className={styles['section-header']}>
             <Title level={3} className={styles['section-title']}>
-              {'Top IT Companies in Vietnam 🇻🇳'}
+              {i18next.t('app:components.client.card.company_card.top_it_companies_in_vietnam')}
             </Title>
             {!showPagination && <SeeMoreLink to='company' />}
           </div>

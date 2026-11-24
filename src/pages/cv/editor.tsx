@@ -35,6 +35,8 @@ import { useIsMobile } from '@/hooks/useIsMobile';
 import { useUser } from '@clerk/react';
 import s from 'styles/cv.module.scss';
 
+import i18next from 'i18next';
+
 const SAVE_DELAY = 1500;
 
 type SaveState = 'saved' | 'pending' | 'saving' | 'error';
@@ -48,20 +50,20 @@ const LIST_SECTIONS: {
   withLink?: boolean;
   noDescription?: boolean;
 }[] = [
-  { name: 'experiences', header: 'Work experience', title: 'Company', subtitle: 'Position' },
+  { name: 'experiences', header: 'Work experience', get title() { return i18next.t('app:common.company'); }, get subtitle() { return i18next.t('app:common.position'); } },
   {
     name: 'projects',
     header: 'Projects',
-    title: 'Project name',
-    subtitle: 'Your role',
+    get title() { return i18next.t('app:pages.cv.editor.project_name'); },
+    get subtitle() { return i18next.t('app:pages.cv.editor.your_role'); },
     withLink: true,
   },
-  { name: 'educations', header: 'Education', title: 'School', subtitle: 'Major / degree' },
+  { name: 'educations', header: 'Education', get title() { return i18next.t('app:pages.cv.editor.school'); }, get subtitle() { return i18next.t('app:pages.cv.editor.major_degree'); } },
   {
     name: 'certificates',
     header: 'Certificates & awards',
-    title: 'Certificate',
-    subtitle: 'Issued by',
+    get title() { return i18next.t('app:pages.cv.editor.certificate'); },
+    get subtitle() { return i18next.t('app:pages.cv.editor.issued_by'); },
     noDescription: true,
   },
 ];
@@ -74,7 +76,7 @@ const ItemList = ({ section }: { section: (typeof LIST_SECTIONS)[number] }) => {
         <>
           {fields.map(field => (
             <div key={field.key} className={s['item-block']}>
-              <Tooltip title='Remove'>
+              <Tooltip title={i18next.t('app:pages.cv.editor.remove')}>
                 <Button
                   className={s['item-remove']}
                   type='text'
@@ -96,18 +98,18 @@ const ItemList = ({ section }: { section: (typeof LIST_SECTIONS)[number] }) => {
                   </Form.Item>
                 </Col>
                 <Col xs={12} md={6}>
-                  <Form.Item name={[field.name, 'start']} label='From'>
-                    <Input placeholder='MM/YYYY' />
+                  <Form.Item name={[field.name, 'start']} label={i18next.t('app:pages.cv.editor.from')}>
+                    <Input placeholder={i18next.t('app:pages.cv.editor.mm_yyyy')} />
                   </Form.Item>
                 </Col>
                 <Col xs={12} md={6}>
-                  <Form.Item name={[field.name, 'end']} label='To'>
-                    <Input placeholder='Hiện tại' />
+                  <Form.Item name={[field.name, 'end']} label={i18next.t('app:pages.cv.editor.to')}>
+                    <Input placeholder={i18next.t('app:pages.cv.editor.hien_tai')} />
                   </Form.Item>
                 </Col>
                 {section.withLink && (
                   <Col xs={24} md={12}>
-                    <Form.Item name={[field.name, 'link']} label='Link'>
+                    <Form.Item name={[field.name, 'link']} label={i18next.t('app:pages.cv.editor.link')}>
                       <Input placeholder='github.com/you/project' />
                     </Form.Item>
                   </Col>
@@ -116,8 +118,8 @@ const ItemList = ({ section }: { section: (typeof LIST_SECTIONS)[number] }) => {
                   <Col span={24}>
                     <Form.Item
                       name={[field.name, 'description']}
-                      label='Description'
-                      extra='Start a line with "-" to make a bullet point.'
+                      label={i18next.t('app:common.description')}
+                      extra={i18next.t('app:pages.cv.editor.start_a_line_with_to_make')}
                     >
                       <Input.TextArea
                         autoSize={{ minRows: 3, maxRows: 10 }}
@@ -130,7 +132,7 @@ const ItemList = ({ section }: { section: (typeof LIST_SECTIONS)[number] }) => {
             </div>
           ))}
           <Button block type='dashed' icon={<PlusOutlined />} onClick={() => add({})}>
-            Add {section.header.toLowerCase()}
+            {i18next.t('app:pages.cv.editor.add')}{' '}{section.header.toLowerCase()}
           </Button>
         </>
       )}
@@ -188,7 +190,7 @@ const CvEditorPage = () => {
         data: cv.data,
       });
       setSaveState(res?.data ? 'saved' : 'error');
-      if (!res?.data) message.error(res?.message ?? 'Cannot save your CV');
+      if (!res?.data) message.error(res?.message ?? i18next.t('app:pages.cv.editor.cannot_save_your_cv'));
     }, SAVE_DELAY);
     return () => clearTimeout(timer);
   }, [cv, saveState]);
@@ -224,7 +226,7 @@ const CvEditorPage = () => {
 
   const onPhoto = async (file: File) => {
     if (!file.type.startsWith('image/')) {
-      message.error('Please choose an image');
+      message.error(i18next.t('app:pages.cv.editor.please_choose_an_image'));
       return Upload.LIST_IGNORE;
     }
     try {
@@ -232,7 +234,7 @@ const CvEditorPage = () => {
       form.setFieldValue('avatar', avatar);
       update({ data: { ...form.getFieldsValue(true), avatar } });
     } catch {
-      message.error('Cannot read this image');
+      message.error(i18next.t('app:pages.cv.editor.cannot_read_this_image'));
     }
     return Upload.LIST_IGNORE;
   };
@@ -249,7 +251,7 @@ const CvEditorPage = () => {
     try {
       await downloadCvPdf(cv);
     } catch {
-      message.error('Cannot export the PDF, please try again');
+      message.error(i18next.t('app:pages.cv.editor.cannot_export_the_pdf_please_try'));
     } finally {
       setIsDownloading(false);
     }
@@ -259,11 +261,11 @@ const CvEditorPage = () => {
     return (
       <Result
         status='404'
-        title='CV not found'
-        subTitle='This CV does not exist or belongs to another account.'
+        title={i18next.t('app:pages.cv.editor.cv_not_found')}
+        subTitle={i18next.t('app:pages.cv.editor.this_cv_does_not_exist_or')}
         extra={
           <Button type='primary' onClick={() => navigate('/cv')}>
-            Back to my CVs
+            {i18next.t('app:pages.cv.editor.back_to_my_cvs')}
           </Button>
         }
       />
@@ -284,20 +286,20 @@ const CvEditorPage = () => {
   const saveLabel = {
     saved: (
       <>
-        <CheckCircleFilled style={{ color: '#16a34a' }} /> Saved
+        <CheckCircleFilled style={{ color: '#16a34a' }} /> {i18next.t('app:pages.cv.editor.saved')}
       </>
     ),
     pending: (
       <>
-        <CloudSyncOutlined /> Unsaved changes
+        <CloudSyncOutlined /> {i18next.t('app:pages.cv.editor.unsaved_changes')}
       </>
     ),
     saving: (
       <>
-        <CloudSyncOutlined spin /> Saving…
+        <CloudSyncOutlined spin /> {i18next.t('app:pages.cv.editor.saving')}
       </>
     ),
-    error: <span style={{ color: '#dc2626' }}>Not saved</span>,
+    error: <span style={{ color: '#dc2626' }}>{i18next.t('app:pages.cv.editor.not_saved')}</span>,
   }[saveState];
 
   const editor = (
@@ -325,7 +327,7 @@ const CvEditorPage = () => {
               className={`${s['swatch']} ${cv.color === color ? s['active'] : ''}`}
               style={{ background: color }}
               onClick={() => update({ color })}
-              aria-label={`Color ${color}`}
+              aria-label={i18next.t('app:pages.cv.editor.color', { v0: color })}
               aria-pressed={cv.color === color}
             />
           ))}
@@ -334,9 +336,9 @@ const CvEditorPage = () => {
 
       {isEmpty && (
         <div className={s['sample-hint']}>
-          Not sure what to write?{' '}
+          {i18next.t('app:pages.cv.editor.not_sure_what_to_write')}{' '}
           <Button type='link' size='small' onClick={fillSample}>
-            Fill with sample content
+            {i18next.t('app:pages.cv.editor.fill_with_sample_content')}
           </Button>
         </div>
       )}
@@ -348,14 +350,14 @@ const CvEditorPage = () => {
           items={[
             {
               key: 'profile',
-              label: 'Personal information',
+              label: i18next.t('app:pages.cv.editor.personal_information'),
               children: (
                 <>
                   <div className={s['photo-row']}>
                     <Avatar size={72} src={avatar} icon={<UserOutlined />} />
                     <div>
                       <Upload accept='image/*' showUploadList={false} beforeUpload={onPhoto}>
-                        <Button size='small'>{avatar ? 'Change photo' : 'Add photo'}</Button>
+                        <Button size='small'>{avatar ? i18next.t('app:pages.cv.editor.change_photo') : i18next.t('app:pages.cv.editor.add_photo')}</Button>
                       </Upload>
                       {avatar && (
                         <Button
@@ -367,10 +369,10 @@ const CvEditorPage = () => {
                             update({ data: { ...form.getFieldsValue(true), avatar: undefined } });
                           }}
                         >
-                          Remove
+                          {i18next.t('app:pages.cv.editor.remove')}
                         </Button>
                       )}
-                      <div className={s['hint']}>Optional, shown on every template</div>
+                      <div className={s['hint']}>{i18next.t('app:pages.cv.editor.optional_shown_on_every_template')}</div>
                     </div>
                   </div>
                   <Form.Item name='avatar' hidden>
@@ -378,38 +380,38 @@ const CvEditorPage = () => {
                   </Form.Item>
                   <Row gutter={12}>
                     <Col xs={24} md={12}>
-                      <Form.Item name='fullName' label='Full name'>
+                      <Form.Item name='fullName' label={i18next.t('app:pages.cv.editor.full_name')}>
                         <Input placeholder={SAMPLE_CV.fullName} />
                       </Form.Item>
                     </Col>
                     <Col xs={24} md={12}>
-                      <Form.Item name='headline' label='Job title'>
+                      <Form.Item name='headline' label={i18next.t('app:pages.cv.editor.job_title')}>
                         <Input placeholder={SAMPLE_CV.headline} />
                       </Form.Item>
                     </Col>
                     <Col xs={24} md={12}>
-                      <Form.Item name='email' label='Email'>
+                      <Form.Item name='email' label={i18next.t('app:common.email')}>
                         <Input placeholder={SAMPLE_CV.email} />
                       </Form.Item>
                     </Col>
                     <Col xs={24} md={12}>
-                      <Form.Item name='phone' label='Phone'>
+                      <Form.Item name='phone' label={i18next.t('app:common.phone')}>
                         <Input placeholder={SAMPLE_CV.phone} />
                       </Form.Item>
                     </Col>
                     <Col xs={24} md={12}>
-                      <Form.Item name='address' label='Address'>
+                      <Form.Item name='address' label={i18next.t('app:common.address')}>
                         <Input placeholder={SAMPLE_CV.address} />
                       </Form.Item>
                     </Col>
                     <Col xs={24} md={12}>
-                      <Form.Item name='website' label='Website / GitHub / LinkedIn'>
+                      <Form.Item name='website' label={i18next.t('app:pages.cv.editor.website_github_linkedin')}>
                         <Input placeholder={SAMPLE_CV.website} />
                       </Form.Item>
                     </Col>
                     <Col xs={24} md={12}>
-                      <Form.Item name='birthday' label='Date of birth'>
-                        <Input placeholder='DD/MM/YYYY' />
+                      <Form.Item name='birthday' label={i18next.t('app:pages.cv.editor.date_of_birth')}>
+                        <Input placeholder={i18next.t('app:pages.cv.editor.dd_mm_yyyy')} />
                       </Form.Item>
                     </Col>
                   </Row>
@@ -418,7 +420,7 @@ const CvEditorPage = () => {
             },
             {
               key: 'summary',
-              label: 'Summary',
+              label: i18next.t('app:pages.cv.editor.summary'),
               children: (
                 <Form.Item name='summary' style={{ marginBottom: 0 }}>
                   <Input.TextArea
@@ -430,22 +432,22 @@ const CvEditorPage = () => {
             },
             {
               key: 'skills',
-              label: 'Skills & languages',
+              label: i18next.t('app:pages.cv.editor.skills_languages'),
               children: (
                 <>
-                  <Form.Item name='skills' label='Skills' extra='Type a skill and press Enter.'>
+                  <Form.Item name='skills' label={i18next.t('app:common.skills')} extra={i18next.t('app:pages.cv.editor.type_a_skill_and_press_enter')}>
                     <Select
                       mode='tags'
                       tokenSeparators={[',']}
-                      placeholder='Node.js, React, Docker…'
+                      placeholder={i18next.t('app:pages.cv.editor.node_js_react_docker')}
                       open={false}
                     />
                   </Form.Item>
-                  <Form.Item name='languages' label='Languages' style={{ marginBottom: 0 }}>
+                  <Form.Item name='languages' label={i18next.t('app:pages.cv.editor.languages')} style={{ marginBottom: 0 }}>
                     <Select
                       mode='tags'
                       tokenSeparators={[',']}
-                      placeholder='Tiếng Anh (IELTS 7.0)…'
+                      placeholder={i18next.t('app:pages.cv.editor.tieng_anh_ielts_7_0')}
                       open={false}
                     />
                   </Form.Item>
@@ -493,11 +495,11 @@ const CvEditorPage = () => {
             type='primary'
             icon={<SendOutlined />}
             onClick={() => {
-              message.info('Open a job and choose this CV in the apply form');
+              message.info(i18next.t('app:pages.cv.editor.open_a_job_and_choose_this'));
               navigate('/job');
             }}
           >
-            Apply with this CV
+            {i18next.t('app:pages.cv.editor.apply_with_this_cv')}
           </Button>
         </div>
       </div>
@@ -509,8 +511,8 @@ const CvEditorPage = () => {
             value={mobileView}
             onChange={value => setMobileView(value as 'edit' | 'preview')}
             options={[
-              { label: 'Edit', value: 'edit' },
-              { label: 'Preview', value: 'preview' },
+              { label: i18next.t('app:pages.cv.editor.edit'), value: 'edit' },
+              { label: i18next.t('app:pages.cv.editor.preview'), value: 'preview' },
             ]}
             className={s['mobile-switch']}
           />

@@ -2,6 +2,8 @@ import { Modal, Typography, Button, Space, Divider } from 'antd';
 import styles from 'styles/client.module.scss';
 import { BellOutlined, CloseCircleOutlined } from '@ant-design/icons';
 
+import i18next from 'i18next';
+
 const { Title, Paragraph, Text } = Typography;
 
 interface AnnouncementModalProps {
@@ -26,7 +28,7 @@ const AnnouncementModal = ({ isModalOpen, setIsModalOpen }: AnnouncementModalPro
       title={
         <div className={styles['announcement-header']}>
           <BellOutlined className={styles['announcement-icon']} />
-          <span>Thông báo mới</span>
+          <span>{i18next.t('app:components.client.modal.announcement_modal.thong_bao_moi')}</span>
         </div>
       }
       open={isModalOpen}
@@ -42,7 +44,7 @@ const AnnouncementModal = ({ isModalOpen, setIsModalOpen }: AnnouncementModalPro
           onClick={handleOk}
           className={styles['announcement-ok-btn']}
         >
-          Tôi đã hiểu
+          {i18next.t('app:components.client.modal.announcement_modal.toi_da_hieu')}
         </Button>,
         <Button
           key='back'
@@ -50,7 +52,7 @@ const AnnouncementModal = ({ isModalOpen, setIsModalOpen }: AnnouncementModalPro
           className={styles['announcement-cancel-btn']}
           icon={<CloseCircleOutlined />}
         >
-          Đóng
+          {i18next.t('app:components.client.modal.announcement_modal.dong')}
         </Button>,
       ]}
     >
@@ -70,24 +72,23 @@ const AnnouncementModal = ({ isModalOpen, setIsModalOpen }: AnnouncementModalPro
           className={styles['announcement-title']}
           style={{ color: 'red', fontWeight: 'bold' }}
         >
-          Chào mừng đến với website của chúng tôi - Nền tảng tuyển dụng IT hàng đầu Việt Nam!
+          {i18next.t('app:components.client.modal.announcement_modal.chao_mung_den_voi_website_cua')}
         </Title>
 
         <Paragraph className={styles['announcement-paragraph']}>
-          Chúng tôi rất vui mừng thông báo về những cập nhật mới trên nền tảng ITviec, giúp việc tìm
-          kiếm công việc IT mơ ước trở nên dễ dàng hơn bao giờ hết.
+          {i18next.t('app:components.client.modal.announcement_modal.chung_toi_rat_vui_mung_thong')}
         </Paragraph>
 
         <Divider orientation='left' style={{ color: 'red' }}>
-          Thông báo về việc dùng tài khoản (demo) truy cập vào website
+          {i18next.t('app:components.client.modal.announcement_modal.thong_bao_ve_viec_dung_tai')}
         </Divider>
 
         <Space direction='vertical' className={styles['announcement-features']}>
           <Paragraph>
-            Tài khoản user: <Text strong>user@gmail.com</Text>
+            {i18next.t('app:components.client.modal.announcement_modal.tai_khoan_user')}{' '}<Text strong>user@gmail.com</Text>
           </Paragraph>
           <Paragraph>
-            Mật khẩu: <Text strong>123456</Text>
+            {i18next.t('app:components.client.modal.announcement_modal.mat_khau')}{' '}<Text strong>123456</Text>
           </Paragraph>
         </Space>
       </div>

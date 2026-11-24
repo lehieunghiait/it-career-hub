@@ -1,0 +1,306 @@
+0	Vui lòng tải lên logo	ロゴをアップロードしてください
+1	Cập nhật công ty thành công	会社情報を更新しました
+2	Đã có lỗi xảy ra	エラーが発生しました
+3	Tạo công ty thành công	会社を作成しました
+4	Bạn chỉ có thể tải lên tệp JPG/PNG/WEBP!	JPG/PNG/WEBP ファイルのみアップロードできます！
+5	Ảnh phải nhỏ hơn 2MB!	画像は 2MB 未満にしてください！
+6	An error occurred while uploading the file.	ファイルのアップロード中にエラーが発生しました。
+7	Logo updated successfully!	ロゴを更新しました！
+8	Failed to update logo	ロゴの更新に失敗しました
+9	Cập nhật công ty	会社情報を更新
+10	Tạo công ty	会社を作成
+11	Cancel	キャンセル
+12	Cập nhật	更新
+13	Tạo mới	作成
+14	Tên công ty	会社名
+15	Vui lòng nhập tên công ty	会社名を入力してください
+16	Nhập tên công ty	会社名を入力
+17	Logo	ロゴ
+18	Vui lòng nhập logo	ロゴを入力してください
+19	Tải lên	アップロード
+20	Địa chỉ	住所
+21	Vui lòng nhập địa chỉ	住所を入力してください
+22	Nhập địa chỉ	住所を入力
+23	Số điện thoại	電話番号
+24	Vui lòng nhập số điện thoại	電話番号を入力してください
+25	Chỉ nhập số điện thoại	電話番号のみ入力してください
+26	Nhập số điện thoại	電話番号を入力
+27	Email	メール
+28	Vui lòng nhập thông tin liên hệ	連絡先を入力してください
+29	Nhập email	メールアドレスを入力
+30	Website	ウェブサイト
+31	Vui lòng nhập website	ウェブサイトを入力してください
+32	Nhập website	ウェブサイトを入力
+33	Mô tả	説明
+34	📋 Chi tiết	📋 詳細
+35	Điện thoại	電話
+36	=	=
+37	=	=
+38	Quy mô nhân sự	従業員数
+39	Loại hình doanh nghiệp	業種
+40	Không có	なし
+41	Năm thành lập	設立年
+42	🛠️ Kỹ năng	🛠️ スキル
+43	📝 Mô tả	📝 説明
+44	Ngày tạo	作成日
+45	Ngày cập nhật	更新日
+46	Job updated successfully	求人を更新しました
+47	An error occurred	エラーが発生しました
+48	Job created successfully	求人を作成しました
+49	Quản lý việc làm	求人管理
+50	Tạo / cập nhật việc làm	求人の作成・更新
+51	Update job	求人を更新
+52	Create job	求人を作成
+53	Tiêu đề	タイトル
+54	Vui lòng nhập tên!	名前を入力してください！
+55	Vui lòng nhập tiêu đề	タイトルを入力してください
+56	Kỹ năng	スキル
+57	Vui lòng chọn kỹ năng yêu cầu	必要なスキルを選択してください
+58	Vui lòng chọn kỹ năng yêu cầu!	必要なスキルを選択してください！
+59	Địa điểm	勤務地
+60	Vui lòng chọn địa điểm	勤務地を選択してください
+61	Vui lòng chọn địa điểm!	勤務地を選択してください！
+62	Mức lương	給与
+63	Vui lòng nhập mức lương!	給与を入力してください！
+64	Vui lòng nhập mức lương	給与を入力してください
+65	₫	₫
+66	Số lượng	募集人数
+67	Vui lòng nhập số lượng!	募集人数を入力してください！
+68	Vui lòng nhập số lượng	募集人数を入力してください
+69	Cấp bậc	レベル
+70	Vui lòng chọn cấp bậc	レベルを選択してください
+71	Vui lòng chọn cấp bậc!	レベルを選択してください！
+72	Công ty	会社
+73	Vui lòng chọn công ty!	会社を選択してください！
+74	Vui lòng chọn công ty	会社を選択してください
+75	Ngày bắt đầu	開始日
+76	Vui lòng chọn ngày bắt đầu!	開始日を選択してください！
+77	Ngày kết thúc	終了日
+78	Vui lòng chọn ngày kết thúc!	終了日を選択してください！
+79	Trạng thái	ステータス
+80	Vui lòng nhập mô tả!	説明を入力してください！
+81	Số lượng tuyển	募集枠
+82	Thời gian đăng tuyển	掲載期間
+83	Hồ sơ ứng tuyển	応募
+84	Đã nhận {{v0}}	{{v0}} 件受付
+85	Chi tiết việc làm	求人の詳細
+86	Xem trang công khai	公開ページを表示
+87	Sửa việc làm	求人を編集
+88	Không tìm thấy việc làm	求人が見つかりません
+89	Đã hết hạn	期限切れ
+90	Hết hạn hôm nay	本日締切
+91	Còn {{v0}} ngày	残り {{v0}} 日
+92	Chưa có kỹ năng nào	スキルが登録されていません
+93	Chưa có mô tả	説明がありません
+94	Người tạo	作成者
+95	Người cập nhật gần nhất	最終更新者
+96	Tổng quan	概要
+97	Tuyển dụng	採用
+98	Phân quyền	アクセス管理
+99	Đăng xuất thành công	ログアウトしました
+100	Về trang chủ	サイトに戻る
+101	Đăng xuất	ログアウト
+102	=	=
+103	Nhà tuyển dụng	採用担当者
+104	Xem trang web	サイトを表示
+105	Cập nhật quyền thành công	権限を更新しました
+106	Tạo quyền thành công	権限を作成しました
+107	Cập nhật quyền	権限を更新
+108	Tạo quyền	権限を作成
+109	Hủy	キャンセル
+110	Tên	名前
+111	Vui lòng không bỏ trống	空欄にしないでください
+112	Nhập tên	名前を入力
+113	Đường dẫn API	API パス
+114	Nhập đường dẫn	パスを入力
+115	Phương thức	メソッド
+116	Vui lòng chọn phương thức	メソッドを選択してください
+117	Vui lòng chọn phương thức!	メソッドを選択してください！
+118	Module	モジュール
+119	Vui lòng chọn module	モジュールを選択してください
+120	Vui lòng chọn module!	モジュールを選択してください！
+121	Chi tiết	詳細
+122	Permission name	権限名
+123	Module	モジュール
+124	Created at	作成日
+125	Updated at	更新日
+126	Đã gửi lời mời	招待を送信済み
+127	Đang diễn ra	進行中
+128	Đã hoàn thành	完了
+129	Link đã hết hạn	リンク期限切れ
+130	Đã thay thế	置き換え済み
+131	Rất phù hợp	強く推薦
+132	Phù hợp	推薦
+133	Cân nhắc	保留
+134	Không phù hợp	不採用
+135	Không thể đánh giá lại buổi phỏng vấn	面接を再評価できません
+136	Phỏng vấn AI	AI 面接
+137	=	=
+138	=	=
+139	Hết hạn	有効期限
+140	Đang chấm điểm buổi phỏng vấn…	面接を採点しています…
+141	Chấm điểm thất bại.	採点に失敗しました。
+142	Thử lại	再試行
+143	AI gợi ý dựa trên bản ghi. Hãy xem lại trước khi quyết định.	文字起こしに基づく AI の提案です。判断の前に確認してください。
+144	Điểm mạnh	強み
+145	Điểm cần lưu ý	懸念点
+146	Bản ghi ({{v0}} lượt)	文字起こし（{{v0}} ターン）
+147	Ứng viên	候補者
+148	Không thể tải hồ sơ ứng tuyển này	この応募を読み込めません
+149	Không thể lưu đánh giá	評価を保存できません
+150	Không thể thêm ghi chú	メモを追加できません
+151	Không thể xóa ghi chú	メモを削除できません
+152	Việc làm đã bị gỡ	求人は削除されました
+153	Xem CV	CV を表示
+154	Đã ứng tuyển	応募済み
+155	Điểm	スコア
+156	Ghi chú	メモ
+157	Chỉ nhóm của bạn xem được	チームのみに表示
+158	Thêm ghi chú về ứng viên này…	この候補者についてメモを追加…
+159	⌘/Ctrl + Enter để lưu	⌘/Ctrl + Enter で保存
+160	Thêm ghi chú	メモを追加
+161	Xóa ghi chú này?	このメモを削除しますか？
+162	Xóa	削除
+163	Chưa có ghi chú	メモはまだありません
+164	Hoạt động	アクティビティ
+165	Chuyển sang	移動先
+166	Chưa có hoạt động	アクティビティはまだありません
+167	Chọn trạng thái mới hoặc viết ghi chú cho ứng viên	新しいステータスを選ぶか、候補者へのメモを書いてください
+168	Cập nhật trạng thái hồ sơ thành công!	応募ステータスを更新しました！
+169	Chi tiết hồ sơ	応募の詳細
+170	Cập nhật trạng thái	ステータスを更新
+171	Tên việc làm	求人名
+172	Ngày sửa	更新日
+173	Lời nhắn cho ứng viên (không bắt buộc)	候補者へのメッセージ（任意）
+174	Hiển thị trên dòng thời gian của ứng viên, ví dụ thời gian, địa điểm hoặc link phỏng vấn.	候補者のタイムラインに表示されます（例：面接日時、場所、会議リンク）。
+175	Lịch sử trạng thái	ステータス履歴
+176	Role updated successfully	ロールを更新しました
+177	Role created successfully	ロールを作成しました
+178	Update role	ロールを更新
+179	Create role	ロールを作成
+180	Update	更新
+181	Create	作成
+182	Nhập mô tả	説明を入力
+183	Quyền hạn	権限
+184	Các quyền được phép cho vai trò này	このロールに許可された権限
+185	User updated successfully	ユーザーを更新しました
+186	User created successfully	ユーザーを作成しました
+187	Update user	ユーザーを更新
+188	Create user	ユーザーを作成
+189	Please do not leave blank	空欄にしないでください
+190	Please enter a valid email	有効なメールアドレスを入力してください
+191	Enter email	メールアドレスを入力
+192	Mật khẩu	パスワード
+193	Enter password	パスワードを入力
+194	Display name	表示名
+195	Enter display name	表示名を入力
+196	Age	年齢
+197	Enter age	年齢を入力
+198	Gender	性別
+199	Vui lòng chọn giới tính	性別を選択してください
+200	Please select a gender!	性別を選択してください！
+201	Role	ロール
+202	Please select a role!	ロールを選択してください！
+203	Select a role	ロールを選択
+204	Company	所属会社
+205	Please select a company!	会社を選択してください！
+206	Select a company	会社を選択
+207	Address	住所
+208	Enter address	住所を入力
+209	Cập nhật hồ sơ thành công	プロフィールを更新しました
+210	Cập nhật hồ sơ thất bại	プロフィールの更新に失敗しました
+211	Tuổi	年齢
+212	Giới tính	性別
+213	Nam	男性
+214	Nữ	女性
+215	Khác	その他
+216	Cập nhật hồ sơ	プロフィールを更新
+217	Xem chi tiết người dùng	ユーザーの詳細を表示
+218	+84 399864422 (Việt Nam)	+84 399864422（ベトナム）
+219	Đội ngũ của chúng tôi	私たちのチーム
+220	Việc làm không còn tồn tại	この求人は掲載終了しました
+221	Đã đóng tuyển	募集終了
+222	Ẩn lịch sử	履歴を隠す
+223	Lịch sử ({{v0}})	履歴（{{v0}}）
+224	Xem thêm	もっと見る
+225	Đang tải...	読み込み中...
+226	Top công ty IT tại Việt Nam 🇻🇳	ベトナムのトップ IT 企業 🇻🇳
+227	Việc làm IT mới 🔥	新着 IT 求人 🔥
+228	=	=
+229	Không có dữ liệu	データがありません
+230	Lương & phúc lợi	給与・福利厚生
+231	Văn hóa & vui chơi	社風・イベント
+232	Quản lý	マネジメント
+233	Cân bằng công việc - cuộc sống	ワークライフバランス
+234	Phát triển sự nghiệp	キャリア成長
+235	Nhận được offer	内定あり
+236	Không nhận offer	内定なし
+237	Đang chờ kết quả	結果待ち
+238	Trải nghiệm tích cực	良い経験
+239	Trải nghiệm bình thường	普通の経験
+240	Trải nghiệm tiêu cực	悪い経験
+241	Đánh giá & phỏng vấn	レビューと面接
+242	Được đăng ẩn danh bởi nhân viên và ứng viên của	匿名で投稿：社員・候補者 ―
+243	Viết đánh giá	レビューを書く
+244	Chia sẻ phỏng vấn	面接体験を共有
+245	% sẽ giới thiệu	% が推薦
+246	Đánh giá ({{v0}})	レビュー（{{v0}}）
+247	Phỏng vấn ({{v0}})	面接（{{v0}}）
+248	Độ khó	難易度
+249	Chưa có đánh giá nào. Bạn từng làm ở đây? Hãy giúp mọi người bằng một đánh giá trung thực.	まだレビューがありません。ここで働いたことがあれば、正直なレビューで他の人を助けてください。
+250	Chưa có trải nghiệm phỏng vấn nào. Bạn từng phỏng vấn ở đây? Hãy chia sẻ nhé.	まだ面接体験がありません。ここで面接を受けたことがあれば共有してください。
+251	Có giới thiệu	推薦する
+252	Không giới thiệu	推薦しない
+253	Ẩn danh ·	匿名 ·
+254	Cựu nhân viên	元社員
+255	Nhân viên hiện tại	現社員
+256	Ưu điểm	良い点
+257	Nhược điểm	悪い点
+258	Lời khuyên cho ban lãnh đạo	経営陣へのアドバイス
+259	Ứng viên ẩn danh ·	匿名の候補者 ·
+260	Quy trình	選考プロセス
+261	Câu hỏi đã gặp	質問内容
+262	Xem thêm	もっと見る
+263	Tên, email và tài khoản của bạn sẽ không bao giờ được hiển thị. Chỉ hiển thị tháng bạn đăng.	名前、メール、アカウントは表示されません。投稿した月のみ表示されます。
+264	Cảm ơn bạn! Đánh giá của bạn đã được đăng.	ありがとうございます！レビューが公開されました。
+265	Không thể đăng đánh giá	レビューを投稿できません
+266	Đánh giá {{v0}}	{{v0}} をレビュー
+267	Đăng ẩn danh	匿名で投稿
+268	Đánh giá tổng thể	総合評価
+269	Vui lòng chấm điểm công ty	会社を評価してください
+270	Bạn là	あなたは
+271	Vị trí của bạn (không bắt buộc)	あなたの職種（任意）
+272	=	=
+273	Tiêu đề đánh giá	レビューのタイトル
+274	Ít nhất 5 ký tự	5 文字以上
+275	Team tuyệt vời, thăng tiến chậm	チームは最高、昇進は遅め
+276	Ít nhất 20 ký tự	20 文字以上
+277	Lời khuyên cho ban lãnh đạo (không bắt buộc)	経営陣へのアドバイス（任意）
+278	Bạn có giới thiệu công ty này cho bạn bè không?	この会社を友人に勧めますか？
+279	Cảm ơn bạn đã chia sẻ buổi phỏng vấn!	面接体験を共有いただきありがとうございます！
+280	Không thể đăng	投稿できません
+281	Phỏng vấn tại {{v0}}	{{v0}} での面接
+282	Vị trí bạn đã phỏng vấn	面接を受けた職種
+283	Vui lòng nhập vị trí	職種を入力してください
+284	=	=
+285	Kết quả	結果
+286	Bắt buộc	必須
+287	Trải nghiệm tổng thể	全体的な印象
+288	Tích cực	良い
+289	Bình thường	普通
+290	Tiêu cực	悪い
+291	Quy trình diễn ra như thế nào?	選考はどのように進みましたか？
+292	Ít nhất 30 ký tự	30 文字以上
+293	Số vòng, thời gian, bạn gặp ai, bài test về nhà…	面接回数、期間、面接官、課題など…
+294	Câu hỏi đã gặp (không bắt buộc)	質問内容（任意）
+295	Hình ảnh công ty	会社の写真
+296	Chưa có hình ảnh	画像がありません
+297	Không gian làm việc {{v0}}	{{v0}} のオフィス
+298	Chưa có mô tả	説明がありません
+299	Trang chủ	ホーム
+300	Công ty	企業
+301	Chi tiết công ty	企業の詳細
+302	Quay lại danh sách	一覧に戻る
+303	Chưa cập nhật địa chỉ	住所未登録
+304	Kỹ năng của chúng tôi	技術スタック
+305	Categories	カテゴリー

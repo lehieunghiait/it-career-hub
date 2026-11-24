@@ -10,6 +10,8 @@ import SaveJobButton from './SaveJobButton';
 import { useAppSelector } from '@/redux/hooks';
 import s from 'styles/job-board.module.scss';
 
+import i18next from 'i18next';
+
 dayjs.extend(relativeTime);
 
 export const skillLabel = (value: string) =>
@@ -53,7 +55,7 @@ const JobListItem = ({ job }: { job: IJob }) => {
           </Link>
         )}
         <div className={s['job-salary']}>
-          <DollarOutlined /> {(job.salary ?? 0).toLocaleString('en-US')} đ
+          <DollarOutlined /> {(job.salary ?? 0).toLocaleString('en-US')} {i18next.t('app:common.d')}
         </div>
         <div className={s['job-meta']}>
           <span>

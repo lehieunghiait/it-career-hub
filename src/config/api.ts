@@ -268,6 +268,94 @@ export const callDeleteResumeNote = (id: string, noteId: string) => {
   return axios.delete<IBackendRes<{ deleted: boolean }>>(`/api/v1/resumes/${id}/notes/${noteId}`);
 };
 
+/**
+ * 
+Module AI interview (ElevenLabs voice screening)
+ */
+export type AiInterviewStatus = 'INVITED' | 'IN_PROGRESS' | 'COMPLETED' | 'EXPIRED' | 'CANCELLED';
+export type AiInterviewLanguage = 'vi' | 'en';
+
+export interface IAiInterviewEvaluation {
+  status: 'PENDING' | 'COMPLETED' | 'FAILED';
+  overallScore?: number;
+  recommendation?: 'STRONG_YES' | 'YES' | 'MAYBE' | 'NO';
+  summary?: string;
+  criteria?: { name: string; score: number; evidence: string }[];
+  strengths?: string[];
+  concerns?: string[];
+  flags?: string[];
+  extracted?: Record<string, string | number | null>;
+  errorMessage?: string;
+}
+
+export interface IAiInterview {
+  _id: string;
+  status: AiInterviewStatus;
+  language: AiInterviewLanguage;
+  expiresAt: string;
+  attempts: number;
+  startedAt?: string;
+  completedAt?: string;
+  durationSecs?: number;
+  transcript: { role: 'agent' | 'user'; message: string; timeInCallSecs?: number }[];
+  evaluation?: IAiInterviewEvaluation;
+  createdBy?: { _id: string; email: string };
+  createdAt: string;
+}
+
+export interface IAiInterviewInvite {
+  status: AiInterviewStatus;
+  language: AiInterviewLanguage;
+  expiresAt: string;
+  attemptsLeft: number;
+  durationMinutes: number;
+  job: {
+    _id: string;
+    name: string;
+    level?: string;
+    companyName?: string;
+    companyLogo?: string;
+  } | null;
+}
+
+export const callInviteAiInterview = (
+  resumeId: string,
+  body: { language: AiInterviewLanguage; note?: string }
+) => {
+  return axios.post<
+    IBackendRes<{ _id: string; status: AiInterviewStatus; expiresAt: string; inviteUrl: string }>
+  >(`/api/v1/interviews/resume/${resumeId}/invite`, body);
+};
+
+export const callFetchAiInterviews = (resumeId: string) => {
+  return axios.get<IBackendRes<IAiInterview[]>>(`/api/v1/interviews/resume/${resumeId}`);
+};
+
+export const callReevaluateAiInterview = (id: string) => {
+  return axios.post<IBackendRes<{ status: string }>>(`/api/v1/interviews/${id}/evaluate`);
+};
+
+export const callFetchAiInterviewInvite = (token: string) => {
+  return axios.get<IBackendRes<IAiInterviewInvite>>(`/api/v1/interviews/invite/${token}`);
+};
+
+export const callStartAiInterview = (token: string) => {
+  return axios.post<
+    IBackendRes<{
+      signedUrl: string;
+      dynamicVariables: Record<string, string | number | boolean>;
+      attemptsLeft: number;
+    }>
+  >(`/api/v1/interviews/invite/${token}/start`, { consent: true });
+};
+
+export const callBindAiInterviewConversation = (token: string, conversationId: string) => {
+  return axios.post<IBackendRes<{ attemptsLeft: number }>>(
+    `/api/v1/interviews/invite/${token}/conversation`,
+    { conversationId }
+  );
+};
+
 export const callFetchResumeByUser = () => {
   return axios.post<IBackendRes<IResume[]>>(`/api/v1/resumes/by-user`);
 };
