@@ -22,7 +22,10 @@ import { useClerk, useUser } from '@clerk/react';
 import { setLogoutAction } from '@/redux/slice/accountSlide';
 import { useTranslation } from 'react-i18next';
 import ManageAccount from './modal/manage.account';
+import LanguageSwitcher from '@/components/share/language.switcher';
 import styles from '@/styles/client.module.scss';
+
+import i18next from 'i18next';
 
 const Header = () => {
   const isMobile = useIsMobile();
@@ -45,27 +48,27 @@ const Header = () => {
 
   const items: MenuProps['items'] = [
     {
-      label: <Link to={'/'}>{'Home'}</Link>,
+      label: <Link to={'/'}>{i18next.t('app:common.home')}</Link>,
       key: '/',
       icon: <HomeOutlined />,
     },
     {
-      label: <Link to={'/job'}>{'IT Jobs'}</Link>,
+      label: <Link to={'/job'}>{i18next.t('app:components.client.header_client.it_jobs')}</Link>,
       key: '/job',
       icon: <CodeOutlined />,
     },
     {
-      label: <Link to={'/company'}>{'Top IT Companies'}</Link>,
+      label: <Link to={'/company'}>{i18next.t('app:components.client.header_client.top_it_companies')}</Link>,
       key: '/company',
       icon: <RiseOutlined />,
     },
     {
-      label: <Link to={'/cv'}>{'Create CV'}</Link>,
+      label: <Link to={'/cv'}>{i18next.t('app:components.client.header_client.create_cv')}</Link>,
       key: '/cv',
       icon: <SolutionOutlined />,
     },
     {
-      label: <Link to={'/salary'}>{'Salary'}</Link>,
+      label: <Link to={'/salary'}>{i18next.t('app:common.salary')}</Link>,
       key: '/salary',
       icon: <DollarOutlined />,
     },
@@ -85,7 +88,7 @@ const Header = () => {
   const handleLogout = async () => {
     await signOut();
     dispatch(setLogoutAction());
-    message.success('Logout successfully');
+    message.success(i18next.t('app:components.client.header_client.logout_successfully'));
     //Redirect to home page
     navigate('/');
   };
@@ -94,14 +97,14 @@ const Header = () => {
    */
   const itemsDropdown = [
     {
-      label: <Link to={'/my-jobs'}>My jobs</Link>,
+      label: <Link to={'/my-jobs'}>{i18next.t('app:components.client.header_client.my_jobs')}</Link>,
       key: 'my-jobs',
       icon: <ProfileOutlined />,
     },
     {
       label: (
         <label style={{ cursor: 'pointer' }} onClick={() => setOpenManageAccount(true)}>
-          Manage Account
+          {i18next.t('app:components.client.header_client.manage_account')}
         </label>
       ),
       key: 'manage-account',
@@ -115,7 +118,7 @@ const Header = () => {
     {
       label: (
         <label style={{ cursor: 'pointer' }} onClick={() => handleLogout()}>
-          Logout
+          {i18next.t('app:components.client.header_client.logout')}
         </label>
       ),
       key: 'logout',
@@ -152,14 +155,15 @@ const Header = () => {
                     overflowedIndicator={null}
                   />
                 </ConfigProvider>
-                <div className={styles['extra']}>
+                <div className={styles['extra']} style={{ display: 'flex', alignItems: 'center', gap: 12 }}>
+                  <LanguageSwitcher theme='light' />
                   {!isSignedIn ? (
-                    <Link to={'/login'}>Login</Link>
+                    <Link to={'/login'}>{i18next.t('app:components.client.header_client.login')}</Link>
                   ) : (
                     <Dropdown menu={{ items: itemsDropdown }} trigger={['click']}>
                       <Space style={{ cursor: 'pointer' }}>
                         <span style={{ fontSize: 13, fontWeight: 500, color: '#fff' }}>
-                          {user?.name || clerkUser?.fullName || 'Guest'}
+                          {user?.name || clerkUser?.fullName || i18next.t('app:common.guest')}
                         </span>
                         <Avatar style={{ backgroundColor: '#fff' }}>
                           <img
@@ -181,13 +185,16 @@ const Header = () => {
           ) : (
             <div className={styles['header-mobile']}>
               <span className={styles['brand-text']}>{import.meta.env.VITE_APP_NAME}</span>
-              <MenuFoldOutlined onClick={() => setOpenMobileMenu(true)} />
+              <span style={{ display: 'inline-flex', alignItems: 'center', gap: 12 }}>
+                <LanguageSwitcher theme='light' />
+                <MenuFoldOutlined onClick={() => setOpenMobileMenu(true)} />
+              </span>
             </div>
           )}
         </div>
       </div>
       <Drawer
-        title='Features'
+        title={i18next.t('app:components.client.header_client.features')}
         placement='right'
         onClose={() => setOpenMobileMenu(false)}
         open={openMobileMenu}

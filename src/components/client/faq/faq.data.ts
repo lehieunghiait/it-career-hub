@@ -1,5 +1,7 @@
 import { FaqItemType } from './faq.item';
 
+import i18next from 'i18next';
+
 // Danh sách các danh mục câu hỏi
 export const faqCategories: string[] = [
   'Tất cả',
@@ -14,65 +16,56 @@ export const faqCategories: string[] = [
 export const faqItems: FaqItemType[] = [
   {
     id: 1,
-    question: 'Làm thế nào để tạo tài khoản trên IT Việc?',
-    answer:
-      'Để tạo tài khoản trên IT Việc, bạn có thể nhấp vào nút "Đăng ký" ở góc trên bên phải của trang web. Sau đó, bạn cần điền thông tin cá nhân như họ tên, email, mật khẩu và làm theo các hướng dẫn để hoàn tất quá trình đăng ký.',
+    get question() { return i18next.t('app:components.client.faq.faq_data.lam_the_nao_de_tao_tai'); },
+    get answer() { return i18next.t('app:components.client.faq.faq_data.de_tao_tai_khoan_tren_it'); },
     category: 'Tài khoản',
   },
   {
     id: 2,
-    question: 'Tôi quên mật khẩu, làm thế nào để khôi phục?',
-    answer:
-      'Nếu bạn quên mật khẩu, bạn có thể nhấp vào liên kết "Quên mật khẩu" trên trang đăng nhập. Hệ thống sẽ gửi một email khôi phục mật khẩu đến địa chỉ email mà bạn đã đăng ký. Làm theo hướng dẫn trong email để đặt lại mật khẩu của bạn.',
+    get question() { return i18next.t('app:components.client.faq.faq_data.toi_quen_mat_khau_lam_the'); },
+    get answer() { return i18next.t('app:components.client.faq.faq_data.neu_ban_quen_mat_khau_ban'); },
     category: 'Tài khoản',
   },
   {
     id: 3,
-    question: 'Làm thế nào để cập nhật hồ sơ cá nhân?',
-    answer:
-      'Để cập nhật hồ sơ cá nhân, đăng nhập vào tài khoản của bạn và nhấp vào tên người dùng ở góc trên bên phải, sau đó chọn "Quản lý tài khoản". Tại đây, bạn có thể cập nhật thông tin cá nhân, kinh nghiệm làm việc, kỹ năng và thông tin liên hệ của mình.',
+    get question() { return i18next.t('app:components.client.faq.faq_data.lam_the_nao_de_cap_nhat'); },
+    get answer() { return i18next.t('app:components.client.faq.faq_data.de_cap_nhat_ho_so_ca'); },
     category: 'Tài khoản',
   },
   {
     id: 4,
-    question: 'Làm thế nào để tìm việc phù hợp với kỹ năng của tôi?',
-    answer:
-      'IT Việc cung cấp công cụ tìm kiếm nâng cao cho phép bạn lọc các công việc dựa trên kỹ năng, vị trí, mức lương và nhiều tiêu chí khác. Bạn cũng có thể đăng ký nhận thông báo việc làm để nhận các cơ hội việc làm phù hợp với hồ sơ của bạn qua email.',
+    get question() { return i18next.t('app:components.client.faq.faq_data.lam_the_nao_de_tim_viec'); },
+    get answer() { return i18next.t('app:components.client.faq.faq_data.it_viec_cung_cap_cong_cu'); },
     category: 'Tìm việc',
   },
   {
     id: 5,
-    question: 'Làm thế nào để ứng tuyển vào một vị trí?',
-    answer:
-      'Để ứng tuyển vào một vị trí, hãy nhấp vào nút "Ứng tuyển ngay" trên trang chi tiết công việc. Bạn sẽ được yêu cầu gửi CV và có thể thêm thư xin việc. Đảm bảo rằng hồ sơ của bạn đã được cập nhật đầy đủ trước khi ứng tuyển.',
+    get question() { return i18next.t('app:components.client.faq.faq_data.lam_the_nao_de_ung_tuyen'); },
+    get answer() { return i18next.t('app:components.client.faq.faq_data.de_ung_tuyen_vao_mot_vi'); },
     category: 'Tìm việc',
   },
   {
     id: 6,
-    question: 'Tôi có thể theo dõi trạng thái ứng tuyển của mình như thế nào?',
-    answer:
-      'Sau khi ứng tuyển, bạn có thể theo dõi trạng thái ứng tuyển bằng cách đăng nhập vào tài khoản và truy cập mục "Việc làm đã ứng tuyển". Tại đây, bạn sẽ thấy danh sách các vị trí đã ứng tuyển và trạng thái hiện tại của chúng.',
+    get question() { return i18next.t('app:components.client.faq.faq_data.toi_co_the_theo_doi_trang'); },
+    get answer() { return i18next.t('app:components.client.faq.faq_data.sau_khi_ung_tuyen_ban_co'); },
     category: 'Tìm việc',
   },
   {
     id: 7,
-    question: 'Làm thế nào để đăng tin tuyển dụng?',
-    answer:
-      'Để đăng tin tuyển dụng, bạn cần đăng nhập với tài khoản nhà tuyển dụng. Sau đó, nhấp vào "Đăng tin tuyển dụng" và điền đầy đủ thông tin về vị trí cần tuyển, yêu cầu công việc, mức lương và thông tin liên hệ. Sau khi xem lại, bạn có thể đăng tin và nó sẽ được hiển thị trên trang việc làm.',
+    get question() { return i18next.t('app:components.client.faq.faq_data.lam_the_nao_de_dang_tin'); },
+    get answer() { return i18next.t('app:components.client.faq.faq_data.de_dang_tin_tuyen_dung_ban'); },
     category: 'Nhà tuyển dụng',
   },
   {
     id: 8,
-    question: 'Chi phí đăng tin tuyển dụng là bao nhiêu?',
-    answer:
-      'Chi phí đăng tin tuyển dụng phụ thuộc vào gói dịch vụ mà bạn lựa chọn. Chúng tôi cung cấp nhiều gói khác nhau với các tính năng và thời hạn khác nhau. Vui lòng truy cập mục "Bảng giá" để xem chi tiết về các gói và lựa chọn phù hợp với nhu cầu của công ty bạn.',
+    get question() { return i18next.t('app:components.client.faq.faq_data.chi_phi_dang_tin_tuyen_dung'); },
+    get answer() { return i18next.t('app:components.client.faq.faq_data.chi_phi_dang_tin_tuyen_dung_2'); },
     category: 'Nhà tuyển dụng',
   },
   {
     id: 9,
-    question: 'Làm thế nào để sàng lọc ứng viên hiệu quả?',
-    answer:
-      'IT Việc cung cấp công cụ quản lý ứng viên giúp bạn sàng lọc hiệu quả. Bạn có thể đánh giá CV, ghi chú, phân loại ứng viên và theo dõi tiến trình tuyển dụng. Ngoài ra, chúng tôi cũng cung cấp tính năng gửi email hàng loạt và lên lịch phỏng vấn trực tiếp từ hệ thống.',
+    get question() { return i18next.t('app:components.client.faq.faq_data.lam_the_nao_de_sang_loc'); },
+    get answer() { return i18next.t('app:components.client.faq.faq_data.it_viec_cung_cap_cong_cu_2'); },
     category: 'Nhà tuyển dụng',
   },
   // {
@@ -98,23 +91,20 @@ export const faqItems: FaqItemType[] = [
   // },
   {
     id: 13,
-    question: 'IT Việc bảo vệ dữ liệu cá nhân của tôi như thế nào?',
-    answer:
-      'IT Việc áp dụng các biện pháp bảo mật nghiêm ngặt để bảo vệ thông tin cá nhân của bạn. Chúng tôi sử dụng mã hóa SSL, lưu trữ dữ liệu an toàn và tuân thủ các quy định về bảo vệ dữ liệu. Chúng tôi không chia sẻ thông tin cá nhân của bạn với bên thứ ba mà không có sự đồng ý của bạn.',
+    get question() { return i18next.t('app:components.client.faq.faq_data.it_viec_bao_ve_du_lieu'); },
+    get answer() { return i18next.t('app:components.client.faq.faq_data.it_viec_ap_dung_cac_bien'); },
     category: 'Bảo mật',
   },
   {
     id: 14,
-    question: 'Làm thế nào để tăng cường bảo mật cho tài khoản của tôi?',
-    answer:
-      'Để tăng cường bảo mật cho tài khoản, bạn nên sử dụng mật khẩu mạnh, thay đổi mật khẩu định kỳ, và bật xác thực hai yếu tố nếu có. Đồng thời, hãy đảm bảo rằng bạn đăng xuất khỏi tài khoản khi sử dụng máy tính công cộng và cập nhật thông tin liên hệ để có thể khôi phục tài khoản khi cần thiết.',
+    get question() { return i18next.t('app:components.client.faq.faq_data.lam_the_nao_de_tang_cuong'); },
+    get answer() { return i18next.t('app:components.client.faq.faq_data.de_tang_cuong_bao_mat_cho'); },
     category: 'Bảo mật',
   },
   {
     id: 15,
-    question: 'Làm thế nào để báo cáo vấn đề bảo mật hoặc lừa đảo?',
-    answer:
-      'Nếu bạn phát hiện vấn đề bảo mật hoặc nghi ngờ có hoạt động lừa đảo trên IT Việc, vui lòng liên hệ ngay với chúng tôi qua email security@itviec.com hoặc hotline 1900 1234. Chúng tôi có đội ngũ chuyên trách xử lý các vấn đề bảo mật và sẽ phản hồi trong thời gian sớm nhất.',
+    get question() { return i18next.t('app:components.client.faq.faq_data.lam_the_nao_de_bao_cao'); },
+    get answer() { return i18next.t('app:components.client.faq.faq_data.neu_ban_phat_hien_van_de'); },
     category: 'Bảo mật',
   },
 ];

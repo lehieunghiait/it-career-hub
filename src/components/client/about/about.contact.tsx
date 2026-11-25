@@ -2,6 +2,8 @@ import { Card, Col, Row, Typography } from 'antd';
 import { useTranslation } from 'react-i18next';
 import styles from 'styles/client.module.scss';
 
+import i18next from 'i18next';
+
 const AboutContact = () => {
   const { t } = useTranslation('about');
   return (
@@ -19,7 +21,7 @@ const AboutContact = () => {
               <strong>{t('email')}:</strong> lehieunghia2402@gmail.com
             </Typography.Paragraph>
             <Typography.Paragraph>
-              <strong>{t('phone')}:</strong> +84 399864422 (Vietnam)
+              <strong>{t('phone')}:</strong> {i18next.t('app:components.client.about.about_contact.t_84_399864422_vietnam')}
             </Typography.Paragraph>
           </Col>
           <Col xs={24} md={12}>

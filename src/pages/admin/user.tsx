@@ -15,6 +15,8 @@ import Access from '@/components/share/access';
 import { ALL_PERMISSIONS } from '@/config/permissions';
 import { EyeOutlined } from '@ant-design/icons';
 
+import i18next from 'i18next';
+
 const UserPage = () => {
   const [openModal, setOpenModal] = useState<boolean>(false);
   const [dataInit, setDataInit] = useState<IUser | null>(null);
@@ -31,11 +33,11 @@ const UserPage = () => {
     if (_id) {
       const res = await callDeleteUser(_id);
       if (res && res.data) {
-        message.success('Xóa User thành công');
+        message.success(i18next.t('app:pages.admin.user.xoa_user_thanh_cong'));
         reloadTable();
       } else {
         notification.error({
-          message: 'Có lỗi xảy ra',
+          message: i18next.t('app:common.co_loi_xay_ra'),
           description: res.message,
         });
       }
@@ -48,7 +50,7 @@ const UserPage = () => {
 
   const columns: ProColumns<IUser>[] = [
     {
-      title: 'Id',
+      title: i18next.t('app:common.id'),
       responsive: ['xl'],
       dataIndex: '_id',
       width: 250,
@@ -68,19 +70,19 @@ const UserPage = () => {
       hideInSearch: true,
     },
     {
-      title: 'Name',
+      title: i18next.t('app:common.name'),
       responsive: ['sm'],
       dataIndex: 'name',
       sorter: true,
     },
     {
-      title: 'Email',
+      title: i18next.t('app:common.email'),
       dataIndex: 'email',
       sorter: true,
     },
 
     {
-      title: 'CreatedAt',
+      title: i18next.t('app:common.createdat'),
       responsive: ['xl'],
       dataIndex: 'createdAt',
       width: 200,
@@ -91,7 +93,7 @@ const UserPage = () => {
       hideInSearch: true,
     },
     {
-      title: 'UpdatedAt',
+      title: i18next.t('app:common.updatedat'),
       responsive: ['lg'],
       dataIndex: 'updatedAt',
       width: 200,
@@ -102,7 +104,7 @@ const UserPage = () => {
       hideInSearch: true,
     },
     {
-      title: 'Actions',
+      title: i18next.t('app:common.actions'),
       fixed: 'right',
       hideInSearch: true,
       width: 100,
@@ -125,11 +127,11 @@ const UserPage = () => {
           <Access permission={ALL_PERMISSIONS.USERS.DELETE} hideChildren>
             <Popconfirm
               placement='leftTop'
-              title={'Confirm delete'}
-              description={'Are you sure you want to delete this user?'}
+              title={i18next.t('app:common.confirm_delete')}
+              description={i18next.t('app:pages.admin.user.are_you_sure_you_want_to')}
               onConfirm={() => handleDeleteUser(entity._id)}
-              okText='Confirm'
-              cancelText='Cancel'
+              okText={i18next.t('app:common.confirm')}
+              cancelText={i18next.t('app:common.cancel')}
             >
               <span style={{ cursor: 'pointer', margin: '0 10px' }}>
                 <DeleteOutlined
@@ -196,7 +198,7 @@ const UserPage = () => {
       <Access permission={ALL_PERMISSIONS.USERS.GET_PAGINATE}>
         <DataTable<IUser>
           actionRef={tableRef}
-          headerTitle='List of Users'
+          headerTitle={i18next.t('app:pages.admin.user.list_of_users')}
           rowKey='_id'
           loading={isFetching}
           columns={columns}
@@ -224,7 +226,7 @@ const UserPage = () => {
           toolBarRender={(_action, _rows): any => {
             return (
               <Button icon={<PlusOutlined />} type='primary' onClick={() => setOpenModal(true)}>
-                Add new
+                {i18next.t('app:common.add_new')}
               </Button>
             );
           }}

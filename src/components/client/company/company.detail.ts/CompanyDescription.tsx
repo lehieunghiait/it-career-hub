@@ -5,6 +5,8 @@ import parse from 'html-react-parser';
 import styles from 'styles/client.module.scss';
 import { InfoCircleOutlined } from '@ant-design/icons';
 
+import i18next from 'i18next';
+
 interface CompanyDescriptionProps {
   description: string | undefined;
 }
@@ -16,7 +18,7 @@ const CompanyDescription = ({ description }: CompanyDescriptionProps) => {
         <div style={{ display: 'flex', alignItems: 'center', gap: '8px' }}>
           <InfoCircleOutlined style={{ color: '#1677ff' }} />
           <Title level={4} style={{ margin: 0 }}>
-            {'Overview'}
+            {i18next.t('app:components.client.company.company_detail_ts.CompanyDescription.overview')}
           </Title>
         </div>
       }
@@ -26,7 +28,7 @@ const CompanyDescription = ({ description }: CompanyDescriptionProps) => {
       {description ? (
         <div className={styles['company-description']}>{parse(description)}</div>
       ) : (
-        <Empty description={'No description available'} image={Empty.PRESENTED_IMAGE_SIMPLE} />
+        <Empty description={i18next.t('app:components.client.company.company_detail_ts.CompanyDescription.no_description_available')} image={Empty.PRESENTED_IMAGE_SIMPLE} />
       )}
     </Card>
   );

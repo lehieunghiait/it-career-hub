@@ -17,6 +17,8 @@ import { ICompany, ICompanyDetail } from '@/types/backend';
 import { v4 as uuidv4 } from 'uuid';
 import enUS from 'antd/lib/locale/en_US';
 
+import i18next from 'i18next';
+
 interface IProps {
   openModal: boolean;
   setOpenModal: (v: boolean) => void;
@@ -87,19 +89,19 @@ const ModalCompany = (props: IProps) => {
     const { name, address, phone, email, website } = valuesForm;
 
     if (dataLogo.length === 0) {
-      message.error('Please upload a logo');
+      message.error(i18next.t('app:components.admin.company.modal_company.please_upload_a_logo'));
       return;
     }
 
     if (dataInit?._id) {
       const res = await callUpdateCompany(dataInit._id, name, address, value, dataLogo[0].url);
       if (res.data) {
-        message.success('Update Company successfully');
+        message.success(i18next.t('app:components.admin.company.modal_company.update_company_successfully'));
         handleReset();
         reloadTable();
       } else {
         notification.error({
-          message: 'An error occurred',
+          message: i18next.t('app:common.an_error_occurred'),
           description: res.message,
         });
       }
@@ -114,12 +116,12 @@ const ModalCompany = (props: IProps) => {
         website
       );
       if (res.data) {
-        message.success('Create Company successfully');
+        message.success(i18next.t('app:components.admin.company.modal_company.create_company_successfully'));
         handleReset();
         reloadTable();
       } else {
         notification.error({
-          message: 'An error occurred',
+          message: i18next.t('app:common.an_error_occurred'),
           description: res.message,
         });
       }
@@ -166,11 +168,11 @@ const ModalCompany = (props: IProps) => {
   const beforeUpload = (file: any) => {
     const isJpgOrPng = ['image/jpeg', 'image/png', 'image/webp'].includes(file.type);
     if (!isJpgOrPng) {
-      message.error('You can only upload JPG/PNG/WEBP file!');
+      message.error(i18next.t('app:components.admin.company.modal_company.you_can_only_upload_jpg_png'));
     }
     const isLt2M = file.size / 1024 / 1024 < 2;
     if (!isLt2M) {
-      message.error('Image must smaller than 2MB!');
+      message.error(i18next.t('app:components.admin.company.modal_company.image_must_smaller_than_2mb'));
     }
     return isJpgOrPng && isLt2M;
   };
@@ -184,7 +186,7 @@ const ModalCompany = (props: IProps) => {
     }
     if (info.file.status === 'error') {
       setLoadingUpload(false);
-      message.error(info?.file?.error?.event?.message ?? 'Đã có lỗi xảy ra khi upload file.');
+      message.error(info?.file?.error?.event?.message ?? i18next.t('app:components.admin.company.modal_company.da_co_loi_xay_ra_khi'));
     }
   };
 
@@ -204,10 +206,10 @@ const ModalCompany = (props: IProps) => {
         },
       ]);
       if (onSuccess) onSuccess('ok');
-      message.success('Cập nhật logo thành công!');
+      message.success(i18next.t('app:components.admin.company.modal_company.cap_nhat_logo_thanh_cong'));
     } else {
       notification.error({
-        message: 'Cập nhật logo thất bại',
+        message: i18next.t('app:components.admin.company.modal_company.cap_nhat_logo_that_bai'),
         description: res.message,
       });
       if (onError) {
@@ -223,7 +225,7 @@ const ModalCompany = (props: IProps) => {
       {openModal && (
         <>
           <ModalForm
-            title={<>{dataInit?._id ? 'Update Company' : 'Create Company'}</>}
+            title={<>{dataInit?._id ? i18next.t('app:components.admin.company.modal_company.update_company') : i18next.t('app:components.admin.company.modal_company.create_company')}</>}
             open={openModal}
             modalProps={{
               onCancel: () => {
@@ -249,8 +251,8 @@ const ModalCompany = (props: IProps) => {
                 icon: <CheckSquareOutlined />,
               },
               searchConfig: {
-                resetText: 'Hủy',
-                submitText: <>{dataInit?._id ? 'Update' : 'Create'}</>,
+                resetText: i18next.t('app:common.huy'),
+                submitText: <>{dataInit?._id ? i18next.t('app:common.update') : i18next.t('app:components.admin.company.modal_company.create')}</>,
               },
             }}
           >
@@ -258,22 +260,22 @@ const ModalCompany = (props: IProps) => {
             <Row gutter={16}>
               <Col span={24}>
                 <ProFormText
-                  label='Company Name'
+                  label={i18next.t('app:components.admin.company.modal_company.company_name')}
                   name='name'
-                  rules={[{ required: true, message: 'Please enter company name' }]}
-                  placeholder='Enter company name'
+                  rules={[{ required: true, message: i18next.t('app:components.admin.company.modal_company.please_enter_company_name') }]}
+                  placeholder={i18next.t('app:components.admin.company.modal_company.enter_company_name')}
                 />
               </Col>
               {/* Logo công ty */}
               <Col span={8}>
                 <Form.Item
                   labelCol={{ span: 24 }}
-                  label='Logo'
+                  label={i18next.t('app:components.admin.company.modal_company.logo')}
                   name='logo'
                   rules={[
                     {
                       required: true,
-                      message: 'Please enter logo',
+                      message: i18next.t('app:components.admin.company.modal_company.please_enter_logo'),
                       validator: () => {
                         if (dataLogo.length > 0 && dataLogo[0].url) return Promise.resolve();
                         else return Promise.reject(false);
@@ -308,7 +310,7 @@ const ModalCompany = (props: IProps) => {
                     >
                       <div>
                         {loadingUpload ? <LoadingOutlined /> : <PlusOutlined />}
-                        <div style={{ marginTop: 8 }}>Upload</div>
+                        <div style={{ marginTop: 8 }}>{i18next.t('app:components.admin.company.modal_company.upload')}</div>
                       </div>
                     </Upload>
                   </ConfigProvider>
@@ -317,10 +319,10 @@ const ModalCompany = (props: IProps) => {
               {/* Địa chỉ công ty */}
               <Col span={16}>
                 <ProFormTextArea
-                  label='Address'
+                  label={i18next.t('app:common.address')}
                   name='address'
-                  rules={[{ required: true, message: 'Please enter address' }]}
-                  placeholder='Enter address'
+                  rules={[{ required: true, message: i18next.t('app:components.admin.company.modal_company.please_enter_address') }]}
+                  placeholder={i18next.t('app:components.admin.company.modal_company.enter_address')}
                   fieldProps={{
                     autoSize: { minRows: 4 },
                   }}
@@ -329,39 +331,39 @@ const ModalCompany = (props: IProps) => {
               {/* Số điện thoại */}
               <Col span={24}>
                 <ProFormText
-                  label='Phone Number'
+                  label={i18next.t('app:components.admin.company.modal_company.phone_number')}
                   name='phone'
                   rules={[
-                    { required: true, message: 'Please enter phone number' },
+                    { required: true, message: i18next.t('app:components.admin.company.modal_company.please_enter_phone_number') },
                     {
                       pattern: /^[0-9\b]+$/,
-                      message: 'Only type phone number',
+                      message: i18next.t('app:components.admin.company.modal_company.only_type_phone_number'),
                     },
                   ]}
-                  placeholder='Enter phone number'
+                  placeholder={i18next.t('app:components.admin.company.modal_company.enter_phone_number')}
                 />
               </Col>
               {/* Email công ty */}
               <Col span={24}>
                 <ProFormText
-                  label='Email'
+                  label={i18next.t('app:common.email')}
                   name='email'
-                  rules={[{ required: true, message: 'Please enter CONTACT' }]}
-                  placeholder='Enter email'
+                  rules={[{ required: true, message: i18next.t('app:components.admin.company.modal_company.please_enter_contact') }]}
+                  placeholder={i18next.t('app:components.admin.company.modal_company.enter_email')}
                 />
               </Col>
               {/* Website công ty */}
               <Col span={12}>
                 <ProFormText
-                  label='Website'
+                  label={i18next.t('app:common.website')}
                   name='website'
-                  rules={[{ required: true, message: 'Please enter website' }]}
-                  placeholder='Enter website'
+                  rules={[{ required: true, message: i18next.t('app:components.admin.company.modal_company.please_enter_website') }]}
+                  placeholder={i18next.t('app:components.admin.company.modal_company.enter_website')}
                 />
               </Col>
               {/* Mô tả công ty */}
               <ProCard
-                title='Description'
+                title={i18next.t('app:common.description')}
                 headStyle={{ color: '#d81921' }}
                 style={{ marginBottom: 20 }}
                 headerBordered

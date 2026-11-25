@@ -9,8 +9,10 @@ import SalaryRangeChart, { formatM } from '@/components/client/salary/SalaryRang
 import styles from 'styles/client.module.scss';
 import s from 'styles/salary.module.scss';
 
+import i18next from 'i18next';
+
 const CITY_OPTIONS = [
-  { label: 'All cities', value: '' },
+  { get label() { return i18next.t('app:common.all_cities'); }, value: '' },
   ...LOCATION_LIST.filter(item => item.value !== 'ALL'),
 ];
 const levelName = (level: string) => level.charAt(0) + level.slice(1).toLowerCase();
@@ -99,19 +101,18 @@ const SalaryPage = () => {
       <section className={s['hero']}>
         <div className={styles['container']}>
           <span className={s['eyebrow']}>
-            <DollarOutlined /> Salary explorer
+            <DollarOutlined /> {i18next.t('app:pages.salary.index.salary_explorer')}
           </span>
-          <h1>How much do IT jobs pay in Vietnam?</h1>
+          <h1>{i18next.t('app:pages.salary.index.how_much_do_it_jobs_pay')}</h1>
           <p>
-            Monthly gross salaries by position, level, skill and city, calculated from job postings
-            on IT Career Hub.
+            {i18next.t('app:pages.salary.index.monthly_gross_salaries_by_position_level')}
           </p>
           <div className={s['filters']}>
             <Input
               size='large'
               allowClear
               prefix={<SearchOutlined />}
-              placeholder='Job title or skill, e.g. Java, React…'
+              placeholder={i18next.t('app:pages.salary.index.job_title_or_skill_e_g')}
               value={keyword}
               onChange={e => {
                 setKeyword(e.target.value);
@@ -125,7 +126,7 @@ const SalaryPage = () => {
               value={role}
               onChange={value => update('role', value)}
               options={[
-                { label: 'All positions', value: '' },
+                { label: i18next.t('app:pages.salary.index.all_positions'), value: '' },
                 ...(data?.roles ?? []).map(r => ({ label: r.label, value: r.key })),
               ]}
               className={s['filter-select']}
@@ -149,34 +150,34 @@ const SalaryPage = () => {
           </div>
         ) : !overall?.count ? (
           <div className={`${s['card']} ${s['no-data']}`}>
-            No job posting matches this search yet. Try a broader keyword or another city.
+            {i18next.t('app:pages.salary.index.no_job_posting_matches_this_search')}
           </div>
         ) : (
           <>
             <div className={s['kpis']}>
               <div className={s['kpi']}>
-                <span>Median salary</span>
+                <span>{i18next.t('app:pages.salary.index.median_salary')}</span>
                 <strong>{formatM(overall.median)}</strong>
-                <small>VND / month</small>
+                <small>{i18next.t('app:pages.salary.index.vnd_month')}</small>
               </div>
               <div className={s['kpi']}>
-                <span>Typical range</span>
+                <span>{i18next.t('app:pages.salary.index.typical_range')}</span>
                 <strong>
                   {formatM(overall.p25)} – {formatM(overall.p75)}
                 </strong>
-                <small>middle 50% of postings</small>
+                <small>{i18next.t('app:pages.salary.index.middle_50_of_postings')}</small>
               </div>
               <div className={s['kpi']}>
-                <span>Highest offer</span>
+                <span>{i18next.t('app:pages.salary.index.highest_offer')}</span>
                 <strong>{formatM(overall.max)}</strong>
-                <small>VND / month</small>
+                <small>{i18next.t('app:pages.salary.index.vnd_month')}</small>
               </div>
               <div className={s['kpi']}>
-                <span>Job postings</span>
+                <span>{i18next.t('app:pages.salary.index.job_postings')}</span>
                 <strong>{overall.count}</strong>
                 <small>
                   {data?.lastUpdated
-                    ? `updated ${dayjs(data.lastUpdated).format('DD/MM/YYYY')}`
+                    ? i18next.t('app:pages.salary.index.updated', { v0: dayjs(data.lastUpdated).format('DD/MM/YYYY') })
                     : ''}
                 </small>
               </div>
@@ -185,8 +186,8 @@ const SalaryPage = () => {
             <section className={s['card']}>
               <div className={s['card-head']}>
                 <div>
-                  <h2>Salary by level</h2>
-                  <p>Click a level to see matching jobs.</p>
+                  <h2>{i18next.t('app:pages.salary.index.salary_by_level')}</h2>
+                  <p>{i18next.t('app:pages.salary.index.click_a_level_to_see_matching')}</p>
                 </div>
                 <Legend />
               </div>
@@ -197,21 +198,21 @@ const SalaryPage = () => {
               <div className={s['card-head']}>
                 <div>
                   <h2>
-                    Salary by{' '}
+                    {i18next.t('app:pages.salary.index.salary_by')}{' '}
                     {breakdown === 'role' ? 'position' : breakdown === 'skill' ? 'skill' : 'city'}
                   </h2>
                   <p>
-                    Sorted by median salary
-                    {breakdown === 'skill' ? ', skills with at least 2 postings' : ''}.
+                    {i18next.t('app:pages.salary.index.sorted_by_median_salary')}
+                    {breakdown === 'skill' ? i18next.t('app:pages.salary.index.skills_with_at_least_2_postings') : ''}.
                   </p>
                 </div>
                 <Segmented
                   value={breakdown}
                   onChange={value => setBreakdown(value as Breakdown)}
                   options={[
-                    { label: 'Position', value: 'role' },
-                    { label: 'Skill', value: 'skill' },
-                    { label: 'City', value: 'location' },
+                    { label: i18next.t('app:common.position'), value: 'role' },
+                    { label: i18next.t('app:pages.salary.index.skill'), value: 'skill' },
+                    { label: i18next.t('app:pages.salary.index.city'), value: 'location' },
                   ]}
                 />
               </div>
@@ -219,9 +220,7 @@ const SalaryPage = () => {
             </section>
 
             <p className={s['method']}>
-              <InfoCircleOutlined /> Figures come from the salary shown on each job posting (monthly
-              gross, VND), not from individual payslips. Groups with fewer than 3 postings are
-              marked as limited data.
+              <InfoCircleOutlined /> {i18next.t('app:pages.salary.index.figures_come_from_the_salary_shown')}
             </p>
           </>
         )}
@@ -233,13 +232,13 @@ const SalaryPage = () => {
 const Legend = () => (
   <div className={s['legend']} aria-label='Legend'>
     <span>
-      <i className={s['legend-whisker']} /> Full range
+      <i className={s['legend-whisker']} /> {i18next.t('app:pages.salary.index.full_range')}
     </span>
     <span>
-      <i className={s['legend-box']} /> Typical (P25–P75)
+      <i className={s['legend-box']} /> {i18next.t('app:pages.salary.index.typical_p25_p75')}
     </span>
     <span>
-      <i className={s['legend-median']} /> Median
+      <i className={s['legend-median']} /> {i18next.t('app:pages.salary.index.median')}
     </span>
   </div>
 );

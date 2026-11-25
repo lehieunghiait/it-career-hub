@@ -3,6 +3,8 @@ import styles from '@/styles/client.module.scss';
 import { PictureOutlined } from '@ant-design/icons';
 import Title from 'antd/lib/typography/Title';
 
+import i18next from 'i18next';
+
 interface ICompanyCarouselProps {
   images: string[];
   loading?: boolean;
@@ -33,12 +35,12 @@ const CompanyCarousel = ({ images, loading = false }: ICompanyCarouselProps) => 
           <div style={{ display: 'flex', alignItems: 'center', gap: '8px' }}>
             <PictureOutlined style={{ color: '#1677ff' }} />
             <Title level={4} style={{ margin: 0 }}>
-              Company Image
+              {i18next.t('app:components.client.company.company_detail_ts.CompanyCarousel.company_image')}
             </Title>
           </div>
         }
       >
-        <Empty description='No images available' image={Empty.PRESENTED_IMAGE_SIMPLE} />
+        <Empty description={i18next.t('app:components.client.company.company_detail_ts.CompanyCarousel.no_images_available')} image={Empty.PRESENTED_IMAGE_SIMPLE} />
       </Card>
     );
   }
@@ -52,7 +54,7 @@ const CompanyCarousel = ({ images, loading = false }: ICompanyCarouselProps) => 
         <div style={{ display: 'flex', alignItems: 'center', gap: '8px' }}>
           <PictureOutlined style={{ color: '#1677ff' }} />
           <Title level={4} style={{ margin: 0 }}>
-            Company Image
+            {i18next.t('app:components.client.company.company_detail_ts.CompanyCarousel.company_image')}
           </Title>
         </div>
       }
@@ -74,7 +76,7 @@ const CompanyCarousel = ({ images, loading = false }: ICompanyCarouselProps) => 
           >
             <img
               src={image}
-              alt={`Company workspace ${index + 1}`}
+              alt={i18next.t('app:components.client.company.company_detail_ts.CompanyCarousel.company_workspace', { v0: index + 1 })}
               loading='lazy'
               style={{
                 height: '500px',

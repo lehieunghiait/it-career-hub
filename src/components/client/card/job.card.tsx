@@ -12,6 +12,8 @@ import relativeTime from 'dayjs/plugin/relativeTime';
 import 'dayjs/locale/vi';
 import SeeMoreLink from '@/components/client/common/SeeMoreLink';
 import JobCardSkeleton from './JobCardSkeleton';
+import i18next from 'i18next';
+
 const { Title } = Typography;
 dayjs.extend(relativeTime);
 
@@ -76,7 +78,7 @@ const JobCard = (props: IProps) => {
           <Col span={24}>
             <div className={isMobile ? styles['dflex-mobile'] : styles['dflex-pc']}>
               <Title level={3} className={styles['section-title']}>
-                {'New IT Jobs 🔥'}
+                {i18next.t('app:components.client.card.job_card.new_it_jobs')}
               </Title>
               {!showPagination && <SeeMoreLink to='job' />}
             </div>
@@ -100,7 +102,7 @@ const JobCard = (props: IProps) => {
                       </div>
                       <div>
                         <ThunderboltOutlined style={{ color: 'orange' }} />
-                        &nbsp;{(item.salary + '')?.replace(/\B(?=(\d{3})+(?!\d))/g, ',')} đ
+                        &nbsp;{(item.salary + '')?.replace(/\B(?=(\d{3})+(?!\d))/g, ',')} {i18next.t('app:common.d')}
                       </div>
                       <div className={styles['job-updatedAt']}>
                         {dayjs(item.updatedAt).locale('en').fromNow()}
@@ -114,7 +116,7 @@ const JobCard = (props: IProps) => {
 
           {(!displayJob || (displayJob && displayJob.length === 0)) && !isLoading && (
             <div className={styles['empty']}>
-              <Empty description='No data' />
+              <Empty description={i18next.t('app:components.client.card.job_card.no_data')} />
             </div>
           )}
         </Row>

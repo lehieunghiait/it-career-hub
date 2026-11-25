@@ -6,6 +6,8 @@ import { callSaveJob, callUnsaveJob } from '@/config/api';
 import { useAppDispatch, useAppSelector } from '@/redux/hooks';
 import { setJobSaved } from '@/redux/slice/savedJobSlide';
 
+import i18next from 'i18next';
+
 /**
  * Save / unsave a job for the signed-in candidate. The heart flips right away and is rolled
  * back if the API call fails; guests are sent to the login page.
@@ -31,10 +33,10 @@ export const useSaveJob = (jobId?: string) => {
     setIsPending(false);
 
     if (res?.data) {
-      message.success(next ? 'Job saved' : 'Removed from saved jobs');
+      message.success(next ? i18next.t('app:hooks.useSaveJob.job_saved') : i18next.t('app:hooks.useSaveJob.removed_from_saved_jobs'));
     } else {
       dispatch(setJobSaved({ jobId, saved: !next }));
-      message.error(res?.message ?? 'Something went wrong, please try again');
+      message.error(res?.message ?? i18next.t('app:hooks.useSaveJob.something_went_wrong_please_try_again'));
     }
   };
 

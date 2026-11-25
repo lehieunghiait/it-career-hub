@@ -17,6 +17,8 @@ import { callFetchCompany } from '@/config/api';
 import { useEffect } from 'react';
 import { useOpenResume } from '@/hooks/useOpenResume';
 
+import i18next from 'i18next';
+
 const ResumePage = () => {
   const { openResume, openingId } = useOpenResume();
   const tableRef = useRef<ActionType>();
@@ -59,11 +61,11 @@ const ResumePage = () => {
     if (_id) {
       const res = await callDeleteResume(_id);
       if (res && res.data) {
-        message.success('Remove Resume successfully');
+        message.success(i18next.t('app:pages.admin.resume.remove_resume_successfully'));
         reloadTable();
       } else {
         notification.error({
-          message: 'An error occurred',
+          message: i18next.t('app:common.an_error_occurred'),
           description: res.message,
         });
       }
@@ -77,7 +79,7 @@ const ResumePage = () => {
 
   const columns: ProColumns<IResume>[] = [
     {
-      title: 'Id',
+      title: i18next.t('app:common.id'),
       responsive: ['xl'],
       dataIndex: '_id',
       width: 250,
@@ -98,7 +100,7 @@ const ResumePage = () => {
     },
     // Status filed
     {
-      title: 'Status',
+      title: i18next.t('app:common.status'),
       dataIndex: 'status',
       sorter: true,
       renderFormItem: (item, props, form) => (
@@ -109,21 +111,22 @@ const ResumePage = () => {
           valueEnum={{
             PENDING: 'PENDING',
             REVIEWING: 'REVIEWING',
+            AI_SCREENING: 'AI_SCREENING',
             INTERVIEW: 'INTERVIEW',
             APPROVED: 'APPROVED',
             REJECTED: 'REJECTED',
           }}
-          placeholder='Select level'
+          placeholder={i18next.t('app:pages.admin.resume.select_level')}
         />
       ),
     },
     {
-      title: 'Job',
+      title: i18next.t('app:pages.admin.resume.job'),
       dataIndex: ['jobId', 'name'],
       renderFormItem: (item, props, form) => {
         return (
           <ProFormSelect
-            placeholder='Filter by job name'
+            placeholder={i18next.t('app:pages.admin.resume.filter_by_job_name')}
             options={jobs.map(job => ({
               label: job.name as string,
               value: job._id as string,
@@ -140,13 +143,13 @@ const ResumePage = () => {
       },
     },
     {
-      title: 'Company',
+      title: i18next.t('app:common.company'),
       responsive: ['md'],
       dataIndex: ['companyId', 'name'],
       renderFormItem: (item, props, form) => {
         return (
           <ProFormSelect
-            placeholder='Filter by company'
+            placeholder={i18next.t('app:pages.admin.resume.filter_by_company')}
             allowClear
             showSearch
             options={companies.map(company => ({
@@ -164,7 +167,7 @@ const ResumePage = () => {
     },
 
     {
-      title: 'CreatedAt',
+      title: i18next.t('app:common.createdat'),
       responsive: ['lg'],
       dataIndex: 'createdAt',
       width: 200,
@@ -175,7 +178,7 @@ const ResumePage = () => {
       hideInSearch: true,
     },
     {
-      title: 'UpdatedAt',
+      title: i18next.t('app:common.updatedat'),
       responsive: ['xl'],
       dataIndex: 'updatedAt',
       width: 150,
@@ -201,14 +204,14 @@ const ResumePage = () => {
               loading={openingId === record._id}
               onClick={() => openResume(record._id)}
             >
-              View CV
+              {i18next.t('app:common.view_cv')}
             </Button>
           </Space>
         );
       },
     },
     {
-      title: 'Actions',
+      title: i18next.t('app:common.actions'),
       fixed: 'right',
       hideInSearch: true,
       width: 130,
@@ -228,11 +231,11 @@ const ResumePage = () => {
 
           <Popconfirm
             placement='leftTop'
-            title={'Confirm delete'}
-            description={'Are you sure you want to delete this resume?'}
+            title={i18next.t('app:common.confirm_delete')}
+            description={i18next.t('app:pages.admin.resume.are_you_sure_you_want_to')}
             onConfirm={() => handleDeleteResume(entity._id)}
-            okText='Confirm'
-            cancelText='Cancel'
+            okText={i18next.t('app:common.confirm')}
+            cancelText={i18next.t('app:common.cancel')}
           >
             <span style={{ cursor: 'pointer', margin: '0 10px' }}>
               <DeleteOutlined
@@ -251,7 +254,7 @@ const ResumePage = () => {
               setOpenViewDetail(true);
               setDataInit(entity);
             }}
-            title='View Details'
+            title={i18next.t('app:pages.admin.resume.view_details')}
           />
         </Space>
       ),
@@ -297,7 +300,7 @@ const ResumePage = () => {
       <Access permission={ALL_PERMISSIONS.RESUMES.GET_PAGINATE}>
         <DataTable<IResume>
           actionRef={tableRef}
-          headerTitle='List Resume'
+          headerTitle={i18next.t('app:pages.admin.resume.list_resume')}
           rowKey='_id'
           loading={isFetching}
           columns={columns}

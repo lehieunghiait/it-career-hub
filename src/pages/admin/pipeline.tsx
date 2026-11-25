@@ -1,18 +1,34 @@
 import { useCallback, useEffect, useMemo, useState } from 'react';
-import { Button, Dropdown, Empty, Input, Modal, Rate, Select, Skeleton, message } from 'antd';
+import {
+  Button,
+  Dropdown,
+  Empty,
+  Input,
+  Modal,
+  Radio,
+  Rate,
+  Select,
+  Skeleton,
+  Typography,
+  message,
+} from 'antd';
 import { MessageOutlined, MoreOutlined, ReloadOutlined, SearchOutlined } from '@ant-design/icons';
 import dayjs from 'dayjs';
 import relativeTime from 'dayjs/plugin/relativeTime';
 import {
+  AiInterviewLanguage,
   IPipelineItem,
   IPipelineJob,
   callFetchPipeline,
+  callInviteAiInterview,
   callUpdateResumeStatus,
 } from '@/config/api';
 import { PIPELINE_STAGES, stageOf } from '@/config/pipeline';
 import { nonAccentVietnamese } from '@/config/utils';
 import PipelineDrawer from '@/components/admin/resume/pipeline.drawer';
 import s from '@/styles/pipeline.module.scss';
+
+import i18next from 'i18next';
 
 dayjs.extend(relativeTime);
 
@@ -31,6 +47,7 @@ const PipelinePage = () => {
   const [overStage, setOverStage] = useState<string | null>(null);
   const [pendingMove, setPendingMove] = useState<IPendingMove | null>(null);
   const [moveMessage, setMoveMessage] = useState('');
+  const [interviewLanguage, setInterviewLanguage] = useState<AiInterviewLanguage>('vi');
   const [selectedId, setSelectedId] = useState<string | null>(null);
 
   const load = useCallback(async () => {
@@ -40,7 +57,7 @@ const PipelinePage = () => {
       setItems(res.data.items);
       setJobs(res.data.jobs);
     } else {
-      message.error(res?.message ?? 'Cannot load the pipeline');
+      message.error(res?.message ?? i18next.t('app:pages.admin.pipeline.cannot_load_the_pipeline'));
     }
     setIsLoading(false);
   }, [jobId]);
@@ -55,12 +72,37 @@ const PipelinePage = () => {
   const commitMove = async (item: IPipelineItem, status: string, note?: string) => {
     const previous = { status: item.status, updatedAt: item.updatedAt };
     patchItem(item._id, { status, updatedAt: new Date().toISOString() });
+    if (stageOf(status).aiInvite) {
+      const res = await callInviteAiInterview(item._id, { language: interviewLanguage, note });
+      if (res?.data) {
+        const { inviteUrl } = res.data;
+        // The link is only shown once (the server keeps a hash), so offer it for manual sharing
+        Modal.success({
+          title: i18next.t('app:pages.admin.pipeline.ai_interview_invite_sent_to', { v0: item.candidateName }),
+          width: 520,
+          content: (
+            <>
+              <p className={s['modal-help']}>
+                {i18next.t('app:pages.admin.pipeline.the_candidate_received_the_link_by')}
+              </p>
+              <Typography.Paragraph copyable={{ text: inviteUrl }} ellipsis>
+                {inviteUrl}
+              </Typography.Paragraph>
+            </>
+          ),
+        });
+      } else {
+        patchItem(item._id, previous);
+        message.error(res?.message ?? i18next.t('app:pages.admin.pipeline.cannot_send_the_ai_interview_invite'));
+      }
+      return;
+    }
     const res = await callUpdateResumeStatus(item._id, status, note);
     if (res?.data) {
-      message.success(`${item.candidateName} moved to ${stageOf(status).title}`);
+      message.success(i18next.t('app:pages.admin.pipeline.moved_to', { v0: item.candidateName, v1: stageOf(status).title }));
     } else {
       patchItem(item._id, previous);
-      message.error(res?.message ?? 'Cannot move this candidate');
+      message.error(res?.message ?? i18next.t('app:pages.admin.pipeline.cannot_move_this_candidate'));
     }
   };
 
@@ -117,15 +159,15 @@ const PipelinePage = () => {
     <div className={s['page']}>
       <div className={s['toolbar']}>
         <div className={s['heading']}>
-          <h1>Candidate pipeline</h1>
-          <p>Drag a card to change its stage. Candidates are notified by email.</p>
+          <h1>{i18next.t('app:pages.admin.pipeline.candidate_pipeline')}</h1>
+          <p>{i18next.t('app:pages.admin.pipeline.drag_a_card_to_change_its')}</p>
         </div>
         <div className={s['filters']}>
           <Select
             allowClear
             showSearch
             optionFilterProp='label'
-            placeholder={`All jobs (${total})`}
+            placeholder={i18next.t('app:pages.admin.pipeline.all_jobs', { v0: total })}
             value={jobId}
             onChange={setJobId}
             className={s['job-select']}
@@ -138,7 +180,7 @@ const PipelinePage = () => {
           <Input
             allowClear
             prefix={<SearchOutlined />}
-            placeholder='Search candidate'
+            placeholder={i18next.t('app:pages.admin.pipeline.search_candidate')}
             value={keyword}
             onChange={event => setKeyword(event.target.value)}
             className={s['search']}
@@ -153,7 +195,7 @@ const PipelinePage = () => {
           <section
             key={column.status}
             className={`${s['column']} ${overStage === column.status ? s['over'] : ''}`}
-            aria-label={`${column.title} column`}
+            aria-label={i18next.t('app:pages.admin.pipeline.column', { v0: column.title })}
             onDragOver={event => {
               if (!draggingId) return;
               event.preventDefault();
@@ -205,7 +247,7 @@ const PipelinePage = () => {
                         menu={{
                           items: PIPELINE_STAGES.filter(
                             stage => stage.status !== column.status
-                          ).map(stage => ({ key: stage.status, label: `Move to ${stage.title}` })),
+                          ).map(stage => ({ key: stage.status, label: i18next.t('app:pages.admin.pipeline.move_to', { v0: stage.title }) })),
                           onClick: ({ key, domEvent }) => {
                             domEvent.stopPropagation();
                             requestMove(item, key);
@@ -231,15 +273,15 @@ const PipelinePage = () => {
                       {item.rating ? (
                         <Rate disabled value={item.rating} className={s['card-rate']} />
                       ) : (
-                        <span className={s['muted']}>Not scored</span>
+                        <span className={s['muted']}>{i18next.t('app:pages.admin.pipeline.not_scored')}</span>
                       )}
                       <span className={s['card-meta']}>
                         {!!item.notesCount && (
-                          <span title={`${item.notesCount} notes`}>
+                          <span title={i18next.t('app:pages.admin.pipeline.notes', { v0: item.notesCount })}>
                             <MessageOutlined /> {item.notesCount}
                           </span>
                         )}
-                        <span title={`Applied ${dayjs(item.createdAt).format('DD/MM/YYYY')}`}>
+                        <span title={i18next.t('app:pages.admin.pipeline.applied', { v0: dayjs(item.createdAt).format('DD/MM/YYYY') })}>
                           {dayjs(item.createdAt).locale('en').fromNow(true)}
                         </span>
                       </span>
@@ -248,7 +290,7 @@ const PipelinePage = () => {
                 ))
               ) : (
                 <div className={s['column-empty']}>
-                  {keyword ? 'No match' : 'Drop candidates here'}
+                  {keyword ? i18next.t('app:pages.admin.pipeline.no_match') : i18next.t('app:pages.admin.pipeline.drop_candidates_here')}
                 </div>
               )}
             </div>
@@ -257,7 +299,7 @@ const PipelinePage = () => {
       </div>
 
       {!isLoading && !items.length && (
-        <Empty className={s['empty']} description='No applications yet' />
+        <Empty className={s['empty']} description={i18next.t('app:pages.admin.pipeline.no_applications_yet')} />
       )}
 
       <Modal
@@ -266,15 +308,37 @@ const PipelinePage = () => {
           pendingMove &&
           `Move ${pendingMove.item.candidateName} to ${stageOf(pendingMove.status).title}?`
         }
-        okText='Move and notify'
+        okText={
+          pendingMove && stageOf(pendingMove.status).aiInvite ? i18next.t('app:pages.admin.pipeline.send_invite') : i18next.t('app:pages.admin.pipeline.move_and_notify')
+        }
         okButtonProps={{ danger: pendingMove?.status === 'REJECTED' }}
         onOk={confirmMove}
         onCancel={() => setPendingMove(null)}
         destroyOnClose
       >
-        <p className={s['modal-help']}>
-          The candidate gets an email about this change. Add a message if you want it included.
-        </p>
+        {pendingMove && stageOf(pendingMove.status).aiInvite ? (
+          <>
+            <p className={s['modal-help']}>
+              {i18next.t('app:pages.admin.pipeline.the_candidate_gets_a_one_time')}
+            </p>
+            <div className={s['modal-field']}>
+              <span>{i18next.t('app:pages.admin.pipeline.interview_language')}</span>
+              <Radio.Group
+                value={interviewLanguage}
+                onChange={event => setInterviewLanguage(event.target.value)}
+                optionType='button'
+                options={[
+                  { label: i18next.t('app:pages.admin.pipeline.tieng_viet'), value: 'vi' },
+                  { label: i18next.t('app:pages.admin.pipeline.english'), value: 'en' },
+                ]}
+              />
+            </div>
+          </>
+        ) : (
+          <p className={s['modal-help']}>
+            {i18next.t('app:pages.admin.pipeline.the_candidate_gets_an_email_about')}
+          </p>
+        )}
         <Input.TextArea
           autoFocus
           value={moveMessage}

@@ -24,6 +24,8 @@ import CompanyLogo from '@/components/client/common/CompanyLogo';
 import { useIsMobile } from '@/hooks/useIsMobile';
 import s from '@/styles/job-detail-drawer.module.scss';
 
+import i18next from 'i18next';
+
 interface IProps {
   jobId: string | null;
   open: boolean;
@@ -68,21 +70,21 @@ const ViewDetailJob = ({ jobId, open, onClose }: IProps) => {
     ? [
         {
           icon: <DollarOutlined />,
-          label: 'Salary',
+          label: i18next.t('app:common.salary'),
           value: `${(job.salary ?? 0).toLocaleString('en-US')} đ`,
         },
-        { icon: <RiseOutlined />, label: 'Level', value: job.level },
-        { icon: <EnvironmentOutlined />, label: 'Location', value: getLocationName(job.location) },
-        { icon: <TeamOutlined />, label: 'Openings', value: `${job.quantity ?? 0} people` },
+        { icon: <RiseOutlined />, label: i18next.t('app:common.level'), value: job.level },
+        { icon: <EnvironmentOutlined />, label: i18next.t('app:common.location'), value: getLocationName(job.location) },
+        { icon: <TeamOutlined />, label: i18next.t('app:components.admin.job.view_detail_job.openings'), value: `${job.quantity ?? 0} people` },
         {
           icon: <CalendarOutlined />,
-          label: 'Posting period',
+          label: i18next.t('app:components.admin.job.view_detail_job.posting_period'),
           value: `${dayjs(job.startDate).format('DD/MM/YYYY')} → ${dayjs(job.endDate).format('DD/MM/YYYY')}`,
         },
         {
           icon: <FileDoneOutlined />,
-          label: 'Applications',
-          value: applications === null ? '—' : `${applications} received`,
+          label: i18next.t('app:components.admin.job.view_detail_job.applications'),
+          value: applications === null ? '—' : i18next.t('app:components.admin.job.view_detail_job.received', { v0: applications }),
         },
       ]
     : [];
@@ -92,7 +94,7 @@ const ViewDetailJob = ({ jobId, open, onClose }: IProps) => {
       open={open}
       onClose={onClose}
       width={isMobile ? '100%' : 720}
-      title='Job details'
+      title={i18next.t('app:components.admin.job.view_detail_job.job_details')}
       destroyOnClose
       footer={
         job && (
@@ -102,7 +104,7 @@ const ViewDetailJob = ({ jobId, open, onClose }: IProps) => {
               href={`/job/${convertSlug(job.name)}?id=${job._id}`}
               target='_blank'
             >
-              View public page
+              {i18next.t('app:components.admin.job.view_detail_job.view_public_page')}
             </Button>
             <Access permission={ALL_PERMISSIONS.JOBS.UPDATE} hideChildren>
               <Button
@@ -110,7 +112,7 @@ const ViewDetailJob = ({ jobId, open, onClose }: IProps) => {
                 icon={<EditOutlined />}
                 onClick={() => navigate(`/admin/job/upsert?id=${job._id}`)}
               >
-                Edit job
+                {i18next.t('app:components.admin.job.view_detail_job.edit_job')}
               </Button>
             </Access>
           </div>
@@ -120,7 +122,7 @@ const ViewDetailJob = ({ jobId, open, onClose }: IProps) => {
       {loading ? (
         <Skeleton active avatar={{ shape: 'square', size: 64 }} paragraph={{ rows: 10 }} />
       ) : !job ? (
-        <Empty description='Job not found' />
+        <Empty description={i18next.t('app:components.admin.job.view_detail_job.job_not_found')} />
       ) : (
         <div className={s['wrap']}>
           <div className={s['header']}>
@@ -138,10 +140,10 @@ const ViewDetailJob = ({ jobId, open, onClose }: IProps) => {
                     color={daysLeft < 0 ? 'red' : daysLeft <= 3 ? 'orange' : 'default'}
                   >
                     {daysLeft < 0
-                      ? 'Expired'
+                      ? i18next.t('app:components.admin.job.view_detail_job.expired')
                       : daysLeft === 0
-                        ? 'Ends today'
-                        : `${daysLeft} days left`}
+                        ? i18next.t('app:components.admin.job.view_detail_job.ends_today')
+                        : i18next.t('app:components.admin.job.view_detail_job.days_left', { v0: daysLeft })}
                   </Tag>
                 )}
               </div>
@@ -161,34 +163,34 @@ const ViewDetailJob = ({ jobId, open, onClose }: IProps) => {
           </div>
 
           <section>
-            <h3 className={s['title']}>Skills</h3>
+            <h3 className={s['title']}>{i18next.t('app:common.skills')}</h3>
             <div className={s['skills']}>
               {job.skills?.length ? (
                 job.skills.map(skill => <Tag key={skill}>{skillLabel(skill)}</Tag>)
               ) : (
-                <span className={s['muted']}>No skills listed</span>
+                <span className={s['muted']}>{i18next.t('app:components.admin.job.view_detail_job.no_skills_listed')}</span>
               )}
             </div>
           </section>
 
           <section>
-            <h3 className={s['title']}>Description</h3>
+            <h3 className={s['title']}>{i18next.t('app:common.description')}</h3>
             <div className={s['description']}>
               {job.description ? (
                 parse(job.description)
               ) : (
-                <span className={s['muted']}>No description</span>
+                <span className={s['muted']}>{i18next.t('app:components.admin.job.view_detail_job.no_description')}</span>
               )}
             </div>
           </section>
 
           <section className={s['audit']}>
             <div>
-              <UserOutlined /> Created by <b>{createdBy?.email ?? '—'}</b> ·{' '}
+              <UserOutlined /> {i18next.t('app:components.admin.job.view_detail_job.created_by')}{' '}<b>{createdBy?.email ?? '—'}</b> ·{' '}
               {dayjs(job.createdAt).format('DD/MM/YYYY HH:mm')}
             </div>
             <div>
-              <EditOutlined /> Last updated by <b>{updatedBy?.email ?? createdBy?.email ?? '—'}</b>{' '}
+              <EditOutlined /> {i18next.t('app:components.admin.job.view_detail_job.last_updated_by')}{' '}<b>{updatedBy?.email ?? createdBy?.email ?? '—'}</b>{' '}
               · {dayjs(job.updatedAt).format('DD/MM/YYYY HH:mm')}
             </div>
           </section>

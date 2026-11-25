@@ -57,7 +57,8 @@ $surface: #f9fafb;
 
 .facts {
   display: flex;
-  gap: 40px;
+  flex-wrap: wrap;
+  gap: 16px 40px;
   margin: 24px 0 0;
 
   div {
@@ -95,6 +96,8 @@ $surface: #f9fafb;
   display: flex;
   gap: 6px;
   flex: 1;
+  min-width: 0;
+  max-width: 100%;
   overflow-x: auto;
   scrollbar-width: none;
 
@@ -167,6 +170,7 @@ $surface: #f9fafb;
   display: flex;
   flex-direction: column;
   gap: 14px;
+  min-width: 0;
   padding: 20px;
   border: 1px solid $line;
   border-radius: 10px;
@@ -234,6 +238,7 @@ $surface: #f9fafb;
     -webkit-line-clamp: 2;
     -webkit-box-orient: vertical;
     overflow: hidden;
+    overflow-wrap: anywhere;
     transition: color 0.15s;
   }
 
@@ -249,6 +254,7 @@ $surface: #f9fafb;
 
 .summary {
   margin: 0;
+  overflow-wrap: anywhere;
   font-size: 14px;
   line-height: 1.55;
   color: $text;
@@ -277,6 +283,8 @@ $surface: #f9fafb;
 
 .card-foot {
   display: flex;
+  flex-wrap: wrap;
+  gap: 6px 12px;
   justify-content: space-between;
   align-items: center;
   margin-top: auto;
@@ -317,6 +325,12 @@ $surface: #f9fafb;
   display: flex;
   justify-content: center;
   margin-top: 32px;
+
+  :global(.ant-pagination) {
+    flex-wrap: wrap;
+    justify-content: center;
+    row-gap: 8px;
+  }
 }
 
 .empty {
@@ -330,6 +344,10 @@ $surface: #f9fafb;
 
   .toolbar {
     flex-wrap: wrap;
+
+    > * {
+      min-width: 0;
+    }
   }
 
   .search {
@@ -347,11 +365,16 @@ $surface: #f9fafb;
   }
 
   .facts {
-    gap: 28px;
+    gap: 12px 28px;
   }
 
+  // minmax(0, 1fr): không để nội dung (summary dùng -webkit-box) đẩy cột rộng hơn màn hình
   .grid {
-    grid-template-columns: 1fr;
+    grid-template-columns: minmax(0, 1fr);
+  }
+
+  .card {
+    padding: 16px;
   }
 
   .cities {

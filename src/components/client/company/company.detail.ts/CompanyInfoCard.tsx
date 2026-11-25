@@ -9,6 +9,8 @@ import { Typography, Space, Divider } from 'antd';
 const { Text, Title } = Typography;
 import styles from 'styles/client.module.scss';
 
+import i18next from 'i18next';
+
 interface CompanyInfoCardProps {
   company: ICompanyDetail;
 }
@@ -29,7 +31,7 @@ const CompanyInfoCard = ({ company }: CompanyInfoCardProps) => {
             className={styles['info-text']}
             style={{ whiteSpace: 'normal', wordBreak: 'break-word' }}
           >
-            {company?.address || 'Address not updated'}
+            {company?.address || i18next.t('app:components.client.company.company_detail_ts.CompanyInfoCard.address_not_updated')}
           </Text>
         </div>
         {/* wesbite */}

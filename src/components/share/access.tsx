@@ -1,6 +1,8 @@
 import { useEffect, useState } from 'react';
 import { Result } from 'antd';
 import { useAppSelector } from '@/redux/hooks';
+import i18next from 'i18next';
+
 interface IProps {
   hideChildren?: boolean;
   children: React.ReactNode;
@@ -38,8 +40,8 @@ const Access = (props: IProps) => {
           {hideChildren === false ? (
             <Result
               status='403'
-              title='Access denied'
-              subTitle='Sorry, you are not authorized to access this information'
+              title={i18next.t('app:components.share.access.access_denied')}
+              subTitle={i18next.t('app:components.share.access.sorry_you_are_not_authorized_to')}
             />
           ) : (
             <>{/* render nothing */}</>

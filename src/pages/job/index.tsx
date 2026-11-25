@@ -21,26 +21,28 @@ import JobListItem from '@/components/client/job/JobListItem';
 import styles from 'styles/client.module.scss';
 import s from 'styles/job-board.module.scss';
 
+import i18next from 'i18next';
+
 const PAGE_SIZE = 10;
 const LEVELS = ['INTERN', 'FRESHER', 'JUNIOR', 'MIDDLE', 'SENIOR'];
 const CITIES = ['', 'HA_NOI', 'HO_CHI_MINH', 'DA_NANG'];
 const MILLION = 1_000_000;
 // Ranges in million VND: [min, max], empty = open-ended
 const SALARY_RANGES: { label: string; min?: number; max?: number }[] = [
-  { label: 'Any salary' },
-  { label: 'Under 10M', max: 10 },
-  { label: '10M – 20M', min: 10, max: 20 },
-  { label: '20M – 30M', min: 20, max: 30 },
-  { label: '30M – 50M', min: 30, max: 50 },
-  { label: 'Over 50M', min: 50 },
+  { get label() { return i18next.t('app:pages.job.index.any_salary'); } },
+  { get label() { return i18next.t('app:pages.job.index.under_10m'); }, max: 10 },
+  { get label() { return i18next.t('app:pages.job.index.t_10m_20m'); }, min: 10, max: 20 },
+  { get label() { return i18next.t('app:pages.job.index.t_20m_30m'); }, min: 20, max: 30 },
+  { get label() { return i18next.t('app:pages.job.index.t_30m_50m'); }, min: 30, max: 50 },
+  { get label() { return i18next.t('app:pages.job.index.over_50m'); }, min: 50 },
 ];
 const rangeKey = (min?: number, max?: number) => `${min ?? ''}-${max ?? ''}`;
 
 const formatMillions = (value: number) => `${value / MILLION}M`;
 const SORTS = [
-  { label: 'Newest', value: '-updatedAt' },
-  { label: 'Salary: high to low', value: '-salary' },
-  { label: 'Salary: low to high', value: 'salary' },
+  { get label() { return i18next.t('app:pages.job.index.newest'); }, value: '-updatedAt' },
+  { get label() { return i18next.t('app:pages.job.index.salary_high_to_low'); }, value: '-salary' },
+  { get label() { return i18next.t('app:pages.job.index.salary_low_to_high'); }, value: 'salary' },
 ];
 
 const escapeRegex = (text: string) => text.replace(/[.*+?^${}()|[\]\\/]/g, '\\$&');
@@ -130,7 +132,7 @@ const ClientJobPage = () => {
   const filters = (
     <div className={s['filters']}>
       <div className={s['filter-head']}>
-        <h3>Filters</h3>
+        <h3>{i18next.t('app:pages.job.index.filters')}</h3>
         {activeCount > 0 && (
           <button
             className={s['clear-btn']}
@@ -140,13 +142,13 @@ const ClientJobPage = () => {
               setParams(next);
             }}
           >
-            Clear all
+            {i18next.t('app:pages.job.index.clear_all')}
           </button>
         )}
       </div>
 
       <div className={s['filter-group']}>
-        <h4>Level</h4>
+        <h4>{i18next.t('app:common.level')}</h4>
         <Checkbox.Group
           value={levels}
           onChange={values => update('level', (values as string[]).join(','))}
@@ -156,7 +158,7 @@ const ClientJobPage = () => {
       </div>
 
       <div className={s['filter-group']}>
-        <h4>City</h4>
+        <h4>{i18next.t('app:pages.job.index.city')}</h4>
         <Radio.Group
           value={params.get('location') ?? ''}
           onChange={e => update('location', e.target.value)}
@@ -164,14 +166,14 @@ const ClientJobPage = () => {
         >
           {CITIES.map(city => (
             <Radio key={city} value={city}>
-              {city ? getLocationName(city) : 'All cities'}
+              {city ? getLocationName(city) : i18next.t('app:common.all_cities')}
             </Radio>
           ))}
         </Radio.Group>
       </div>
 
       <div className={s['filter-group']}>
-        <h4>Salary (VND / month)</h4>
+        <h4>{i18next.t('app:pages.job.index.salary_vnd_month')}</h4>
         <Radio.Group
           value={isPresetRange ? currentRangeKey : 'custom'}
           onChange={e => {
@@ -188,7 +190,7 @@ const ClientJobPage = () => {
           {!isPresetRange && (
             <Radio value='custom'>
               {salaryMin ? formatMillions(salaryMin) : '0'} –{' '}
-              {salaryMax ? formatMillions(salaryMax) : 'no limit'}
+              {salaryMax ? formatMillions(salaryMax) : i18next.t('app:pages.job.index.no_limit')}
             </Radio>
           )}
         </Radio.Group>
@@ -199,7 +201,7 @@ const ClientJobPage = () => {
             max={1000}
             value={customMin}
             onChange={setCustomMin}
-            placeholder='Min'
+            placeholder={i18next.t('app:pages.job.index.min')}
             suffix='M'
             controls={false}
           />
@@ -209,7 +211,7 @@ const ClientJobPage = () => {
             max={1000}
             value={customMax}
             onChange={setCustomMax}
-            placeholder='Max'
+            placeholder={i18next.t('app:pages.job.index.max')}
             suffix='M'
             controls={false}
             status={customInvalid ? 'error' : undefined}
@@ -220,14 +222,14 @@ const ClientJobPage = () => {
             disabled={customInvalid || (!customMin && !customMax)}
             onClick={() => setSalaryRange(customMin, customMax)}
           >
-            Apply
+            {i18next.t('app:pages.job.index.apply')}
           </Button>
         </div>
-        {customInvalid && <div className={s['salary-error']}>Min must be lower than max</div>}
+        {customInvalid && <div className={s['salary-error']}>{i18next.t('app:pages.job.index.min_must_be_lower_than_max')}</div>}
       </div>
 
       <div className={s['filter-group']}>
-        <h4>Skills</h4>
+        <h4>{i18next.t('app:common.skills')}</h4>
         <Select
           mode='multiple'
           allowClear
@@ -235,7 +237,7 @@ const ClientJobPage = () => {
           onChange={(values: string[]) => update('skills', values.join(','))}
           options={SKILLS_LIST}
           optionFilterProp='label'
-          placeholder='e.g. Java, React.JS'
+          placeholder={i18next.t('app:pages.job.index.e_g_java_react_js')}
           style={{ width: '100%' }}
           maxTagCount='responsive'
         />
@@ -263,7 +265,7 @@ const ClientJobPage = () => {
         <div className={s['list-layout']}>
           {isMobile ? (
             <Drawer
-              title='Filters'
+              title={i18next.t('app:pages.job.index.filters')}
               placement='left'
               open={openFilters}
               onClose={() => setOpenFilters(false)}
@@ -278,13 +280,13 @@ const ClientJobPage = () => {
           <main className={s['results']}>
             <div className={s['results-head']}>
               <h1>
-                {total} IT job{total === 1 ? '' : 's'}
-                {params.get('q') && <span> for “{params.get('q')}”</span>}
+                {total} {i18next.t('app:pages.job.index.it_job')}{total === 1 ? '' : 's'}
+                {params.get('q') && <span> {i18next.t('app:pages.job.index.for')}{params.get('q')}”</span>}
               </h1>
               <div className={s['results-tools']}>
                 {isMobile && (
                   <Button icon={<FilterOutlined />} onClick={() => setOpenFilters(true)}>
-                    Filters{activeCount ? ` (${activeCount})` : ''}
+                    {i18next.t('app:pages.job.index.filters')}{activeCount ? ` (${activeCount})` : ''}
                   </Button>
                 )}
                 <Select
@@ -311,7 +313,7 @@ const ClientJobPage = () => {
                 jobs.map(job => <JobListItem key={job._id} job={job} />)
               ) : (
                 <div className={s['empty-box']}>
-                  <Empty description='No jobs match your filters' />
+                  <Empty description={i18next.t('app:pages.job.index.no_jobs_match_your_filters')} />
                 </div>
               )}
             </div>

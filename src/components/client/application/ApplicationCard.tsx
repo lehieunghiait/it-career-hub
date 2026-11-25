@@ -22,6 +22,8 @@ import CompanyLogo from '@/components/client/common/CompanyLogo';
 import { useIsMobile } from '@/hooks/useIsMobile';
 import s from 'styles/my-jobs.module.scss';
 
+import i18next from 'i18next';
+
 type Job = Exclude<IResume['jobId'], string>;
 type Company = Exclude<IResume['companyId'], string>;
 
@@ -88,19 +90,19 @@ const ApplicationCard = ({ resume, onOpenCv, isOpeningCv }: ApplicationCardProps
         <CompanyLogo className={s['app-logo']} src={companyLogo} name={companyName} />
         <div className={s['app-info']}>
           <h3 className={s['app-title']}>
-            {jobLink ? <Link to={jobLink}>{job?.name}</Link> : 'Job no longer available'}
+            {jobLink ? <Link to={jobLink}>{job?.name}</Link> : i18next.t('app:components.client.application.ApplicationCard.job_no_longer_available')}
           </h3>
           <div className={s['app-company']}>{companyName}</div>
           <div className={s['app-meta']}>
             <span>
-              <CalendarOutlined /> Applied {formatDate(resume.createdAt)}
+              <CalendarOutlined /> {i18next.t('app:common.applied')}{' '}{formatDate(resume.createdAt)}
             </span>
             {job?.location && (
               <span>
                 <EnvironmentOutlined /> {getLocationName(job.location)}
               </span>
             )}
-            {job && job.isActive === false && !closed && <Tag>Job closed</Tag>}
+            {job && job.isActive === false && !closed && <Tag>{i18next.t('app:components.client.application.ApplicationCard.job_closed')}</Tag>}
           </div>
         </div>
         <Tag color={statusMeta.color} className={s['app-status']}>
@@ -155,11 +157,11 @@ const ApplicationCard = ({ resume, onOpenCv, isOpeningCv }: ApplicationCardProps
           loading={isOpeningCv}
           onClick={() => onOpenCv(resume._id)}
         >
-          View CV
+          {i18next.t('app:common.view_cv')}
         </Button>
         {history.length > 0 && (
           <Button size='small' type='link' onClick={() => setShowHistory(v => !v)}>
-            {showHistory ? 'Hide history' : `History (${history.length})`}
+            {showHistory ? i18next.t('app:components.client.application.ApplicationCard.hide_history') : i18next.t('app:components.client.application.ApplicationCard.history', { v0: history.length })}
           </Button>
         )}
       </footer>

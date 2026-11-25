@@ -3,6 +3,8 @@ import { Typography, Tabs } from 'antd';
 import type { TabsProps } from 'antd';
 import styles from 'styles/client.module.scss';
 
+import i18next from 'i18next';
+
 // Khai báo kiểu dữ liệu cho props
 interface FaqCategoryProps {
   categories: string[];
@@ -30,7 +32,7 @@ const FaqCategory: React.FC<FaqCategoryProps> = ({
   return (
     <div className={styles['faq-category-container']}>
       <Typography.Title level={3} style={{ textAlign: 'center', marginBottom: 30 }}>
-        Danh Mục
+        {i18next.t('app:components.client.faq.faq_category.danh_muc')}
       </Typography.Title>
       <Tabs
         centered

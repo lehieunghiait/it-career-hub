@@ -3,6 +3,8 @@ import { Tooltip } from 'antd';
 import { ISalaryStats } from '@/config/api';
 import s from 'styles/salary.module.scss';
 
+import i18next from 'i18next';
+
 const MILLION = 1_000_000;
 // Fewer postings than this: show the row but flag it
 const LIMITED = 3;
@@ -33,7 +35,7 @@ const SalaryRangeChart = ({ rows, domain }: Props) => {
   const pct = (value: number) => `${((value - lo) / Math.max(hi - lo, 1)) * 100}%`;
   const width = (from: number, to: number) => `${((to - from) / Math.max(hi - lo, 1)) * 100}%`;
 
-  if (!rows.length) return <div className={s['no-data']}>No salary data for this filter yet.</div>;
+  if (!rows.length) return <div className={s['no-data']}>{i18next.t('app:components.client.salary.SalaryRangeChart.no_salary_data_for_this_filter')}</div>;
 
   return (
     <div className={s['range-chart']} role='table' aria-label='Salary ranges'>
@@ -44,7 +46,7 @@ const SalaryRangeChart = ({ rows, domain }: Props) => {
             <span className={s['range-name']}>{row.name}</span>
             <span className={s['range-n']}>
               {row.count} job{row.count > 1 ? 's' : ''}
-              {limited && <em> · limited data</em>}
+              {limited && <em> {i18next.t('app:components.client.salary.SalaryRangeChart.limited_data')}</em>}
             </span>
           </div>
         );
@@ -65,15 +67,15 @@ const SalaryRangeChart = ({ rows, domain }: Props) => {
               title={
                 <div className={s['tip']}>
                   <strong>{row.name}</strong>
-                  <div>Median: {formatM(row.median)}</div>
+                  <div>{i18next.t('app:components.client.salary.SalaryRangeChart.median')}{' '}{formatM(row.median)}</div>
                   <div>
-                    Typical (P25–P75): {formatM(row.p25)} – {formatM(row.p75)}
+                    {i18next.t('app:components.client.salary.SalaryRangeChart.typical_p25_p75')}{' '}{formatM(row.p25)} – {formatM(row.p75)}
                   </div>
                   <div>
-                    Full range: {formatM(row.min)} – {formatM(row.max)}
+                    {i18next.t('app:components.client.salary.SalaryRangeChart.full_range')}{' '}{formatM(row.min)} – {formatM(row.max)}
                   </div>
                   <div>
-                    Based on {row.count} job posting{row.count > 1 ? 's' : ''}
+                    {i18next.t('app:components.client.salary.SalaryRangeChart.based_on')}{' '}{row.count} {i18next.t('app:components.client.salary.SalaryRangeChart.job_posting')}{row.count > 1 ? 's' : ''}
                   </div>
                 </div>
               }

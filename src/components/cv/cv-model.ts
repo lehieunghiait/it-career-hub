@@ -1,3 +1,4 @@
+import i18next from 'i18next';
 /**
  * Content of an online CV (stored as `data` on the CV document)
  */
@@ -41,9 +42,9 @@ export interface ICv {
 }
 
 export const CV_TEMPLATES: { key: CvTemplate; name: string; description: string }[] = [
-  { key: 'classic', name: 'Professional', description: 'Accent bar, timeline and skill pills' },
-  { key: 'modern', name: 'Creative', description: 'Soft colored sidebar with photo' },
-  { key: 'minimal', name: 'Minimal', description: 'Big name, airy two-column layout' },
+  { key: 'classic', name: 'Professional', get description() { return i18next.t('app:components.cv.cv_model.accent_bar_timeline_and_skill_pills'); } },
+  { key: 'modern', name: 'Creative', get description() { return i18next.t('app:components.cv.cv_model.soft_colored_sidebar_with_photo'); } },
+  { key: 'minimal', name: 'Minimal', get description() { return i18next.t('app:components.cv.cv_model.big_name_airy_two_column_layout'); } },
 ];
 
 export const CV_COLORS = ['#e14000', '#2563eb', '#0d9488', '#7c3aed', '#db2777', '#0f172a'];
@@ -78,41 +79,39 @@ export const SAMPLE_CV: ICvData = {
   languages: ['Tiếng Anh (IELTS 7.0)', 'Tiếng Việt'],
   experiences: [
     {
-      title: 'Công ty Cổ phần Công nghệ ABC',
-      subtitle: 'Senior Backend Developer',
+      get title() { return i18next.t('app:components.cv.cv_model.cong_ty_co_phan_cong_nghe'); },
+      get subtitle() { return i18next.t('app:components.cv.cv_model.senior_backend_developer'); },
       start: '03/2022',
       end: 'Hiện tại',
-      description:
-        '- Thiết kế lại dịch vụ thanh toán, giảm 40% thời gian xử lý\n- Dẫn dắt nhóm 5 kỹ sư, review code và mentoring\n- Triển khai CI/CD với GitHub Actions và AWS ECS',
+      get description() { return i18next.t('app:components.cv.cv_model.thiet_ke_lai_dich_vu_thanh'); },
     },
     {
-      title: 'XYZ Software',
-      subtitle: 'Backend Developer',
+      get title() { return i18next.t('app:components.cv.cv_model.xyz_software'); },
+      get subtitle() { return i18next.t('app:components.cv.cv_model.backend_developer'); },
       start: '07/2019',
       end: '02/2022',
-      description:
-        '- Xây dựng REST API cho ứng dụng giao hàng 1 triệu người dùng\n- Viết unit test, độ phủ 85%',
+      get description() { return i18next.t('app:components.cv.cv_model.xay_dung_rest_api_cho_ung'); },
     },
   ],
   educations: [
     {
-      title: 'Đại học Bách khoa TP.HCM',
-      subtitle: 'Kỹ sư Khoa học Máy tính',
+      get title() { return i18next.t('app:components.cv.cv_model.dai_hoc_bach_khoa_tp_hcm'); },
+      get subtitle() { return i18next.t('app:components.cv.cv_model.ky_su_khoa_hoc_may_tinh'); },
       start: '2015',
       end: '2019',
-      description: 'GPA 3.4/4.0',
+      get description() { return i18next.t('app:components.cv.cv_model.gpa_3_4_4_0'); },
     },
   ],
   projects: [
     {
-      title: 'Hệ thống đặt vé sự kiện',
-      subtitle: 'Tech lead',
+      get title() { return i18next.t('app:components.cv.cv_model.he_thong_dat_ve_su_kien'); },
+      get subtitle() { return i18next.t('app:components.cv.cv_model.tech_lead'); },
       start: '2023',
       end: '2023',
-      description: 'NestJS, Redis, RabbitMQ — xử lý 5.000 đơn/phút giờ cao điểm',
+      get description() { return i18next.t('app:components.cv.cv_model.nestjs_redis_rabbitmq_xu_ly_5'); },
     },
   ],
-  certificates: [{ title: 'AWS Certified Developer – Associate', subtitle: 'Amazon', end: '2023' }],
+  certificates: [{ get title() { return i18next.t('app:components.cv.cv_model.aws_certified_developer_associate'); }, get subtitle() { return i18next.t('app:components.cv.cv_model.amazon'); }, end: '2023' }],
 };
 
 /**

@@ -30,10 +30,12 @@ import CvHtmlPreview from '@/components/cv/CvHtmlPreview';
 import styles from 'styles/client.module.scss';
 import s from 'styles/cv-landing.module.scss';
 
+import i18next from 'i18next';
+
 dayjs.extend(relativeTime);
 
 const sampleCv = (template: CvTemplate, color: string): ICv => ({
-  title: 'Sample',
+  title: i18next.t('app:pages.cv.index.sample'),
   template,
   color,
   data: SAMPLE_CV,
@@ -41,39 +43,39 @@ const sampleCv = (template: CvTemplate, color: string): ICv => ({
 
 const STEPS = [
   {
-    title: 'Pick a template',
-    text: 'Three modern layouts designed for IT profiles. Switch any time, your content stays.',
+    get title() { return i18next.t('app:pages.cv.index.pick_a_template'); },
+    get text() { return i18next.t('app:pages.cv.index.three_modern_layouts_designed_for_it'); },
   },
   {
-    title: 'Fill in your story',
-    text: 'Type on the left, see the CV update instantly on the right. Saved automatically.',
+    get title() { return i18next.t('app:pages.cv.index.fill_in_your_story'); },
+    get text() { return i18next.t('app:pages.cv.index.type_on_the_left_see_the'); },
   },
   {
-    title: 'Download or apply',
-    text: 'Export a clean PDF, or apply to any job on IT Career Hub with one click.',
+    get title() { return i18next.t('app:pages.cv.index.download_or_apply'); },
+    get text() { return i18next.t('app:pages.cv.index.export_a_clean_pdf_or_apply'); },
   },
 ];
 
 const FEATURES = [
   {
     icon: <FileSearchOutlined />,
-    title: 'ATS friendly',
-    text: 'Real text PDF that recruiters’ screening tools can read, not a flat image.',
+    get title() { return i18next.t('app:pages.cv.index.ats_friendly'); },
+    get text() { return i18next.t('app:pages.cv.index.real_text_pdf_that_recruiters_screening'); },
   },
   {
     icon: <FontSizeOutlined />,
-    title: 'Perfect Vietnamese',
-    text: 'Be Vietnam Pro font embedded, every accent renders exactly as typed.',
+    get title() { return i18next.t('app:pages.cv.index.perfect_vietnamese'); },
+    get text() { return i18next.t('app:pages.cv.index.be_vietnam_pro_font_embedded_every'); },
   },
   {
     icon: <SendOutlined />,
-    title: 'One-click apply',
-    text: 'Choose your online CV in the apply form, we attach the latest PDF for you.',
+    get title() { return i18next.t('app:pages.cv.index.one_click_apply'); },
+    get text() { return i18next.t('app:pages.cv.index.choose_your_online_cv_in_the'); },
   },
   {
     icon: <CloudSyncOutlined />,
-    title: 'Always up to date',
-    text: 'Edit once, every new application uses the newest version of your CV.',
+    get title() { return i18next.t('app:pages.cv.index.always_up_to_date'); },
+    get text() { return i18next.t('app:pages.cv.index.edit_once_every_new_application_uses'); },
   },
 ];
 
@@ -108,7 +110,7 @@ const CvListPage = () => {
     setCreating(template);
     const name = user?.fullName ?? '';
     const res = await callCreateCv({
-      title: `${name || 'My'} CV - ${CV_TEMPLATES.find(t => t.key === template)?.name}`,
+      title: i18next.t('app:pages.cv.index.cv', { v0: name || 'My', v1: CV_TEMPLATES.find(t => t.key === template)?.name }),
       template,
       color,
       data: emptyCvData(name, user?.primaryEmailAddress?.emailAddress ?? ''),
@@ -117,7 +119,7 @@ const CvListPage = () => {
     if (res?.data?._id) {
       navigate(`/cv/${res.data._id}`);
     } else {
-      message.error(res?.message ?? 'Cannot create the CV');
+      message.error(res?.message ?? i18next.t('app:pages.cv.index.cannot_create_the_cv'));
     }
   };
 
@@ -127,7 +129,7 @@ const CvListPage = () => {
       const res = await callFetchCvById(id);
       if (res?.data) await downloadCvPdf(res.data);
     } catch {
-      message.error('Cannot export the PDF, please try again');
+      message.error(i18next.t('app:pages.cv.index.cannot_export_the_pdf_please_try'));
     } finally {
       setDownloadingId(null);
     }
@@ -137,9 +139,9 @@ const CvListPage = () => {
     const res = await callDeleteCv(id);
     if (res?.data) {
       setCvs(list => list.filter(cv => cv._id !== id));
-      message.success('CV deleted');
+      message.success(i18next.t('app:pages.cv.index.cv_deleted'));
     } else {
-      message.error(res?.message ?? 'Cannot delete the CV');
+      message.error(res?.message ?? i18next.t('app:pages.cv.index.cannot_delete_the_cv'));
     }
   };
 
@@ -153,13 +155,12 @@ const CvListPage = () => {
         <div className={s['hero-glow']} />
         <div className={`${styles['container']} ${s['hero-grid']}`}>
           <div className={s['hero-copy']}>
-            <span className={s['eyebrow']}>Free CV builder for IT talent</span>
+            <span className={s['eyebrow']}>{i18next.t('app:pages.cv.index.free_cv_builder_for_it_talent')}</span>
             <h1>
-              Your next IT job starts with a <span>great CV</span>
+              {i18next.t('app:pages.cv.index.your_next_it_job_starts_with')}{' '}<span>{i18next.t('app:pages.cv.index.great_cv')}</span>
             </h1>
             <p className={s['lead']}>
-              Build a modern, ATS-friendly CV in minutes, see every change live, and apply to top
-              tech companies with one click.
+              {i18next.t('app:pages.cv.index.build_a_modern_ats_friendly_cv')}
             </p>
             <div className={s['hero-actions']}>
               <Button
@@ -169,21 +170,21 @@ const CvListPage = () => {
                 loading={creating === 'modern'}
                 onClick={() => createFrom('modern', CV_COLORS[0])}
               >
-                Create my CV <ArrowRightOutlined />
+                {i18next.t('app:pages.cv.index.create_my_cv')}{' '}<ArrowRightOutlined />
               </Button>
               <Button size='large' ghost className={s['ghost']} onClick={scrollToTemplates}>
-                Browse templates
+                {i18next.t('app:pages.cv.index.browse_templates')}
               </Button>
             </div>
             <ul className={s['hero-points']}>
               <li>
-                <CheckCircleFilled /> 100% free
+                <CheckCircleFilled /> {i18next.t('app:pages.cv.index.t_100_free')}
               </li>
               <li>
-                <CheckCircleFilled /> PDF download
+                <CheckCircleFilled /> {i18next.t('app:pages.cv.index.pdf_download')}
               </li>
               <li>
-                <CheckCircleFilled /> Vietnamese ready
+                <CheckCircleFilled /> {i18next.t('app:pages.cv.index.vietnamese_ready')}
               </li>
             </ul>
           </div>
@@ -195,7 +196,7 @@ const CvListPage = () => {
               <CvHtmlPreview cv={sampleCv('modern', CV_COLORS[0])} />
             </div>
             <div className={s['float-badge']}>
-              <CheckCircleFilled /> ATS-ready PDF
+              <CheckCircleFilled /> {i18next.t('app:pages.cv.index.ats_ready_pdf')}
             </div>
           </div>
         </div>
@@ -207,8 +208,8 @@ const CvListPage = () => {
           <section className={s['section']}>
             <div className={s['section-head']}>
               <div>
-                <h2>My CVs</h2>
-                <p>Keep one CV per role you target, each application uses the latest version.</p>
+                <h2>{i18next.t('app:pages.cv.index.my_cvs')}</h2>
+                <p>{i18next.t('app:pages.cv.index.keep_one_cv_per_role_you')}</p>
               </div>
             </div>
             {isLoading ? (
@@ -224,7 +225,7 @@ const CvListPage = () => {
                         background: `linear-gradient(135deg, ${cv.color}22, ${cv.color}0d)`,
                       }}
                       onClick={() => navigate(`/cv/${cv._id}`)}
-                      aria-label={`Edit ${cv.title}`}
+                      aria-label={i18next.t('app:pages.cv.index.edit', { v0: cv.title })}
                     >
                       <span style={{ background: cv.color }}>
                         {(cv.data?.fullName || cv.title).trim().charAt(0).toUpperCase()}
@@ -233,7 +234,7 @@ const CvListPage = () => {
                     <div className={s['my-body']}>
                       <h3 title={cv.title}>{cv.title}</h3>
                       <p>
-                        {CV_TEMPLATES.find(t => t.key === cv.template)?.name} · edited{' '}
+                        {CV_TEMPLATES.find(t => t.key === cv.template)?.name} {i18next.t('app:pages.cv.index.edited')}{' '}
                         {dayjs(cv.updatedAt).locale('en').fromNow()}
                       </p>
                       <div className={s['my-actions']}>
@@ -243,9 +244,9 @@ const CvListPage = () => {
                           icon={<EditOutlined />}
                           onClick={() => navigate(`/cv/${cv._id}`)}
                         >
-                          Edit
+                          {i18next.t('app:pages.cv.index.edit_2')}
                         </Button>
-                        <Tooltip title='Download PDF'>
+                        <Tooltip title={i18next.t('app:pages.cv.index.download_pdf')}>
                           <Button
                             size='small'
                             icon={<DownloadOutlined />}
@@ -255,9 +256,9 @@ const CvListPage = () => {
                           />
                         </Tooltip>
                         <Popconfirm
-                          title='Delete this CV?'
-                          description='Applications already sent keep their PDF.'
-                          okText='Delete'
+                          title={i18next.t('app:pages.cv.index.delete_this_cv')}
+                          description={i18next.t('app:pages.cv.index.applications_already_sent_keep_their_pdf')}
+                          okText={i18next.t('app:pages.cv.index.delete')}
                           okButtonProps={{ danger: true }}
                           onConfirm={() => remove(cv._id!)}
                         >
@@ -274,7 +275,7 @@ const CvListPage = () => {
                 ))}
                 <button type='button' className={s['my-new']} onClick={scrollToTemplates}>
                   <PlusOutlined />
-                  <span>New CV</span>
+                  <span>{i18next.t('app:pages.cv.index.new_cv')}</span>
                 </button>
               </div>
             )}
@@ -285,8 +286,8 @@ const CvListPage = () => {
         <section id='cv-templates' className={s['section']}>
           <div className={s['section-head']}>
             <div>
-              <h2>Choose your template</h2>
-              <p>Designed with recruiters. Pick a color, you can change everything later.</p>
+              <h2>{i18next.t('app:pages.cv.index.choose_your_template')}</h2>
+              <p>{i18next.t('app:pages.cv.index.designed_with_recruiters_pick_a_color')}</p>
             </div>
             <div className={s['colors']} role='radiogroup' aria-label='Template color'>
               {CV_COLORS.map(color => (
@@ -295,7 +296,7 @@ const CvListPage = () => {
                   type='button'
                   role='radio'
                   aria-checked={galleryColor === color}
-                  aria-label={`Color ${color}`}
+                  aria-label={i18next.t('app:pages.cv.index.color', { v0: color })}
                   className={`${s['swatch']} ${galleryColor === color ? s['active'] : ''}`}
                   style={{ background: color }}
                   onClick={() => setGalleryColor(color)}
@@ -317,7 +318,7 @@ const CvListPage = () => {
                       loading={creating === template.key}
                       onClick={() => createFrom(template.key)}
                     >
-                      Use this template
+                      {i18next.t('app:pages.cv.index.use_this_template')}
                     </Button>
                   </div>
                 </div>
@@ -332,7 +333,7 @@ const CvListPage = () => {
                     disabled={!!creating && creating !== template.key}
                     onClick={() => createFrom(template.key)}
                   >
-                    Use
+                    {i18next.t('app:pages.cv.index.use')}
                   </Button>
                 </div>
               </article>
@@ -344,8 +345,8 @@ const CvListPage = () => {
         <section className={s['section']}>
           <div className={s['section-head']}>
             <div>
-              <h2>Ready in 3 steps</h2>
-              <p>Most candidates finish their first CV in under 15 minutes.</p>
+              <h2>{i18next.t('app:pages.cv.index.ready_in_3_steps')}</h2>
+              <p>{i18next.t('app:pages.cv.index.most_candidates_finish_their_first_cv')}</p>
             </div>
           </div>
           <ol className={s['steps']}>
@@ -375,8 +376,8 @@ const CvListPage = () => {
         {/* ===== CTA ===== */}
         <section className={s['cta-band']}>
           <div>
-            <h2>Stand out to IT recruiters today</h2>
-            <p>Create your CV for free and apply to hundreds of tech jobs.</p>
+            <h2>{i18next.t('app:pages.cv.index.stand_out_to_it_recruiters_today')}</h2>
+            <p>{i18next.t('app:pages.cv.index.create_your_cv_for_free_and')}</p>
           </div>
           <Button
             size='large'
@@ -384,7 +385,7 @@ const CvListPage = () => {
             loading={creating === 'classic'}
             onClick={() => createFrom('classic')}
           >
-            Start building <ArrowRightOutlined />
+            {i18next.t('app:pages.cv.index.start_building')}{' '}<ArrowRightOutlined />
           </Button>
         </section>
       </div>

@@ -13,8 +13,10 @@ import { LOCATION_LIST, SKILLS_LIST, convertSlug } from '@/config/utils';
 import CompanyLogo from '@/components/client/common/CompanyLogo';
 import s from 'styles/job-board.module.scss';
 
+import i18next from 'i18next';
+
 const CITY_OPTIONS = [
-  { label: 'All cities', value: '' },
+  { get label() { return i18next.t('app:common.all_cities'); }, value: '' },
   ...LOCATION_LIST.filter(item => item.value !== 'ALL'),
 ];
 
@@ -68,7 +70,7 @@ const JobSearchBar = ({ defaultKeyword = '', defaultLocation = '' }: JobSearchBa
     const skills = SKILLS_LIST.filter(skill => skill.label.toLowerCase().includes(q)).slice(0, 4);
     const groups = [
       {
-        title: 'Skills',
+        title: i18next.t('app:common.skills'),
         items: skills.map(skill => ({
           value: `skill:${skill.value}`,
           label: (
@@ -80,7 +82,7 @@ const JobSearchBar = ({ defaultKeyword = '', defaultLocation = '' }: JobSearchBa
         })),
       },
       {
-        title: 'Job titles',
+        title: i18next.t('app:components.client.job.JobSearchBar.job_titles'),
         items: suggestions.jobs.map(job => ({
           value: `job:${job.name}`,
           label: (
@@ -93,7 +95,7 @@ const JobSearchBar = ({ defaultKeyword = '', defaultLocation = '' }: JobSearchBa
         })),
       },
       {
-        title: 'Companies',
+        title: i18next.t('app:common.companies'),
         items: suggestions.companies.map(company => ({
           value: `company:${company._id}:${company.name}`,
           label: (
@@ -167,7 +169,7 @@ const JobSearchBar = ({ defaultKeyword = '', defaultLocation = '' }: JobSearchBa
         popupClassName={s['suggest-popup']}
       >
         <Input
-          placeholder='Job title, skill, company…'
+          placeholder={i18next.t('app:components.client.job.JobSearchBar.job_title_skill_company')}
           prefix={<SearchOutlined />}
           size='large'
           variant='borderless'
@@ -184,7 +186,7 @@ const JobSearchBar = ({ defaultKeyword = '', defaultLocation = '' }: JobSearchBa
         />
       </AutoComplete>
       <Button htmlType='submit' type='primary' size='large' className={s['search-btn']}>
-        <SearchOutlined /> Search
+        <SearchOutlined /> {i18next.t('app:components.client.job.JobSearchBar.search')}
       </Button>
     </form>
   );

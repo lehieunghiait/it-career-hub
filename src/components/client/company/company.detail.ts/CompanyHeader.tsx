@@ -4,6 +4,8 @@ import { useTranslation } from 'react-i18next';
 import { Link } from 'react-router-dom';
 import styles from 'styles/client.module.scss';
 
+import i18next from 'i18next';
+
 interface CompanyHeaderProps {
   onGoBack: () => void;
   companyName?: string;
@@ -17,13 +19,13 @@ const CompanyHeader = ({ onGoBack, companyName }: CompanyHeaderProps) => {
         separator='>'
         items={[
           {
-            title: <Link to='/'>{'Home'}</Link>,
+            title: <Link to='/'>{i18next.t('app:common.home')}</Link>,
           },
           {
-            title: <Link to='/company'>{'Companies'}</Link>,
+            title: <Link to='/company'>{i18next.t('app:common.companies')}</Link>,
           },
           {
-            title: companyName || 'Company Detail',
+            title: companyName || i18next.t('app:components.client.company.company_detail_ts.CompanyHeader.company_detail'),
           },
         ]}
         className={styles['company-breadcrumb']}
@@ -35,7 +37,7 @@ const CompanyHeader = ({ onGoBack, companyName }: CompanyHeaderProps) => {
         style={{ color: 'red', fontWeight: 500, cursor: 'pointer' }}
         className={styles['back-button']}
       >
-        Back to list
+        {i18next.t('app:components.client.company.company_detail_ts.CompanyHeader.back_to_list')}
       </Button>
     </div>
   );

@@ -3,6 +3,8 @@ import { useTranslation } from 'react-i18next';
 import { ICompanyDetail } from '@/types/backend';
 import { Divider } from 'antd';
 
+import i18next from 'i18next';
+
 interface CompanyStatsProps {
   company: ICompanyDetail;
 }
@@ -23,7 +25,7 @@ const CompanyStats = ({ company }: CompanyStatsProps) => {
     },
     {
       icon: <CalendarOutlined className='text-[22px] text-blue-500 transition-all duration-300' />,
-      value: company.createdAt ? new Date(company.createdAt).getFullYear() : 'N/A',
+      value: company.createdAt ? new Date(company.createdAt).getFullYear() : i18next.t('app:components.client.company.company_detail_ts.CompanyStats.n_a'),
       label: t('Overview.YearOfFoundation'),
     },
   ];

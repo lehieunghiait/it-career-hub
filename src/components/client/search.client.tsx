@@ -5,6 +5,8 @@ import { ProForm, ProFormUploadButton } from '@ant-design/pro-components';
 import styles from 'styles/client.module.scss';
 import { useTranslation } from 'react-i18next';
 
+import i18next from 'i18next';
+
 const SearchClient = () => {
   const optionsSkills = SKILLS_LIST;
   const optionsLocations = LOCATION_LIST;
@@ -12,7 +14,7 @@ const SearchClient = () => {
   const { t } = useTranslation('search');
   const onFinish = async () => {
     notification.success({
-      message: 'Feature is under development',
+      message: i18next.t('app:components.client.search_client.feature_is_under_development'),
     });
   };
 
@@ -36,7 +38,7 @@ const SearchClient = () => {
               style={{ width: '100%' }}
               placeholder={
                 <>
-                  <MonitorOutlined /> Search by skills....
+                  <MonitorOutlined /> {i18next.t('app:components.client.search_client.search_by_skills')}
                 </>
               }
               optionLabelProp='label'
@@ -48,13 +50,13 @@ const SearchClient = () => {
         <Col span={12} md={8}>
           <ProFormUploadButton
             name='cv'
-            label='Upload CV'
+            label={i18next.t('app:components.client.search_client.upload_cv')}
             max={1}
             fieldProps={{
               beforeUpload: () => false, // Để file không tự upload, chỉ giữ local
               accept: '.pdf,.doc,.docx',
             }}
-            title='Chọn CV (.pdf, .doc, .docx)'
+            title={i18next.t('app:components.client.search_client.chon_cv_pdf_doc_docx')}
             icon={<UploadOutlined />}
           />
         </Col>
@@ -66,7 +68,7 @@ const SearchClient = () => {
               style={{ width: '100%' }}
               placeholder={
                 <>
-                  <EnvironmentOutlined /> {'Location'}...
+                  <EnvironmentOutlined /> {i18next.t('app:common.location')}...
                 </>
               }
               optionLabelProp='label'

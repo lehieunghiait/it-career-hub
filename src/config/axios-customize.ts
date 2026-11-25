@@ -1,6 +1,7 @@
 import axiosClient from 'axios';
 import { getToken } from '@clerk/react';
 
+
 /**
  * Creates an initial 'axios' instance with custom settings.
  */

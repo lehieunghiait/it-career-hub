@@ -12,6 +12,8 @@ import { callCreateUser, callFetchCompany, callFetchRole, callUpdateUser } from 
 import { IUser } from '@/types/backend';
 import { DebounceSelect } from './debouce.select';
 
+import i18next from 'i18next';
+
 interface IProps {
   openModal: boolean;
   setOpenModal: (v: boolean) => void;
@@ -77,12 +79,12 @@ const ModalUser = (props: IProps) => {
 
       const res = await callUpdateUser(user, dataInit._id);
       if (res.data) {
-        message.success('Cập nhật user thành công');
+        message.success(i18next.t('app:components.admin.user.modal_user.cap_nhat_user_thanh_cong'));
         handleReset();
         reloadTable();
       } else {
         notification.error({
-          message: 'Có lỗi xảy ra',
+          message: i18next.t('app:common.co_loi_xay_ra'),
           description: res.message,
         });
       }
@@ -103,12 +105,12 @@ const ModalUser = (props: IProps) => {
       };
       const res = await callCreateUser(user);
       if (res.data) {
-        message.success('Thêm mới user thành công');
+        message.success(i18next.t('app:components.admin.user.modal_user.them_moi_user_thanh_cong'));
         handleReset();
         reloadTable();
       } else {
         notification.error({
-          message: 'Có lỗi xảy ra',
+          message: i18next.t('app:common.co_loi_xay_ra'),
           description: res.message,
         });
       }
@@ -155,7 +157,7 @@ const ModalUser = (props: IProps) => {
   return (
     <>
       <ModalForm
-        title={<>{dataInit?._id ? 'Cập nhật User' : 'Tạo mới User'}</>}
+        title={<>{dataInit?._id ? i18next.t('app:components.admin.user.modal_user.cap_nhat_user') : i18next.t('app:components.admin.user.modal_user.tao_moi_user')}</>}
         open={openModal}
         modalProps={{
           onCancel: () => {
@@ -166,8 +168,8 @@ const ModalUser = (props: IProps) => {
           width: isMobile ? '100%' : 900,
           keyboard: false,
           maskClosable: false,
-          okText: <>{dataInit?._id ? 'Cập nhật' : 'Tạo mới'}</>,
-          cancelText: 'Hủy',
+          okText: <>{dataInit?._id ? i18next.t('app:components.admin.user.modal_user.cap_nhat') : i18next.t('app:components.admin.user.modal_user.tao_moi')}</>,
+          cancelText: i18next.t('app:common.huy'),
         }}
         scrollToFirstError={true}
         preserve={false}
@@ -178,67 +180,67 @@ const ModalUser = (props: IProps) => {
         <Row gutter={16}>
           <Col lg={12} md={12} sm={24} xs={24}>
             <ProFormText
-              label='Email'
+              label={i18next.t('app:common.email')}
               name='email'
               rules={[
-                { required: true, message: 'Vui lòng không bỏ trống' },
-                { type: 'email', message: 'Vui lòng nhập email hợp lệ' },
+                { required: true, message: i18next.t('app:components.admin.user.modal_user.vui_long_khong_bo_trong') },
+                { type: 'email', message: i18next.t('app:components.admin.user.modal_user.vui_long_nhap_email_hop_le') },
               ]}
-              placeholder='Nhập email'
+              placeholder={i18next.t('app:components.admin.user.modal_user.nhap_email')}
             />
           </Col>
           <Col lg={12} md={12} sm={24} xs={24}>
             <ProFormText.Password
               disabled={dataInit?._id ? true : false}
-              label='Password'
+              label={i18next.t('app:components.admin.user.modal_user.password')}
               name='password'
               rules={[
-                { required: dataInit?._id ? false : true, message: 'Vui lòng không bỏ trống' },
+                { required: dataInit?._id ? false : true, message: i18next.t('app:components.admin.user.modal_user.vui_long_khong_bo_trong') },
               ]}
-              placeholder='Nhập password'
+              placeholder={i18next.t('app:components.admin.user.modal_user.nhap_password')}
             />
           </Col>
           <Col lg={6} md={6} sm={24} xs={24}>
             <ProFormText
-              label='Tên hiển thị'
+              label={i18next.t('app:components.admin.user.modal_user.ten_hien_thi')}
               name='name'
-              rules={[{ required: true, message: 'Vui lòng không bỏ trống' }]}
-              placeholder='Nhập tên hiển thị'
+              rules={[{ required: true, message: i18next.t('app:components.admin.user.modal_user.vui_long_khong_bo_trong') }]}
+              placeholder={i18next.t('app:components.admin.user.modal_user.nhap_ten_hien_thi')}
             />
           </Col>
           <Col lg={6} md={6} sm={24} xs={24}>
             <ProFormDigit
-              label='Tuổi'
+              label={i18next.t('app:components.admin.user.modal_user.tuoi')}
               name='age'
-              rules={[{ required: true, message: 'Vui lòng không bỏ trống' }]}
-              placeholder='Nhập nhập tuổi'
+              rules={[{ required: true, message: i18next.t('app:components.admin.user.modal_user.vui_long_khong_bo_trong') }]}
+              placeholder={i18next.t('app:components.admin.user.modal_user.nhap_nhap_tuoi')}
             />
           </Col>
           <Col lg={6} md={6} sm={24} xs={24}>
             <ProFormSelect
               name='gender'
-              label='Giới Tính'
+              label={i18next.t('app:components.admin.user.modal_user.gioi_tinh')}
               valueEnum={{
                 MALE: 'Nam',
                 FEMALE: 'Nữ',
                 OTHER: 'Khác',
               }}
-              placeholder='Please select a gender'
-              rules={[{ required: true, message: 'Vui lòng chọn giới tính!' }]}
+              placeholder={i18next.t('app:components.admin.user.modal_user.please_select_a_gender')}
+              rules={[{ required: true, message: i18next.t('app:components.admin.user.modal_user.vui_long_chon_gioi_tinh') }]}
             />
           </Col>
           <Col lg={6} md={6} sm={24} xs={24}>
             <ProForm.Item
               name='role'
-              label='Vai trò'
-              rules={[{ required: true, message: 'Vui lòng chọn vai trò!' }]}
+              label={i18next.t('app:components.admin.user.modal_user.vai_tro')}
+              rules={[{ required: true, message: i18next.t('app:components.admin.user.modal_user.vui_long_chon_vai_tro') }]}
             >
               <DebounceSelect
                 allowClear
                 showSearch
                 defaultValue={roles}
                 value={roles}
-                placeholder='Chọn công vai trò'
+                placeholder={i18next.t('app:components.admin.user.modal_user.chon_cong_vai_tro')}
                 fetchOptions={fetchRoleList}
                 onChange={(newValue: any) => {
                   if (newValue?.length === 0 || newValue?.length === 1) {
@@ -252,15 +254,15 @@ const ModalUser = (props: IProps) => {
           <Col lg={12} md={12} sm={24} xs={24}>
             <ProForm.Item
               name='company'
-              label='Thuộc Công Ty'
-              rules={[{ required: true, message: 'Vui lòng chọn company!' }]}
+              label={i18next.t('app:components.admin.user.modal_user.thuoc_cong_ty')}
+              rules={[{ required: true, message: i18next.t('app:components.admin.user.modal_user.vui_long_chon_company') }]}
             >
               <DebounceSelect
                 allowClear
                 showSearch
                 defaultValue={companies}
                 value={companies}
-                placeholder='Chọn công ty'
+                placeholder={i18next.t('app:components.admin.user.modal_user.chon_cong_ty')}
                 fetchOptions={fetchCompanyList}
                 onChange={(newValue: any) => {
                   if (newValue?.length === 0 || newValue?.length === 1) {
@@ -273,10 +275,10 @@ const ModalUser = (props: IProps) => {
           </Col>
           <Col lg={12} md={12} sm={24} xs={24}>
             <ProFormText
-              label='Địa chỉ'
+              label={i18next.t('app:components.admin.user.modal_user.dia_chi')}
               name='address'
-              rules={[{ required: true, message: 'Vui lòng không bỏ trống' }]}
-              placeholder='Nhập địa chỉ'
+              rules={[{ required: true, message: i18next.t('app:components.admin.user.modal_user.vui_long_khong_bo_trong') }]}
+              placeholder={i18next.t('app:components.admin.user.modal_user.nhap_dia_chi')}
             />
           </Col>
         </Row>

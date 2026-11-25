@@ -5,6 +5,8 @@ import { useAppSelector } from '@/redux/hooks';
 import NotPermitted from './not-permitted';
 import Loading from '../loading';
 
+import i18next from 'i18next';
+
 const RoleBaseRoute = (props: any) => {
   const user = useAppSelector(state => state.account.user);
   const userRole = user?.role?.name;
@@ -33,14 +35,14 @@ const ProtectedRoute = (props: any) => {
     return (
       <Result
         status='warning'
-        title='Could not verify your session with the server'
+        title={i18next.t('app:components.share.protected_route_ts.index.could_not_verify_your_session_with')}
         subTitle={
           authError ??
-          'You are signed in, but the API rejected your session token. Please try again later or contact the administrator.'
+          i18next.t('app:components.share.protected_route_ts.index.you_are_signed_in_but_the')
         }
         extra={
           <Button type='primary' onClick={() => window.location.reload()}>
-            Try again
+            {i18next.t('app:components.share.protected_route_ts.index.try_again')}
           </Button>
         }
       />

@@ -1,0 +1,4070 @@
+{
+ "components.admin.company.modal_company.please_upload_a_logo": {
+  "text": "Please upload a logo",
+  "lang": "en"
+ },
+ "components.admin.company.modal_company.update_company_successfully": {
+  "text": "Update Company successfully",
+  "lang": "en"
+ },
+ "common.an_error_occurred": {
+  "text": "An error occurred",
+  "lang": "en"
+ },
+ "components.admin.company.modal_company.create_company_successfully": {
+  "text": "Create Company successfully",
+  "lang": "en"
+ },
+ "components.admin.company.modal_company.you_can_only_upload_jpg_png": {
+  "text": "You can only upload JPG/PNG/WEBP file!",
+  "lang": "en"
+ },
+ "components.admin.company.modal_company.image_must_smaller_than_2mb": {
+  "text": "Image must smaller than 2MB!",
+  "lang": "en"
+ },
+ "components.admin.company.modal_company.da_co_loi_xay_ra_khi": {
+  "text": "Đã có lỗi xảy ra khi upload file.",
+  "lang": "vi"
+ },
+ "components.admin.company.modal_company.cap_nhat_logo_thanh_cong": {
+  "text": "Cập nhật logo thành công!",
+  "lang": "vi"
+ },
+ "components.admin.company.modal_company.cap_nhat_logo_that_bai": {
+  "text": "Cập nhật logo thất bại",
+  "lang": "vi"
+ },
+ "components.admin.company.modal_company.update_company": {
+  "text": "Update Company",
+  "lang": "en"
+ },
+ "components.admin.company.modal_company.create_company": {
+  "text": "Create Company",
+  "lang": "en"
+ },
+ "common.huy": {
+  "text": "Hủy",
+  "lang": "vi"
+ },
+ "common.update": {
+  "text": "Update",
+  "lang": "en"
+ },
+ "components.admin.company.modal_company.create": {
+  "text": "Create",
+  "lang": "en"
+ },
+ "components.admin.company.modal_company.company_name": {
+  "text": "Company Name",
+  "lang": "en"
+ },
+ "components.admin.company.modal_company.please_enter_company_name": {
+  "text": "Please enter company name",
+  "lang": "en"
+ },
+ "components.admin.company.modal_company.enter_company_name": {
+  "text": "Enter company name",
+  "lang": "en"
+ },
+ "components.admin.company.modal_company.logo": {
+  "text": "Logo",
+  "lang": "en"
+ },
+ "components.admin.company.modal_company.please_enter_logo": {
+  "text": "Please enter logo",
+  "lang": "en"
+ },
+ "components.admin.company.modal_company.upload": {
+  "text": "Upload",
+  "lang": "en"
+ },
+ "common.address": {
+  "text": "Address",
+  "lang": "en"
+ },
+ "components.admin.company.modal_company.please_enter_address": {
+  "text": "Please enter address",
+  "lang": "en"
+ },
+ "components.admin.company.modal_company.enter_address": {
+  "text": "Enter address",
+  "lang": "en"
+ },
+ "components.admin.company.modal_company.phone_number": {
+  "text": "Phone Number",
+  "lang": "en"
+ },
+ "components.admin.company.modal_company.please_enter_phone_number": {
+  "text": "Please enter phone number",
+  "lang": "en"
+ },
+ "components.admin.company.modal_company.only_type_phone_number": {
+  "text": "Only type phone number",
+  "lang": "en"
+ },
+ "components.admin.company.modal_company.enter_phone_number": {
+  "text": "Enter phone number",
+  "lang": "en"
+ },
+ "common.email": {
+  "text": "Email",
+  "lang": "en"
+ },
+ "components.admin.company.modal_company.please_enter_contact": {
+  "text": "Please enter CONTACT",
+  "lang": "en"
+ },
+ "components.admin.company.modal_company.enter_email": {
+  "text": "Enter email",
+  "lang": "en"
+ },
+ "common.website": {
+  "text": "Website",
+  "lang": "en"
+ },
+ "components.admin.company.modal_company.please_enter_website": {
+  "text": "Please enter website",
+  "lang": "en"
+ },
+ "components.admin.company.modal_company.enter_website": {
+  "text": "Enter website",
+  "lang": "en"
+ },
+ "common.description": {
+  "text": "Description",
+  "lang": "en"
+ },
+ "components.admin.company.view_detail_company.detail": {
+  "text": "📋 Detail",
+  "lang": "en"
+ },
+ "common.phone": {
+  "text": "Phone",
+  "lang": "en"
+ },
+ "components.admin.company.view_detail_company.tel": {
+  "text": "tel:{{v0}}",
+  "lang": "en"
+ },
+ "components.admin.company.view_detail_company.mailto": {
+  "text": "mailto:{{v0}}",
+  "lang": "en"
+ },
+ "components.admin.company.view_detail_company.number_of_staff": {
+  "text": "Number of staff",
+  "lang": "en"
+ },
+ "components.admin.company.view_detail_company.type_of_business": {
+  "text": "Type of business",
+  "lang": "en"
+ },
+ "components.admin.company.view_detail_company.n_a": {
+  "text": "N/A",
+  "lang": "en"
+ },
+ "components.admin.company.view_detail_company.year_of_foundation": {
+  "text": "Year of foundation",
+  "lang": "en"
+ },
+ "components.admin.company.view_detail_company.skills": {
+  "text": "🛠️ Skills",
+  "lang": "en"
+ },
+ "components.admin.company.view_detail_company.description": {
+  "text": "📝 Description",
+  "lang": "en"
+ },
+ "components.admin.company.view_detail_company.created_at": {
+  "text": "Created At",
+  "lang": "en"
+ },
+ "components.admin.company.view_detail_company.updated_at": {
+  "text": "Updated At",
+  "lang": "en"
+ },
+ "components.admin.job.upsert_job.cap_nhat_job_thanh_cong": {
+  "text": "Cập nhật job thành công",
+  "lang": "vi"
+ },
+ "common.co_loi_xay_ra": {
+  "text": "Có lỗi xảy ra",
+  "lang": "vi"
+ },
+ "components.admin.job.upsert_job.tao_moi_job_thanh_cong": {
+  "text": "Tạo mới job thành công",
+  "lang": "vi"
+ },
+ "components.admin.job.upsert_job.manage_job": {
+  "text": "Manage Job",
+  "lang": "en"
+ },
+ "components.admin.job.upsert_job.upsert_job": {
+  "text": "Upsert Job",
+  "lang": "en"
+ },
+ "components.admin.job.upsert_job.cap_nhat_job": {
+  "text": "Cập nhật Job",
+  "lang": "vi"
+ },
+ "components.admin.job.upsert_job.tao_moi_job": {
+  "text": "Tạo mới Job",
+  "lang": "vi"
+ },
+ "components.admin.job.upsert_job.title": {
+  "text": "Title",
+  "lang": "en"
+ },
+ "components.admin.job.upsert_job.please_enter_a_name": {
+  "text": "Please enter a name!",
+  "lang": "en"
+ },
+ "components.admin.job.upsert_job.please_enter_a_title": {
+  "text": "Please enter a title",
+  "lang": "en"
+ },
+ "common.skills": {
+  "text": "Skills",
+  "lang": "en"
+ },
+ "components.admin.job.upsert_job.please_select_a_skill_required": {
+  "text": "Please select a skill required",
+  "lang": "en"
+ },
+ "components.admin.job.upsert_job.please_select_a_skill_required_2": {
+  "text": "Please select a skill required!",
+  "lang": "en"
+ },
+ "common.location": {
+  "text": "Location",
+  "lang": "en"
+ },
+ "components.admin.job.upsert_job.please_select_a_location": {
+  "text": "Please select a location",
+  "lang": "en"
+ },
+ "components.admin.job.upsert_job.please_select_a_location_2": {
+  "text": "Please select a location!",
+  "lang": "en"
+ },
+ "common.salary": {
+  "text": "Salary",
+  "lang": "en"
+ },
+ "components.admin.job.upsert_job.please_enter_salary": {
+  "text": "Please enter salary!",
+  "lang": "en"
+ },
+ "components.admin.job.upsert_job.please_enter_salary_2": {
+  "text": "Please enter salary",
+  "lang": "en"
+ },
+ "common.d": {
+  "text": "đ",
+  "lang": "vi"
+ },
+ "components.admin.job.upsert_job.quantity": {
+  "text": "Quantity",
+  "lang": "en"
+ },
+ "components.admin.job.upsert_job.please_enter_quantity": {
+  "text": "Please enter quantity!",
+  "lang": "en"
+ },
+ "components.admin.job.upsert_job.please_enter_quantity_2": {
+  "text": "Please enter quantity",
+  "lang": "en"
+ },
+ "common.level": {
+  "text": "Level",
+  "lang": "en"
+ },
+ "components.admin.job.upsert_job.please_select_a_level": {
+  "text": "Please select a level",
+  "lang": "en"
+ },
+ "components.admin.job.upsert_job.please_select_a_level_2": {
+  "text": "Please select a level!",
+  "lang": "en"
+ },
+ "common.company": {
+  "text": "Company",
+  "lang": "en"
+ },
+ "components.admin.job.upsert_job.please_select_a_company": {
+  "text": "Please select a company!",
+  "lang": "en"
+ },
+ "components.admin.job.upsert_job.please_select_a_company_2": {
+  "text": "Please select a company",
+  "lang": "en"
+ },
+ "components.admin.job.upsert_job.start_date": {
+  "text": "Start Date",
+  "lang": "en"
+ },
+ "components.admin.job.upsert_job.please_select_a_start_date": {
+  "text": "Please select a start date!",
+  "lang": "en"
+ },
+ "components.admin.job.upsert_job.end_date": {
+  "text": "End Date",
+  "lang": "en"
+ },
+ "components.admin.job.upsert_job.please_select_a_end_date": {
+  "text": "Please select a end date!",
+  "lang": "en"
+ },
+ "common.status": {
+  "text": "Status",
+  "lang": "en"
+ },
+ "components.admin.job.upsert_job.please_enter_a_description": {
+  "text": "Please enter a description!",
+  "lang": "en"
+ },
+ "components.admin.job.view_detail_job.openings": {
+  "text": "Openings",
+  "lang": "en"
+ },
+ "components.admin.job.view_detail_job.posting_period": {
+  "text": "Posting period",
+  "lang": "en"
+ },
+ "components.admin.job.view_detail_job.applications": {
+  "text": "Applications",
+  "lang": "en"
+ },
+ "components.admin.job.view_detail_job.received": {
+  "text": "{{v0}} received",
+  "lang": "en"
+ },
+ "components.admin.job.view_detail_job.job_details": {
+  "text": "Job details",
+  "lang": "en"
+ },
+ "components.admin.job.view_detail_job.view_public_page": {
+  "text": "View public page",
+  "lang": "en"
+ },
+ "components.admin.job.view_detail_job.edit_job": {
+  "text": "Edit job",
+  "lang": "en"
+ },
+ "components.admin.job.view_detail_job.job_not_found": {
+  "text": "Job not found",
+  "lang": "en"
+ },
+ "components.admin.job.view_detail_job.expired": {
+  "text": "Expired",
+  "lang": "en"
+ },
+ "components.admin.job.view_detail_job.ends_today": {
+  "text": "Ends today",
+  "lang": "en"
+ },
+ "components.admin.job.view_detail_job.days_left": {
+  "text": "{{v0}} days left",
+  "lang": "en"
+ },
+ "components.admin.job.view_detail_job.no_skills_listed": {
+  "text": "No skills listed",
+  "lang": "en"
+ },
+ "components.admin.job.view_detail_job.no_description": {
+  "text": "No description",
+  "lang": "en"
+ },
+ "components.admin.job.view_detail_job.created_by": {
+  "text": "Created by",
+  "lang": "en"
+ },
+ "components.admin.job.view_detail_job.last_updated_by": {
+  "text": "Last updated by",
+  "lang": "en"
+ },
+ "components.admin.layout_admin.overview": {
+  "text": "Overview",
+  "lang": "en"
+ },
+ "components.admin.layout_admin.recruitment": {
+  "text": "Recruitment",
+  "lang": "en"
+ },
+ "components.admin.layout_admin.access_control": {
+  "text": "Access control",
+  "lang": "en"
+ },
+ "components.admin.layout_admin.logout_successfully": {
+  "text": "Logout successfully",
+  "lang": "en"
+ },
+ "components.admin.layout_admin.back_to_site": {
+  "text": "Back to site",
+  "lang": "en"
+ },
+ "components.admin.layout_admin.logout": {
+  "text": "Logout",
+  "lang": "en"
+ },
+ "components.admin.layout_admin.career_hub": {
+  "text": "Career Hub",
+  "lang": "en"
+ },
+ "components.admin.layout_admin.recruiter": {
+  "text": "Recruiter",
+  "lang": "en"
+ },
+ "components.admin.layout_admin.view_site": {
+  "text": "View site",
+  "lang": "en"
+ },
+ "components.admin.permission.modal_permission.update_permission_successfully": {
+  "text": "Update permission successfully",
+  "lang": "en"
+ },
+ "components.admin.permission.modal_permission.create_permission_successfully": {
+  "text": "Create permission successfully",
+  "lang": "en"
+ },
+ "components.admin.permission.modal_permission.update_permission": {
+  "text": "Update Permission",
+  "lang": "en"
+ },
+ "components.admin.permission.modal_permission.create_permission": {
+  "text": "Create Permission",
+  "lang": "en"
+ },
+ "components.admin.permission.modal_permission.create": {
+  "text": "Create",
+  "lang": "en"
+ },
+ "common.cancel": {
+  "text": "Cancel",
+  "lang": "en"
+ },
+ "common.name": {
+  "text": "Name",
+  "lang": "en"
+ },
+ "components.admin.permission.modal_permission.please_do_not_leave_blank": {
+  "text": "Please do not leave blank",
+  "lang": "en"
+ },
+ "components.admin.permission.modal_permission.enter_name": {
+  "text": "Enter name",
+  "lang": "en"
+ },
+ "components.admin.permission.modal_permission.api_path": {
+  "text": "API Path",
+  "lang": "en"
+ },
+ "components.admin.permission.modal_permission.enter_path": {
+  "text": "Enter path",
+  "lang": "en"
+ },
+ "common.method": {
+  "text": "Method",
+  "lang": "en"
+ },
+ "components.admin.permission.modal_permission.please_select_a_method": {
+  "text": "Please select a method",
+  "lang": "en"
+ },
+ "components.admin.permission.modal_permission.please_select_a_method_2": {
+  "text": "Please select a method!",
+  "lang": "en"
+ },
+ "components.admin.permission.modal_permission.module": {
+  "text": "Module",
+  "lang": "en"
+ },
+ "components.admin.permission.modal_permission.please_select_a_module": {
+  "text": "Please select a module",
+  "lang": "en"
+ },
+ "components.admin.permission.modal_permission.please_select_a_module_2": {
+  "text": "Please select a module!",
+  "lang": "en"
+ },
+ "components.admin.permission.view_permission.detail": {
+  "text": "Detail",
+  "lang": "en"
+ },
+ "components.admin.permission.view_permission.ten_permission": {
+  "text": "Tên Permission",
+  "lang": "vi"
+ },
+ "components.admin.permission.view_permission.api_path": {
+  "text": "API Path",
+  "lang": "en"
+ },
+ "components.admin.permission.view_permission.thuoc_module": {
+  "text": "Thuộc Module",
+  "lang": "vi"
+ },
+ "components.admin.permission.view_permission.ngay_tao": {
+  "text": "Ngày tạo",
+  "lang": "vi"
+ },
+ "components.admin.permission.view_permission.ngay_sua": {
+  "text": "Ngày sửa",
+  "lang": "vi"
+ },
+ "components.admin.resume.ai_interview_section.invite_sent": {
+  "text": "Invite sent",
+  "lang": "en"
+ },
+ "components.admin.resume.ai_interview_section.in_progress": {
+  "text": "In progress",
+  "lang": "en"
+ },
+ "components.admin.resume.ai_interview_section.completed": {
+  "text": "Completed",
+  "lang": "en"
+ },
+ "components.admin.resume.ai_interview_section.link_expired": {
+  "text": "Link expired",
+  "lang": "en"
+ },
+ "components.admin.resume.ai_interview_section.replaced": {
+  "text": "Replaced",
+  "lang": "en"
+ },
+ "components.admin.resume.ai_interview_section.strong_yes": {
+  "text": "Strong yes",
+  "lang": "en"
+ },
+ "components.admin.resume.ai_interview_section.yes": {
+  "text": "Yes",
+  "lang": "en"
+ },
+ "components.admin.resume.ai_interview_section.maybe": {
+  "text": "Maybe",
+  "lang": "en"
+ },
+ "components.admin.resume.ai_interview_section.no": {
+  "text": "No",
+  "lang": "en"
+ },
+ "components.admin.resume.ai_interview_section.cannot_evaluate_the_interview_again": {
+  "text": "Cannot evaluate the interview again",
+  "lang": "en"
+ },
+ "common.ai_interview": {
+  "text": "AI interview",
+  "lang": "en"
+ },
+ "components.admin.resume.ai_interview_section.english": {
+  "text": "English",
+  "lang": "en"
+ },
+ "components.admin.resume.ai_interview_section.tieng_viet": {
+  "text": "Tiếng Việt",
+  "lang": "vi"
+ },
+ "components.admin.resume.ai_interview_section.expires": {
+  "text": "Expires",
+  "lang": "en"
+ },
+ "components.admin.resume.ai_interview_section.scoring_the_interview": {
+  "text": "Scoring the interview…",
+  "lang": "en"
+ },
+ "components.admin.resume.ai_interview_section.scoring_failed": {
+  "text": "Scoring failed.",
+  "lang": "en"
+ },
+ "components.admin.resume.ai_interview_section.try_again": {
+  "text": "Try again",
+  "lang": "en"
+ },
+ "components.admin.resume.ai_interview_section.suggested_by_ai_from_the_transcript": {
+  "text": "Suggested by AI from the transcript. Review before deciding.",
+  "lang": "en"
+ },
+ "components.admin.resume.ai_interview_section.strengths": {
+  "text": "Strengths",
+  "lang": "en"
+ },
+ "components.admin.resume.ai_interview_section.concerns": {
+  "text": "Concerns",
+  "lang": "en"
+ },
+ "components.admin.resume.ai_interview_section.transcript_turns": {
+  "text": "Transcript ({{v0}} turns)",
+  "lang": "en"
+ },
+ "components.admin.resume.ai_interview_section.candidate": {
+  "text": "Candidate",
+  "lang": "en"
+ },
+ "components.admin.resume.pipeline_drawer.cannot_load_this_application": {
+  "text": "Cannot load this application",
+  "lang": "en"
+ },
+ "components.admin.resume.pipeline_drawer.cannot_save_the_rating": {
+  "text": "Cannot save the rating",
+  "lang": "en"
+ },
+ "components.admin.resume.pipeline_drawer.cannot_add_the_note": {
+  "text": "Cannot add the note",
+  "lang": "en"
+ },
+ "components.admin.resume.pipeline_drawer.cannot_delete_the_note": {
+  "text": "Cannot delete the note",
+  "lang": "en"
+ },
+ "components.admin.resume.pipeline_drawer.mailto": {
+  "text": "mailto:{{v0}}",
+  "lang": "en"
+ },
+ "components.admin.resume.pipeline_drawer.job_removed": {
+  "text": "Job removed",
+  "lang": "en"
+ },
+ "common.view_cv": {
+  "text": "View CV",
+  "lang": "en"
+ },
+ "common.applied": {
+  "text": "Applied",
+  "lang": "en"
+ },
+ "components.admin.resume.pipeline_drawer.score": {
+  "text": "Score",
+  "lang": "en"
+ },
+ "components.admin.resume.pipeline_drawer.notes": {
+  "text": "Notes",
+  "lang": "en"
+ },
+ "components.admin.resume.pipeline_drawer.only_visible_to_your_team": {
+  "text": "Only visible to your team",
+  "lang": "en"
+ },
+ "components.admin.resume.pipeline_drawer.add_a_note_about_this_candidate": {
+  "text": "Add a note about this candidate…",
+  "lang": "en"
+ },
+ "components.admin.resume.pipeline_drawer.ctrl_enter_to_save": {
+  "text": "⌘/Ctrl + Enter to save",
+  "lang": "en"
+ },
+ "components.admin.resume.pipeline_drawer.add_note": {
+  "text": "Add note",
+  "lang": "en"
+ },
+ "components.admin.resume.pipeline_drawer.delete_this_note": {
+  "text": "Delete this note?",
+  "lang": "en"
+ },
+ "components.admin.resume.pipeline_drawer.delete": {
+  "text": "Delete",
+  "lang": "en"
+ },
+ "components.admin.resume.pipeline_drawer.no_notes_yet": {
+  "text": "No notes yet",
+  "lang": "en"
+ },
+ "components.admin.resume.pipeline_drawer.activity": {
+  "text": "Activity",
+  "lang": "en"
+ },
+ "components.admin.resume.pipeline_drawer.moved_to": {
+  "text": "Moved to",
+  "lang": "en"
+ },
+ "components.admin.resume.pipeline_drawer.no_activity_yet": {
+  "text": "No activity yet",
+  "lang": "en"
+ },
+ "components.admin.resume.view_resume.choose_a_new_status_or_write": {
+  "text": "Choose a new status or write a note for the candidate",
+  "lang": "en"
+ },
+ "components.admin.resume.view_resume.update_resume_status_successfully": {
+  "text": "Update Resume status successfully!",
+  "lang": "en"
+ },
+ "components.admin.resume.view_resume.resume_detail": {
+  "text": "Resume Detail",
+  "lang": "en"
+ },
+ "components.admin.resume.view_resume.update_status": {
+  "text": "Update Status",
+  "lang": "en"
+ },
+ "components.admin.resume.view_resume.job_name": {
+  "text": "Job Name",
+  "lang": "en"
+ },
+ "components.admin.resume.view_resume.company_name": {
+  "text": "Company Name",
+  "lang": "en"
+ },
+ "components.admin.resume.view_resume.created_at": {
+  "text": "Created At",
+  "lang": "en"
+ },
+ "components.admin.resume.view_resume.modified_at": {
+  "text": "Modified At",
+  "lang": "en"
+ },
+ "components.admin.resume.view_resume.message_to_the_candidate_optional": {
+  "text": "Message to the candidate (optional)",
+  "lang": "en"
+ },
+ "components.admin.resume.view_resume.shown_on_the_candidate_timeline_e": {
+  "text": "Shown on the candidate timeline, e.g. interview time, place or meeting link.",
+  "lang": "en"
+ },
+ "components.admin.resume.view_resume.status_history": {
+  "text": "Status history",
+  "lang": "en"
+ },
+ "components.admin.role.modal_role.cap_nhat_role_thanh_cong": {
+  "text": "Cập nhật role thành công",
+  "lang": "vi"
+ },
+ "components.admin.role.modal_role.them_moi_role_thanh_cong": {
+  "text": "Thêm mới role thành công",
+  "lang": "vi"
+ },
+ "components.admin.role.modal_role.cap_nhat_role": {
+  "text": "Cập nhật Role",
+  "lang": "vi"
+ },
+ "components.admin.role.modal_role.tao_moi_role": {
+  "text": "Tạo mới Role",
+  "lang": "vi"
+ },
+ "components.admin.role.modal_role.cap_nhat": {
+  "text": "Cập nhật",
+  "lang": "vi"
+ },
+ "components.admin.role.modal_role.tao_moi": {
+  "text": "Tạo mới",
+  "lang": "vi"
+ },
+ "components.admin.role.modal_role.please_do_not_leave_blank": {
+  "text": "Please do not leave blank",
+  "lang": "en"
+ },
+ "components.admin.role.modal_role.enter_name": {
+  "text": "Enter name",
+  "lang": "en"
+ },
+ "components.admin.role.modal_role.enter_description": {
+  "text": "Enter description",
+  "lang": "en"
+ },
+ "components.admin.role.modal_role.permissions": {
+  "text": "Permissions",
+  "lang": "en"
+ },
+ "components.admin.role.modal_role.the_permissions_allowed_for_this_role": {
+  "text": "The permissions allowed for this role",
+  "lang": "en"
+ },
+ "components.admin.user.modal_user.cap_nhat_user_thanh_cong": {
+  "text": "Cập nhật user thành công",
+  "lang": "vi"
+ },
+ "components.admin.user.modal_user.them_moi_user_thanh_cong": {
+  "text": "Thêm mới user thành công",
+  "lang": "vi"
+ },
+ "components.admin.user.modal_user.cap_nhat_user": {
+  "text": "Cập nhật User",
+  "lang": "vi"
+ },
+ "components.admin.user.modal_user.tao_moi_user": {
+  "text": "Tạo mới User",
+  "lang": "vi"
+ },
+ "components.admin.user.modal_user.cap_nhat": {
+  "text": "Cập nhật",
+  "lang": "vi"
+ },
+ "components.admin.user.modal_user.tao_moi": {
+  "text": "Tạo mới",
+  "lang": "vi"
+ },
+ "components.admin.user.modal_user.vui_long_khong_bo_trong": {
+  "text": "Vui lòng không bỏ trống",
+  "lang": "vi"
+ },
+ "components.admin.user.modal_user.vui_long_nhap_email_hop_le": {
+  "text": "Vui lòng nhập email hợp lệ",
+  "lang": "vi"
+ },
+ "components.admin.user.modal_user.nhap_email": {
+  "text": "Nhập email",
+  "lang": "vi"
+ },
+ "components.admin.user.modal_user.password": {
+  "text": "Password",
+  "lang": "en"
+ },
+ "components.admin.user.modal_user.nhap_password": {
+  "text": "Nhập password",
+  "lang": "vi"
+ },
+ "components.admin.user.modal_user.ten_hien_thi": {
+  "text": "Tên hiển thị",
+  "lang": "vi"
+ },
+ "components.admin.user.modal_user.nhap_ten_hien_thi": {
+  "text": "Nhập tên hiển thị",
+  "lang": "vi"
+ },
+ "components.admin.user.modal_user.tuoi": {
+  "text": "Tuổi",
+  "lang": "vi"
+ },
+ "components.admin.user.modal_user.nhap_nhap_tuoi": {
+  "text": "Nhập nhập tuổi",
+  "lang": "vi"
+ },
+ "components.admin.user.modal_user.gioi_tinh": {
+  "text": "Giới Tính",
+  "lang": "vi"
+ },
+ "components.admin.user.modal_user.please_select_a_gender": {
+  "text": "Please select a gender",
+  "lang": "en"
+ },
+ "components.admin.user.modal_user.vui_long_chon_gioi_tinh": {
+  "text": "Vui lòng chọn giới tính!",
+  "lang": "vi"
+ },
+ "components.admin.user.modal_user.vai_tro": {
+  "text": "Vai trò",
+  "lang": "vi"
+ },
+ "components.admin.user.modal_user.vui_long_chon_vai_tro": {
+  "text": "Vui lòng chọn vai trò!",
+  "lang": "vi"
+ },
+ "components.admin.user.modal_user.chon_cong_vai_tro": {
+  "text": "Chọn công vai trò",
+  "lang": "vi"
+ },
+ "components.admin.user.modal_user.thuoc_cong_ty": {
+  "text": "Thuộc Công Ty",
+  "lang": "vi"
+ },
+ "components.admin.user.modal_user.vui_long_chon_company": {
+  "text": "Vui lòng chọn company!",
+  "lang": "vi"
+ },
+ "components.admin.user.modal_user.chon_cong_ty": {
+  "text": "Chọn công ty",
+  "lang": "vi"
+ },
+ "components.admin.user.modal_user.dia_chi": {
+  "text": "Địa chỉ",
+  "lang": "vi"
+ },
+ "components.admin.user.modal_user.nhap_dia_chi": {
+  "text": "Nhập địa chỉ",
+  "lang": "vi"
+ },
+ "components.admin.user.update_profile_user.update_profile_successfully": {
+  "text": "Update profile successfully",
+  "lang": "en"
+ },
+ "components.admin.user.update_profile_user.update_profile_failed": {
+  "text": "Update profile failed",
+  "lang": "en"
+ },
+ "components.admin.user.update_profile_user.age": {
+  "text": "Age",
+  "lang": "en"
+ },
+ "components.admin.user.update_profile_user.gender": {
+  "text": "Gender",
+  "lang": "en"
+ },
+ "components.admin.user.update_profile_user.male": {
+  "text": "Male",
+  "lang": "en"
+ },
+ "components.admin.user.update_profile_user.female": {
+  "text": "Female",
+  "lang": "en"
+ },
+ "components.admin.user.update_profile_user.other": {
+  "text": "Other",
+  "lang": "en"
+ },
+ "components.admin.user.update_profile_user.update_profile": {
+  "text": "Update Profile",
+  "lang": "en"
+ },
+ "components.admin.user.view_user.view_detail_user": {
+  "text": "View Detail User",
+  "lang": "en"
+ },
+ "components.client.about.about_contact.t_84_399864422_vietnam": {
+  "text": "+84 399864422 (Vietnam)",
+  "lang": "en"
+ },
+ "components.client.about.about_teammember.our_team": {
+  "text": "Our Team",
+  "lang": "en"
+ },
+ "components.client.application.ApplicationCard.job_no_longer_available": {
+  "text": "Job no longer available",
+  "lang": "en"
+ },
+ "components.client.application.ApplicationCard.job_closed": {
+  "text": "Job closed",
+  "lang": "en"
+ },
+ "components.client.application.ApplicationCard.hide_history": {
+  "text": "Hide history",
+  "lang": "en"
+ },
+ "components.client.application.ApplicationCard.history": {
+  "text": "History ({{v0}})",
+  "lang": "en"
+ },
+ "components.client.card.company_card.see_more": {
+  "text": "See more",
+  "lang": "en"
+ },
+ "components.client.card.company_card.loading": {
+  "text": "Loading...",
+  "lang": "en"
+ },
+ "components.client.card.company_card.top_it_companies_in_vietnam": {
+  "text": "Top IT Companies in Vietnam 🇻🇳",
+  "lang": "en"
+ },
+ "components.client.card.job_card.new_it_jobs": {
+  "text": "New IT Jobs 🔥",
+  "lang": "en"
+ },
+ "components.client.card.job_card.nbsp": {
+  "text": "&nbsp;",
+  "lang": "en"
+ },
+ "components.client.card.job_card.no_data": {
+  "text": "No data",
+  "lang": "en"
+ },
+ "components.client.company.CompanyReviews.salary_benefits": {
+  "text": "Salary & benefits",
+  "lang": "en"
+ },
+ "components.client.company.CompanyReviews.culture_fun": {
+  "text": "Culture & fun",
+  "lang": "en"
+ },
+ "components.client.company.CompanyReviews.management": {
+  "text": "Management",
+  "lang": "en"
+ },
+ "components.client.company.CompanyReviews.work_life_balance": {
+  "text": "Work-life balance",
+  "lang": "en"
+ },
+ "components.client.company.CompanyReviews.career_growth": {
+  "text": "Career growth",
+  "lang": "en"
+ },
+ "components.client.company.CompanyReviews.got_an_offer": {
+  "text": "Got an offer",
+  "lang": "en"
+ },
+ "components.client.company.CompanyReviews.no_offer": {
+  "text": "No offer",
+  "lang": "en"
+ },
+ "components.client.company.CompanyReviews.waiting_for_result": {
+  "text": "Waiting for result",
+  "lang": "en"
+ },
+ "components.client.company.CompanyReviews.positive_experience": {
+  "text": "Positive experience",
+  "lang": "en"
+ },
+ "components.client.company.CompanyReviews.neutral_experience": {
+  "text": "Neutral experience",
+  "lang": "en"
+ },
+ "components.client.company.CompanyReviews.negative_experience": {
+  "text": "Negative experience",
+  "lang": "en"
+ },
+ "components.client.company.CompanyReviews.reviews_interviews": {
+  "text": "Reviews & interviews",
+  "lang": "en"
+ },
+ "components.client.company.CompanyReviews.posted_anonymously_by_employees_and_candidates": {
+  "text": "Posted anonymously by employees and candidates of",
+  "lang": "en"
+ },
+ "components.client.company.CompanyReviews.write_a_review": {
+  "text": "Write a review",
+  "lang": "en"
+ },
+ "components.client.company.CompanyReviews.share_an_interview": {
+  "text": "Share an interview",
+  "lang": "en"
+ },
+ "components.client.company.CompanyReviews.would_recommend": {
+  "text": "% would recommend",
+  "lang": "en"
+ },
+ "components.client.company.CompanyReviews.reviews": {
+  "text": "Reviews ({{v0}})",
+  "lang": "en"
+ },
+ "components.client.company.CompanyReviews.interviews": {
+  "text": "Interviews ({{v0}})",
+  "lang": "en"
+ },
+ "components.client.company.CompanyReviews.difficulty": {
+  "text": "Difficulty",
+  "lang": "en"
+ },
+ "components.client.company.CompanyReviews.no_review_yet_worked_here_help": {
+  "text": "No review yet. Worked here? Help others with an honest review.",
+  "lang": "en"
+ },
+ "components.client.company.CompanyReviews.no_interview_experience_yet_interviewed_here": {
+  "text": "No interview experience yet. Interviewed here? Share how it went.",
+  "lang": "en"
+ },
+ "components.client.company.CompanyReviews.recommends": {
+  "text": "Recommends",
+  "lang": "en"
+ },
+ "components.client.company.CompanyReviews.doesn_t_recommend": {
+  "text": "Doesn't recommend",
+  "lang": "en"
+ },
+ "components.client.company.CompanyReviews.anonymous": {
+  "text": "Anonymous ·",
+  "lang": "en"
+ },
+ "components.client.company.CompanyReviews.former_employee": {
+  "text": "Former employee",
+  "lang": "en"
+ },
+ "components.client.company.CompanyReviews.current_employee": {
+  "text": "Current employee",
+  "lang": "en"
+ },
+ "components.client.company.CompanyReviews.pros": {
+  "text": "Pros",
+  "lang": "en"
+ },
+ "components.client.company.CompanyReviews.cons": {
+  "text": "Cons",
+  "lang": "en"
+ },
+ "components.client.company.CompanyReviews.advice_to_management": {
+  "text": "Advice to management",
+  "lang": "en"
+ },
+ "components.client.company.CompanyReviews.anonymous_candidate": {
+  "text": "Anonymous candidate ·",
+  "lang": "en"
+ },
+ "components.client.company.CompanyReviews.process": {
+  "text": "Process",
+  "lang": "en"
+ },
+ "components.client.company.CompanyReviews.questions_asked": {
+  "text": "Questions asked",
+  "lang": "en"
+ },
+ "components.client.company.CompanyReviews.show_more": {
+  "text": "Show more",
+  "lang": "en"
+ },
+ "components.client.company.CompanyReviews.your_name_email_and_account_are": {
+  "text": "Your name, email and account are never shown. Only the month you posted is displayed.",
+  "lang": "en"
+ },
+ "components.client.company.CompanyReviews.thanks_your_review_is_now_live": {
+  "text": "Thanks! Your review is now live.",
+  "lang": "en"
+ },
+ "components.client.company.CompanyReviews.cannot_post_the_review": {
+  "text": "Cannot post the review",
+  "lang": "en"
+ },
+ "components.client.company.CompanyReviews.review": {
+  "text": "Review {{v0}}",
+  "lang": "en"
+ },
+ "components.client.company.CompanyReviews.post_anonymously": {
+  "text": "Post anonymously",
+  "lang": "en"
+ },
+ "components.client.company.CompanyReviews.overall_rating": {
+  "text": "Overall rating",
+  "lang": "en"
+ },
+ "components.client.company.CompanyReviews.please_rate_the_company": {
+  "text": "Please rate the company",
+  "lang": "en"
+ },
+ "components.client.company.CompanyReviews.you_are_a": {
+  "text": "You are a",
+  "lang": "en"
+ },
+ "components.client.company.CompanyReviews.your_position_optional": {
+  "text": "Your position (optional)",
+  "lang": "en"
+ },
+ "components.client.company.CompanyReviews.backend_developer": {
+  "text": "Backend Developer",
+  "lang": "en"
+ },
+ "components.client.company.CompanyReviews.review_title": {
+  "text": "Review title",
+  "lang": "en"
+ },
+ "components.client.company.CompanyReviews.at_least_5_characters": {
+  "text": "At least 5 characters",
+  "lang": "en"
+ },
+ "components.client.company.CompanyReviews.great_team_slow_promotions": {
+  "text": "Great team, slow promotions",
+  "lang": "en"
+ },
+ "components.client.company.CompanyReviews.at_least_20_characters": {
+  "text": "At least 20 characters",
+  "lang": "en"
+ },
+ "components.client.company.CompanyReviews.advice_to_management_optional": {
+  "text": "Advice to management (optional)",
+  "lang": "en"
+ },
+ "components.client.company.CompanyReviews.would_you_recommend_this_company_to": {
+  "text": "Would you recommend this company to a friend?",
+  "lang": "en"
+ },
+ "components.client.company.CompanyReviews.yes": {
+  "text": "Yes",
+  "lang": "en"
+ },
+ "components.client.company.CompanyReviews.no": {
+  "text": "No",
+  "lang": "en"
+ },
+ "components.client.company.CompanyReviews.thanks_for_sharing_your_interview": {
+  "text": "Thanks for sharing your interview!",
+  "lang": "en"
+ },
+ "components.client.company.CompanyReviews.cannot_post": {
+  "text": "Cannot post",
+  "lang": "en"
+ },
+ "components.client.company.CompanyReviews.interview_at": {
+  "text": "Interview at {{v0}}",
+  "lang": "en"
+ },
+ "components.client.company.CompanyReviews.position_you_interviewed_for": {
+  "text": "Position you interviewed for",
+  "lang": "en"
+ },
+ "components.client.company.CompanyReviews.please_enter_the_position": {
+  "text": "Please enter the position",
+  "lang": "en"
+ },
+ "components.client.company.CompanyReviews.senior_java_developer": {
+  "text": "Senior Java Developer",
+  "lang": "en"
+ },
+ "components.client.company.CompanyReviews.result": {
+  "text": "Result",
+  "lang": "en"
+ },
+ "components.client.company.CompanyReviews.required": {
+  "text": "Required",
+  "lang": "en"
+ },
+ "components.client.company.CompanyReviews.overall_experience": {
+  "text": "Overall experience",
+  "lang": "en"
+ },
+ "components.client.company.CompanyReviews.positive": {
+  "text": "Positive",
+  "lang": "en"
+ },
+ "components.client.company.CompanyReviews.neutral": {
+  "text": "Neutral",
+  "lang": "en"
+ },
+ "components.client.company.CompanyReviews.negative": {
+  "text": "Negative",
+  "lang": "en"
+ },
+ "components.client.company.CompanyReviews.how_did_the_process_go": {
+  "text": "How did the process go?",
+  "lang": "en"
+ },
+ "components.client.company.CompanyReviews.at_least_30_characters": {
+  "text": "At least 30 characters",
+  "lang": "en"
+ },
+ "components.client.company.CompanyReviews.rounds_duration_who_you_met_take": {
+  "text": "Rounds, duration, who you met, take-home test…",
+  "lang": "en"
+ },
+ "components.client.company.CompanyReviews.questions_asked_optional": {
+  "text": "Questions asked (optional)",
+  "lang": "en"
+ },
+ "components.client.company.company_detail_ts.CompanyCarousel.company_image": {
+  "text": "Company Image",
+  "lang": "en"
+ },
+ "components.client.company.company_detail_ts.CompanyCarousel.no_images_available": {
+  "text": "No images available",
+  "lang": "en"
+ },
+ "components.client.company.company_detail_ts.CompanyCarousel.company_workspace": {
+  "text": "Company workspace {{v0}}",
+  "lang": "en"
+ },
+ "components.client.company.company_detail_ts.CompanyDescription.overview": {
+  "text": "Overview",
+  "lang": "en"
+ },
+ "components.client.company.company_detail_ts.CompanyDescription.no_description_available": {
+  "text": "No description available",
+  "lang": "en"
+ },
+ "common.home": {
+  "text": "Home",
+  "lang": "en"
+ },
+ "common.companies": {
+  "text": "Companies",
+  "lang": "en"
+ },
+ "components.client.company.company_detail_ts.CompanyHeader.company_detail": {
+  "text": "Company Detail",
+  "lang": "en"
+ },
+ "components.client.company.company_detail_ts.CompanyHeader.back_to_list": {
+  "text": "Back to list",
+  "lang": "en"
+ },
+ "components.client.company.company_detail_ts.CompanyInfoCard.address_not_updated": {
+  "text": "Address not updated",
+  "lang": "en"
+ },
+ "components.client.company.company_detail_ts.CompanyInfoCard.tel": {
+  "text": "tel:{{v0}}",
+  "lang": "en"
+ },
+ "components.client.company.company_detail_ts.CompanyInfoCard.mailto": {
+  "text": "mailto:{{v0}}",
+  "lang": "en"
+ },
+ "components.client.company.company_detail_ts.CompanySkills.our_skills": {
+  "text": "Our Skills",
+  "lang": "en"
+ },
+ "components.client.company.company_detail_ts.CompanyStats.n_a": {
+  "text": "N/A",
+  "lang": "en"
+ },
+ "components.client.faq.faq_category.danh_muc": {
+  "text": "Danh Mục",
+  "lang": "vi"
+ },
+ "components.client.faq.faq_data.lam_the_nao_de_tao_tai": {
+  "text": "Làm thế nào để tạo tài khoản trên IT Việc?",
+  "lang": "vi"
+ },
+ "components.client.faq.faq_data.de_tao_tai_khoan_tren_it": {
+  "text": "Để tạo tài khoản trên IT Việc, bạn có thể nhấp vào nút \"Đăng ký\" ở góc trên bên phải của trang web. Sau đó, bạn cần điền thông tin cá nhân như họ tên, email, mật khẩu và làm theo các hướng dẫn để hoàn tất quá trình đăng ký.",
+  "lang": "vi"
+ },
+ "components.client.faq.faq_data.toi_quen_mat_khau_lam_the": {
+  "text": "Tôi quên mật khẩu, làm thế nào để khôi phục?",
+  "lang": "vi"
+ },
+ "components.client.faq.faq_data.neu_ban_quen_mat_khau_ban": {
+  "text": "Nếu bạn quên mật khẩu, bạn có thể nhấp vào liên kết \"Quên mật khẩu\" trên trang đăng nhập. Hệ thống sẽ gửi một email khôi phục mật khẩu đến địa chỉ email mà bạn đã đăng ký. Làm theo hướng dẫn trong email để đặt lại mật khẩu của bạn.",
+  "lang": "vi"
+ },
+ "components.client.faq.faq_data.lam_the_nao_de_cap_nhat": {
+  "text": "Làm thế nào để cập nhật hồ sơ cá nhân?",
+  "lang": "vi"
+ },
+ "components.client.faq.faq_data.de_cap_nhat_ho_so_ca": {
+  "text": "Để cập nhật hồ sơ cá nhân, đăng nhập vào tài khoản của bạn và nhấp vào tên người dùng ở góc trên bên phải, sau đó chọn \"Quản lý tài khoản\". Tại đây, bạn có thể cập nhật thông tin cá nhân, kinh nghiệm làm việc, kỹ năng và thông tin liên hệ của mình.",
+  "lang": "vi"
+ },
+ "components.client.faq.faq_data.lam_the_nao_de_tim_viec": {
+  "text": "Làm thế nào để tìm việc phù hợp với kỹ năng của tôi?",
+  "lang": "vi"
+ },
+ "components.client.faq.faq_data.it_viec_cung_cap_cong_cu": {
+  "text": "IT Việc cung cấp công cụ tìm kiếm nâng cao cho phép bạn lọc các công việc dựa trên kỹ năng, vị trí, mức lương và nhiều tiêu chí khác. Bạn cũng có thể đăng ký nhận thông báo việc làm để nhận các cơ hội việc làm phù hợp với hồ sơ của bạn qua email.",
+  "lang": "vi"
+ },
+ "components.client.faq.faq_data.lam_the_nao_de_ung_tuyen": {
+  "text": "Làm thế nào để ứng tuyển vào một vị trí?",
+  "lang": "vi"
+ },
+ "components.client.faq.faq_data.de_ung_tuyen_vao_mot_vi": {
+  "text": "Để ứng tuyển vào một vị trí, hãy nhấp vào nút \"Ứng tuyển ngay\" trên trang chi tiết công việc. Bạn sẽ được yêu cầu gửi CV và có thể thêm thư xin việc. Đảm bảo rằng hồ sơ của bạn đã được cập nhật đầy đủ trước khi ứng tuyển.",
+  "lang": "vi"
+ },
+ "components.client.faq.faq_data.toi_co_the_theo_doi_trang": {
+  "text": "Tôi có thể theo dõi trạng thái ứng tuyển của mình như thế nào?",
+  "lang": "vi"
+ },
+ "components.client.faq.faq_data.sau_khi_ung_tuyen_ban_co": {
+  "text": "Sau khi ứng tuyển, bạn có thể theo dõi trạng thái ứng tuyển bằng cách đăng nhập vào tài khoản và truy cập mục \"Việc làm đã ứng tuyển\". Tại đây, bạn sẽ thấy danh sách các vị trí đã ứng tuyển và trạng thái hiện tại của chúng.",
+  "lang": "vi"
+ },
+ "components.client.faq.faq_data.lam_the_nao_de_dang_tin": {
+  "text": "Làm thế nào để đăng tin tuyển dụng?",
+  "lang": "vi"
+ },
+ "components.client.faq.faq_data.de_dang_tin_tuyen_dung_ban": {
+  "text": "Để đăng tin tuyển dụng, bạn cần đăng nhập với tài khoản nhà tuyển dụng. Sau đó, nhấp vào \"Đăng tin tuyển dụng\" và điền đầy đủ thông tin về vị trí cần tuyển, yêu cầu công việc, mức lương và thông tin liên hệ. Sau khi xem lại, bạn có thể đăng tin và nó sẽ được hiển thị trên trang việc làm.",
+  "lang": "vi"
+ },
+ "components.client.faq.faq_data.chi_phi_dang_tin_tuyen_dung": {
+  "text": "Chi phí đăng tin tuyển dụng là bao nhiêu?",
+  "lang": "vi"
+ },
+ "components.client.faq.faq_data.chi_phi_dang_tin_tuyen_dung_2": {
+  "text": "Chi phí đăng tin tuyển dụng phụ thuộc vào gói dịch vụ mà bạn lựa chọn. Chúng tôi cung cấp nhiều gói khác nhau với các tính năng và thời hạn khác nhau. Vui lòng truy cập mục \"Bảng giá\" để xem chi tiết về các gói và lựa chọn phù hợp với nhu cầu của công ty bạn.",
+  "lang": "vi"
+ },
+ "components.client.faq.faq_data.lam_the_nao_de_sang_loc": {
+  "text": "Làm thế nào để sàng lọc ứng viên hiệu quả?",
+  "lang": "vi"
+ },
+ "components.client.faq.faq_data.it_viec_cung_cap_cong_cu_2": {
+  "text": "IT Việc cung cấp công cụ quản lý ứng viên giúp bạn sàng lọc hiệu quả. Bạn có thể đánh giá CV, ghi chú, phân loại ứng viên và theo dõi tiến trình tuyển dụng. Ngoài ra, chúng tôi cũng cung cấp tính năng gửi email hàng loạt và lên lịch phỏng vấn trực tiếp từ hệ thống.",
+  "lang": "vi"
+ },
+ "components.client.faq.faq_data.it_viec_bao_ve_du_lieu": {
+  "text": "IT Việc bảo vệ dữ liệu cá nhân của tôi như thế nào?",
+  "lang": "vi"
+ },
+ "components.client.faq.faq_data.it_viec_ap_dung_cac_bien": {
+  "text": "IT Việc áp dụng các biện pháp bảo mật nghiêm ngặt để bảo vệ thông tin cá nhân của bạn. Chúng tôi sử dụng mã hóa SSL, lưu trữ dữ liệu an toàn và tuân thủ các quy định về bảo vệ dữ liệu. Chúng tôi không chia sẻ thông tin cá nhân của bạn với bên thứ ba mà không có sự đồng ý của bạn.",
+  "lang": "vi"
+ },
+ "components.client.faq.faq_data.lam_the_nao_de_tang_cuong": {
+  "text": "Làm thế nào để tăng cường bảo mật cho tài khoản của tôi?",
+  "lang": "vi"
+ },
+ "components.client.faq.faq_data.de_tang_cuong_bao_mat_cho": {
+  "text": "Để tăng cường bảo mật cho tài khoản, bạn nên sử dụng mật khẩu mạnh, thay đổi mật khẩu định kỳ, và bật xác thực hai yếu tố nếu có. Đồng thời, hãy đảm bảo rằng bạn đăng xuất khỏi tài khoản khi sử dụng máy tính công cộng và cập nhật thông tin liên hệ để có thể khôi phục tài khoản khi cần thiết.",
+  "lang": "vi"
+ },
+ "components.client.faq.faq_data.lam_the_nao_de_bao_cao": {
+  "text": "Làm thế nào để báo cáo vấn đề bảo mật hoặc lừa đảo?",
+  "lang": "vi"
+ },
+ "components.client.faq.faq_data.neu_ban_phat_hien_van_de": {
+  "text": "Nếu bạn phát hiện vấn đề bảo mật hoặc nghi ngờ có hoạt động lừa đảo trên IT Việc, vui lòng liên hệ ngay với chúng tôi qua email security@itviec.com hoặc hotline 1900 1234. Chúng tôi có đội ngũ chuyên trách xử lý các vấn đề bảo mật và sẽ phản hồi trong thời gian sớm nhất.",
+  "lang": "vi"
+ },
+ "components.client.faq.faq_item.khong_co_cau_hoi_nao_trong": {
+  "text": "Không có câu hỏi nào trong danh mục này.",
+  "lang": "vi"
+ },
+ "components.client.faq.faq_search.cau_hoi_thuong_gap": {
+  "text": "Câu Hỏi Thường Gặp",
+  "lang": "vi"
+ },
+ "components.client.faq.faq_search.tim_kiem_cau_tra_loi_cho": {
+  "text": "Tìm kiếm câu trả lời cho những thắc mắc của bạn",
+  "lang": "vi"
+ },
+ "components.client.faq.faq_search.nhap_tu_khoa_de_tim_kiem": {
+  "text": "Nhập từ khóa để tìm kiếm câu hỏi...",
+  "lang": "vi"
+ },
+ "components.client.faq.faq_search.tim_kiem": {
+  "text": "Tìm kiếm",
+  "lang": "vi"
+ },
+ "components.client.header_client.it_jobs": {
+  "text": "IT Jobs",
+  "lang": "en"
+ },
+ "components.client.header_client.top_it_companies": {
+  "text": "Top IT Companies",
+  "lang": "en"
+ },
+ "components.client.header_client.create_cv": {
+  "text": "Create CV",
+  "lang": "en"
+ },
+ "components.client.header_client.logout_successfully": {
+  "text": "Logout successfully",
+  "lang": "en"
+ },
+ "components.client.header_client.my_jobs": {
+  "text": "My jobs",
+  "lang": "en"
+ },
+ "components.client.header_client.manage_account": {
+  "text": "Manage Account",
+  "lang": "en"
+ },
+ "components.client.header_client.logout": {
+  "text": "Logout",
+  "lang": "en"
+ },
+ "components.client.header_client.login": {
+  "text": "Login",
+  "lang": "en"
+ },
+ "components.client.header_client.features": {
+  "text": "Features",
+  "lang": "en"
+ },
+ "common.all_cities": {
+  "text": "All cities",
+  "lang": "en"
+ },
+ "components.client.job.JobSearchBar.job_titles": {
+  "text": "Job titles",
+  "lang": "en"
+ },
+ "components.client.job.JobSearchBar.job_title_skill_company": {
+  "text": "Job title, skill, company…",
+  "lang": "en"
+ },
+ "components.client.job.JobSearchBar.search": {
+  "text": "Search",
+  "lang": "en"
+ },
+ "components.client.job.SaveJobButton.saved": {
+  "text": "Saved",
+  "lang": "en"
+ },
+ "components.client.job.SaveJobButton.save": {
+  "text": "Save",
+  "lang": "en"
+ },
+ "components.client.job.SaveJobButton.remove_from_saved_jobs": {
+  "text": "Remove from saved jobs",
+  "lang": "en"
+ },
+ "components.client.job.SaveJobButton.save_job": {
+  "text": "Save job",
+  "lang": "en"
+ },
+ "components.client.modal.announcement_modal.thong_bao_moi": {
+  "text": "Thông báo mới",
+  "lang": "vi"
+ },
+ "components.client.modal.announcement_modal.toi_da_hieu": {
+  "text": "Tôi đã hiểu",
+  "lang": "vi"
+ },
+ "components.client.modal.announcement_modal.dong": {
+  "text": "Đóng",
+  "lang": "vi"
+ },
+ "components.client.modal.announcement_modal.chao_mung_den_voi_website_cua": {
+  "text": "Chào mừng đến với website của chúng tôi - Nền tảng tuyển dụng IT hàng đầu Việt Nam!",
+  "lang": "vi"
+ },
+ "components.client.modal.announcement_modal.chung_toi_rat_vui_mung_thong": {
+  "text": "Chúng tôi rất vui mừng thông báo về những cập nhật mới trên nền tảng ITviec, giúp việc tìm kiếm công việc IT mơ ước trở nên dễ dàng hơn bao giờ hết.",
+  "lang": "vi"
+ },
+ "components.client.modal.announcement_modal.thong_bao_ve_viec_dung_tai": {
+  "text": "Thông báo về việc dùng tài khoản (demo) truy cập vào website",
+  "lang": "vi"
+ },
+ "components.client.modal.announcement_modal.tai_khoan_user": {
+  "text": "Tài khoản user:",
+  "lang": "vi"
+ },
+ "components.client.modal.announcement_modal.mat_khau": {
+  "text": "Mật khẩu:",
+  "lang": "vi"
+ },
+ "components.client.modal.apply_modal.cannot_load_this_cv": {
+  "text": "Cannot load this CV",
+  "lang": "en"
+ },
+ "components.client.modal.apply_modal.cannot_upload_the_cv": {
+  "text": "Cannot upload the CV",
+  "lang": "en"
+ },
+ "components.client.modal.apply_modal.please_choose_one_of_your_cvs": {
+  "text": "Please choose one of your CVs",
+  "lang": "en"
+ },
+ "components.client.modal.apply_modal.please_upload_a_file_cv": {
+  "text": "Please upload a file CV!",
+  "lang": "en"
+ },
+ "components.client.modal.apply_modal.cannot_prepare_your_cv": {
+  "text": "Cannot prepare your CV",
+  "lang": "en"
+ },
+ "components.client.modal.apply_modal.your_application_has_been_sent": {
+  "text": "Your application has been sent!",
+  "lang": "en"
+ },
+ "components.client.modal.apply_modal.error_uploading_cv": {
+  "text": "Error uploading CV",
+  "lang": "en"
+ },
+ "components.client.modal.apply_modal.only_pdf_doc_or_docx_files": {
+  "text": "Only PDF, DOC or DOCX files are accepted",
+  "lang": "en"
+ },
+ "components.client.modal.apply_modal.your_cv_must_be_smaller_than": {
+  "text": "Your CV must be smaller than 5MB",
+  "lang": "en"
+ },
+ "components.client.modal.apply_modal.file_uploaded_successfully": {
+  "text": "{{v0}} file uploaded successfully",
+  "lang": "en"
+ },
+ "components.client.modal.apply_modal.da_co_loi_xay_ra_khi": {
+  "text": "Đã có lỗi xảy ra khi upload file.",
+  "lang": "vi"
+ },
+ "components.client.modal.apply_modal.apply_for": {
+  "text": "Apply for",
+  "lang": "en"
+ },
+ "components.client.modal.apply_modal.applying_as": {
+  "text": "Applying as",
+  "lang": "en"
+ },
+ "components.client.modal.apply_modal.your_cv": {
+  "text": "Your CV",
+  "lang": "en"
+ },
+ "components.client.modal.apply_modal.online_cv": {
+  "text": "Online CV",
+  "lang": "en"
+ },
+ "components.client.modal.apply_modal.saved": {
+  "text": "{{v0}} saved",
+  "lang": "en"
+ },
+ "components.client.modal.apply_modal.build_one_for_free": {
+  "text": "Build one for free",
+  "lang": "en"
+ },
+ "components.client.modal.apply_modal.upload_a_file": {
+  "text": "Upload a file",
+  "lang": "en"
+ },
+ "components.client.modal.apply_modal.pdf_doc_docx_max_5mb": {
+  "text": "PDF, DOC, DOCX · max 5MB",
+  "lang": "en"
+ },
+ "components.client.modal.apply_modal.the_latest_version_is_exported_to": {
+  "text": "The latest version is exported to PDF and attached.",
+  "lang": "en"
+ },
+ "components.client.modal.apply_modal.manage_cvs": {
+  "text": "Manage CVs",
+  "lang": "en"
+ },
+ "components.client.modal.apply_modal.you_have_no_online_cv_yet": {
+  "text": "You have no online CV yet.",
+  "lang": "en"
+ },
+ "components.client.modal.apply_modal.create_a_cv_in_minutes": {
+  "text": "Create a CV in minutes",
+  "lang": "en"
+ },
+ "components.client.modal.apply_modal.click_or_drag_your_cv_here": {
+  "text": "Click or drag your CV here",
+  "lang": "en"
+ },
+ "components.client.modal.apply_modal.supports_pdf_doc_docx_up_to": {
+  "text": "Supports PDF, DOC, DOCX up to 5MB",
+  "lang": "en"
+ },
+ "components.client.modal.apply_modal.shared_only_with_this_employer": {
+  "text": "Shared only with this employer",
+  "lang": "en"
+ },
+ "components.client.modal.apply_modal.sending": {
+  "text": "Sending...",
+  "lang": "en"
+ },
+ "components.client.modal.apply_modal.submit_application": {
+  "text": "Submit application",
+  "lang": "en"
+ },
+ "components.client.modal.apply_modal.sign_in_to_apply": {
+  "text": "Sign in to apply",
+  "lang": "en"
+ },
+ "components.client.modal.apply_modal.log_in_to_send_your_cv": {
+  "text": "Log in to send your CV and track this application in My jobs.",
+  "lang": "en"
+ },
+ "components.client.modal.apply_modal.log_in_to_apply": {
+  "text": "Log in to apply",
+  "lang": "en"
+ },
+ "components.client.modal.manage_account.manage_password_amp_security": {
+  "text": "Manage password &amp; security",
+  "lang": "en"
+ },
+ "common.position": {
+  "text": "Position",
+  "lang": "en"
+ },
+ "components.client.modal.manage_account.date_of_cv_release": {
+  "text": "Date of CV release",
+  "lang": "en"
+ },
+ "components.client.modal.manage_account.track_progress_of_each_application_in": {
+  "text": "Track progress of each application in My jobs →",
+  "lang": "en"
+ },
+ "components.client.modal.manage_account.userupdateinfo": {
+  "text": "UserUpdateInfo",
+  "lang": "en"
+ },
+ "components.client.modal.manage_account.update_information_successfully": {
+  "text": "Update information successfully",
+  "lang": "en"
+ },
+ "components.client.modal.manage_account.please_select_at_least_1_skill": {
+  "text": "Please select at least 1 skill!",
+  "lang": "en"
+ },
+ "components.client.modal.manage_account.search_by_skills": {
+  "text": "Search by skills...",
+  "lang": "en"
+ },
+ "components.client.modal.manage_account.receive_jobs_by_skills": {
+  "text": "Receive jobs by skills",
+  "lang": "en"
+ },
+ "components.client.modal.manage_account.update_profile": {
+  "text": "Update profile",
+  "lang": "en"
+ },
+ "components.client.modal.manage_account.account_security": {
+  "text": "Account security",
+  "lang": "en"
+ },
+ "components.client.modal.manage_account.manage_account": {
+  "text": "Manage Account",
+  "lang": "en"
+ },
+ "components.client.salary.SalaryRangeChart.no_salary_data_for_this_filter": {
+  "text": "No salary data for this filter yet.",
+  "lang": "en"
+ },
+ "components.client.salary.SalaryRangeChart.limited_data": {
+  "text": "· limited data",
+  "lang": "en"
+ },
+ "components.client.salary.SalaryRangeChart.median": {
+  "text": "Median:",
+  "lang": "en"
+ },
+ "components.client.salary.SalaryRangeChart.typical_p25_p75": {
+  "text": "Typical (P25–P75):",
+  "lang": "en"
+ },
+ "components.client.salary.SalaryRangeChart.full_range": {
+  "text": "Full range:",
+  "lang": "en"
+ },
+ "components.client.salary.SalaryRangeChart.based_on": {
+  "text": "Based on",
+  "lang": "en"
+ },
+ "components.client.salary.SalaryRangeChart.job_posting": {
+  "text": "job posting",
+  "lang": "en"
+ },
+ "components.client.search_client.feature_is_under_development": {
+  "text": "Feature is under development",
+  "lang": "en"
+ },
+ "components.client.search_client.search_by_skills": {
+  "text": "Search by skills....",
+  "lang": "en"
+ },
+ "components.client.search_client.upload_cv": {
+  "text": "Upload CV",
+  "lang": "en"
+ },
+ "components.client.search_client.chon_cv_pdf_doc_docx": {
+  "text": "Chọn CV (.pdf, .doc, .docx)",
+  "lang": "vi"
+ },
+ "components.cv.CvHtmlPreview.page": {
+  "text": "Page",
+  "lang": "en"
+ },
+ "components.cv.CvLayout.about_me": {
+  "text": "About me",
+  "lang": "en"
+ },
+ "components.cv.CvLayout.experience": {
+  "text": "Experience",
+  "lang": "en"
+ },
+ "components.cv.CvLayout.projects": {
+  "text": "Projects",
+  "lang": "en"
+ },
+ "components.cv.CvLayout.education": {
+  "text": "Education",
+  "lang": "en"
+ },
+ "components.cv.CvLayout.certificates": {
+  "text": "Certificates",
+  "lang": "en"
+ },
+ "components.cv.CvLayout.languages": {
+  "text": "Languages",
+  "lang": "en"
+ },
+ "components.cv.CvLayout.contact": {
+  "text": "Contact",
+  "lang": "en"
+ },
+ "components.cv.cv_model.accent_bar_timeline_and_skill_pills": {
+  "text": "Accent bar, timeline and skill pills",
+  "lang": "en"
+ },
+ "components.cv.cv_model.soft_colored_sidebar_with_photo": {
+  "text": "Soft colored sidebar with photo",
+  "lang": "en"
+ },
+ "components.cv.cv_model.big_name_airy_two_column_layout": {
+  "text": "Big name, airy two-column layout",
+  "lang": "en"
+ },
+ "components.cv.cv_model.cong_ty_co_phan_cong_nghe": {
+  "text": "Công ty Cổ phần Công nghệ ABC",
+  "lang": "vi"
+ },
+ "components.cv.cv_model.senior_backend_developer": {
+  "text": "Senior Backend Developer",
+  "lang": "en"
+ },
+ "components.cv.cv_model.thiet_ke_lai_dich_vu_thanh": {
+  "text": "- Thiết kế lại dịch vụ thanh toán, giảm 40% thời gian xử lý - Dẫn dắt nhóm 5 kỹ sư, review code và mentoring - Triển khai CI/CD với GitHub Actions và AWS ECS",
+  "lang": "vi"
+ },
+ "components.cv.cv_model.xyz_software": {
+  "text": "XYZ Software",
+  "lang": "en"
+ },
+ "components.cv.cv_model.backend_developer": {
+  "text": "Backend Developer",
+  "lang": "en"
+ },
+ "components.cv.cv_model.xay_dung_rest_api_cho_ung": {
+  "text": "- Xây dựng REST API cho ứng dụng giao hàng 1 triệu người dùng - Viết unit test, độ phủ 85%",
+  "lang": "vi"
+ },
+ "components.cv.cv_model.dai_hoc_bach_khoa_tp_hcm": {
+  "text": "Đại học Bách khoa TP.HCM",
+  "lang": "vi"
+ },
+ "components.cv.cv_model.ky_su_khoa_hoc_may_tinh": {
+  "text": "Kỹ sư Khoa học Máy tính",
+  "lang": "vi"
+ },
+ "components.cv.cv_model.gpa_3_4_4_0": {
+  "text": "GPA 3.4/4.0",
+  "lang": "en"
+ },
+ "components.cv.cv_model.he_thong_dat_ve_su_kien": {
+  "text": "Hệ thống đặt vé sự kiện",
+  "lang": "vi"
+ },
+ "components.cv.cv_model.tech_lead": {
+  "text": "Tech lead",
+  "lang": "en"
+ },
+ "components.cv.cv_model.nestjs_redis_rabbitmq_xu_ly_5": {
+  "text": "NestJS, Redis, RabbitMQ — xử lý 5.000 đơn/phút giờ cao điểm",
+  "lang": "vi"
+ },
+ "components.cv.cv_model.aws_certified_developer_associate": {
+  "text": "AWS Certified Developer – Associate",
+  "lang": "en"
+ },
+ "components.cv.cv_model.amazon": {
+  "text": "Amazon",
+  "lang": "en"
+ },
+ "components.cv.cv_pdf.cv_pdf": {
+  "text": "{{v0}}-CV.pdf",
+  "lang": "en"
+ },
+ "components.share.access.access_denied": {
+  "text": "Access denied",
+  "lang": "en"
+ },
+ "components.share.access.sorry_you_are_not_authorized_to": {
+  "text": "Sorry, you are not authorized to access this information",
+  "lang": "en"
+ },
+ "components.share.not_found.sorry_the_page_you_visited_does": {
+  "text": "Sorry, the page you visited does not exist.",
+  "lang": "en"
+ },
+ "components.share.not_found.back_home": {
+  "text": "Back Home",
+  "lang": "en"
+ },
+ "components.share.protected_route_ts.index.could_not_verify_your_session_with": {
+  "text": "Could not verify your session with the server",
+  "lang": "en"
+ },
+ "components.share.protected_route_ts.index.you_are_signed_in_but_the": {
+  "text": "You are signed in, but the API rejected your session token. Please try again later or contact the administrator.",
+  "lang": "en"
+ },
+ "components.share.protected_route_ts.index.try_again": {
+  "text": "Try again",
+  "lang": "en"
+ },
+ "components.share.protected_route_ts.not_permitted.sorry_you_are_not_authorized_to": {
+  "text": "Sorry, you are not authorized to access this page.",
+  "lang": "en"
+ },
+ "components.share.protected_route_ts.not_permitted.back_home": {
+  "text": "Back Home",
+  "lang": "en"
+ },
+ "config.axios_customize.bearer": {
+  "text": "Bearer",
+  "lang": "en"
+ },
+ "config.pipeline.new": {
+  "text": "New",
+  "lang": "en"
+ },
+ "config.pipeline.screening": {
+  "text": "Screening",
+  "lang": "en"
+ },
+ "common.interview": {
+  "text": "Interview",
+  "lang": "en"
+ },
+ "config.pipeline.offer": {
+  "text": "Offer",
+  "lang": "en"
+ },
+ "config.pipeline.rejected": {
+  "text": "Rejected",
+  "lang": "en"
+ },
+ "config.resume_status.cv_under_review": {
+  "text": "CV under review",
+  "lang": "en"
+ },
+ "config.resume_status.offer": {
+  "text": "Offer",
+  "lang": "en"
+ },
+ "config.resume_status.not_selected": {
+  "text": "Not selected",
+  "lang": "en"
+ },
+ "config.resume_status.reviewing": {
+  "text": "Reviewing",
+  "lang": "en"
+ },
+ "config.resume_status.result": {
+  "text": "Result",
+  "lang": "en"
+ },
+ "config.utils.an_giang": {
+  "text": "An Giang",
+  "lang": "en"
+ },
+ "config.utils.ba_ria_vung_tau": {
+  "text": "Bà Rịa - Vũng Tàu",
+  "lang": "vi"
+ },
+ "config.utils.bac_giang": {
+  "text": "Bắc Giang",
+  "lang": "vi"
+ },
+ "config.utils.bac_kan": {
+  "text": "Bắc Kạn",
+  "lang": "vi"
+ },
+ "config.utils.bac_lieu": {
+  "text": "Bạc Liêu",
+  "lang": "vi"
+ },
+ "config.utils.bac_ninh": {
+  "text": "Bắc Ninh",
+  "lang": "vi"
+ },
+ "config.utils.ben_tre": {
+  "text": "Bến Tre",
+  "lang": "vi"
+ },
+ "config.utils.binh_dinh": {
+  "text": "Bình Định",
+  "lang": "vi"
+ },
+ "config.utils.binh_duong": {
+  "text": "Bình Dương",
+  "lang": "vi"
+ },
+ "config.utils.binh_phuoc": {
+  "text": "Bình Phước",
+  "lang": "vi"
+ },
+ "config.utils.binh_thuan": {
+  "text": "Bình Thuận",
+  "lang": "vi"
+ },
+ "config.utils.ca_mau": {
+  "text": "Cà Mau",
+  "lang": "vi"
+ },
+ "config.utils.can_tho": {
+  "text": "Cần Thơ",
+  "lang": "vi"
+ },
+ "config.utils.cao_bang": {
+  "text": "Cao Bằng",
+  "lang": "vi"
+ },
+ "config.utils.da_nang": {
+  "text": "Đà Nẵng",
+  "lang": "vi"
+ },
+ "config.utils.dak_lak": {
+  "text": "Đắk Lắk",
+  "lang": "vi"
+ },
+ "config.utils.dak_nong": {
+  "text": "Đắk Nông",
+  "lang": "vi"
+ },
+ "config.utils.dien_bien": {
+  "text": "Điện Biên",
+  "lang": "vi"
+ },
+ "config.utils.dong_nai": {
+  "text": "Đồng Nai",
+  "lang": "vi"
+ },
+ "config.utils.dong_thap": {
+  "text": "Đồng Tháp",
+  "lang": "vi"
+ },
+ "config.utils.gia_lai": {
+  "text": "Gia Lai",
+  "lang": "en"
+ },
+ "config.utils.ha_giang": {
+  "text": "Hà Giang",
+  "lang": "vi"
+ },
+ "config.utils.ha_nam": {
+  "text": "Hà Nam",
+  "lang": "vi"
+ },
+ "config.utils.ha_noi": {
+  "text": "Hà Nội",
+  "lang": "vi"
+ },
+ "config.utils.ha_tinh": {
+  "text": "Hà Tĩnh",
+  "lang": "vi"
+ },
+ "config.utils.hai_duong": {
+  "text": "Hải Dương",
+  "lang": "vi"
+ },
+ "config.utils.hai_phong": {
+  "text": "Hải Phòng",
+  "lang": "vi"
+ },
+ "config.utils.hau_giang": {
+  "text": "Hậu Giang",
+  "lang": "vi"
+ },
+ "config.utils.hoa_binh": {
+  "text": "Hòa Bình",
+  "lang": "vi"
+ },
+ "config.utils.hung_yen": {
+  "text": "Hưng Yên",
+  "lang": "vi"
+ },
+ "config.utils.khanh_hoa": {
+  "text": "Khánh Hòa",
+  "lang": "vi"
+ },
+ "config.utils.kien_giang": {
+  "text": "Kiên Giang",
+  "lang": "vi"
+ },
+ "config.utils.kon_tum": {
+  "text": "Kon Tum",
+  "lang": "en"
+ },
+ "config.utils.lai_chau": {
+  "text": "Lai Châu",
+  "lang": "vi"
+ },
+ "config.utils.lam_dong": {
+  "text": "Lâm Đồng",
+  "lang": "vi"
+ },
+ "config.utils.lang_son": {
+  "text": "Lạng Sơn",
+  "lang": "vi"
+ },
+ "config.utils.lao_cai": {
+  "text": "Lào Cai",
+  "lang": "vi"
+ },
+ "config.utils.long_an": {
+  "text": "Long An",
+  "lang": "en"
+ },
+ "config.utils.nam_dinh": {
+  "text": "Nam Định",
+  "lang": "vi"
+ },
+ "config.utils.nghe_an": {
+  "text": "Nghệ An",
+  "lang": "vi"
+ },
+ "config.utils.ninh_binh": {
+  "text": "Ninh Bình",
+  "lang": "vi"
+ },
+ "config.utils.ninh_thuan": {
+  "text": "Ninh Thuận",
+  "lang": "vi"
+ },
+ "config.utils.phu_tho": {
+  "text": "Phú Thọ",
+  "lang": "vi"
+ },
+ "config.utils.phu_yen": {
+  "text": "Phú Yên",
+  "lang": "vi"
+ },
+ "config.utils.quang_binh": {
+  "text": "Quảng Bình",
+  "lang": "vi"
+ },
+ "config.utils.quang_nam": {
+  "text": "Quảng Nam",
+  "lang": "vi"
+ },
+ "config.utils.quang_ngai": {
+  "text": "Quảng Ngãi",
+  "lang": "vi"
+ },
+ "config.utils.quang_ninh": {
+  "text": "Quảng Ninh",
+  "lang": "vi"
+ },
+ "config.utils.quang_tri": {
+  "text": "Quảng Trị",
+  "lang": "vi"
+ },
+ "config.utils.soc_trang": {
+  "text": "Sóc Trăng",
+  "lang": "vi"
+ },
+ "config.utils.son_la": {
+  "text": "Sơn La",
+  "lang": "vi"
+ },
+ "config.utils.tay_ninh": {
+  "text": "Tây Ninh",
+  "lang": "vi"
+ },
+ "config.utils.thai_binh": {
+  "text": "Thái Bình",
+  "lang": "vi"
+ },
+ "config.utils.thai_nguyen": {
+  "text": "Thái Nguyên",
+  "lang": "vi"
+ },
+ "config.utils.thanh_hoa": {
+  "text": "Thanh Hóa",
+  "lang": "vi"
+ },
+ "config.utils.thua_thien_hue": {
+  "text": "Thừa Thiên Huế",
+  "lang": "vi"
+ },
+ "config.utils.tien_giang": {
+  "text": "Tiền Giang",
+  "lang": "vi"
+ },
+ "config.utils.tp_ho_chi_minh": {
+  "text": "TP. Hồ Chí Minh",
+  "lang": "vi"
+ },
+ "config.utils.tra_vinh": {
+  "text": "Trà Vinh",
+  "lang": "vi"
+ },
+ "config.utils.tuyen_quang": {
+  "text": "Tuyên Quang",
+  "lang": "vi"
+ },
+ "config.utils.vinh_long": {
+  "text": "Vĩnh Long",
+  "lang": "vi"
+ },
+ "config.utils.vinh_phuc": {
+  "text": "Vĩnh Phúc",
+  "lang": "vi"
+ },
+ "config.utils.yen_bai": {
+  "text": "Yên Bái",
+  "lang": "vi"
+ },
+ "config.utils.tat_ca_tinh_thanh": {
+  "text": "Tất cả tỉnh thành",
+  "lang": "vi"
+ },
+ "hooks.useOpenResume.cannot_open_this_cv": {
+  "text": "Cannot open this CV",
+  "lang": "en"
+ },
+ "hooks.useSaveJob.job_saved": {
+  "text": "Job saved",
+  "lang": "en"
+ },
+ "hooks.useSaveJob.removed_from_saved_jobs": {
+  "text": "Removed from saved jobs",
+  "lang": "en"
+ },
+ "hooks.useSaveJob.something_went_wrong_please_try_again": {
+  "text": "Something went wrong, please try again",
+  "lang": "en"
+ },
+ "pages.about.index.chung_toi_la_mot_cong_ty": {
+  "text": "Chúng tôi là một công ty tuyển dụng hàng đầu, kết nối ứng viên tài năng với các doanh nghiệp tốt nhất.",
+  "lang": "vi"
+ },
+ "pages.about.index.i_am_a_developer_with_a": {
+  "text": "I am a developer with a passion for building web applications.",
+  "lang": "en"
+ },
+ "pages.about.index.innovative": {
+  "text": "Innovative",
+  "lang": "en"
+ },
+ "pages.about.index.we_always_seek_new_methods_and": {
+  "text": "We always seek new methods and solutions to serve customers better.",
+  "lang": "en"
+ },
+ "pages.about.index.honest": {
+  "text": "Honest",
+  "lang": "en"
+ },
+ "pages.about.index.we_operate_with_the_highest_ethical": {
+  "text": "We operate with the highest ethical standards, always transparent and honest.",
+  "lang": "en"
+ },
+ "pages.about.index.collaborative": {
+  "text": "Collaborative",
+  "lang": "en"
+ },
+ "pages.about.index.we_believe_in_the_power_of": {
+  "text": "We believe in the power of teamwork and building strong partner relationships.",
+  "lang": "en"
+ },
+ "pages.about.index.exceptional": {
+  "text": "Exceptional",
+  "lang": "en"
+ },
+ "pages.about.index.we_never_stop_striving_to_achieve": {
+  "text": "We never stop striving to achieve the best results in everything we do.",
+  "lang": "en"
+ },
+ "pages.about.index.ve_chung_toi": {
+  "text": "Về Chúng Tôi",
+  "lang": "vi"
+ },
+ "pages.about.index.su_menh": {
+  "text": "Sứ mệnh",
+  "lang": "vi"
+ },
+ "pages.about.index.tam_nhin": {
+  "text": "Tầm nhìn",
+  "lang": "vi"
+ },
+ "pages.about.index.gia_tri_cot_loi": {
+  "text": "Giá Trị Cốt Lõi",
+  "lang": "vi"
+ },
+ "pages.admin.company.delete_company_successfully": {
+  "text": "Delete Company successfully",
+  "lang": "en"
+ },
+ "pages.admin.company.index": {
+  "text": "Index",
+  "lang": "en"
+ },
+ "common.createdat": {
+  "text": "CreatedAt",
+  "lang": "en"
+ },
+ "common.updatedat": {
+  "text": "UpdatedAt",
+  "lang": "en"
+ },
+ "common.actions": {
+  "text": "Actions",
+  "lang": "en"
+ },
+ "pages.admin.company.xac_nhan_xoa_company": {
+  "text": "Xác nhận xóa company",
+  "lang": "vi"
+ },
+ "pages.admin.company.ban_co_chac_chan_muon_xoa": {
+  "text": "Bạn có chắc chắn muốn xóa company này ?",
+  "lang": "vi"
+ },
+ "common.xac_nhan": {
+  "text": "Xác nhận",
+  "lang": "vi"
+ },
+ "pages.admin.company.list_of_companies": {
+  "text": "List of Companies",
+  "lang": "en"
+ },
+ "pages.admin.company.tren": {
+  "text": "trên",
+  "lang": "vi"
+ },
+ "common.add_new": {
+  "text": "Add new",
+  "lang": "en"
+ },
+ "pages.admin.company.export_to_excel": {
+  "text": "Export to Excel",
+  "lang": "en"
+ },
+ "pages.admin.company.export": {
+  "text": "Export",
+  "lang": "en"
+ },
+ "pages.admin.dashboard.pending": {
+  "text": "Pending",
+  "lang": "en"
+ },
+ "pages.admin.dashboard.reviewing": {
+  "text": "Reviewing",
+  "lang": "en"
+ },
+ "pages.admin.dashboard.approved": {
+  "text": "Approved",
+  "lang": "en"
+ },
+ "pages.admin.dashboard.rejected": {
+  "text": "Rejected",
+  "lang": "en"
+ },
+ "pages.admin.dashboard.good_morning": {
+  "text": "Good morning",
+  "lang": "en"
+ },
+ "pages.admin.dashboard.good_afternoon": {
+  "text": "Good afternoon",
+  "lang": "en"
+ },
+ "pages.admin.dashboard.good_evening": {
+  "text": "Good evening",
+  "lang": "en"
+ },
+ "pages.admin.dashboard.no_data_yet": {
+  "text": "No data yet",
+  "lang": "en"
+ },
+ "pages.admin.dashboard.active_jobs": {
+  "text": "Active jobs",
+  "lang": "en"
+ },
+ "pages.admin.dashboard.applications": {
+  "text": "Applications",
+  "lang": "en"
+ },
+ "pages.admin.dashboard.users": {
+  "text": "Users",
+  "lang": "en"
+ },
+ "pages.admin.dashboard.candidate": {
+  "text": "Candidate",
+  "lang": "en"
+ },
+ "pages.admin.dashboard.job": {
+  "text": "Job",
+  "lang": "en"
+ },
+ "pages.admin.dashboard.waiting_for_review": {
+  "text": "waiting for review",
+  "lang": "en"
+ },
+ "pages.admin.dashboard.refresh_data": {
+  "text": "Refresh data",
+  "lang": "en"
+ },
+ "pages.admin.dashboard.review_applications": {
+  "text": "Review applications",
+  "lang": "en"
+ },
+ "pages.admin.dashboard.post_a_job": {
+  "text": "Post a job",
+  "lang": "en"
+ },
+ "pages.admin.dashboard.hiring_activity": {
+  "text": "Hiring activity",
+  "lang": "en"
+ },
+ "pages.admin.dashboard.jobs_posted_and_applications_received_last": {
+  "text": "Jobs posted and applications received · last 30 days",
+  "lang": "en"
+ },
+ "pages.admin.dashboard.jobs_posted": {
+  "text": "Jobs posted",
+  "lang": "en"
+ },
+ "pages.admin.dashboard.application_pipeline": {
+  "text": "Application pipeline",
+  "lang": "en"
+ },
+ "pages.admin.dashboard.applications_in_total": {
+  "text": "{{v0}} applications in total",
+  "lang": "en"
+ },
+ "pages.admin.dashboard.no_applications_yet_they_will_show": {
+  "text": "No applications yet. They will show up here as candidates apply.",
+  "lang": "en"
+ },
+ "pages.admin.dashboard.jobs_by_level": {
+  "text": "Jobs by level",
+  "lang": "en"
+ },
+ "pages.admin.dashboard.seniority_of_open_roles": {
+  "text": "Seniority of open roles",
+  "lang": "en"
+ },
+ "pages.admin.dashboard.jobs_by_city": {
+  "text": "Jobs by city",
+  "lang": "en"
+ },
+ "pages.admin.dashboard.where_the_openings_are": {
+  "text": "Where the openings are",
+  "lang": "en"
+ },
+ "pages.admin.dashboard.most_wanted_skills": {
+  "text": "Most wanted skills",
+  "lang": "en"
+ },
+ "pages.admin.dashboard.across_all_job_posts": {
+  "text": "Across all job posts",
+  "lang": "en"
+ },
+ "pages.admin.dashboard.top_hiring_companies": {
+  "text": "Top hiring companies",
+  "lang": "en"
+ },
+ "pages.admin.dashboard.by_number_of_job_posts": {
+  "text": "By number of job posts",
+  "lang": "en"
+ },
+ "pages.admin.dashboard.manage": {
+  "text": "Manage",
+  "lang": "en"
+ },
+ "pages.admin.dashboard.jobs": {
+  "text": "jobs ·",
+  "lang": "en"
+ },
+ "pages.admin.dashboard.closing_soon": {
+  "text": "Closing soon",
+  "lang": "en"
+ },
+ "pages.admin.dashboard.active_jobs_ending_in_the_next": {
+  "text": "Active jobs ending in the next 14 days",
+  "lang": "en"
+ },
+ "pages.admin.dashboard.all_jobs": {
+  "text": "All jobs",
+  "lang": "en"
+ },
+ "pages.admin.dashboard.today": {
+  "text": "Today",
+  "lang": "en"
+ },
+ "pages.admin.dashboard.day_left": {
+  "text": "{{v0}} day{{v1}} left",
+  "lang": "en"
+ },
+ "pages.admin.dashboard.nothing_closes_in_the_next_2": {
+  "text": "Nothing closes in the next 2 weeks",
+  "lang": "en"
+ },
+ "pages.admin.dashboard.latest_applications": {
+  "text": "Latest applications",
+  "lang": "en"
+ },
+ "pages.admin.dashboard.view_all": {
+  "text": "View all",
+  "lang": "en"
+ },
+ "pages.admin.dashboard.no_applications_yet": {
+  "text": "No applications yet",
+  "lang": "en"
+ },
+ "pages.admin.job.delete_job_successfully": {
+  "text": "Delete Job successfully",
+  "lang": "en"
+ },
+ "pages.admin.job.select_level": {
+  "text": "Select level",
+  "lang": "en"
+ },
+ "pages.admin.job.view_details": {
+  "text": "View details",
+  "lang": "en"
+ },
+ "common.confirm_delete": {
+  "text": "Confirm delete",
+  "lang": "en"
+ },
+ "pages.admin.job.are_you_sure_you_want_to": {
+  "text": "Are you sure you want to delete this job?",
+  "lang": "en"
+ },
+ "common.confirm": {
+  "text": "Confirm",
+  "lang": "en"
+ },
+ "pages.admin.job.list_of_jobs": {
+  "text": "List of Jobs",
+  "lang": "en"
+ },
+ "pages.admin.permission.xoa_permission_thanh_cong": {
+  "text": "Xóa Permission thành công",
+  "lang": "vi"
+ },
+ "common.id": {
+  "text": "Id",
+  "lang": "en"
+ },
+ "pages.admin.permission.module": {
+  "text": "Module",
+  "lang": "en"
+ },
+ "pages.admin.permission.xac_nhan_xoa_permission": {
+  "text": "Xác nhận xóa permission",
+  "lang": "vi"
+ },
+ "pages.admin.permission.ban_co_chac_chan_muon_xoa": {
+  "text": "Bạn có chắc chắn muốn xóa permission này ?",
+  "lang": "vi"
+ },
+ "pages.admin.permission.list_of_permissions": {
+  "text": "List of permissions",
+  "lang": "en"
+ },
+ "pages.admin.permission.tren": {
+  "text": "trên",
+  "lang": "vi"
+ },
+ "pages.admin.pipeline.cannot_load_the_pipeline": {
+  "text": "Cannot load the pipeline",
+  "lang": "en"
+ },
+ "pages.admin.pipeline.ai_interview_invite_sent_to": {
+  "text": "AI interview invite sent to {{v0}}",
+  "lang": "en"
+ },
+ "pages.admin.pipeline.the_candidate_received_the_link_by": {
+  "text": "The candidate received the link by email. You can also share it yourself, only their account can open it.",
+  "lang": "en"
+ },
+ "pages.admin.pipeline.cannot_send_the_ai_interview_invite": {
+  "text": "Cannot send the AI interview invite",
+  "lang": "en"
+ },
+ "pages.admin.pipeline.moved_to": {
+  "text": "{{v0}} moved to {{v1}}",
+  "lang": "en"
+ },
+ "pages.admin.pipeline.cannot_move_this_candidate": {
+  "text": "Cannot move this candidate",
+  "lang": "en"
+ },
+ "pages.admin.pipeline.candidate_pipeline": {
+  "text": "Candidate pipeline",
+  "lang": "en"
+ },
+ "pages.admin.pipeline.drag_a_card_to_change_its": {
+  "text": "Drag a card to change its stage. Candidates are notified by email.",
+  "lang": "en"
+ },
+ "pages.admin.pipeline.all_jobs": {
+  "text": "All jobs ({{v0}})",
+  "lang": "en"
+ },
+ "pages.admin.pipeline.search_candidate": {
+  "text": "Search candidate",
+  "lang": "en"
+ },
+ "pages.admin.pipeline.column": {
+  "text": "{{v0}} column",
+  "lang": "en"
+ },
+ "pages.admin.pipeline.move_to": {
+  "text": "Move to {{v0}}",
+  "lang": "en"
+ },
+ "pages.admin.pipeline.not_scored": {
+  "text": "Not scored",
+  "lang": "en"
+ },
+ "pages.admin.pipeline.notes": {
+  "text": "{{v0}} notes",
+  "lang": "en"
+ },
+ "pages.admin.pipeline.applied": {
+  "text": "Applied {{v0}}",
+  "lang": "en"
+ },
+ "pages.admin.pipeline.no_match": {
+  "text": "No match",
+  "lang": "en"
+ },
+ "pages.admin.pipeline.drop_candidates_here": {
+  "text": "Drop candidates here",
+  "lang": "en"
+ },
+ "pages.admin.pipeline.no_applications_yet": {
+  "text": "No applications yet",
+  "lang": "en"
+ },
+ "pages.admin.pipeline.send_invite": {
+  "text": "Send invite",
+  "lang": "en"
+ },
+ "pages.admin.pipeline.move_and_notify": {
+  "text": "Move and notify",
+  "lang": "en"
+ },
+ "pages.admin.pipeline.the_candidate_gets_a_one_time": {
+  "text": "The candidate gets a one-time link to a ~15 minute voice interview with the AI interviewer. You get the transcript and a suggested score, the decision stays yours.",
+  "lang": "en"
+ },
+ "pages.admin.pipeline.interview_language": {
+  "text": "Interview language",
+  "lang": "en"
+ },
+ "pages.admin.pipeline.tieng_viet": {
+  "text": "Tiếng Việt",
+  "lang": "vi"
+ },
+ "pages.admin.pipeline.english": {
+  "text": "English",
+  "lang": "en"
+ },
+ "pages.admin.pipeline.the_candidate_gets_an_email_about": {
+  "text": "The candidate gets an email about this change. Add a message if you want it included.",
+  "lang": "en"
+ },
+ "pages.admin.resume.remove_resume_successfully": {
+  "text": "Remove Resume successfully",
+  "lang": "en"
+ },
+ "pages.admin.resume.select_level": {
+  "text": "Select level",
+  "lang": "en"
+ },
+ "pages.admin.resume.job": {
+  "text": "Job",
+  "lang": "en"
+ },
+ "pages.admin.resume.filter_by_job_name": {
+  "text": "Filter by job name",
+  "lang": "en"
+ },
+ "pages.admin.resume.filter_by_company": {
+  "text": "Filter by company",
+  "lang": "en"
+ },
+ "pages.admin.resume.are_you_sure_you_want_to": {
+  "text": "Are you sure you want to delete this resume?",
+  "lang": "en"
+ },
+ "pages.admin.resume.view_details": {
+  "text": "View Details",
+  "lang": "en"
+ },
+ "pages.admin.resume.list_resume": {
+  "text": "List Resume",
+  "lang": "en"
+ },
+ "pages.admin.role.xoa_role_thanh_cong": {
+  "text": "Xóa Role thành công",
+  "lang": "vi"
+ },
+ "pages.admin.role.trang_thai": {
+  "text": "Trạng thái",
+  "lang": "vi"
+ },
+ "pages.admin.role.xac_nhan_xoa_role": {
+  "text": "Xác nhận xóa role",
+  "lang": "vi"
+ },
+ "pages.admin.role.ban_co_chac_chan_muon_xoa": {
+  "text": "Bạn có chắc chắn muốn xóa role này ?",
+  "lang": "vi"
+ },
+ "pages.admin.role.list_of_roles": {
+  "text": "List of Roles",
+  "lang": "en"
+ },
+ "pages.admin.user.xoa_user_thanh_cong": {
+  "text": "Xóa User thành công",
+  "lang": "vi"
+ },
+ "pages.admin.user.are_you_sure_you_want_to": {
+  "text": "Are you sure you want to delete this user?",
+  "lang": "en"
+ },
+ "pages.admin.user.list_of_users": {
+  "text": "List of Users",
+  "lang": "en"
+ },
+ "pages.ats.index.react": {
+  "text": "React",
+  "lang": "en"
+ },
+ "pages.ats.index.typescript": {
+  "text": "TypeScript",
+  "lang": "en"
+ },
+ "pages.ats.index.node_js": {
+  "text": "Node.js",
+  "lang": "en"
+ },
+ "pages.ats.index.rest_api": {
+  "text": "REST API",
+  "lang": "en"
+ },
+ "pages.ats.index.docker": {
+  "text": "Docker",
+  "lang": "en"
+ },
+ "pages.ats.index.analyzing": {
+  "text": "Analyzing",
+  "lang": "en"
+ },
+ "pages.ats.index.ats_score": {
+  "text": "ATS Score",
+  "lang": "en"
+ },
+ "pages.ats.index.get_past_the_first_filter": {
+  "text": "Get Past the First Filter",
+  "lang": "en"
+ },
+ "pages.ats.index.optimize_your_cv_to_rank_higher": {
+  "text": "Optimize your CV to rank higher in ATS scoring algorithms and reach human recruiters.",
+  "lang": "en"
+ },
+ "pages.ats.index.increase_interview_chances": {
+  "text": "Increase Interview Chances",
+  "lang": "en"
+ },
+ "pages.ats.index.ats_optimized_cvs_have_3x_higher": {
+  "text": "ATS-optimized CVs have 3x higher chance of getting interview callbacks.",
+  "lang": "en"
+ },
+ "pages.ats.index.know_what_to_improve": {
+  "text": "Know What to Improve",
+  "lang": "en"
+ },
+ "pages.ats.index.get_actionable_insights_on_missing_keywords": {
+  "text": "Get actionable insights on missing keywords, skills, and formatting issues.",
+  "lang": "en"
+ },
+ "pages.ats.index.stand_out_from_competition": {
+  "text": "Stand Out from Competition",
+  "lang": "en"
+ },
+ "pages.ats.index.beat_80_of_candidates_who_submit": {
+  "text": "Beat 80% of candidates who submit non-optimized resumes.",
+  "lang": "en"
+ },
+ "pages.ats.index.upload_your_cv": {
+  "text": "Upload Your CV",
+  "lang": "en"
+ },
+ "pages.ats.index.upload_your_resume_in_pdf_or": {
+  "text": "Upload your resume in PDF or DOC format",
+  "lang": "en"
+ },
+ "pages.ats.index.select_target_job": {
+  "text": "Select Target Job",
+  "lang": "en"
+ },
+ "pages.ats.index.choose_the_job_position_you_want": {
+  "text": "Choose the job position you want to apply for",
+  "lang": "en"
+ },
+ "pages.ats.index.ai_analysis": {
+  "text": "AI Analysis",
+  "lang": "en"
+ },
+ "pages.ats.index.our_ai_scans_and_compares_your": {
+  "text": "Our AI scans and compares your CV with job requirements",
+  "lang": "en"
+ },
+ "pages.ats.index.get_results": {
+  "text": "Get Results",
+  "lang": "en"
+ },
+ "pages.ats.index.receive_detailed_ats_score_and_improvement": {
+  "text": "Receive detailed ATS score and improvement recommendations",
+  "lang": "en"
+ },
+ "pages.ats.index.keyword_match": {
+  "text": "Keyword match",
+  "lang": "en"
+ },
+ "pages.ats.index.skills_match": {
+  "text": "Skills match",
+  "lang": "en"
+ },
+ "pages.ats.index.experience_match": {
+  "text": "Experience match",
+  "lang": "en"
+ },
+ "pages.ats.index.format_quality": {
+  "text": "Format quality",
+  "lang": "en"
+ },
+ "pages.ats.index.analysis_report": {
+  "text": "Analysis report",
+  "lang": "en"
+ },
+ "pages.ats.index.add": {
+  "text": "Add",
+  "lang": "en"
+ },
+ "pages.ats.index.experience_to_raise_your_score_by": {
+  "text": "experience to raise your score by ~9 points.",
+  "lang": "en"
+ },
+ "pages.ats.index.ai_powered_cv_analysis": {
+  "text": "AI-Powered CV Analysis",
+  "lang": "en"
+ },
+ "pages.ats.index.beat_the_ats_system": {
+  "text": "Beat the ATS System,",
+  "lang": "en"
+ },
+ "pages.ats.index.land_your_dream_job": {
+  "text": "Land Your Dream Job",
+  "lang": "en"
+ },
+ "pages.ats.index.t_75_of_resumes_are_rejected_by": {
+  "text": "75% of resumes are rejected by ATS before reaching human recruiters. Our AI-powered analyzer scores your CV against real job requirements and shows you exactly what to fix.",
+  "lang": "en"
+ },
+ "pages.ats.index.analyze_your_cv_now": {
+  "text": "Analyze Your CV Now",
+  "lang": "en"
+ },
+ "pages.ats.index.how_it_works": {
+  "text": "How It Works",
+  "lang": "en"
+ },
+ "pages.ats.index.cvs_analyzed": {
+  "text": "CVs Analyzed",
+  "lang": "en"
+ },
+ "pages.ats.index.success_rate": {
+  "text": "Success Rate",
+  "lang": "en"
+ },
+ "pages.ats.index.user_rating": {
+  "text": "User Rating",
+  "lang": "en"
+ },
+ "pages.ats.index.the_basics": {
+  "text": "The basics",
+  "lang": "en"
+ },
+ "pages.ats.index.what_is_an_applicant_tracking_system": {
+  "text": "What is an Applicant Tracking System?",
+  "lang": "en"
+ },
+ "pages.ats.index.understanding_the_technology_that_screens_your": {
+  "text": "Understanding the technology that screens your resume",
+  "lang": "en"
+ },
+ "pages.ats.index.the_challenge": {
+  "text": "The Challenge",
+  "lang": "en"
+ },
+ "pages.ats.index.is_software_used_by_99_of": {
+  "text": "is software used by 99% of Fortune 500 companies to automatically screen resumes. It scans, parses, and ranks candidates based on:",
+  "lang": "en"
+ },
+ "pages.ats.index.the_reality": {
+  "text": "The Reality",
+  "lang": "en"
+ },
+ "pages.ats.index.of_resumes_never_reach_human_recruiters": {
+  "text": "of resumes never reach human recruiters",
+  "lang": "en"
+ },
+ "pages.ats.index.average_time_ats_spends_scanning_a": {
+  "text": "average time ATS spends scanning a resume",
+  "lang": "en"
+ },
+ "pages.ats.index.of_qualified_candidates_are_rejected_due": {
+  "text": "of qualified candidates are rejected due to poor CV formatting",
+  "lang": "en"
+ },
+ "pages.ats.index.why_it_matters": {
+  "text": "Why it matters",
+  "lang": "en"
+ },
+ "pages.ats.index.why_your_cv_needs_ats_optimization": {
+  "text": "Why Your CV Needs ATS Optimization",
+  "lang": "en"
+ },
+ "pages.ats.index.how_it_works_2": {
+  "text": "How it works",
+  "lang": "en"
+ },
+ "pages.ats.index.from_upload_to_insights_in_4": {
+  "text": "From upload to insights in 4 steps",
+  "lang": "en"
+ },
+ "pages.ats.index.it_takes_about_10_seconds": {
+  "text": "It takes about 10 seconds",
+  "lang": "en"
+ },
+ "pages.ats.index.what_you_get": {
+  "text": "What you get",
+  "lang": "en"
+ },
+ "pages.ats.index.a_report_that_tells_you_exactly": {
+  "text": "A report that tells you exactly what to fix",
+  "lang": "en"
+ },
+ "pages.ats.index.testimonials": {
+  "text": "Testimonials",
+  "lang": "en"
+ },
+ "pages.ats.index.what_our_users_say": {
+  "text": "What Our Users Say",
+  "lang": "en"
+ },
+ "pages.ats.index.ldquo": {
+  "text": "&ldquo;",
+  "lang": "en"
+ },
+ "pages.ats.index.rdquo": {
+  "text": "&rdquo;",
+  "lang": "en"
+ },
+ "pages.ats.index.ready_to_optimize_your_cv": {
+  "text": "Ready to optimize your CV?",
+  "lang": "en"
+ },
+ "pages.ats.index.get_your_ats_score_and_a": {
+  "text": "Get your ATS score and a personalized improvement plan in seconds.",
+  "lang": "en"
+ },
+ "pages.ats.index.browse_it_jobs": {
+  "text": "Browse IT Jobs",
+  "lang": "en"
+ },
+ "pages.ats.index.free_to_use_instant_results_powered": {
+  "text": "Free to use · Instant results · Powered by AI",
+  "lang": "en"
+ },
+ "pages.blog.index.feature_under_development_coming_soon": {
+  "text": "Feature under development... Coming Soon",
+  "lang": "en"
+ },
+ "pages.blog.index.back_to_home": {
+  "text": "Back to Home",
+  "lang": "en"
+ },
+ "pages.company.detail.link_copied": {
+  "text": "Link copied",
+  "lang": "en"
+ },
+ "pages.company.detail.could_not_copy_the_link": {
+  "text": "Could not copy the link",
+  "lang": "en"
+ },
+ "pages.company.detail.company_not_found": {
+  "text": "Company not found",
+  "lang": "en"
+ },
+ "pages.company.detail.back_to_companies": {
+  "text": "Back to companies",
+  "lang": "en"
+ },
+ "pages.company.detail.reviews": {
+  "text": "reviews)",
+  "lang": "en"
+ },
+ "pages.company.detail.open_position": {
+  "text": "open position",
+  "lang": "en"
+ },
+ "pages.company.detail.view_jobs": {
+  "text": "View jobs",
+  "lang": "en"
+ },
+ "pages.company.detail.about": {
+  "text": "About",
+  "lang": "en"
+ },
+ "pages.company.detail.jobs": {
+  "text": "Jobs",
+  "lang": "en"
+ },
+ "pages.company.detail.reviews_2": {
+  "text": "Reviews",
+  "lang": "en"
+ },
+ "pages.company.detail.no_description_yet": {
+  "text": "No description yet.",
+  "lang": "en"
+ },
+ "pages.company.detail.show_less": {
+  "text": "Show less",
+  "lang": "en"
+ },
+ "pages.company.detail.read_more": {
+  "text": "Read more",
+  "lang": "en"
+ },
+ "pages.company.detail.tech_stack": {
+  "text": "Tech stack",
+  "lang": "en"
+ },
+ "pages.company.detail.open_positions": {
+  "text": "Open positions",
+  "lang": "en"
+ },
+ "pages.company.detail.this_company_has_no_open_positions": {
+  "text": "This company has no open positions right now",
+  "lang": "en"
+ },
+ "pages.company.detail.general_information": {
+  "text": "General information",
+  "lang": "en"
+ },
+ "pages.company.detail.view_on_map": {
+  "text": "View on map",
+  "lang": "en"
+ },
+ "pages.company.detail.working_locations": {
+  "text": "Working locations",
+  "lang": "en"
+ },
+ "pages.company.detail.hiring_now": {
+  "text": "Hiring now",
+  "lang": "en"
+ },
+ "pages.company.detail.openings_across": {
+  "text": "openings across",
+  "lang": "en"
+ },
+ "pages.company.detail.tel": {
+  "text": "tel:{{v0}}",
+  "lang": "en"
+ },
+ "pages.company.detail.mailto": {
+  "text": "mailto:{{v0}}",
+  "lang": "en"
+ },
+ "pages.company.detail.share_this_company": {
+  "text": "Share this company",
+  "lang": "en"
+ },
+ "pages.company.detail.copy_link": {
+  "text": "Copy link",
+  "lang": "en"
+ },
+ "pages.company.index.vietnam": {
+  "text": "Vietnam",
+  "lang": "en"
+ },
+ "pages.company.index.no_reviews_yet": {
+  "text": "No reviews yet",
+  "lang": "en"
+ },
+ "pages.company.index.open_job": {
+  "text": "open job",
+  "lang": "en"
+ },
+ "pages.company.index.not_hiring": {
+  "text": "Not hiring",
+  "lang": "en"
+ },
+ "pages.company.index.other": {
+  "text": "Other",
+  "lang": "en"
+ },
+ "pages.company.index.top_it_companies_in_vietnam": {
+  "text": "Top IT companies in Vietnam",
+  "lang": "en"
+ },
+ "pages.company.index.compare_employers_by_open_roles_tech": {
+  "text": "Compare employers by open roles, tech stack and reviews from people who work there.",
+  "lang": "en"
+ },
+ "pages.company.index.open_jobs": {
+  "text": "Open jobs",
+  "lang": "en"
+ },
+ "pages.company.index.hiring_now": {
+  "text": "Hiring now",
+  "lang": "en"
+ },
+ "pages.company.index.search_company_name": {
+  "text": "Search company name",
+  "lang": "en"
+ },
+ "pages.company.index.most_open_jobs": {
+  "text": "Most open jobs",
+  "lang": "en"
+ },
+ "pages.company.index.highest_rated": {
+  "text": "Highest rated",
+  "lang": "en"
+ },
+ "pages.company.index.name_a_z": {
+  "text": "Name A–Z",
+  "lang": "en"
+ },
+ "pages.company.index.loading_companies": {
+  "text": "Loading companies...",
+  "lang": "en"
+ },
+ "pages.company.index.no_company_matches_your_search": {
+  "text": "No company matches your search",
+  "lang": "en"
+ },
+ "pages.cv.editor.project_name": {
+  "text": "Project name",
+  "lang": "en"
+ },
+ "pages.cv.editor.your_role": {
+  "text": "Your role",
+  "lang": "en"
+ },
+ "pages.cv.editor.school": {
+  "text": "School",
+  "lang": "en"
+ },
+ "pages.cv.editor.major_degree": {
+  "text": "Major / degree",
+  "lang": "en"
+ },
+ "pages.cv.editor.certificate": {
+  "text": "Certificate",
+  "lang": "en"
+ },
+ "pages.cv.editor.issued_by": {
+  "text": "Issued by",
+  "lang": "en"
+ },
+ "pages.cv.editor.remove": {
+  "text": "Remove",
+  "lang": "en"
+ },
+ "pages.cv.editor.from": {
+  "text": "From",
+  "lang": "en"
+ },
+ "pages.cv.editor.mm_yyyy": {
+  "text": "MM/YYYY",
+  "lang": "en"
+ },
+ "pages.cv.editor.to": {
+  "text": "To",
+  "lang": "en"
+ },
+ "pages.cv.editor.hien_tai": {
+  "text": "Hiện tại",
+  "lang": "vi"
+ },
+ "pages.cv.editor.link": {
+  "text": "Link",
+  "lang": "en"
+ },
+ "pages.cv.editor.start_a_line_with_to_make": {
+  "text": "Start a line with \"-\" to make a bullet point.",
+  "lang": "en"
+ },
+ "pages.cv.editor.add": {
+  "text": "Add",
+  "lang": "en"
+ },
+ "pages.cv.editor.cannot_save_your_cv": {
+  "text": "Cannot save your CV",
+  "lang": "en"
+ },
+ "pages.cv.editor.please_choose_an_image": {
+  "text": "Please choose an image",
+  "lang": "en"
+ },
+ "pages.cv.editor.cannot_read_this_image": {
+  "text": "Cannot read this image",
+  "lang": "en"
+ },
+ "pages.cv.editor.cannot_export_the_pdf_please_try": {
+  "text": "Cannot export the PDF, please try again",
+  "lang": "en"
+ },
+ "pages.cv.editor.cv_not_found": {
+  "text": "CV not found",
+  "lang": "en"
+ },
+ "pages.cv.editor.this_cv_does_not_exist_or": {
+  "text": "This CV does not exist or belongs to another account.",
+  "lang": "en"
+ },
+ "pages.cv.editor.back_to_my_cvs": {
+  "text": "Back to my CVs",
+  "lang": "en"
+ },
+ "pages.cv.editor.saved": {
+  "text": "Saved",
+  "lang": "en"
+ },
+ "pages.cv.editor.unsaved_changes": {
+  "text": "Unsaved changes",
+  "lang": "en"
+ },
+ "pages.cv.editor.saving": {
+  "text": "Saving…",
+  "lang": "en"
+ },
+ "pages.cv.editor.not_saved": {
+  "text": "Not saved",
+  "lang": "en"
+ },
+ "pages.cv.editor.color": {
+  "text": "Color {{v0}}",
+  "lang": "en"
+ },
+ "pages.cv.editor.not_sure_what_to_write": {
+  "text": "Not sure what to write?",
+  "lang": "en"
+ },
+ "pages.cv.editor.fill_with_sample_content": {
+  "text": "Fill with sample content",
+  "lang": "en"
+ },
+ "pages.cv.editor.personal_information": {
+  "text": "Personal information",
+  "lang": "en"
+ },
+ "pages.cv.editor.change_photo": {
+  "text": "Change photo",
+  "lang": "en"
+ },
+ "pages.cv.editor.add_photo": {
+  "text": "Add photo",
+  "lang": "en"
+ },
+ "pages.cv.editor.optional_shown_on_every_template": {
+  "text": "Optional, shown on every template",
+  "lang": "en"
+ },
+ "pages.cv.editor.full_name": {
+  "text": "Full name",
+  "lang": "en"
+ },
+ "pages.cv.editor.job_title": {
+  "text": "Job title",
+  "lang": "en"
+ },
+ "pages.cv.editor.website_github_linkedin": {
+  "text": "Website / GitHub / LinkedIn",
+  "lang": "en"
+ },
+ "pages.cv.editor.date_of_birth": {
+  "text": "Date of birth",
+  "lang": "en"
+ },
+ "pages.cv.editor.dd_mm_yyyy": {
+  "text": "DD/MM/YYYY",
+  "lang": "en"
+ },
+ "pages.cv.editor.summary": {
+  "text": "Summary",
+  "lang": "en"
+ },
+ "pages.cv.editor.skills_languages": {
+  "text": "Skills & languages",
+  "lang": "en"
+ },
+ "pages.cv.editor.type_a_skill_and_press_enter": {
+  "text": "Type a skill and press Enter.",
+  "lang": "en"
+ },
+ "pages.cv.editor.node_js_react_docker": {
+  "text": "Node.js, React, Docker…",
+  "lang": "en"
+ },
+ "pages.cv.editor.languages": {
+  "text": "Languages",
+  "lang": "en"
+ },
+ "pages.cv.editor.tieng_anh_ielts_7_0": {
+  "text": "Tiếng Anh (IELTS 7.0)…",
+  "lang": "vi"
+ },
+ "pages.cv.editor.open_a_job_and_choose_this": {
+  "text": "Open a job and choose this CV in the apply form",
+  "lang": "en"
+ },
+ "pages.cv.editor.apply_with_this_cv": {
+  "text": "Apply with this CV",
+  "lang": "en"
+ },
+ "pages.cv.editor.edit": {
+  "text": "Edit",
+  "lang": "en"
+ },
+ "pages.cv.editor.preview": {
+  "text": "Preview",
+  "lang": "en"
+ },
+ "pages.cv.index.sample": {
+  "text": "Sample",
+  "lang": "en"
+ },
+ "pages.cv.index.pick_a_template": {
+  "text": "Pick a template",
+  "lang": "en"
+ },
+ "pages.cv.index.three_modern_layouts_designed_for_it": {
+  "text": "Three modern layouts designed for IT profiles. Switch any time, your content stays.",
+  "lang": "en"
+ },
+ "pages.cv.index.fill_in_your_story": {
+  "text": "Fill in your story",
+  "lang": "en"
+ },
+ "pages.cv.index.type_on_the_left_see_the": {
+  "text": "Type on the left, see the CV update instantly on the right. Saved automatically.",
+  "lang": "en"
+ },
+ "pages.cv.index.download_or_apply": {
+  "text": "Download or apply",
+  "lang": "en"
+ },
+ "pages.cv.index.export_a_clean_pdf_or_apply": {
+  "text": "Export a clean PDF, or apply to any job on IT Career Hub with one click.",
+  "lang": "en"
+ },
+ "pages.cv.index.ats_friendly": {
+  "text": "ATS friendly",
+  "lang": "en"
+ },
+ "pages.cv.index.real_text_pdf_that_recruiters_screening": {
+  "text": "Real text PDF that recruiters’ screening tools can read, not a flat image.",
+  "lang": "en"
+ },
+ "pages.cv.index.perfect_vietnamese": {
+  "text": "Perfect Vietnamese",
+  "lang": "en"
+ },
+ "pages.cv.index.be_vietnam_pro_font_embedded_every": {
+  "text": "Be Vietnam Pro font embedded, every accent renders exactly as typed.",
+  "lang": "en"
+ },
+ "pages.cv.index.one_click_apply": {
+  "text": "One-click apply",
+  "lang": "en"
+ },
+ "pages.cv.index.choose_your_online_cv_in_the": {
+  "text": "Choose your online CV in the apply form, we attach the latest PDF for you.",
+  "lang": "en"
+ },
+ "pages.cv.index.always_up_to_date": {
+  "text": "Always up to date",
+  "lang": "en"
+ },
+ "pages.cv.index.edit_once_every_new_application_uses": {
+  "text": "Edit once, every new application uses the newest version of your CV.",
+  "lang": "en"
+ },
+ "pages.cv.index.cv": {
+  "text": "{{v0}} CV - {{v1}}",
+  "lang": "en"
+ },
+ "pages.cv.index.cannot_create_the_cv": {
+  "text": "Cannot create the CV",
+  "lang": "en"
+ },
+ "pages.cv.index.cannot_export_the_pdf_please_try": {
+  "text": "Cannot export the PDF, please try again",
+  "lang": "en"
+ },
+ "pages.cv.index.cv_deleted": {
+  "text": "CV deleted",
+  "lang": "en"
+ },
+ "pages.cv.index.cannot_delete_the_cv": {
+  "text": "Cannot delete the CV",
+  "lang": "en"
+ },
+ "pages.cv.index.free_cv_builder_for_it_talent": {
+  "text": "Free CV builder for IT talent",
+  "lang": "en"
+ },
+ "pages.cv.index.your_next_it_job_starts_with": {
+  "text": "Your next IT job starts with a",
+  "lang": "en"
+ },
+ "pages.cv.index.great_cv": {
+  "text": "great CV",
+  "lang": "en"
+ },
+ "pages.cv.index.build_a_modern_ats_friendly_cv": {
+  "text": "Build a modern, ATS-friendly CV in minutes, see every change live, and apply to top tech companies with one click.",
+  "lang": "en"
+ },
+ "pages.cv.index.create_my_cv": {
+  "text": "Create my CV",
+  "lang": "en"
+ },
+ "pages.cv.index.browse_templates": {
+  "text": "Browse templates",
+  "lang": "en"
+ },
+ "pages.cv.index.t_100_free": {
+  "text": "100% free",
+  "lang": "en"
+ },
+ "pages.cv.index.pdf_download": {
+  "text": "PDF download",
+  "lang": "en"
+ },
+ "pages.cv.index.vietnamese_ready": {
+  "text": "Vietnamese ready",
+  "lang": "en"
+ },
+ "pages.cv.index.ats_ready_pdf": {
+  "text": "ATS-ready PDF",
+  "lang": "en"
+ },
+ "pages.cv.index.my_cvs": {
+  "text": "My CVs",
+  "lang": "en"
+ },
+ "pages.cv.index.keep_one_cv_per_role_you": {
+  "text": "Keep one CV per role you target, each application uses the latest version.",
+  "lang": "en"
+ },
+ "pages.cv.index.edit": {
+  "text": "Edit {{v0}}",
+  "lang": "en"
+ },
+ "pages.cv.index.edited": {
+  "text": "· edited",
+  "lang": "en"
+ },
+ "pages.cv.index.edit_2": {
+  "text": "Edit",
+  "lang": "en"
+ },
+ "pages.cv.index.download_pdf": {
+  "text": "Download PDF",
+  "lang": "en"
+ },
+ "pages.cv.index.delete_this_cv": {
+  "text": "Delete this CV?",
+  "lang": "en"
+ },
+ "pages.cv.index.applications_already_sent_keep_their_pdf": {
+  "text": "Applications already sent keep their PDF.",
+  "lang": "en"
+ },
+ "pages.cv.index.delete": {
+  "text": "Delete",
+  "lang": "en"
+ },
+ "pages.cv.index.new_cv": {
+  "text": "New CV",
+  "lang": "en"
+ },
+ "pages.cv.index.choose_your_template": {
+  "text": "Choose your template",
+  "lang": "en"
+ },
+ "pages.cv.index.designed_with_recruiters_pick_a_color": {
+  "text": "Designed with recruiters. Pick a color, you can change everything later.",
+  "lang": "en"
+ },
+ "pages.cv.index.color": {
+  "text": "Color {{v0}}",
+  "lang": "en"
+ },
+ "pages.cv.index.use_this_template": {
+  "text": "Use this template",
+  "lang": "en"
+ },
+ "pages.cv.index.use": {
+  "text": "Use",
+  "lang": "en"
+ },
+ "pages.cv.index.ready_in_3_steps": {
+  "text": "Ready in 3 steps",
+  "lang": "en"
+ },
+ "pages.cv.index.most_candidates_finish_their_first_cv": {
+  "text": "Most candidates finish their first CV in under 15 minutes.",
+  "lang": "en"
+ },
+ "pages.cv.index.stand_out_to_it_recruiters_today": {
+  "text": "Stand out to IT recruiters today",
+  "lang": "en"
+ },
+ "pages.cv.index.create_your_cv_for_free_and": {
+  "text": "Create your CV for free and apply to hundreds of tech jobs.",
+  "lang": "en"
+ },
+ "pages.cv.index.start_building": {
+  "text": "Start building",
+  "lang": "en"
+ },
+ "pages.home.index.view_all": {
+  "text": "View all",
+  "lang": "en"
+ },
+ "pages.home.index.it_jobs_for_developers": {
+  "text": "IT jobs for developers",
+  "lang": "en"
+ },
+ "pages.home.index.who_want_to_grow": {
+  "text": "who want to grow",
+  "lang": "en"
+ },
+ "pages.home.index.real_openings_from_top_tech_companies": {
+  "text": "Real openings from top tech companies in Vietnam, updated every day.",
+  "lang": "en"
+ },
+ "pages.home.index.suggestions_for_you": {
+  "text": "Suggestions for you:",
+  "lang": "en"
+ },
+ "pages.home.index.active_jobs": {
+  "text": "Active jobs",
+  "lang": "en"
+ },
+ "pages.home.index.tech_companies": {
+  "text": "Tech companies",
+  "lang": "en"
+ },
+ "pages.home.index.open_headcount": {
+  "text": "Open headcount",
+  "lang": "en"
+ },
+ "pages.home.index.top_employers": {
+  "text": "Top employers",
+  "lang": "en"
+ },
+ "pages.home.index.all_companies": {
+  "text": "All companies",
+  "lang": "en"
+ },
+ "pages.home.index.latest_it_jobs": {
+  "text": "Latest IT jobs",
+  "lang": "en"
+ },
+ "pages.home.index.all_jobs": {
+  "text": "All jobs",
+  "lang": "en"
+ },
+ "pages.home.index.browse_all": {
+  "text": "Browse all",
+  "lang": "en"
+ },
+ "pages.home.index.jobs_by_city": {
+  "text": "Jobs by city",
+  "lang": "en"
+ },
+ "pages.home.index.popular_skills": {
+  "text": "Popular skills",
+  "lang": "en"
+ },
+ "pages.home.index.is_your_cv_ready_for_ats": {
+  "text": "Is your CV ready for ATS?",
+  "lang": "en"
+ },
+ "pages.home.index.score_your_cv_against_real_job": {
+  "text": "Score your CV against real job requirements and see exactly what to improve.",
+  "lang": "en"
+ },
+ "pages.home.index.check_my_cv": {
+  "text": "Check my CV",
+  "lang": "en"
+ },
+ "pages.home.index.hiring_it_talent": {
+  "text": "Hiring IT talent?",
+  "lang": "en"
+ },
+ "pages.home.index.post_jobs_track_applicants_and_review": {
+  "text": "Post jobs, track applicants and review CVs in one recruiter dashboard.",
+  "lang": "en"
+ },
+ "pages.home.index.recruiter_dashboard": {
+  "text": "Recruiter dashboard",
+  "lang": "en"
+ },
+ "pages.interview.index.khong_truy_cap_duoc_micro_hay": {
+  "text": "Không truy cập được micro. Hãy cho phép trình duyệt dùng micro rồi thử lại.",
+  "lang": "vi"
+ },
+ "pages.interview.index.microphone_access_was_blocked_allow_the": {
+  "text": "Microphone access was blocked. Allow the browser to use your microphone and try again.",
+  "lang": "en"
+ },
+ "pages.interview.index.cannot_start_the_interview": {
+  "text": "Cannot start the interview",
+  "lang": "en"
+ },
+ "pages.interview.index.cam_on_ban_da_hoan_thanh": {
+  "text": "Cảm ơn bạn đã hoàn thành phỏng vấn!",
+  "lang": "vi"
+ },
+ "pages.interview.index.thank_you_for_completing_the_interview": {
+  "text": "Thank you for completing the interview!",
+  "lang": "en"
+ },
+ "pages.interview.index.nha_tuyen_dung_se_xem_lai": {
+  "text": "Nhà tuyển dụng sẽ xem lại buổi phỏng vấn và liên hệ với bạn qua email.",
+  "lang": "vi"
+ },
+ "pages.interview.index.the_recruiter_will_review_the_conversation": {
+  "text": "The recruiter will review the conversation and contact you by email.",
+  "lang": "en"
+ },
+ "pages.interview.index.theo_doi_ho_so": {
+  "text": "Theo dõi hồ sơ",
+  "lang": "vi"
+ },
+ "pages.interview.index.track_your_application": {
+  "text": "Track your application",
+  "lang": "en"
+ },
+ "pages.interview.index.dang_ket_noi": {
+  "text": "Đang kết nối…",
+  "lang": "vi"
+ },
+ "pages.interview.index.connecting": {
+  "text": "Connecting…",
+  "lang": "en"
+ },
+ "pages.interview.index.ai_dang_noi": {
+  "text": "AI đang nói",
+  "lang": "vi"
+ },
+ "pages.interview.index.the_ai_interviewer_is_speaking": {
+  "text": "The AI interviewer is speaking",
+  "lang": "en"
+ },
+ "pages.interview.index.dang_nghe_ban": {
+  "text": "Đang nghe bạn…",
+  "lang": "vi"
+ },
+ "pages.interview.index.listening": {
+  "text": "Listening…",
+  "lang": "en"
+ },
+ "pages.interview.index.ket_thuc_phong_van": {
+  "text": "Kết thúc phỏng vấn",
+  "lang": "vi"
+ },
+ "pages.interview.index.end_interview": {
+  "text": "End interview",
+  "lang": "en"
+ },
+ "pages.interview.index.cuoc_goi_bi_gian_doan": {
+  "text": "Cuộc gọi bị gián đoạn",
+  "lang": "vi"
+ },
+ "pages.interview.index.the_call_was_interrupted": {
+  "text": "The call was interrupted",
+  "lang": "en"
+ },
+ "pages.interview.index.ban_co_the_bat_dau_lai": {
+  "text": "Bạn có thể bắt đầu lại (còn {{v0}} lượt).",
+  "lang": "vi"
+ },
+ "pages.interview.index.you_can_start_again_attempt_left": {
+  "text": "You can start again ({{v0}} attempt left).",
+  "lang": "en"
+ },
+ "pages.interview.index.ban_da_dung_het_luot_nha": {
+  "text": "Bạn đã dùng hết lượt. Nhà tuyển dụng vẫn nhận được phần đã ghi lại.",
+  "lang": "vi"
+ },
+ "pages.interview.index.no_attempts_left_the_recruiter_still": {
+  "text": "No attempts left. The recruiter still receives what was recorded.",
+  "lang": "en"
+ },
+ "pages.interview.index.vong_phong_van_so_loai_voi": {
+  "text": "Vòng phỏng vấn sơ loại với AI",
+  "lang": "vi"
+ },
+ "pages.interview.index.ai_screening_interview": {
+  "text": "AI screening interview",
+  "lang": "en"
+ },
+ "pages.interview.index.khoang_phut_tro_chuyen_bang_giong": {
+  "text": "Khoảng {{v0}} phút, trò chuyện bằng giọng nói với người phỏng vấn AI.",
+  "lang": "vi"
+ },
+ "pages.interview.index.about_minutes_a_voice_conversation_with": {
+  "text": "About {{v0}} minutes, a voice conversation with an AI interviewer.",
+  "lang": "en"
+ },
+ "pages.interview.index.hay_ngoi_o_noi_yen_tinh": {
+  "text": "Hãy ngồi ở nơi yên tĩnh, dùng tai nghe nếu có, và trả lời như với người phỏng vấn thật.",
+  "lang": "vi"
+ },
+ "pages.interview.index.find_a_quiet_place_use_headphones": {
+  "text": "Find a quiet place, use headphones if you can, and answer as you would with a person.",
+  "lang": "en"
+ },
+ "pages.interview.index.neu_mat_ket_noi_ban_co": {
+  "text": "Nếu mất kết nối bạn có thể bắt đầu lại. Số lượt còn lại: {{v0}}.",
+  "lang": "vi"
+ },
+ "pages.interview.index.if_the_connection_drops_you_can": {
+  "text": "If the connection drops you can start again. Attempts left: {{v0}}.",
+  "lang": "en"
+ },
+ "pages.interview.index.link_het_han_luc": {
+  "text": "Link hết hạn lúc {{v0}}.",
+  "lang": "vi"
+ },
+ "pages.interview.index.the_link_expires_at": {
+  "text": "The link expires at {{v0}}.",
+  "lang": "en"
+ },
+ "pages.interview.index.toi_dong_y_cho_ghi_am": {
+  "text": "Tôi đồng ý cho ghi âm và dùng AI để chuyển buổi phỏng vấn thành văn bản và gợi ý đánh giá. Nhà tuyển dụng là người ra quyết định cuối cùng.",
+  "lang": "vi"
+ },
+ "pages.interview.index.i_agree_that_the_interview_is": {
+  "text": "I agree that the interview is recorded and processed by AI to produce a transcript and a suggested assessment. The recruiter makes the final decision.",
+  "lang": "en"
+ },
+ "pages.interview.index.bat_dau_phong_van": {
+  "text": "Bắt đầu phỏng vấn",
+  "lang": "vi"
+ },
+ "pages.interview.index.start_the_interview": {
+  "text": "Start the interview",
+  "lang": "en"
+ },
+ "pages.interview.index.interview_link_is_not_valid": {
+  "text": "Interview link is not valid",
+  "lang": "en"
+ },
+ "pages.interview.index.sign_in_to_start_your_interview": {
+  "text": "Sign in to start your interview",
+  "lang": "en"
+ },
+ "pages.interview.index.use_the_account_you_applied_with": {
+  "text": "Use the account you applied with.",
+  "lang": "en"
+ },
+ "pages.interview.index.sign_in": {
+  "text": "Sign in",
+  "lang": "en"
+ },
+ "pages.interview.index.you_already_completed_this_interview": {
+  "text": "You already completed this interview",
+  "lang": "en"
+ },
+ "pages.interview.index.the_recruiter_will_contact_you_by": {
+  "text": "The recruiter will contact you by email.",
+  "lang": "en"
+ },
+ "pages.job.detail.copied_link_to_clipboard": {
+  "text": "Copied link to clipboard",
+  "lang": "en"
+ },
+ "pages.job.detail.applied": {
+  "text": "Applied ·",
+  "lang": "en"
+ },
+ "pages.job.detail.no_longer_accepting": {
+  "text": "No longer accepting",
+  "lang": "en"
+ },
+ "pages.job.detail.apply_now": {
+  "text": "Apply now",
+  "lang": "en"
+ },
+ "pages.job.detail.share": {
+  "text": "Share",
+  "lang": "en"
+ },
+ "pages.job.detail.print": {
+  "text": "Print",
+  "lang": "en"
+ },
+ "pages.job.detail.report_this_company": {
+  "text": "Report this company",
+  "lang": "en"
+ },
+ "pages.job.detail.job_details": {
+  "text": "Job Details",
+  "lang": "en"
+ },
+ "pages.job.detail.salary": {
+  "text": "Salary:",
+  "lang": "en"
+ },
+ "pages.job.detail.location": {
+  "text": "Location:",
+  "lang": "en"
+ },
+ "pages.job.detail.job_type": {
+  "text": "Job Type:",
+  "lang": "en"
+ },
+ "pages.job.detail.full_time": {
+  "text": "Full Time",
+  "lang": "en"
+ },
+ "pages.job.detail.level": {
+  "text": "Level:",
+  "lang": "en"
+ },
+ "pages.job.detail.all_levels": {
+  "text": "All Levels",
+  "lang": "en"
+ },
+ "pages.job.detail.posted_on": {
+  "text": "Posted On:",
+  "lang": "en"
+ },
+ "pages.job.detail.required_skills": {
+  "text": "Required Skills",
+  "lang": "en"
+ },
+ "pages.job.detail.job_description": {
+  "text": "Job Description",
+  "lang": "en"
+ },
+ "pages.job.detail.company_info": {
+  "text": "Company Info",
+  "lang": "en"
+ },
+ "pages.job.detail.unknown_company": {
+  "text": "Unknown Company",
+  "lang": "en"
+ },
+ "pages.job.detail.unknown_website": {
+  "text": "Unknown Website",
+  "lang": "en"
+ },
+ "pages.job.detail.unknown_email": {
+  "text": "Unknown Email",
+  "lang": "en"
+ },
+ "pages.job.detail.unknown_phone": {
+  "text": "Unknown Phone",
+  "lang": "en"
+ },
+ "pages.job.detail.unknown_address": {
+  "text": "Unknown Address",
+  "lang": "en"
+ },
+ "pages.job.index.any_salary": {
+  "text": "Any salary",
+  "lang": "en"
+ },
+ "pages.job.index.under_10m": {
+  "text": "Under 10M",
+  "lang": "en"
+ },
+ "pages.job.index.t_10m_20m": {
+  "text": "10M – 20M",
+  "lang": "en"
+ },
+ "pages.job.index.t_20m_30m": {
+  "text": "20M – 30M",
+  "lang": "en"
+ },
+ "pages.job.index.t_30m_50m": {
+  "text": "30M – 50M",
+  "lang": "en"
+ },
+ "pages.job.index.over_50m": {
+  "text": "Over 50M",
+  "lang": "en"
+ },
+ "pages.job.index.newest": {
+  "text": "Newest",
+  "lang": "en"
+ },
+ "pages.job.index.salary_high_to_low": {
+  "text": "Salary: high to low",
+  "lang": "en"
+ },
+ "pages.job.index.salary_low_to_high": {
+  "text": "Salary: low to high",
+  "lang": "en"
+ },
+ "pages.job.index.filters": {
+  "text": "Filters",
+  "lang": "en"
+ },
+ "pages.job.index.clear_all": {
+  "text": "Clear all",
+  "lang": "en"
+ },
+ "pages.job.index.city": {
+  "text": "City",
+  "lang": "en"
+ },
+ "pages.job.index.salary_vnd_month": {
+  "text": "Salary (VND / month)",
+  "lang": "en"
+ },
+ "pages.job.index.no_limit": {
+  "text": "no limit",
+  "lang": "en"
+ },
+ "pages.job.index.min": {
+  "text": "Min",
+  "lang": "en"
+ },
+ "pages.job.index.max": {
+  "text": "Max",
+  "lang": "en"
+ },
+ "pages.job.index.apply": {
+  "text": "Apply",
+  "lang": "en"
+ },
+ "pages.job.index.min_must_be_lower_than_max": {
+  "text": "Min must be lower than max",
+  "lang": "en"
+ },
+ "pages.job.index.e_g_java_react_js": {
+  "text": "e.g. Java, React.JS",
+  "lang": "en"
+ },
+ "pages.job.index.it_job": {
+  "text": "IT job",
+  "lang": "en"
+ },
+ "pages.job.index.for": {
+  "text": "for “",
+  "lang": "en"
+ },
+ "pages.job.index.no_jobs_match_your_filters": {
+  "text": "No jobs match your filters",
+  "lang": "en"
+ },
+ "pages.my_jobs.index.all": {
+  "text": "All",
+  "lang": "en"
+ },
+ "pages.my_jobs.index.in_progress": {
+  "text": "In progress",
+  "lang": "en"
+ },
+ "pages.my_jobs.index.closed": {
+  "text": "Closed",
+  "lang": "en"
+ },
+ "pages.my_jobs.index.sign_in_to_track_your_applications": {
+  "text": "Sign in to track your applications and saved jobs",
+  "lang": "en"
+ },
+ "pages.my_jobs.index.sign_in": {
+  "text": "Sign in",
+  "lang": "en"
+ },
+ "pages.my_jobs.index.you_haven_t_applied_to_any": {
+  "text": "You haven't applied to any job yet",
+  "lang": "en"
+ },
+ "pages.my_jobs.index.find_jobs": {
+  "text": "Find jobs",
+  "lang": "en"
+ },
+ "pages.my_jobs.index.no_applications_in_this_group": {
+  "text": "No applications in this group",
+  "lang": "en"
+ },
+ "pages.my_jobs.index.no_saved_jobs_yet_tap_the": {
+  "text": "No saved jobs yet. Tap the heart on a job to keep it here.",
+  "lang": "en"
+ },
+ "pages.my_jobs.index.browse_jobs": {
+  "text": "Browse jobs",
+  "lang": "en"
+ },
+ "pages.my_jobs.index.my_jobs": {
+  "text": "My jobs",
+  "lang": "en"
+ },
+ "pages.my_jobs.index.follow_every_application_from_submission_to": {
+  "text": "Follow every application from submission to the final result.",
+  "lang": "en"
+ },
+ "pages.my_jobs.index.applied": {
+  "text": "Applied{{v0}}",
+  "lang": "en"
+ },
+ "pages.my_jobs.index.saved": {
+  "text": "Saved{{v0}}",
+  "lang": "en"
+ },
+ "pages.salary.index.salary_explorer": {
+  "text": "Salary explorer",
+  "lang": "en"
+ },
+ "pages.salary.index.how_much_do_it_jobs_pay": {
+  "text": "How much do IT jobs pay in Vietnam?",
+  "lang": "en"
+ },
+ "pages.salary.index.monthly_gross_salaries_by_position_level": {
+  "text": "Monthly gross salaries by position, level, skill and city, calculated from job postings on IT Career Hub.",
+  "lang": "en"
+ },
+ "pages.salary.index.job_title_or_skill_e_g": {
+  "text": "Job title or skill, e.g. Java, React…",
+  "lang": "en"
+ },
+ "pages.salary.index.all_positions": {
+  "text": "All positions",
+  "lang": "en"
+ },
+ "pages.salary.index.no_job_posting_matches_this_search": {
+  "text": "No job posting matches this search yet. Try a broader keyword or another city.",
+  "lang": "en"
+ },
+ "pages.salary.index.median_salary": {
+  "text": "Median salary",
+  "lang": "en"
+ },
+ "pages.salary.index.vnd_month": {
+  "text": "VND / month",
+  "lang": "en"
+ },
+ "pages.salary.index.typical_range": {
+  "text": "Typical range",
+  "lang": "en"
+ },
+ "pages.salary.index.middle_50_of_postings": {
+  "text": "middle 50% of postings",
+  "lang": "en"
+ },
+ "pages.salary.index.highest_offer": {
+  "text": "Highest offer",
+  "lang": "en"
+ },
+ "pages.salary.index.job_postings": {
+  "text": "Job postings",
+  "lang": "en"
+ },
+ "pages.salary.index.updated": {
+  "text": "updated {{v0}}",
+  "lang": "en"
+ },
+ "pages.salary.index.salary_by_level": {
+  "text": "Salary by level",
+  "lang": "en"
+ },
+ "pages.salary.index.click_a_level_to_see_matching": {
+  "text": "Click a level to see matching jobs.",
+  "lang": "en"
+ },
+ "pages.salary.index.salary_by": {
+  "text": "Salary by",
+  "lang": "en"
+ },
+ "pages.salary.index.sorted_by_median_salary": {
+  "text": "Sorted by median salary",
+  "lang": "en"
+ },
+ "pages.salary.index.skills_with_at_least_2_postings": {
+  "text": ", skills with at least 2 postings",
+  "lang": "en"
+ },
+ "pages.salary.index.skill": {
+  "text": "Skill",
+  "lang": "en"
+ },
+ "pages.salary.index.city": {
+  "text": "City",
+  "lang": "en"
+ },
+ "pages.salary.index.figures_come_from_the_salary_shown": {
+  "text": "Figures come from the salary shown on each job posting (monthly gross, VND), not from individual payslips. Groups with fewer than 3 postings are marked as limited data.",
+  "lang": "en"
+ },
+ "pages.salary.index.full_range": {
+  "text": "Full range",
+  "lang": "en"
+ },
+ "pages.salary.index.typical_p25_p75": {
+  "text": "Typical (P25–P75)",
+  "lang": "en"
+ },
+ "pages.salary.index.median": {
+  "text": "Median",
+  "lang": "en"
+ },
+ "common.guest": {
+  "text": "Guest",
+  "lang": "en"
+ }
+}

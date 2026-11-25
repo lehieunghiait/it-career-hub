@@ -5,6 +5,8 @@ import { callCreatePermission, callUpdatePermission } from '@/config/api';
 import { IPermission } from '@/types/backend';
 import { ALL_MODULES } from '@/config/permissions';
 
+import i18next from 'i18next';
+
 interface IProps {
   openModal: boolean;
   setOpenModal: (v: boolean) => void;
@@ -31,12 +33,12 @@ const ModalPermission = (props: IProps) => {
 
       const res = await callUpdatePermission(permission, dataInit._id);
       if (res.data) {
-        message.success('Update permission successfully');
+        message.success(i18next.t('app:components.admin.permission.modal_permission.update_permission_successfully'));
         handleReset();
         reloadTable();
       } else {
         notification.error({
-          message: 'An error occurred',
+          message: i18next.t('app:common.an_error_occurred'),
           description: res.message,
         });
       }
@@ -50,12 +52,12 @@ const ModalPermission = (props: IProps) => {
       };
       const res = await callCreatePermission(permission);
       if (res.data) {
-        message.success('Create permission successfully');
+        message.success(i18next.t('app:components.admin.permission.modal_permission.create_permission_successfully'));
         handleReset();
         reloadTable();
       } else {
         notification.error({
-          message: 'An error occurred',
+          message: i18next.t('app:common.an_error_occurred'),
           description: res.message,
         });
       }
@@ -71,7 +73,7 @@ const ModalPermission = (props: IProps) => {
   return (
     <>
       <ModalForm
-        title={<>{dataInit?._id ? 'Update Permission' : 'Create Permission'}</>}
+        title={<>{dataInit?._id ? i18next.t('app:components.admin.permission.modal_permission.update_permission') : i18next.t('app:components.admin.permission.modal_permission.create_permission')}</>}
         open={openModal}
         modalProps={{
           onCancel: () => {
@@ -82,8 +84,8 @@ const ModalPermission = (props: IProps) => {
           width: isMobile ? '100%' : 900,
           keyboard: false,
           maskClosable: false,
-          okText: <>{dataInit?._id ? 'Update' : 'Create'}</>,
-          cancelText: 'Cancel',
+          okText: <>{dataInit?._id ? i18next.t('app:common.update') : i18next.t('app:components.admin.permission.modal_permission.create')}</>,
+          cancelText: i18next.t('app:common.cancel'),
         }}
         scrollToFirstError={true}
         preserve={false}
@@ -94,25 +96,25 @@ const ModalPermission = (props: IProps) => {
         <Row gutter={16}>
           <Col lg={12} md={12} sm={24} xs={24}>
             <ProFormText
-              label='Name'
+              label={i18next.t('app:common.name')}
               name='name'
-              rules={[{ required: true, message: 'Please do not leave blank' }]}
-              placeholder='Enter name'
+              rules={[{ required: true, message: i18next.t('app:components.admin.permission.modal_permission.please_do_not_leave_blank') }]}
+              placeholder={i18next.t('app:components.admin.permission.modal_permission.enter_name')}
             />
           </Col>
           <Col lg={12} md={12} sm={24} xs={24}>
             <ProFormText
-              label='API Path'
+              label={i18next.t('app:components.admin.permission.modal_permission.api_path')}
               name='apiPath'
-              rules={[{ required: true, message: 'Please do not leave blank' }]}
-              placeholder='Enter path'
+              rules={[{ required: true, message: i18next.t('app:components.admin.permission.modal_permission.please_do_not_leave_blank') }]}
+              placeholder={i18next.t('app:components.admin.permission.modal_permission.enter_path')}
             />
           </Col>
 
           <Col lg={12} md={12} sm={24} xs={24}>
             <ProFormSelect
               name='method'
-              label='Method'
+              label={i18next.t('app:common.method')}
               valueEnum={{
                 GET: 'GET',
                 POST: 'POST',
@@ -120,17 +122,17 @@ const ModalPermission = (props: IProps) => {
                 PATCH: 'PATCH',
                 DELETE: 'DELETE',
               }}
-              placeholder='Please select a method'
-              rules={[{ required: true, message: 'Please select a method!' }]}
+              placeholder={i18next.t('app:components.admin.permission.modal_permission.please_select_a_method')}
+              rules={[{ required: true, message: i18next.t('app:components.admin.permission.modal_permission.please_select_a_method_2') }]}
             />
           </Col>
           <Col lg={12} md={12} sm={24} xs={24}>
             <ProFormSelect
               name='module'
-              label='Module'
+              label={i18next.t('app:components.admin.permission.modal_permission.module')}
               valueEnum={ALL_MODULES}
-              placeholder='Please select a module'
-              rules={[{ required: true, message: 'Please select a module!' }]}
+              placeholder={i18next.t('app:components.admin.permission.modal_permission.please_select_a_module')}
+              rules={[{ required: true, message: i18next.t('app:components.admin.permission.modal_permission.please_select_a_module_2') }]}
             />
           </Col>
         </Row>

@@ -2,6 +2,8 @@ import { Card, Tag, Typography } from 'antd';
 import { useTranslation } from 'react-i18next';
 import styles from 'styles/client.module.scss';
 import { CodeOutlined } from '@ant-design/icons';
+import i18next from 'i18next';
+
 const { Title } = Typography;
 
 interface CompanySkillsProps {
@@ -19,7 +21,7 @@ const CompanySkills = ({ skills }: CompanySkillsProps) => {
         <div style={{ display: 'flex', alignItems: 'center', gap: '8px' }}>
           <CodeOutlined style={{ color: '#e14000' }} />
           <Title level={4} style={{ margin: 0 }}>
-            Our Skills
+            {i18next.t('app:components.client.company.company_detail_ts.CompanySkills.our_skills')}
           </Title>
         </div>
       }

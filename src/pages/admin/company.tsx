@@ -18,6 +18,8 @@ import styles from '@/styles/dashboard.module.scss';
 import { useNavigate } from 'react-router-dom';
 import ViewDetailCompany from '@/components/admin/company/view.detail.company';
 
+import i18next from 'i18next';
+
 const CompanyPage = () => {
   const [openModal, setOpenModal] = useState<boolean>(false);
   const [dataInit, setDataInit] = useState<ICompany | null>(null);
@@ -34,11 +36,11 @@ const CompanyPage = () => {
     if (_id) {
       const res = await callDeleteCompany(_id);
       if (res && res.data) {
-        message.success('Delete Company successfully');
+        message.success(i18next.t('app:pages.admin.company.delete_company_successfully'));
         reloadTable();
       } else {
         notification.error({
-          message: 'An error occurred',
+          message: i18next.t('app:common.an_error_occurred'),
           description: res.message,
         });
       }
@@ -51,7 +53,7 @@ const CompanyPage = () => {
 
   const columns: ProColumns<ICompany>[] = [
     {
-      title: 'Index',
+      title: i18next.t('app:pages.admin.company.index'),
       responsive: ['md'],
       key: 'index',
       width: 50,
@@ -62,7 +64,7 @@ const CompanyPage = () => {
       hideInSearch: true,
     },
     {
-      title: 'Name',
+      title: i18next.t('app:common.name'),
       dataIndex: 'name',
       sorter: true,
       render: (_dom, record) => (
@@ -76,7 +78,7 @@ const CompanyPage = () => {
       ),
     },
     {
-      title: 'CreatedAt',
+      title: i18next.t('app:common.createdat'),
       responsive: ['xl'],
       dataIndex: 'createdAt',
       width: 200,
@@ -87,7 +89,7 @@ const CompanyPage = () => {
       hideInSearch: true,
     },
     {
-      title: 'UpdatedAt',
+      title: i18next.t('app:common.updatedat'),
       responsive: ['lg'],
       dataIndex: 'updatedAt',
       width: 200,
@@ -98,7 +100,7 @@ const CompanyPage = () => {
       hideInSearch: true,
     },
     {
-      title: 'Actions',
+      title: i18next.t('app:common.actions'),
       fixed: 'right',
       hideInSearch: true,
       width: 100,
@@ -122,11 +124,11 @@ const CompanyPage = () => {
           <Access permission={ALL_PERMISSIONS.COMPANIES.DELETE} hideChildren>
             <Popconfirm
               placement='leftTop'
-              title={'Xác nhận xóa company'}
-              description={'Bạn có chắc chắn muốn xóa company này ?'}
+              title={i18next.t('app:pages.admin.company.xac_nhan_xoa_company')}
+              description={i18next.t('app:pages.admin.company.ban_co_chac_chan_muon_xoa')}
               onConfirm={() => handleDeleteCompany(entity._id)}
-              okText='Xác nhận'
-              cancelText='Hủy'
+              okText={i18next.t('app:common.xac_nhan')}
+              cancelText={i18next.t('app:common.huy')}
             >
               <span style={{ cursor: 'pointer', margin: '0 10px' }}>
                 <DeleteOutlined
@@ -193,7 +195,7 @@ const CompanyPage = () => {
       <Access permission={ALL_PERMISSIONS.COMPANIES.GET_PAGINATE}>
         <DataTable<ICompany>
           actionRef={tableRef}
-          headerTitle='List of Companies'
+          headerTitle={i18next.t('app:pages.admin.company.list_of_companies')}
           rowKey='_id'
           loading={isFetching}
           columns={columns}
@@ -212,7 +214,7 @@ const CompanyPage = () => {
               return (
                 <div>
                   {' '}
-                  {range[0]}-{range[1]} trên {total} rows
+                  {range[0]}-{range[1]} {i18next.t('app:pages.admin.company.tren')}{' '}{total} rows
                 </div>
               );
             },
@@ -223,7 +225,7 @@ const CompanyPage = () => {
               <Space>
                 <Access permission={ALL_PERMISSIONS.COMPANIES.CREATE} hideChildren>
                   <Button icon={<PlusOutlined />} type='primary' onClick={() => setOpenModal(true)}>
-                    Add new
+                    {i18next.t('app:common.add_new')}
                   </Button>
                 </Access>
                 <Dropdown
@@ -236,10 +238,10 @@ const CompanyPage = () => {
                             onClick={() => {
                               // Export to Excel logic here
                               // You would replace this with a real export function as needed
-                              message.info('Export to Excel');
+                              message.info(i18next.t('app:pages.admin.company.export_to_excel'));
                             }}
                           >
-                            Export to Excel
+                            {i18next.t('app:pages.admin.company.export_to_excel')}
                           </span>
                         ),
                       },
@@ -252,7 +254,7 @@ const CompanyPage = () => {
                       color: '#1890ff',
                     }}
                   >
-                    Export
+                    {i18next.t('app:pages.admin.company.export')}
                   </Button>
                 </Dropdown>
               </Space>

@@ -3,6 +3,8 @@ import { Input, Button, Row, Col, Typography } from 'antd';
 import { SearchOutlined } from '@ant-design/icons';
 import styles from 'styles/client.module.scss';
 
+import i18next from 'i18next';
+
 // Khai báo props cho component
 interface FaqSearchProps {
   searchValue: string;
@@ -26,16 +28,16 @@ const FaqSearch: React.FC<FaqSearchProps> = ({ searchValue, onSearch }) => {
       <Row justify='center' align='middle' gutter={[0, 20]}>
         <Col xs={24}>
           <Typography.Title level={2} style={{ textAlign: 'center' }}>
-            Câu Hỏi Thường Gặp
+            {i18next.t('app:components.client.faq.faq_search.cau_hoi_thuong_gap')}
           </Typography.Title>
           <Typography.Paragraph style={{ textAlign: 'center', fontSize: 16 }}>
-            Tìm kiếm câu trả lời cho những thắc mắc của bạn
+            {i18next.t('app:components.client.faq.faq_search.tim_kiem_cau_tra_loi_cho')}
           </Typography.Paragraph>
         </Col>
         <Col xs={24} md={16} lg={12}>
           <Input
             size='large'
-            placeholder='Nhập từ khóa để tìm kiếm câu hỏi...'
+            placeholder={i18next.t('app:components.client.faq.faq_search.nhap_tu_khoa_de_tim_kiem')}
             value={searchValue}
             onChange={handleChange}
             suffix={
@@ -45,7 +47,7 @@ const FaqSearch: React.FC<FaqSearchProps> = ({ searchValue, onSearch }) => {
                 onClick={handleSearch}
                 className={styles['faq-search-button']}
               >
-                Tìm kiếm
+                {i18next.t('app:components.client.faq.faq_search.tim_kiem')}
               </Button>
             }
             className={styles['faq-search-input']}

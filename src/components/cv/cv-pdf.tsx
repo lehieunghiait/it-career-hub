@@ -1,5 +1,7 @@
 import type { ICv } from './cv-model';
 
+import i18next from 'i18next';
+
 /**
  * Renders a CV to a PDF blob. react-pdf (~1MB) is only loaded when a PDF is actually needed.
  */
@@ -20,7 +22,7 @@ export const cvFileName = (cv: ICv) => {
     .replace(/Đ/g, 'D')
     .replace(/[^a-zA-Z0-9]+/g, '-')
     .replace(/^-|-$/g, '');
-  return `${base || 'CV'}-CV.pdf`;
+  return i18next.t('app:components.cv.cv_pdf.cv_pdf', { v0: base || 'CV' });
 };
 
 export const renderCvPdfFile = async (cv: ICv) =>

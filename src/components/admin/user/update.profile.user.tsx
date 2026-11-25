@@ -5,6 +5,8 @@ import { useEffect } from 'react';
 import { Row, Col, Input } from 'antd';
 import { Button } from 'antd/lib';
 import { callUpdateUser } from '@/config/api';
+import i18next from 'i18next';
+
 const UpdateProfileUser = (props: any) => {
   const [form] = Form.useForm();
   const user = useAppSelector(state => state.account.user);
@@ -22,10 +24,10 @@ const UpdateProfileUser = (props: any) => {
       user._id
     );
     if (res.data) {
-      message.success('Update profile successfully');
+      message.success(i18next.t('app:components.admin.user.update_profile_user.update_profile_successfully'));
     } else {
       notification.error({
-        message: 'Update profile failed',
+        message: i18next.t('app:components.admin.user.update_profile_user.update_profile_failed'),
         description: res.message,
       });
     }
@@ -34,39 +36,39 @@ const UpdateProfileUser = (props: any) => {
     <Form onFinish={onFinish} form={form}>
       <Row gutter={[20, 20]}>
         <Col span={24}>
-          <Form.Item label='Name' name='name' rules={[{ required: true }]}>
+          <Form.Item label={i18next.t('app:common.name')} name='name' rules={[{ required: true }]}>
             <Input />
           </Form.Item>
         </Col>
         <Col span={24}>
-          <Form.Item label='Email' name='email'>
+          <Form.Item label={i18next.t('app:common.email')} name='email'>
             <Input disabled />
           </Form.Item>
         </Col>
         <Col span={12}>
-          <Form.Item label='Age' name='age'>
+          <Form.Item label={i18next.t('app:components.admin.user.update_profile_user.age')} name='age'>
             <InputNumber style={{ width: '100%' }} />
           </Form.Item>
         </Col>
         <Col span={12}>
-          <Form.Item label='Gender' name='gender'>
+          <Form.Item label={i18next.t('app:components.admin.user.update_profile_user.gender')} name='gender'>
             <Select
               options={[
-                { label: 'Male', value: 'MALE' },
-                { label: 'Female', value: 'FEMALE' },
-                { label: 'Other', value: 'OTHER' },
+                { label: i18next.t('app:components.admin.user.update_profile_user.male'), value: 'MALE' },
+                { label: i18next.t('app:components.admin.user.update_profile_user.female'), value: 'FEMALE' },
+                { label: i18next.t('app:components.admin.user.update_profile_user.other'), value: 'OTHER' },
               ]}
             />
           </Form.Item>
         </Col>
         <Col span={24}>
-          <Form.Item label='Address' name='address'>
+          <Form.Item label={i18next.t('app:common.address')} name='address'>
             <Input />
           </Form.Item>
         </Col>
         <Col span={24}>
           <Button type='primary' onClick={() => form.submit()}>
-            Update Profile
+            {i18next.t('app:components.admin.user.update_profile_user.update_profile')}
           </Button>
         </Col>
       </Row>

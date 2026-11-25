@@ -8,6 +8,8 @@ import { ICompany } from '@/types/backend';
 import styles from 'styles/client.module.scss';
 import s from 'styles/company-directory.module.scss';
 
+import i18next from 'i18next';
+
 const PAGE_SIZE = 12;
 const CITIES = ['HA_NOI', 'HO_CHI_MINH', 'DA_NANG'];
 
@@ -66,7 +68,7 @@ const CompanyListItem = ({ row }: { row: ICompanyRow }) => {
           <h3 title={company.name}>{company.name}</h3>
           <p>
             <EnvironmentOutlined />
-            {cities.length ? cities.map(getLocationName).join(', ') : 'Vietnam'}
+            {cities.length ? cities.map(getLocationName).join(', ') : i18next.t('app:pages.company.index.vietnam')}
           </p>
         </div>
       </div>
@@ -92,14 +94,14 @@ const CompanyListItem = ({ row }: { row: ICompanyRow }) => {
             </small>
           </span>
         ) : (
-          <span className={s['muted']}>No reviews yet</span>
+          <span className={s['muted']}>{i18next.t('app:pages.company.index.no_reviews_yet')}</span>
         )}
         {openJobs ? (
           <span className={s['jobs']}>
-            {openJobs} open job{openJobs > 1 ? 's' : ''}
+            {openJobs} {i18next.t('app:pages.company.index.open_job')}{openJobs > 1 ? 's' : ''}
           </span>
         ) : (
-          <span className={s['muted']}>Not hiring</span>
+          <span className={s['muted']}>{i18next.t('app:pages.company.index.not_hiring')}</span>
         )}
       </div>
     </Link>
@@ -189,12 +191,12 @@ const ClientCompanyPage = () => {
   const totalJobs = highlights.reduce((sum, item) => sum + item.openJobs, 0);
   const pageItems = filtered.slice((current - 1) * PAGE_SIZE, current * PAGE_SIZE);
   const cityOptions = [
-    { value: 'ALL', label: 'All cities' },
+    { value: 'ALL', label: i18next.t('app:common.all_cities') },
     ...CITIES.filter(code => cityCounts[code]).map(code => ({
       value: code,
       label: getLocationName(code),
     })),
-    ...(cityCounts.OTHER ? [{ value: 'OTHER', label: 'Other' }] : []),
+    ...(cityCounts.OTHER ? [{ value: 'OTHER', label: i18next.t('app:pages.company.index.other') }] : []),
   ];
 
   return (
@@ -202,26 +204,26 @@ const ClientCompanyPage = () => {
       <header className={s['header']}>
         <div className={styles['container']}>
           <nav className={s['crumbs']} aria-label='Breadcrumb'>
-            <Link to='/'>Home</Link>
+            <Link to='/'>{i18next.t('app:common.home')}</Link>
             <span>/</span>
-            <span aria-current='page'>Companies</span>
+            <span aria-current='page'>{i18next.t('app:common.companies')}</span>
           </nav>
-          <h1>Top IT companies in Vietnam</h1>
+          <h1>{i18next.t('app:pages.company.index.top_it_companies_in_vietnam')}</h1>
           <p className={s['lead']}>
-            Compare employers by open roles, tech stack and reviews from people who work there.
+            {i18next.t('app:pages.company.index.compare_employers_by_open_roles_tech')}
           </p>
           {!isLoading && (
             <dl className={s['facts']}>
               <div>
-                <dt>Companies</dt>
+                <dt>{i18next.t('app:common.companies')}</dt>
                 <dd>{companies.length}</dd>
               </div>
               <div>
-                <dt>Open jobs</dt>
+                <dt>{i18next.t('app:pages.company.index.open_jobs')}</dt>
                 <dd>{totalJobs}</dd>
               </div>
               <div>
-                <dt>Hiring now</dt>
+                <dt>{i18next.t('app:pages.company.index.hiring_now')}</dt>
                 <dd>{highlights.filter(item => item.openJobs > 0).length}</dd>
               </div>
             </dl>
@@ -235,7 +237,7 @@ const ClientCompanyPage = () => {
             allowClear
             size='large'
             prefix={<SearchOutlined />}
-            placeholder='Search company name'
+            placeholder={i18next.t('app:pages.company.index.search_company_name')}
             value={keyword}
             onChange={event => setKeyword(event.target.value)}
             className={s['search']}
@@ -263,16 +265,16 @@ const ClientCompanyPage = () => {
             className={s['sort']}
             aria-label='Sort companies'
             options={[
-              { value: 'jobs', label: 'Most open jobs' },
-              { value: 'rating', label: 'Highest rated' },
-              { value: 'name', label: 'Name A–Z' },
+              { value: 'jobs', label: i18next.t('app:pages.company.index.most_open_jobs') },
+              { value: 'rating', label: i18next.t('app:pages.company.index.highest_rated') },
+              { value: 'name', label: i18next.t('app:pages.company.index.name_a_z') },
             ]}
           />
         </div>
 
         <p className={s['count']}>
           {isLoading
-            ? 'Loading companies...'
+            ? i18next.t('app:pages.company.index.loading_companies')
             : `${filtered.length} ${filtered.length === 1 ? 'company' : 'companies'}`}
         </p>
 
@@ -307,7 +309,7 @@ const ClientCompanyPage = () => {
             )}
           </>
         ) : (
-          <Empty className={s['empty']} description='No company matches your search' />
+          <Empty className={s['empty']} description={i18next.t('app:pages.company.index.no_company_matches_your_search')} />
         )}
       </div>
     </div>

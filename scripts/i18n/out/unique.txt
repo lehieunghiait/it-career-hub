@@ -1,0 +1,963 @@
+0	Please upload a logo
+1	Update Company successfully
+2	An error occurred
+3	Create Company successfully
+4	You can only upload JPG/PNG/WEBP file!
+5	Image must smaller than 2MB!
+6	Đã có lỗi xảy ra khi upload file.
+7	Cập nhật logo thành công!
+8	Cập nhật logo thất bại
+9	Update Company
+10	Create Company
+11	Hủy
+12	Update
+13	Create
+14	Company Name
+15	Please enter company name
+16	Enter company name
+17	Logo
+18	Please enter logo
+19	Upload
+20	Address
+21	Please enter address
+22	Enter address
+23	Phone Number
+24	Please enter phone number
+25	Only type phone number
+26	Enter phone number
+27	Email
+28	Please enter CONTACT
+29	Enter email
+30	Website
+31	Please enter website
+32	Enter website
+33	Description
+34	📋 Detail
+35	Phone
+36	tel:{{v0}}
+37	mailto:{{v0}}
+38	Number of staff
+39	Type of business
+40	N/A
+41	Year of foundation
+42	🛠️ Skills
+43	📝 Description
+44	Created At
+45	Updated At
+46	Cập nhật job thành công
+47	Có lỗi xảy ra
+48	Tạo mới job thành công
+49	Manage Job
+50	Upsert Job
+51	Cập nhật Job
+52	Tạo mới Job
+53	Title
+54	Please enter a name!
+55	Please enter a title
+56	Skills
+57	Please select a skill required
+58	Please select a skill required!
+59	Location
+60	Please select a location
+61	Please select a location!
+62	Salary
+63	Please enter salary!
+64	Please enter salary
+65	đ
+66	Quantity
+67	Please enter quantity!
+68	Please enter quantity
+69	Level
+70	Please select a level
+71	Please select a level!
+72	Company
+73	Please select a company!
+74	Please select a company
+75	Start Date
+76	Please select a start date!
+77	End Date
+78	Please select a end date!
+79	Status
+80	Please enter a description!
+81	Openings
+82	Posting period
+83	Applications
+84	{{v0}} received
+85	Job details
+86	View public page
+87	Edit job
+88	Job not found
+89	Expired
+90	Ends today
+91	{{v0}} days left
+92	No skills listed
+93	No description
+94	Created by
+95	Last updated by
+96	Overview
+97	Recruitment
+98	Access control
+99	Logout successfully
+100	Back to site
+101	Logout
+102	Career Hub
+103	Recruiter
+104	View site
+105	Update permission successfully
+106	Create permission successfully
+107	Update Permission
+108	Create Permission
+109	Cancel
+110	Name
+111	Please do not leave blank
+112	Enter name
+113	API Path
+114	Enter path
+115	Method
+116	Please select a method
+117	Please select a method!
+118	Module
+119	Please select a module
+120	Please select a module!
+121	Detail
+122	Tên Permission
+123	Thuộc Module
+124	Ngày tạo
+125	Ngày sửa
+126	Invite sent
+127	In progress
+128	Completed
+129	Link expired
+130	Replaced
+131	Strong yes
+132	Yes
+133	Maybe
+134	No
+135	Cannot evaluate the interview again
+136	AI interview
+137	English
+138	Tiếng Việt
+139	Expires
+140	Scoring the interview…
+141	Scoring failed.
+142	Try again
+143	Suggested by AI from the transcript. Review before deciding.
+144	Strengths
+145	Concerns
+146	Transcript ({{v0}} turns)
+147	Candidate
+148	Cannot load this application
+149	Cannot save the rating
+150	Cannot add the note
+151	Cannot delete the note
+152	Job removed
+153	View CV
+154	Applied
+155	Score
+156	Notes
+157	Only visible to your team
+158	Add a note about this candidate…
+159	⌘/Ctrl + Enter to save
+160	Add note
+161	Delete this note?
+162	Delete
+163	No notes yet
+164	Activity
+165	Moved to
+166	No activity yet
+167	Choose a new status or write a note for the candidate
+168	Update Resume status successfully!
+169	Resume Detail
+170	Update Status
+171	Job Name
+172	Modified At
+173	Message to the candidate (optional)
+174	Shown on the candidate timeline, e.g. interview time, place or meeting link.
+175	Status history
+176	Cập nhật role thành công
+177	Thêm mới role thành công
+178	Cập nhật Role
+179	Tạo mới Role
+180	Cập nhật
+181	Tạo mới
+182	Enter description
+183	Permissions
+184	The permissions allowed for this role
+185	Cập nhật user thành công
+186	Thêm mới user thành công
+187	Cập nhật User
+188	Tạo mới User
+189	Vui lòng không bỏ trống
+190	Vui lòng nhập email hợp lệ
+191	Nhập email
+192	Password
+193	Nhập password
+194	Tên hiển thị
+195	Nhập tên hiển thị
+196	Tuổi
+197	Nhập nhập tuổi
+198	Giới Tính
+199	Please select a gender
+200	Vui lòng chọn giới tính!
+201	Vai trò
+202	Vui lòng chọn vai trò!
+203	Chọn công vai trò
+204	Thuộc Công Ty
+205	Vui lòng chọn company!
+206	Chọn công ty
+207	Địa chỉ
+208	Nhập địa chỉ
+209	Update profile successfully
+210	Update profile failed
+211	Age
+212	Gender
+213	Male
+214	Female
+215	Other
+216	Update Profile
+217	View Detail User
+218	+84 399864422 (Vietnam)
+219	Our Team
+220	Job no longer available
+221	Job closed
+222	Hide history
+223	History ({{v0}})
+224	See more
+225	Loading...
+226	Top IT Companies in Vietnam 🇻🇳
+227	New IT Jobs 🔥
+228	&nbsp;
+229	No data
+230	Salary & benefits
+231	Culture & fun
+232	Management
+233	Work-life balance
+234	Career growth
+235	Got an offer
+236	No offer
+237	Waiting for result
+238	Positive experience
+239	Neutral experience
+240	Negative experience
+241	Reviews & interviews
+242	Posted anonymously by employees and candidates of
+243	Write a review
+244	Share an interview
+245	% would recommend
+246	Reviews ({{v0}})
+247	Interviews ({{v0}})
+248	Difficulty
+249	No review yet. Worked here? Help others with an honest review.
+250	No interview experience yet. Interviewed here? Share how it went.
+251	Recommends
+252	Doesn't recommend
+253	Anonymous ·
+254	Former employee
+255	Current employee
+256	Pros
+257	Cons
+258	Advice to management
+259	Anonymous candidate ·
+260	Process
+261	Questions asked
+262	Show more
+263	Your name, email and account are never shown. Only the month you posted is displayed.
+264	Thanks! Your review is now live.
+265	Cannot post the review
+266	Review {{v0}}
+267	Post anonymously
+268	Overall rating
+269	Please rate the company
+270	You are a
+271	Your position (optional)
+272	Backend Developer
+273	Review title
+274	At least 5 characters
+275	Great team, slow promotions
+276	At least 20 characters
+277	Advice to management (optional)
+278	Would you recommend this company to a friend?
+279	Thanks for sharing your interview!
+280	Cannot post
+281	Interview at {{v0}}
+282	Position you interviewed for
+283	Please enter the position
+284	Senior Java Developer
+285	Result
+286	Required
+287	Overall experience
+288	Positive
+289	Neutral
+290	Negative
+291	How did the process go?
+292	At least 30 characters
+293	Rounds, duration, who you met, take-home test…
+294	Questions asked (optional)
+295	Company Image
+296	No images available
+297	Company workspace {{v0}}
+298	No description available
+299	Home
+300	Companies
+301	Company Detail
+302	Back to list
+303	Address not updated
+304	Our Skills
+305	Danh Mục
+306	Làm thế nào để tạo tài khoản trên IT Việc?
+307	Để tạo tài khoản trên IT Việc, bạn có thể nhấp vào nút "Đăng ký" ở góc trên bên phải của trang web. Sau đó, bạn cần điền thông tin cá nhân như họ tên, email, mật khẩu và làm theo các hướng dẫn để hoàn tất quá trình đăng ký.
+308	Tôi quên mật khẩu, làm thế nào để khôi phục?
+309	Nếu bạn quên mật khẩu, bạn có thể nhấp vào liên kết "Quên mật khẩu" trên trang đăng nhập. Hệ thống sẽ gửi một email khôi phục mật khẩu đến địa chỉ email mà bạn đã đăng ký. Làm theo hướng dẫn trong email để đặt lại mật khẩu của bạn.
+310	Làm thế nào để cập nhật hồ sơ cá nhân?
+311	Để cập nhật hồ sơ cá nhân, đăng nhập vào tài khoản của bạn và nhấp vào tên người dùng ở góc trên bên phải, sau đó chọn "Quản lý tài khoản". Tại đây, bạn có thể cập nhật thông tin cá nhân, kinh nghiệm làm việc, kỹ năng và thông tin liên hệ của mình.
+312	Làm thế nào để tìm việc phù hợp với kỹ năng của tôi?
+313	IT Việc cung cấp công cụ tìm kiếm nâng cao cho phép bạn lọc các công việc dựa trên kỹ năng, vị trí, mức lương và nhiều tiêu chí khác. Bạn cũng có thể đăng ký nhận thông báo việc làm để nhận các cơ hội việc làm phù hợp với hồ sơ của bạn qua email.
+314	Làm thế nào để ứng tuyển vào một vị trí?
+315	Để ứng tuyển vào một vị trí, hãy nhấp vào nút "Ứng tuyển ngay" trên trang chi tiết công việc. Bạn sẽ được yêu cầu gửi CV và có thể thêm thư xin việc. Đảm bảo rằng hồ sơ của bạn đã được cập nhật đầy đủ trước khi ứng tuyển.
+316	Tôi có thể theo dõi trạng thái ứng tuyển của mình như thế nào?
+317	Sau khi ứng tuyển, bạn có thể theo dõi trạng thái ứng tuyển bằng cách đăng nhập vào tài khoản và truy cập mục "Việc làm đã ứng tuyển". Tại đây, bạn sẽ thấy danh sách các vị trí đã ứng tuyển và trạng thái hiện tại của chúng.
+318	Làm thế nào để đăng tin tuyển dụng?
+319	Để đăng tin tuyển dụng, bạn cần đăng nhập với tài khoản nhà tuyển dụng. Sau đó, nhấp vào "Đăng tin tuyển dụng" và điền đầy đủ thông tin về vị trí cần tuyển, yêu cầu công việc, mức lương và thông tin liên hệ. Sau khi xem lại, bạn có thể đăng tin và nó sẽ được hiển thị trên trang việc làm.
+320	Chi phí đăng tin tuyển dụng là bao nhiêu?
+321	Chi phí đăng tin tuyển dụng phụ thuộc vào gói dịch vụ mà bạn lựa chọn. Chúng tôi cung cấp nhiều gói khác nhau với các tính năng và thời hạn khác nhau. Vui lòng truy cập mục "Bảng giá" để xem chi tiết về các gói và lựa chọn phù hợp với nhu cầu của công ty bạn.
+322	Làm thế nào để sàng lọc ứng viên hiệu quả?
+323	IT Việc cung cấp công cụ quản lý ứng viên giúp bạn sàng lọc hiệu quả. Bạn có thể đánh giá CV, ghi chú, phân loại ứng viên và theo dõi tiến trình tuyển dụng. Ngoài ra, chúng tôi cũng cung cấp tính năng gửi email hàng loạt và lên lịch phỏng vấn trực tiếp từ hệ thống.
+324	IT Việc bảo vệ dữ liệu cá nhân của tôi như thế nào?
+325	IT Việc áp dụng các biện pháp bảo mật nghiêm ngặt để bảo vệ thông tin cá nhân của bạn. Chúng tôi sử dụng mã hóa SSL, lưu trữ dữ liệu an toàn và tuân thủ các quy định về bảo vệ dữ liệu. Chúng tôi không chia sẻ thông tin cá nhân của bạn với bên thứ ba mà không có sự đồng ý của bạn.
+326	Làm thế nào để tăng cường bảo mật cho tài khoản của tôi?
+327	Để tăng cường bảo mật cho tài khoản, bạn nên sử dụng mật khẩu mạnh, thay đổi mật khẩu định kỳ, và bật xác thực hai yếu tố nếu có. Đồng thời, hãy đảm bảo rằng bạn đăng xuất khỏi tài khoản khi sử dụng máy tính công cộng và cập nhật thông tin liên hệ để có thể khôi phục tài khoản khi cần thiết.
+328	Làm thế nào để báo cáo vấn đề bảo mật hoặc lừa đảo?
+329	Nếu bạn phát hiện vấn đề bảo mật hoặc nghi ngờ có hoạt động lừa đảo trên IT Việc, vui lòng liên hệ ngay với chúng tôi qua email security@itviec.com hoặc hotline 1900 1234. Chúng tôi có đội ngũ chuyên trách xử lý các vấn đề bảo mật và sẽ phản hồi trong thời gian sớm nhất.
+330	Không có câu hỏi nào trong danh mục này.
+331	Câu Hỏi Thường Gặp
+332	Tìm kiếm câu trả lời cho những thắc mắc của bạn
+333	Nhập từ khóa để tìm kiếm câu hỏi...
+334	Tìm kiếm
+335	IT Jobs
+336	Top IT Companies
+337	Create CV
+338	My jobs
+339	Manage Account
+340	Login
+341	Features
+342	All cities
+343	Job titles
+344	Job title, skill, company…
+345	Search
+346	Saved
+347	Save
+348	Remove from saved jobs
+349	Save job
+350	Thông báo mới
+351	Tôi đã hiểu
+352	Đóng
+353	Chào mừng đến với website của chúng tôi - Nền tảng tuyển dụng IT hàng đầu Việt Nam!
+354	Chúng tôi rất vui mừng thông báo về những cập nhật mới trên nền tảng ITviec, giúp việc tìm kiếm công việc IT mơ ước trở nên dễ dàng hơn bao giờ hết.
+355	Thông báo về việc dùng tài khoản (demo) truy cập vào website
+356	Tài khoản user:
+357	Mật khẩu:
+358	Cannot load this CV
+359	Cannot upload the CV
+360	Please choose one of your CVs
+361	Please upload a file CV!
+362	Cannot prepare your CV
+363	Your application has been sent!
+364	Error uploading CV
+365	Only PDF, DOC or DOCX files are accepted
+366	Your CV must be smaller than 5MB
+367	{{v0}} file uploaded successfully
+368	Apply for
+369	Applying as
+370	Your CV
+371	Online CV
+372	{{v0}} saved
+373	Build one for free
+374	Upload a file
+375	PDF, DOC, DOCX · max 5MB
+376	The latest version is exported to PDF and attached.
+377	Manage CVs
+378	You have no online CV yet.
+379	Create a CV in minutes
+380	Click or drag your CV here
+381	Supports PDF, DOC, DOCX up to 5MB
+382	Shared only with this employer
+383	Sending...
+384	Submit application
+385	Sign in to apply
+386	Log in to send your CV and track this application in My jobs.
+387	Log in to apply
+388	Manage password &amp; security
+389	Position
+390	Date of CV release
+391	Track progress of each application in My jobs →
+392	UserUpdateInfo
+393	Update information successfully
+394	Please select at least 1 skill!
+395	Search by skills...
+396	Receive jobs by skills
+397	Update profile
+398	Account security
+399	No salary data for this filter yet.
+400	· limited data
+401	Median:
+402	Typical (P25–P75):
+403	Full range:
+404	Based on
+405	job posting
+406	Feature is under development
+407	Search by skills....
+408	Upload CV
+409	Chọn CV (.pdf, .doc, .docx)
+410	Page
+411	About me
+412	Experience
+413	Projects
+414	Education
+415	Certificates
+416	Languages
+417	Contact
+418	Accent bar, timeline and skill pills
+419	Soft colored sidebar with photo
+420	Big name, airy two-column layout
+421	Công ty Cổ phần Công nghệ ABC
+422	Senior Backend Developer
+423	- Thiết kế lại dịch vụ thanh toán, giảm 40% thời gian xử lý - Dẫn dắt nhóm 5 kỹ sư, review code và mentoring - Triển khai CI/CD với GitHub Actions và AWS ECS
+424	XYZ Software
+425	- Xây dựng REST API cho ứng dụng giao hàng 1 triệu người dùng - Viết unit test, độ phủ 85%
+426	Đại học Bách khoa TP.HCM
+427	Kỹ sư Khoa học Máy tính
+428	GPA 3.4/4.0
+429	Hệ thống đặt vé sự kiện
+430	Tech lead
+431	NestJS, Redis, RabbitMQ — xử lý 5.000 đơn/phút giờ cao điểm
+432	AWS Certified Developer – Associate
+433	Amazon
+434	{{v0}}-CV.pdf
+435	Access denied
+436	Sorry, you are not authorized to access this information
+437	Sorry, the page you visited does not exist.
+438	Back Home
+439	Could not verify your session with the server
+440	You are signed in, but the API rejected your session token. Please try again later or contact the administrator.
+441	Sorry, you are not authorized to access this page.
+442	Bearer
+443	New
+444	Screening
+445	Interview
+446	Offer
+447	Rejected
+448	CV under review
+449	Not selected
+450	Reviewing
+451	An Giang
+452	Bà Rịa - Vũng Tàu
+453	Bắc Giang
+454	Bắc Kạn
+455	Bạc Liêu
+456	Bắc Ninh
+457	Bến Tre
+458	Bình Định
+459	Bình Dương
+460	Bình Phước
+461	Bình Thuận
+462	Cà Mau
+463	Cần Thơ
+464	Cao Bằng
+465	Đà Nẵng
+466	Đắk Lắk
+467	Đắk Nông
+468	Điện Biên
+469	Đồng Nai
+470	Đồng Tháp
+471	Gia Lai
+472	Hà Giang
+473	Hà Nam
+474	Hà Nội
+475	Hà Tĩnh
+476	Hải Dương
+477	Hải Phòng
+478	Hậu Giang
+479	Hòa Bình
+480	Hưng Yên
+481	Khánh Hòa
+482	Kiên Giang
+483	Kon Tum
+484	Lai Châu
+485	Lâm Đồng
+486	Lạng Sơn
+487	Lào Cai
+488	Long An
+489	Nam Định
+490	Nghệ An
+491	Ninh Bình
+492	Ninh Thuận
+493	Phú Thọ
+494	Phú Yên
+495	Quảng Bình
+496	Quảng Nam
+497	Quảng Ngãi
+498	Quảng Ninh
+499	Quảng Trị
+500	Sóc Trăng
+501	Sơn La
+502	Tây Ninh
+503	Thái Bình
+504	Thái Nguyên
+505	Thanh Hóa
+506	Thừa Thiên Huế
+507	Tiền Giang
+508	TP. Hồ Chí Minh
+509	Trà Vinh
+510	Tuyên Quang
+511	Vĩnh Long
+512	Vĩnh Phúc
+513	Yên Bái
+514	Tất cả tỉnh thành
+515	Cannot open this CV
+516	Job saved
+517	Removed from saved jobs
+518	Something went wrong, please try again
+519	Chúng tôi là một công ty tuyển dụng hàng đầu, kết nối ứng viên tài năng với các doanh nghiệp tốt nhất.
+520	I am a developer with a passion for building web applications.
+521	Innovative
+522	We always seek new methods and solutions to serve customers better.
+523	Honest
+524	We operate with the highest ethical standards, always transparent and honest.
+525	Collaborative
+526	We believe in the power of teamwork and building strong partner relationships.
+527	Exceptional
+528	We never stop striving to achieve the best results in everything we do.
+529	Về Chúng Tôi
+530	Sứ mệnh
+531	Tầm nhìn
+532	Giá Trị Cốt Lõi
+533	Delete Company successfully
+534	Index
+535	CreatedAt
+536	UpdatedAt
+537	Actions
+538	Xác nhận xóa company
+539	Bạn có chắc chắn muốn xóa company này ?
+540	Xác nhận
+541	List of Companies
+542	trên
+543	Add new
+544	Export to Excel
+545	Export
+546	Pending
+547	Approved
+548	Good morning
+549	Good afternoon
+550	Good evening
+551	No data yet
+552	Active jobs
+553	Users
+554	Job
+555	waiting for review
+556	Refresh data
+557	Review applications
+558	Post a job
+559	Hiring activity
+560	Jobs posted and applications received · last 30 days
+561	Jobs posted
+562	Application pipeline
+563	{{v0}} applications in total
+564	No applications yet. They will show up here as candidates apply.
+565	Jobs by level
+566	Seniority of open roles
+567	Jobs by city
+568	Where the openings are
+569	Most wanted skills
+570	Across all job posts
+571	Top hiring companies
+572	By number of job posts
+573	Manage
+574	jobs ·
+575	Closing soon
+576	Active jobs ending in the next 14 days
+577	All jobs
+578	Today
+579	{{v0}} day{{v1}} left
+580	Nothing closes in the next 2 weeks
+581	Latest applications
+582	View all
+583	No applications yet
+584	Delete Job successfully
+585	Select level
+586	View details
+587	Confirm delete
+588	Are you sure you want to delete this job?
+589	Confirm
+590	List of Jobs
+591	Xóa Permission thành công
+592	Id
+593	Xác nhận xóa permission
+594	Bạn có chắc chắn muốn xóa permission này ?
+595	List of permissions
+596	Cannot load the pipeline
+597	AI interview invite sent to {{v0}}
+598	The candidate received the link by email. You can also share it yourself, only their account can open it.
+599	Cannot send the AI interview invite
+600	{{v0}} moved to {{v1}}
+601	Cannot move this candidate
+602	Candidate pipeline
+603	Drag a card to change its stage. Candidates are notified by email.
+604	All jobs ({{v0}})
+605	Search candidate
+606	{{v0}} column
+607	Move to {{v0}}
+608	Not scored
+609	{{v0}} notes
+610	Applied {{v0}}
+611	No match
+612	Drop candidates here
+613	Send invite
+614	Move and notify
+615	The candidate gets a one-time link to a ~15 minute voice interview with the AI interviewer. You get the transcript and a suggested score, the decision stays yours.
+616	Interview language
+617	The candidate gets an email about this change. Add a message if you want it included.
+618	Remove Resume successfully
+619	Filter by job name
+620	Filter by company
+621	Are you sure you want to delete this resume?
+622	View Details
+623	List Resume
+624	Xóa Role thành công
+625	Trạng thái
+626	Xác nhận xóa role
+627	Bạn có chắc chắn muốn xóa role này ?
+628	List of Roles
+629	Xóa User thành công
+630	Are you sure you want to delete this user?
+631	List of Users
+632	React
+633	TypeScript
+634	Node.js
+635	REST API
+636	Docker
+637	Analyzing
+638	ATS Score
+639	Get Past the First Filter
+640	Optimize your CV to rank higher in ATS scoring algorithms and reach human recruiters.
+641	Increase Interview Chances
+642	ATS-optimized CVs have 3x higher chance of getting interview callbacks.
+643	Know What to Improve
+644	Get actionable insights on missing keywords, skills, and formatting issues.
+645	Stand Out from Competition
+646	Beat 80% of candidates who submit non-optimized resumes.
+647	Upload Your CV
+648	Upload your resume in PDF or DOC format
+649	Select Target Job
+650	Choose the job position you want to apply for
+651	AI Analysis
+652	Our AI scans and compares your CV with job requirements
+653	Get Results
+654	Receive detailed ATS score and improvement recommendations
+655	Keyword match
+656	Skills match
+657	Experience match
+658	Format quality
+659	Analysis report
+660	Add
+661	experience to raise your score by ~9 points.
+662	AI-Powered CV Analysis
+663	Beat the ATS System,
+664	Land Your Dream Job
+665	75% of resumes are rejected by ATS before reaching human recruiters. Our AI-powered analyzer scores your CV against real job requirements and shows you exactly what to fix.
+666	Analyze Your CV Now
+667	How It Works
+668	CVs Analyzed
+669	Success Rate
+670	User Rating
+671	The basics
+672	What is an Applicant Tracking System?
+673	Understanding the technology that screens your resume
+674	The Challenge
+675	is software used by 99% of Fortune 500 companies to automatically screen resumes. It scans, parses, and ranks candidates based on:
+676	The Reality
+677	of resumes never reach human recruiters
+678	average time ATS spends scanning a resume
+679	of qualified candidates are rejected due to poor CV formatting
+680	Why it matters
+681	Why Your CV Needs ATS Optimization
+682	How it works
+683	From upload to insights in 4 steps
+684	It takes about 10 seconds
+685	What you get
+686	A report that tells you exactly what to fix
+687	Testimonials
+688	What Our Users Say
+689	&ldquo;
+690	&rdquo;
+691	Ready to optimize your CV?
+692	Get your ATS score and a personalized improvement plan in seconds.
+693	Browse IT Jobs
+694	Free to use · Instant results · Powered by AI
+695	Feature under development... Coming Soon
+696	Back to Home
+697	Link copied
+698	Could not copy the link
+699	Company not found
+700	Back to companies
+701	reviews)
+702	open position
+703	View jobs
+704	About
+705	Jobs
+706	Reviews
+707	No description yet.
+708	Show less
+709	Read more
+710	Tech stack
+711	Open positions
+712	This company has no open positions right now
+713	General information
+714	View on map
+715	Working locations
+716	Hiring now
+717	openings across
+718	Share this company
+719	Copy link
+720	Vietnam
+721	No reviews yet
+722	open job
+723	Not hiring
+724	Top IT companies in Vietnam
+725	Compare employers by open roles, tech stack and reviews from people who work there.
+726	Open jobs
+727	Search company name
+728	Most open jobs
+729	Highest rated
+730	Name A–Z
+731	Loading companies...
+732	No company matches your search
+733	Project name
+734	Your role
+735	School
+736	Major / degree
+737	Certificate
+738	Issued by
+739	Remove
+740	From
+741	MM/YYYY
+742	To
+743	Hiện tại
+744	Link
+745	Start a line with "-" to make a bullet point.
+746	Cannot save your CV
+747	Please choose an image
+748	Cannot read this image
+749	Cannot export the PDF, please try again
+750	CV not found
+751	This CV does not exist or belongs to another account.
+752	Back to my CVs
+753	Unsaved changes
+754	Saving…
+755	Not saved
+756	Color {{v0}}
+757	Not sure what to write?
+758	Fill with sample content
+759	Personal information
+760	Change photo
+761	Add photo
+762	Optional, shown on every template
+763	Full name
+764	Job title
+765	Website / GitHub / LinkedIn
+766	Date of birth
+767	DD/MM/YYYY
+768	Summary
+769	Skills & languages
+770	Type a skill and press Enter.
+771	Node.js, React, Docker…
+772	Tiếng Anh (IELTS 7.0)…
+773	Open a job and choose this CV in the apply form
+774	Apply with this CV
+775	Edit
+776	Preview
+777	Sample
+778	Pick a template
+779	Three modern layouts designed for IT profiles. Switch any time, your content stays.
+780	Fill in your story
+781	Type on the left, see the CV update instantly on the right. Saved automatically.
+782	Download or apply
+783	Export a clean PDF, or apply to any job on IT Career Hub with one click.
+784	ATS friendly
+785	Real text PDF that recruiters’ screening tools can read, not a flat image.
+786	Perfect Vietnamese
+787	Be Vietnam Pro font embedded, every accent renders exactly as typed.
+788	One-click apply
+789	Choose your online CV in the apply form, we attach the latest PDF for you.
+790	Always up to date
+791	Edit once, every new application uses the newest version of your CV.
+792	{{v0}} CV - {{v1}}
+793	Cannot create the CV
+794	CV deleted
+795	Cannot delete the CV
+796	Free CV builder for IT talent
+797	Your next IT job starts with a
+798	great CV
+799	Build a modern, ATS-friendly CV in minutes, see every change live, and apply to top tech companies with one click.
+800	Create my CV
+801	Browse templates
+802	100% free
+803	PDF download
+804	Vietnamese ready
+805	ATS-ready PDF
+806	My CVs
+807	Keep one CV per role you target, each application uses the latest version.
+808	Edit {{v0}}
+809	· edited
+810	Download PDF
+811	Delete this CV?
+812	Applications already sent keep their PDF.
+813	New CV
+814	Choose your template
+815	Designed with recruiters. Pick a color, you can change everything later.
+816	Use this template
+817	Use
+818	Ready in 3 steps
+819	Most candidates finish their first CV in under 15 minutes.
+820	Stand out to IT recruiters today
+821	Create your CV for free and apply to hundreds of tech jobs.
+822	Start building
+823	IT jobs for developers
+824	who want to grow
+825	Real openings from top tech companies in Vietnam, updated every day.
+826	Suggestions for you:
+827	Tech companies
+828	Open headcount
+829	Top employers
+830	All companies
+831	Latest IT jobs
+832	Browse all
+833	Popular skills
+834	Is your CV ready for ATS?
+835	Score your CV against real job requirements and see exactly what to improve.
+836	Check my CV
+837	Hiring IT talent?
+838	Post jobs, track applicants and review CVs in one recruiter dashboard.
+839	Recruiter dashboard
+840	Không truy cập được micro. Hãy cho phép trình duyệt dùng micro rồi thử lại.
+841	Microphone access was blocked. Allow the browser to use your microphone and try again.
+842	Cannot start the interview
+843	Cảm ơn bạn đã hoàn thành phỏng vấn!
+844	Thank you for completing the interview!
+845	Nhà tuyển dụng sẽ xem lại buổi phỏng vấn và liên hệ với bạn qua email.
+846	The recruiter will review the conversation and contact you by email.
+847	Theo dõi hồ sơ
+848	Track your application
+849	Đang kết nối…
+850	Connecting…
+851	AI đang nói
+852	The AI interviewer is speaking
+853	Đang nghe bạn…
+854	Listening…
+855	Kết thúc phỏng vấn
+856	End interview
+857	Cuộc gọi bị gián đoạn
+858	The call was interrupted
+859	Bạn có thể bắt đầu lại (còn {{v0}} lượt).
+860	You can start again ({{v0}} attempt left).
+861	Bạn đã dùng hết lượt. Nhà tuyển dụng vẫn nhận được phần đã ghi lại.
+862	No attempts left. The recruiter still receives what was recorded.
+863	Vòng phỏng vấn sơ loại với AI
+864	AI screening interview
+865	Khoảng {{v0}} phút, trò chuyện bằng giọng nói với người phỏng vấn AI.
+866	About {{v0}} minutes, a voice conversation with an AI interviewer.
+867	Hãy ngồi ở nơi yên tĩnh, dùng tai nghe nếu có, và trả lời như với người phỏng vấn thật.
+868	Find a quiet place, use headphones if you can, and answer as you would with a person.
+869	Nếu mất kết nối bạn có thể bắt đầu lại. Số lượt còn lại: {{v0}}.
+870	If the connection drops you can start again. Attempts left: {{v0}}.
+871	Link hết hạn lúc {{v0}}.
+872	The link expires at {{v0}}.
+873	Tôi đồng ý cho ghi âm và dùng AI để chuyển buổi phỏng vấn thành văn bản và gợi ý đánh giá. Nhà tuyển dụng là người ra quyết định cuối cùng.
+874	I agree that the interview is recorded and processed by AI to produce a transcript and a suggested assessment. The recruiter makes the final decision.
+875	Bắt đầu phỏng vấn
+876	Start the interview
+877	Interview link is not valid
+878	Sign in to start your interview
+879	Use the account you applied with.
+880	Sign in
+881	You already completed this interview
+882	The recruiter will contact you by email.
+883	Copied link to clipboard
+884	Applied ·
+885	No longer accepting
+886	Apply now
+887	Share
+888	Print
+889	Report this company
+890	Job Details
+891	Salary:
+892	Location:
+893	Job Type:
+894	Full Time
+895	Level:
+896	All Levels
+897	Posted On:
+898	Required Skills
+899	Job Description
+900	Company Info
+901	Unknown Company
+902	Unknown Website
+903	Unknown Email
+904	Unknown Phone
+905	Unknown Address
+906	Any salary
+907	Under 10M
+908	10M – 20M
+909	20M – 30M
+910	30M – 50M
+911	Over 50M
+912	Newest
+913	Salary: high to low
+914	Salary: low to high
+915	Filters
+916	Clear all
+917	City
+918	Salary (VND / month)
+919	no limit
+920	Min
+921	Max
+922	Apply
+923	Min must be lower than max
+924	e.g. Java, React.JS
+925	IT job
+926	for “
+927	No jobs match your filters
+928	All
+929	Closed
+930	Sign in to track your applications and saved jobs
+931	You haven't applied to any job yet
+932	Find jobs
+933	No applications in this group
+934	No saved jobs yet. Tap the heart on a job to keep it here.
+935	Browse jobs
+936	Follow every application from submission to the final result.
+937	Applied{{v0}}
+938	Saved{{v0}}
+939	Salary explorer
+940	How much do IT jobs pay in Vietnam?
+941	Monthly gross salaries by position, level, skill and city, calculated from job postings on IT Career Hub.
+942	Job title or skill, e.g. Java, React…
+943	All positions
+944	No job posting matches this search yet. Try a broader keyword or another city.
+945	Median salary
+946	VND / month
+947	Typical range
+948	middle 50% of postings
+949	Highest offer
+950	Job postings
+951	updated {{v0}}
+952	Salary by level
+953	Click a level to see matching jobs.
+954	Salary by
+955	Sorted by median salary
+956	, skills with at least 2 postings
+957	Skill
+958	Figures come from the salary shown on each job posting (monthly gross, VND), not from individual payslips. Groups with fewer than 3 postings are marked as limited data.
+959	Full range
+960	Typical (P25–P75)
+961	Median
+962	Guest

@@ -17,6 +17,8 @@ import { getLocationName } from '@/config/utils';
 import CompanyLogo from '@/components/client/common/CompanyLogo';
 import styles from '@/styles/dashboard.module.scss';
 
+import i18next from 'i18next';
+
 const JobPage = () => {
   const tableRef = useRef<ActionType>();
   const [viewJobId, setViewJobId] = useState<string | null>(null);
@@ -31,11 +33,11 @@ const JobPage = () => {
     if (_id) {
       const res = await callDeleteJob(_id);
       if (res && res.data) {
-        message.success('Delete Job successfully');
+        message.success(i18next.t('app:pages.admin.job.delete_job_successfully'));
         reloadTable();
       } else {
         notification.error({
-          message: 'An error occurred',
+          message: i18next.t('app:common.an_error_occurred'),
           description: res.message,
         });
       }
@@ -59,7 +61,7 @@ const JobPage = () => {
       hideInSearch: true,
     },
     {
-      title: 'Name',
+      title: i18next.t('app:common.name'),
       dataIndex: 'name',
       sorter: true,
       render: (_dom, entity) => (
@@ -77,24 +79,24 @@ const JobPage = () => {
       ),
     },
     {
-      title: 'Location',
+      title: i18next.t('app:common.location'),
       responsive: ['lg'],
       dataIndex: 'location',
       hideInSearch: true,
       render: (_dom, entity) => getLocationName(entity.location),
     },
     {
-      title: 'Salary',
+      title: i18next.t('app:common.salary'),
       responsive: ['sm'],
       dataIndex: 'salary',
       sorter: true,
       render(dom, entity, index, action, schema) {
         const str = '' + entity.salary;
-        return <>{str?.replace(/\B(?=(\d{3})+(?!\d))/g, ',')} đ</>;
+        return <>{str?.replace(/\B(?=(\d{3})+(?!\d))/g, ',')} {i18next.t('app:common.d')}</>;
       },
     },
     {
-      title: 'Level',
+      title: i18next.t('app:common.level'),
       responsive: ['md'],
       dataIndex: 'level',
       renderFormItem: (item, props, form) => (
@@ -109,12 +111,12 @@ const JobPage = () => {
             MIDDLE: 'MIDDLE',
             SENIOR: 'SENIOR',
           }}
-          placeholder='Select level'
+          placeholder={i18next.t('app:pages.admin.job.select_level')}
         />
       ),
     },
     {
-      title: 'Status',
+      title: i18next.t('app:common.status'),
       dataIndex: 'isActive',
       render(dom, entity, index, action, schema) {
         return (
@@ -129,7 +131,7 @@ const JobPage = () => {
     },
 
     {
-      title: 'CreatedAt',
+      title: i18next.t('app:common.createdat'),
       responsive: ['xxl'],
       dataIndex: 'createdAt',
       width: 200,
@@ -140,7 +142,7 @@ const JobPage = () => {
       hideInSearch: true,
     },
     {
-      title: 'UpdatedAt',
+      title: i18next.t('app:common.updatedat'),
       responsive: ['xl'],
       dataIndex: 'updatedAt',
       width: 200,
@@ -151,13 +153,13 @@ const JobPage = () => {
       hideInSearch: true,
     },
     {
-      title: 'Actions',
+      title: i18next.t('app:common.actions'),
       fixed: 'right',
       hideInSearch: true,
       width: 130,
       render: (_value, entity, _index, _action) => (
         <Space>
-          <Tooltip title='View details'>
+          <Tooltip title={i18next.t('app:pages.admin.job.view_details')}>
             <EyeOutlined
               aria-label='View details'
               style={{ fontSize: 20, color: '#2a78d6', cursor: 'pointer' }}
@@ -179,11 +181,11 @@ const JobPage = () => {
           <Access permission={ALL_PERMISSIONS.JOBS.DELETE} hideChildren>
             <Popconfirm
               placement='leftTop'
-              title={'Confirm delete'}
-              description={'Are you sure you want to delete this job?'}
+              title={i18next.t('app:common.confirm_delete')}
+              description={i18next.t('app:pages.admin.job.are_you_sure_you_want_to')}
               onConfirm={() => handleDeleteJob(entity._id)}
-              okText='Confirm'
-              cancelText='Cancel'
+              okText={i18next.t('app:common.confirm')}
+              cancelText={i18next.t('app:common.cancel')}
             >
               <span style={{ cursor: 'pointer', margin: '0 10px' }}>
                 <DeleteOutlined
@@ -239,7 +241,7 @@ const JobPage = () => {
       <Access permission={ALL_PERMISSIONS.JOBS.GET_PAGINATE}>
         <DataTable<IJob>
           actionRef={tableRef}
-          headerTitle='List of Jobs'
+          headerTitle={i18next.t('app:pages.admin.job.list_of_jobs')}
           rowKey='_id'
           loading={isFetching}
           columns={columns}
@@ -267,7 +269,7 @@ const JobPage = () => {
           toolBarRender={(_action, _rows): any => {
             return (
               <Button icon={<PlusOutlined />} type='primary' onClick={() => navigate('upsert')}>
-                Add new
+                {i18next.t('app:common.add_new')}
               </Button>
             );
           }}

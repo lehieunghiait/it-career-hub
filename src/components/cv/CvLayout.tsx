@@ -1,6 +1,8 @@
 import type { CSSProperties, FC, ReactNode } from 'react';
 import { ICv, ICvData, ICvItem, dateRange, descriptionLines } from './cv-model';
 
+import i18next from 'i18next';
+
 /**
  * CV templates written once against a few primitives (Page / View / Text / Image / Link).
  * The live preview renders them as HTML, the export renders them with react-pdf, so what you
@@ -49,11 +51,11 @@ const contactItems = (data: ICvData) =>
 
 const mainSections = (data: ICvData) =>
   [
-    { key: 'summary', title: 'About me', text: data.summary },
-    { key: 'experiences', title: 'Experience', items: has(data.experiences) },
-    { key: 'projects', title: 'Projects', items: has(data.projects) },
-    { key: 'educations', title: 'Education', items: has(data.educations) },
-    { key: 'certificates', title: 'Certificates', items: has(data.certificates) },
+    { key: 'summary', title: i18next.t('app:components.cv.CvLayout.about_me'), text: data.summary },
+    { key: 'experiences', title: i18next.t('app:components.cv.CvLayout.experience'), items: has(data.experiences) },
+    { key: 'projects', title: i18next.t('app:components.cv.CvLayout.projects'), items: has(data.projects) },
+    { key: 'educations', title: i18next.t('app:components.cv.CvLayout.education'), items: has(data.educations) },
+    { key: 'certificates', title: i18next.t('app:components.cv.CvLayout.certificates'), items: has(data.certificates) },
   ].filter(section => (section.items ? section.items.length > 0 : !!section.text?.trim()));
 
 const base = {
@@ -293,8 +295,8 @@ const ProfessionalTemplate = ({ p, data, color }: Ctx) => (
         </p.View>
       ))}
       {[
-        { title: 'Skills', list: data.skills },
-        { title: 'Languages', list: data.languages },
+        { title: i18next.t('app:common.skills'), list: data.skills },
+        { title: i18next.t('app:components.cv.CvLayout.languages'), list: data.languages },
       ]
         .filter(group => group.list?.length)
         .map(group => (
@@ -380,7 +382,7 @@ const CreativeTemplate = ({ p, data, color }: Ctx) => (
           }}
         />
       ) : null}
-      <SideTitle p={p} title='Contact' color={color} />
+      <SideTitle p={p} title={i18next.t('app:components.cv.CvLayout.contact')} color={color} />
       {contactItems(data).map(text => (
         <p.Text key={text} style={{ fontSize: 8.5, color: INK, marginBottom: 5 }}>
           {text}
@@ -388,13 +390,13 @@ const CreativeTemplate = ({ p, data, color }: Ctx) => (
       ))}
       {data.skills?.length ? (
         <>
-          <SideTitle p={p} title='Skills' color={color} />
+          <SideTitle p={p} title={i18next.t('app:common.skills')} color={color} />
           <Pills p={p} list={data.skills} color={color} onDark />
         </>
       ) : null}
       {data.languages?.length ? (
         <>
-          <SideTitle p={p} title='Languages' color={color} />
+          <SideTitle p={p} title={i18next.t('app:components.cv.CvLayout.languages')} color={color} />
           {data.languages.map(text => (
             <p.Text key={text} style={{ fontSize: 8.5, color: INK, marginBottom: 4 }}>
               {text}
@@ -544,8 +546,8 @@ const MinimalTemplate = ({ p, data, color }: Ctx) => {
         </p.View>
       ))}
       {[
-        { key: 'skills', title: 'Skills', list: data.skills },
-        { key: 'languages', title: 'Languages', list: data.languages },
+        { key: 'skills', title: i18next.t('app:common.skills'), list: data.skills },
+        { key: 'languages', title: i18next.t('app:components.cv.CvLayout.languages'), list: data.languages },
       ]
         .filter(row => row.list?.length)
         .map(row => (

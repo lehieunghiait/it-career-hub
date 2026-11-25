@@ -4,6 +4,8 @@ import CvLayout, { CV_FONT, CvPrimitives, flattenStyle } from './CvLayout';
 import { CV_FONT_FILES } from './cv-fonts';
 import s from 'styles/cv.module.scss';
 
+import i18next from 'i18next';
+
 // A4 in pt; the sheet is drawn at 1pt = 1px and scaled to the available width
 const A4_WIDTH = 595;
 const A4_HEIGHT = 842;
@@ -95,7 +97,7 @@ const CvHtmlPreview = ({ cv }: { cv: ICv }) => {
           <CvLayout cv={cv} primitives={htmlPrimitives} />
           {Array.from({ length: pages - 1 }).map((_, i) => (
             <div key={i} className={s['page-break']} style={{ top: (i + 1) * A4_HEIGHT }}>
-              <span>Page {i + 2}</span>
+              <span>{i18next.t('app:components.cv.CvHtmlPreview.page')}{' '}{i + 2}</span>
             </div>
           ))}
         </div>

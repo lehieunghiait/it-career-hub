@@ -14,13 +14,19 @@ import styles from 'styles/client.module.scss';
 import s from 'styles/my-jobs.module.scss';
 import board from 'styles/job-board.module.scss';
 
+import i18next from 'i18next';
+
 type AppFilter = 'all' | 'active' | 'interview' | 'closed';
 
 const FILTERS: { label: string; value: AppFilter; match: (status: string) => boolean }[] = [
-  { label: 'All', value: 'all', match: () => true },
-  { label: 'In progress', value: 'active', match: status => !isClosedStatus(status) },
-  { label: 'Interview', value: 'interview', match: status => status === 'INTERVIEW' },
-  { label: 'Closed', value: 'closed', match: isClosedStatus },
+  { get label() { return i18next.t('app:pages.my_jobs.index.all'); }, value: 'all', match: () => true },
+  { get label() { return i18next.t('app:pages.my_jobs.index.in_progress'); }, value: 'active', match: status => !isClosedStatus(status) },
+  {
+    get label() { return i18next.t('app:common.interview'); },
+    value: 'interview',
+    match: status => status === 'INTERVIEW' || status === 'AI_SCREENING',
+  },
+  { get label() { return i18next.t('app:pages.my_jobs.index.closed'); }, value: 'closed', match: isClosedStatus },
 ];
 
 const ListSkeleton = () => (
@@ -81,12 +87,12 @@ const MyJobsPage = () => {
       <div className={board['board']}>
         <div className={styles['container']}>
           <div className={s['guest']}>
-            <Empty description='Sign in to track your applications and saved jobs'>
+            <Empty description={i18next.t('app:pages.my_jobs.index.sign_in_to_track_your_applications')}>
               <Button
                 type='primary'
                 onClick={() => navigate(`/login?callback=${encodeURIComponent('/my-jobs')}`)}
               >
-                Sign in
+                {i18next.t('app:pages.my_jobs.index.sign_in')}
               </Button>
             </Empty>
           </div>
@@ -99,10 +105,10 @@ const MyJobsPage = () => {
     <ListSkeleton />
   ) : resumes.length === 0 ? (
     <div className={board['empty-box']}>
-      <Empty description="You haven't applied to any job yet">
+      <Empty description={i18next.t('app:pages.my_jobs.index.you_haven_t_applied_to_any')}>
         <Link to='/job'>
           <Button type='primary' icon={<SendOutlined />}>
-            Find jobs
+            {i18next.t('app:pages.my_jobs.index.find_jobs')}
           </Button>
         </Link>
       </Empty>
@@ -118,7 +124,7 @@ const MyJobsPage = () => {
       </div>
       {filteredResumes.length === 0 ? (
         <div className={board['empty-box']}>
-          <Empty description='No applications in this group' />
+          <Empty description={i18next.t('app:pages.my_jobs.index.no_applications_in_this_group')} />
         </div>
       ) : (
         <div className={s['list']}>
@@ -139,10 +145,10 @@ const MyJobsPage = () => {
     <ListSkeleton />
   ) : visibleSaved.length === 0 ? (
     <div className={board['empty-box']}>
-      <Empty description='No saved jobs yet. Tap the heart on a job to keep it here.'>
+      <Empty description={i18next.t('app:pages.my_jobs.index.no_saved_jobs_yet_tap_the')}>
         <Link to='/job'>
           <Button type='primary' icon={<HeartOutlined />}>
-            Browse jobs
+            {i18next.t('app:pages.my_jobs.index.browse_jobs')}
           </Button>
         </Link>
       </Empty>
@@ -159,8 +165,8 @@ const MyJobsPage = () => {
     <div className={board['board']}>
       <div className={styles['container']}>
         <div className={s['page-head']}>
-          <h1>My jobs</h1>
-          <p>Follow every application from submission to the final result.</p>
+          <h1>{i18next.t('app:pages.my_jobs.index.my_jobs')}</h1>
+          <p>{i18next.t('app:pages.my_jobs.index.follow_every_application_from_submission_to')}</p>
         </div>
         <Tabs
           className={s['tabs']}
@@ -169,12 +175,12 @@ const MyJobsPage = () => {
           items={[
             {
               key: 'applied',
-              label: `Applied${isLoading ? '' : ` (${resumes.length})`}`,
+              label: i18next.t('app:pages.my_jobs.index.applied', { v0: isLoading ? '' : ` (${resumes.length})` }),
               children: applied,
             },
             {
               key: 'saved',
-              label: `Saved${isLoading ? '' : ` (${visibleSaved.length})`}`,
+              label: i18next.t('app:pages.my_jobs.index.saved', { v0: isLoading ? '' : ` (${visibleSaved.length})` }),
               children: saved,
             },
           ]}
